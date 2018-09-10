@@ -1,39 +1,30 @@
-# Diplom
+# Webpack Frontend Starterkit
 
-This repo contains `webpack`, `AngularJS`, `ES6` and `Bootstrap 4`starter kit.
+A lightweight foundation for your next webpack based frontend project.
 
-### Prerequisites
-Node 6.x.x, Yarn
 
-### Steps to run project
-1. Clone Project.
-2. Do `yarn install` to install all dependencies.
-3. Finally `yarn start` to run project.
-
-For building project use `yarn build`
-
-### Enable Debug with VS Code
-Folks, if you want to enable debugging with VSCode then you need to create `launch.json` file and add below two tasks in that file.
+### Installation
 
 ```
-{
-   "type":"node",
-   "request":"launch",
-   "name":"Debug",
-   "program":"${workspaceFolder}/node_modules/webpack-dev-server/bin/webpack-dev-server",
-   "args":[
-      "--progress",
-      "--debug"
-   ]
-},
-{
-   "name":"Launch Chrome against localhost, with sourcemaps",
-   "type":"chrome",
-   "request":"launch",
-   "url":"http://localhost:3000",
-   "sourceMaps":true,
-   "webRoot":"${workspaceRoot}"
-}
+npm install
 ```
 
-After adding these tasks, you need to run first debug task and then launch chrome task.
+### Start Dev Server
+
+```
+npm run dev
+```
+
+### Build Prod Version
+
+```
+npm run build
+```
+
+### Features:
+
+* ES6 Support via [babel-loader](https://github.com/babel/babel-loader)
+* SASS Support via [sass-loader](https://github.com/jtangelder/sass-loader)
+* Linting via [eslint-loader](https://github.com/MoOx/eslint-loader)
+
+When you run `npm run build` we use the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) to move the css to a separate file and included in the head of your `index.html`, so that the styles are applied before any javascript gets loaded. We disabled this function for the dev version, because the loader doesn't support hot module replacement.

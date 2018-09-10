@@ -23,7 +23,7 @@ export default function homeController() {
 						length:11,
 						id:"ARROW",
 						events:{
-							click:function() { alert("you clicked on the arrow overlay")}
+							click:function() { alert("you clicked on the arrow overlay");}
 						}
 					} ],
 					[ "Label", {

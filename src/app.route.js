@@ -1,5 +1,5 @@
 export default function routing($urlRouterProvider, $locationProvider) {
-	"ngInject"
+	"ngInject";
 	$locationProvider.html5Mode(true);
 	$urlRouterProvider.otherwise('/');
 }

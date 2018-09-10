@@ -7,5 +7,5 @@ export default function header() {
 		},
 		template: template,
 		controller: 'headerController as header'
-	}
+	};
 }
