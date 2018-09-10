@@ -1,4 +1,4 @@
-# AngularJS ES6 Starter Kit
+# Diplom
 
 This repo contains `webpack`, `AngularJS`, `ES6` and `Bootstrap 4`starter kit.
 

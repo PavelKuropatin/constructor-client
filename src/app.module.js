@@ -1,20 +1,22 @@
-// for loading styles we need to load main scss file
-import styles from './styles/styles.scss';
+import angular from 'angular';
+import uirouter from 'angular-ui-router';
+import animate from 'angular-animate';
+import aria from 'angular-aria';
+import messages from 'angular-messages';
+import material from 'angular-material';
 
-// loading shared module
-import './services/core.module';
-// loading all module components
-import './app.components';
+import routing from './app.route';
 
-const appModule = angular
-	.module('angularjs-es6-starter-kit', [
-		// shared module
-		'app.core',
-		// 3rd party modules
-		'ui.router',
-		// application specific modules
-		'app.header',
-		'app.home',
-	]);
+import 'angular-material/angular-material.scss';
+import './components/directives/header/header.scss'
+import './global.scss'
 
-export default appModule;
+import homeModule from './components/home/home.modue'
+
+import headerDirective from './components/directives/header/header.directive';
+import headerController from './components/directives/header/header.controller';
+
+angular.module('diplom', [uirouter, animate, aria, messages, material, homeModule])
+	.directive('header', headerDirective)
+	.controller('headerController', headerController)
+	.config(routing);

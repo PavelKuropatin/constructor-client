@@ -75,7 +75,7 @@ const config = {
 			jquery: 'jquery'
 		}),
 		new ExtractTextWebpackPlugin('styles/styles.css'),
-		new OptimizeCssAssetsWebpackPlugin()
+		// new OptimizeCssAssetsWebpackPlugin()
 	],
 	devServer: {
 		port: 3000,

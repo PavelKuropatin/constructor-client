@@ -1,4 +1,4 @@
-export default function HomeController($log) {
+export default function homeController() {
 	'ngInject';
 	const vm = this;
 
