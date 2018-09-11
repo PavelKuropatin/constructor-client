@@ -4,6 +4,7 @@ const Path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 const dest = Path.join(__dirname, '../dist');
 
@@ -17,6 +18,10 @@ module.exports = {
     filename: 'bundle.[hash].js'
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      $: require.resolve('jquery'),
+      jQuery: require.resolve('jquery')
+    }),
     new CleanWebpackPlugin([dest], {root: Path.resolve(__dirname, '..')}),
     new CopyWebpackPlugin([
       {from: Path.resolve(__dirname, '../public'), to: 'public'}
@@ -41,7 +46,7 @@ module.exports = {
           }
         }
       },
-      { test: /\.html$/, loader: 'html-loader' }
+      {test: /\.html$/, loader: 'html-loader'}
     ]
   }
 };
