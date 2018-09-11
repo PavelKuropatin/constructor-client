@@ -124,3 +124,10 @@ path, .jtk-endpoint {
 		stroke-dashoffset: 0;
 	}
 }
+
+.home-controller {
+	position: absolute;
+	left: 0;
+	top: 200px;
+	z-index: 4000;
+}

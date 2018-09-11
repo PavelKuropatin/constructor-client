@@ -6,6 +6,6 @@ export default function header() {
 		scope: {
 		},
 		template: template,
-		controller: 'headerController as header'
+		controller: 'headerController as vm'
 	};
 }
