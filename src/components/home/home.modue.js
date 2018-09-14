@@ -16,7 +16,7 @@ import postRenderDirective from './components/directives/post-render.directive';
 export default angular.module('app.home', [uirouter])
 	.config(routing)
 	.controller('homeController', homeController)
-  .directive('draggables', draggableDirective)
+  .directive('draggable', draggableDirective)
   .directive('droppable', droppableDirective)
   .directive('plumbConnect', plumbConnectDirective)
   .directive('plumbItem', plumbItemDirective)

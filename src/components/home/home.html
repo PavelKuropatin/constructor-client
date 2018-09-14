@@ -2,7 +2,7 @@
   <div id="menu-container">
     <div plumb-menu-item class="menu-item" ng-repeat="module in home.library"
          ng-style="{ 'left':module.x, 'top':module.y }"
-         data-identifier="{{module.library_id}}" draggables>
+         data-identifier="{{module.library_id}}" draggable>
       <div class="summary">{{module.title}}</div>
     </div>
   </div>

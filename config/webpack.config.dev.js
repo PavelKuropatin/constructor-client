@@ -10,7 +10,6 @@ const dest = Path.join(__dirname, '../dist');
 module.exports = merge(common, {
 	mode: 'development',
 	devtool: 'cheap-eval-source-map',
-
 	devServer: {
 		contentBase: dest,
 		inline: true

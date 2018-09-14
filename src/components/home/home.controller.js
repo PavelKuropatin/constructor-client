@@ -1,8 +1,6 @@
 export default function homeController($scope) {
   'ngInject';
   const vm = this;
-
-  vm.jsPlumbInstance = jsPlumb.getInstance();
   // module should be visualized by title, icon
   vm.library = [];
   // library_uuid is a unique identifier per module type in the library
@@ -33,7 +31,7 @@ export default function homeController($scope) {
   }
 
   vm.$onInit = () => {
-    vm.init();
+    // vm.init();
     // vm.redraw();
   };
 
@@ -84,8 +82,8 @@ export default function homeController($scope) {
   };
 
   vm.init = function () {
-    vm.jsPlumbInstance.bind("ready", function () {
-      vm.jsPlumbInstance.bind("connection", function (info) {
+    jsPlumb.bind("ready", function () {
+      jsPlumb.bind("connection", function (info) {
         $scope.$apply(function () {
         });
       });

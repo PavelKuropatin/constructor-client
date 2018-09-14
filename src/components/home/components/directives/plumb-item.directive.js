@@ -2,11 +2,12 @@ export default function plumbItem() {
   return {
     replace: true,
     link: function (scope, element, attrs) {
-      scope.home.jsPlumbInstance.makeTarget(element, {
+      // todo there are problems
+      jsPlumb.makeTarget(element, {
         anchor: 'Continuous',
         maxConnections: 2,
       });
-      scope.home.jsPlumbInstance.draggable(element, {
+      jsPlumb.draggable(element, {
         containment: 'parent'
       });
 
@@ -17,7 +18,7 @@ export default function plumbItem() {
         // stop event propagation, so it does not directly generate a new state
         e.stopPropagation();
         //we need the scope of the parent, here assuming <plumb-item> is part of the <plumbApp>
-        scope.home.removeState(attrs.identifier);
+        scope.removeState(attrs.identifier);
         scope.$digest();
       });
 

@@ -4,7 +4,7 @@ export default function droppable() {
     link: function (scope, element, attrs) {
       $(element).droppable({
         drop: function (event, ui) {
-          let dragIndex = angular.element(ui.draggable).data('identifier'),
+          let dragIndex = ui.draggable.data('identifier'),
             dragEl = angular.element(ui.draggable),
             dropEl = angular.element(this);
 
