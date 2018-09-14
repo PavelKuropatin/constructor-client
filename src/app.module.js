@@ -8,8 +8,8 @@ import material from 'angular-material';
 require('lodash');
 require('jsplumb');
 
-import 'popper.js';
-import 'jsplumb';
+require("jquery-ui/ui/widgets/draggable");
+require("jquery-ui/ui/widgets/droppable");
 
 import routing from './app.route';
 

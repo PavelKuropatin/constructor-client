@@ -4,7 +4,7 @@ export default function postRender($timeout) {
     terminal : true,
     transclude : true,
     link : function(scope, element, attrs) {
-      $timeout(scope.redraw, 0);
+      $timeout(scope.home.redraw, 0);
     }
   };
 }

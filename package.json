@@ -48,7 +48,6 @@
     "angular-ui-router": "^1.0.3",
     "babel-polyfill": "^6.26.0",
     "jsplumb": "^2.8.0",
-    "lodash": "^4.17.10",
-    "popper.js": "^1.14.3"
+    "lodash": "^4.17.10"
   }
 }
