@@ -6,6 +6,7 @@ import messages from 'angular-messages';
 import material from 'angular-material';
 
 require('lodash');
+require('jsplumb');
 
 import 'popper.js';
 import 'jsplumb';

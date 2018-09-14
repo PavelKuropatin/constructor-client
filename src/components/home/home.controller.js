@@ -1,193 +1,100 @@
 export default function homeController() {
   'ngInject';
   const vm = this;
-  const instance = window.jsp = jsPlumb.getInstance({
-    // default drag options
-    DragOptions: {cursor: 'pointer', zIndex: 2000},
-    // the overlays to decorate each connection with.  note that the label overlay uses a function to generate the label text; in this
-    // case it returns the 'labelText' member that we set on each connection in the 'init' method below.
-    ConnectionOverlays: [
-      ["Arrow", {
-        location: 1,
-        visible: true,
-        width: 11,
-        length: 11,
-        id: "ARROW",
-        events: {
-          click: function () {
-            alert("you clicked on the arrow overlay");
-          }
-        }
-      }],
-      ["Label", {
-        location: 0.1,
-        id: "label",
-        cssClass: "aLabel",
-        events: {
-          tap: function () {
-            alert("hey");
-          }
-        }
-      }]
-    ],
-    Container: "canvas"
-  });
 
+  function module(library_id, schema_id, title, description, x, y) {
+    this.library_id = library_id;
+    this.schema_id = schema_id;
+    this.title = title;
+    this.description = description;
+    this.x = x;
+    this.y = y;
+  }
   vm.$onInit = () => {
-    init();
+    vm.init();
+    vm.redraw();
+    // let m = new module(1, 1, 'test', 'test', 23, 80);
+    // vm.library.push(m);
   };
 
-  vm.click = () => {
-    jsPlumb.repaintEverything();
+
+
+  // module should be visualized by title, icon
+  vm.library = [];
+
+  // library_uuid is a unique identifier per module type in the library
+  vm.library_uuid = 0;
+
+  // state is [identifier, x position, y position, title, description]
+  vm.schema = [];
+
+  // schema_uuid should always yield a unique identifier, can never be decreased
+  vm.schema_uuid = 0;
+
+  // todo: find out how to go back and forth between css and angular
+  vm.library_topleft = {
+    x: 15,
+    y: 145,
+    item_height: 50,
+    margin: 5,
   };
 
-  function init() {
-    jsPlumb.ready(function () {
+  vm.module_css = {
+    width: 150,
+    height: 100, // actually variable
+  };
 
-      var basicType = {
-        connector: "Flowchart",
-        paintStyle: {stroke: "red", strokeWidth: 4},
-        hoverPaintStyle: {stroke: "blue"},
-        overlays: [
-          "Arrow"
-        ],
-        drop: function () {
-          console.log(123);
-        }
-      };
-      instance.registerConnectionType("basic", basicType);
+  vm.redraw = function () {
+    vm.schema_uuid = 0;
+    jsPlumb.detachEveryConnection();
+    vm.schema = [];
+    vm.library = [];
+    vm.addModuleToLibrary("Sum", "Aggregates an incoming sequences of values and returns the sum",
+      vm.library_topleft.x + vm.library_topleft.margin,
+      vm.library_topleft.y + vm.library_topleft.margin);
+    vm.addModuleToLibrary("Camera", "Hooks up to hardware camera and sends out an image at 20 Hz",
+      vm.library_topleft.x + vm.library_topleft.margin,
+      vm.library_topleft.y + vm.library_topleft.margin + vm.library_topleft.item_height);
+  };
 
-      // this is the paint style for the connecting lines..
-      var connectorPaintStyle = {
-          strokeWidth: 2,
-          stroke: "#61B7CF",
-          joinstyle: "round",
-          outlineStroke: "white",
-          outlineWidth: 2
-        },
-        // .. and this is the hover style.
-        connectorHoverStyle = {
-          strokeWidth: 3,
-          stroke: "#216477",
-          outlineWidth: 5,
-          outlineStroke: "white"
-        },
-        endpointHoverStyle = {
-          fill: "#216477",
-          stroke: "#216477"
-        },
-        // the definition of source endpoints (the small blue ones)
-        sourceEndpoint = {
-          endpoint: "Dot",
-          paintStyle: {
-            stroke: "#7AB02C",
-            fill: "transparent",
-            radius: 7,
-            strokeWidth: 1
-          },
-          isSource: true,
-          connector: ["Flowchart", {stub: [40, 60], gap: 10, cornerRadius: 5, alwaysRespectStubs: true}],
-          connectorStyle: connectorPaintStyle,
-          hoverPaintStyle: endpointHoverStyle,
-          connectorHoverStyle: connectorHoverStyle,
-          dragOptions: {
-            drag: function (e, ui) {
-              console.log(123);
-            }
-          },
-          overlays: [
-            ["Label", {
-              location: [0.5, 1.5],
-              label: "Drag",
-              cssClass: "endpointSourceLabel",
-              visible: false
-            }]
-          ]
-        },
-        // the definition of target endpoints (will appear when the user drags a connection)
-        targetEndpoint = {
-          endpoint: "Dot",
-          paintStyle: {fill: "#7AB02C", radius: 7},
-          hoverPaintStyle: endpointHoverStyle,
-          maxConnections: -1,
-          dropOptions: {hoverClass: "hover", activeClass: "active"},
-          isTarget: true,
-          overlays: [
-            ["Label", {location: [0.5, -0.5], label: "Drop", cssClass: "endpointTargetLabel", visible: false}]
-          ]
-        },
-        init = function (connection) {
-          connection.getOverlay("label").setLabel(connection.sourceId.substring(15) + "-" + connection.targetId.substring(15));
-          // instance.draggable(jsPlumb.getSelector(".jtk-connector"), { grid: [20, 20] });
-          // console.log(connection.connector.id);
-        };
+  // add a module to the library
+  vm.addModuleToLibrary = function (title, description, posX, posY) {
+    var library_id = vm.library_uuid++;
+    var schema_id = -1;
+    var m = new module(library_id, schema_id, title, description, posX, posY);
+    vm.library.push(m);
+  };
 
-      var _addEndpoints = function (toId, sourceAnchors, targetAnchors) {
-        for (var i = 0; i < sourceAnchors.length; i++) {
-          var sourceUUID = toId + sourceAnchors[i];
-          instance.addEndpoint("flowchart" + toId, sourceEndpoint, {
-            anchor: sourceAnchors[i], uuid: sourceUUID
-          });
-        }
-        for (var j = 0; j < targetAnchors.length; j++) {
-          var targetUUID = toId + targetAnchors[j];
-          instance.addEndpoint("flowchart" + toId, targetEndpoint, {anchor: targetAnchors[j], uuid: targetUUID});
-        }
-      };
+  // add a module to the schema
+  vm.addModuleToSchema = function (library_id, posX, posY) {
+    var schema_id = vm.schema_uuid++;
+    var title = "Unknown";
+    var description = "Likewise unknown";
+    for (var i = 0; i < vm.library.length; i++) {
+      if (vm.library[i].library_id == library_id) {
+        title = vm.library[i].title;
+        description = vm.library[i].description;
+      }
+    }
+    var m = new module(library_id, schema_id, title, description, posX, posY);
+    vm.schema.push(m);
+  };
 
-      // suspend drawing and initialise.
-      instance.batch(function () {
+  vm.removeState = function (schema_id) {
+    for (var i = 0; i < vm.schema.length; i++) {
+      // compare in non-strict manner
+      if (vm.schema[i].schema_id == schema_id) {
+        vm.schema.splice(i, 1);
+      }
+    }
+  };
 
-        _addEndpoints("Window4", ["TopCenter", "BottomCenter"], ["LeftMiddle", "RightMiddle"]);
-        _addEndpoints("Window2", ["LeftMiddle", "BottomCenter"], ["TopCenter", "RightMiddle"]);
-        _addEndpoints("Window3", ["RightMiddle", "BottomCenter"], ["LeftMiddle", "TopCenter"]);
-        _addEndpoints("Window1", ["LeftMiddle", "RightMiddle"], ["TopCenter", "BottomCenter"]);
-
-        // listen for new connections; initialise them the same way we initialise the connections at startup.
-        instance.bind("connection", function (connInfo, originalEvent) {
-          // instance.draggable(jsPlumb.getSelector(connInfo.connection, { grid: [20, 20] });
-          // init(connInfo.connection);
-        });
-
-        // make all the window divs draggable
-        instance.draggable(jsPlumb.getSelector(".flowchart-demo .window"), {grid: [20, 20]});
-        // THIS DEMO ONLY USES getSelector FOR CONVENIENCE. Use your library's appropriate selector
-        // method, or document.querySelectorAll:
-        //jsPlumb.draggable(document.querySelectorAll(".window"), { grid: [20, 20] });
-
-        // connect a few up
-        instance.connect({uuids: ["Window2BottomCenter", "Window3TopCenter"], editable: true});
-        instance.connect({uuids: ["Window2LeftMiddle", "Window4LeftMiddle"], editable: true});
-        instance.connect({uuids: ["Window4TopCenter", "Window4RightMiddle"], editable: true});
-        instance.connect({uuids: ["Window3RightMiddle", "Window2RightMiddle"], editable: true});
-        instance.connect({uuids: ["Window4BottomCenter", "Window1TopCenter"], editable: true});
-        instance.connect({uuids: ["Window3BottomCenter", "Window1BottomCenter"], editable: true});
-        //
-
-        //
-        // listen for clicks on connections, and offer to delete connections on click.
-        //
-        instance.bind("click", function (conn, originalEvent) {
-          $("#flowchartWindow1").css('top', '600px');
-          // jsPlumb.repaintEverything();
-
-        });
-
-        instance.bind("connectionDrag", function (connection) {
-          console.log("connection " + connection.id + " is being dragged. suspendedElement is ", connection.suspendedElement, " of type ", connection.suspendedElementType);
-        });
-
-        instance.bind("connectionDragStop", function (connection) {
-          console.log("connection " + connection.id + " was dragged");
-        });
-
-        instance.bind("connectionMoved", function (params) {
-          console.log("connection " + params.connection.id + " was moved");
+  vm.init = function () {
+    jsPlumb.bind("ready", function () {
+      jsPlumb.bind("connection", function (info) {
+        vm.$apply(function () {
         });
       });
-
-
-      jsPlumb.fire("jsPlumbDemoLoaded", instance);
     });
-  }
+  };
 }
