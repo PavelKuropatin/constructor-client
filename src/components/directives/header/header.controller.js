@@ -1,4 +1,4 @@
-export default function HeaderController() {
+export default function headerController() {
   const vm = this;
 
   vm.click = () => {

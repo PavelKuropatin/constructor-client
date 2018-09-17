@@ -3,12 +3,12 @@ export default function plumbItem() {
     replace: true,
     link: function (scope, element, attrs) {
       // todo there are problems
-      jsPlumb.makeTarget(element, {
+      scope.home.jsPlumbInstance.makeTarget(element, {
         anchor: 'Continuous',
         maxConnections: 2,
       });
-      jsPlumb.draggable(element, {
-        containment: 'parent'
+      scope.home.jsPlumbInstance.draggable(element, {
+        containment: $(element).parent()
       });
 
       // this should actually done by a AngularJS template and subsequently a controller attached to the dbl-click event

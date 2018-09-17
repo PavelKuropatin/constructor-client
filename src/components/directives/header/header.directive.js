@@ -1,6 +1,6 @@
 import template from './header.html';
 
-export default function header() {
+export default function eader() {
 	return {
 		restrict: 'E',
 		scope: {

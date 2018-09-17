@@ -6,6 +6,9 @@ import uirouter from 'angular-ui-router';
 import routing from './home.route';
 import homeController from './home.controller';
 
+import jsplubService from './components/services/jsplumb.service';
+import moduleService from './components/services/module.sevice';
+
 import draggableDirective from './components/directives/draggable.directive';
 import droppableDirective from './components/directives/droppable.directive';
 import plumbConnectDirective from './components/directives/plumb-connect.directive';
@@ -22,4 +25,6 @@ export default angular.module('app.home', [uirouter])
   .directive('plumbItem', plumbItemDirective)
   .directive('plumbMenuItem', plumbMenuItemDirective)
   .directive('postRender', postRenderDirective)
+  .service('jsplubService', jsplubService)
+  .service('moduleService', moduleService)
 	.name;
