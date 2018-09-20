@@ -1,61 +1,66 @@
 .title {
-	padding: 10px;
-	cursor: move;
-	font-weight: bold;
-	font-size: 120%;
+  padding: 10px;
+  cursor: move;
+  font-weight: bold;
+  font-size: 120%;
 }
 
 .connect {
-	width: 100%;
-	height: 20px;
-	cursor: pointer;
-	background-color: #40B3DF;
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  margin: 0 auto;
+  width: 20%;
+  height: 20px;
+  cursor: pointer;
+  background-color: #40B3DF;
 }
 
 .summary {
-	padding: 10px;
-	cursor: move;
-	font-weight: bold;
-	font-size: 120%;
+  padding: 10px;
+  cursor: move;
+  font-weight: bold;
+  font-size: 120%;
 }
 
 .menu-item {
-	position: absolute;
-	border: 1px solid black;
-	width: 150px;
-	font-size: 80%;
-	background-color:#FFFFFF;
-	text-align: center;
-	-moz-box-shadow: 2px 2px 3px 1px #AAA;
-	-webkit-box-shadow: 2px 2px 3px 1px #AAA;
-	box-shadow: 2px 2px 3px 1px #AAA;
+  position: absolute;
+  border: 1px solid black;
+  width: 150px;
+  font-size: 80%;
+  background-color: #FFFFFF;
+  text-align: center;
+  -moz-box-shadow: 2px 2px 3px 1px #AAA;
+  -webkit-box-shadow: 2px 2px 3px 1px #AAA;
+  box-shadow: 2px 2px 3px 1px #AAA;
 }
 
 .item {
-	position: absolute;
-	border: 1px solid black;
-	width: 150px;
-	font-size: 80%;
-	background-color:#FFFFFF;
-	text-align: center;
-	-moz-box-shadow: 2px 2px 3px 1px #AAA;
-	-webkit-box-shadow: 2px 2px 3px 1px #AAA;
-	box-shadow: 2px 2px 3px 1px #AAA;
+  border-radius: 30px;
+  position: absolute;
+  border: 1px solid black;
+  width: 150px;
+  font-size: 80%;
+  background-color: #FFFFFF;
+  text-align: center;
+  -moz-box-shadow: 2px 2px 3px 1px #AAA;
+  -webkit-box-shadow: 2px 2px 3px 1px #AAA;
+  box-shadow: 2px 2px 3px 1px #AAA;
 }
 
 /* the container is 200px (size of menu-container) plus 3 times 250px + 2px per border*/
 #container {
-	border: 2px solid gray;
-	width: 100%;
-	height: 100%;
+  border: 2px solid gray;
+  width: 100%;
+  height: 100%;
 }
 
 /* the menu is 200px wide */
 #menu-container {
-	float: left;
-	border: 2px solid gray;
-	border-right: 4px solid gray;
-	width: 200px;
-	height: 497px;
-	background-color: #F3F2F4;
+  float: left;
+  border: 2px solid gray;
+  border-right: 4px solid gray;
+  width: 200px;
+  height: 497px;
+  background-color: #F3F2F4;
 }

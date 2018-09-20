@@ -2,7 +2,12 @@
 	<md-toolbar class="md-hue-2">
 		<div class="md-toolbar-tools">
 			<h2 flex md-truncate>Toolbar</h2>
-			<md-button class="md-raised" ng-click="vm.click()">Update</md-button>
+			<md-slider-container>
+				<span>Zoom</span>
+				<md-slider min="0" max="2" ng-model="vm.zoomValue" step="0.1" aria-label="red" id="red-slider"
+						   class="md-warn" ng-change="vm.zoom()">
+				</md-slider>
+			</md-slider-container>
 		</div>
 	</md-toolbar>
 </div>

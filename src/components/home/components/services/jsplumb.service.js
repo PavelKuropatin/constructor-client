@@ -1,6 +1,8 @@
 export default function jsplubService() {
   this.getJsplumbInstance = () => {
     return jsPlumb.getInstance({
+      Container: $('#container'),
+      Connector : "Flowchart",
       PaintStyle: {
         strokeWidth: 13,
         stroke: 'rgba(200,0,0,100)'
