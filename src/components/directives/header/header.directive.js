@@ -1,10 +1,9 @@
 import template from './header.html';
 
-export default function eader() {
+export default function headerDirective() {
 	return {
 		restrict: 'E',
 		scope: {
-			library: '='
 		},
 		template: template,
 		controller: 'headerController as vm'

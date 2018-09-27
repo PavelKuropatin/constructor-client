@@ -1,9 +1,9 @@
-export default function plumbConnect() {
+export default function plumbConnect(jsplubService) {
   return {
     replace: true,
     link: function (scope, element, attrs) {
       scope.home.jsPlumbInstance.makeSource(element, {
-        parent: $(element).parent().parent(),
+        parent: $('#container'),
         paintStyle: {
           strokeStyle: "#225588",
           fillStyle: "transparent",

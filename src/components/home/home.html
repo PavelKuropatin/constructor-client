@@ -1,17 +1,23 @@
 <!--<div id="menu-container">-->
- <!---->
+<!---->
 <!--</div>-->
 
-<div id="container" class="drop-container" droppable>
-  <div plumb-item class="item" ng-repeat="module in home.schema" ng-style="{ 'left':module.x, 'top':module.y }"
-       data-identifier="{{module.schema_id}}">
-    <div class="title">{{module.title}}</div>
-    <div plumb-connect class="connect"></div>
-  </div>
+<div class="drop-container" layout="row" droppable>
+    <div flex="15" sidenav class="sidenav-container"></div>
+    <div flex id="container">
+      <div plumb-item class="item" ng-repeat="module in home.schema" ng-style="{ 'left':module.x, 'top':module.y }"
+           data-identifier="{{module.schema_id}}">
+        <div class="title">{{module.title}}</div>
+        <div plumb-connect class="connect"></div>
+      </div>
+    </div>
 </div>
 
+<post-render></post-render>
+
+
 <!--<p>-->
-  <!--<md-button class="md-raised" ng-click="home.redraw()">Redraw</md-button>-->
+<!--<md-button class="md-raised" ng-click="home.redraw()">Redraw</md-button>-->
 <!--</p>-->
 
 <!--  does not render what comes behind it, so it's probably wrong -->

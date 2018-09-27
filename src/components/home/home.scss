@@ -48,19 +48,11 @@
   box-shadow: 2px 2px 3px 1px #AAA;
 }
 
-/* the container is 200px (size of menu-container) plus 3 times 250px + 2px per border*/
-#container {
-  border: 2px solid gray;
-  width: 100%;
+.drop-container {
   height: 100%;
+  width: 100%;
 }
 
-/* the menu is 200px wide */
-#menu-container {
-  float: left;
-  border: 2px solid gray;
-  border-right: 4px solid gray;
-  width: 200px;
-  height: 497px;
-  background-color: #F3F2F4;
-}
+//.sidenav-container {
+//  background-color: #3F51B5;
+//}

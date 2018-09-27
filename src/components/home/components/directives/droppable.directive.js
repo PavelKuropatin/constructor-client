@@ -10,8 +10,8 @@ export default function droppable(stateParamsService, moduleService) {
 
           if (dragEl.hasClass('menu-item') && dropEl.hasClass('drop-container')) {
             //todo refactor
-            let x = event.pageX - moduleService.getStyleModule.module_css.width / 2;
-            let y = event.pageY - moduleService.getStyleModule.module_css.height / 2;
+            let x = event.pageX - moduleService.getStyleModule().width / 2;
+            let y = event.pageY - moduleService.getStyleModule().height / 2;
 
             stateParamsService.addModuleToSchema(dragIndex, x, y);
           }

@@ -1,0 +1,20 @@
+<!--<md-sidenav class="md-sidenav-right" md-component-id="left" md-whiteframe="2" md-disable-backdrop>-->
+  <!--<md-toolbar class="md-theme-indigo">-->
+    <!--<h1 class="md-toolbar-tools">Menu</h1>-->
+  <!--</md-toolbar>-->
+
+<div ng-show="vm.isSindenavVisible" class="sidenav" id="sidenav-container">
+  <div plumb-menu-item class="menu-item" ng-repeat="module in vm.library"
+       ng-style="{ 'left':module.x, 'top':module.y }"
+       data-identifier="{{module.library_id}}" draggable>
+    <div class="summary">{{module.title}}</div>
+  </div>
+
+  <!--<md-button ng-click="vm.toggleLeft()" class="md-accent">-->
+    <!--Close-->
+  <!--</md-button>-->
+</div>
+
+<!--</md-sidenav>-->
+
+

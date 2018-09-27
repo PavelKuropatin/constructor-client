@@ -1,4 +1,4 @@
-export default function stateParamsService(moduleService) {
+export default function stateParamsService(moduleService, restoreService, jsplubService) {
   const vm = this;
 
   vm.library = [];
@@ -44,24 +44,4 @@ export default function stateParamsService(moduleService) {
     });
     vm.schema.push(moduleService.createModule(library_id, schema_id, title, description, posX, posY));
   };
-
-  function init() {
-    let library_topleft = {
-      x: 15,
-      y: 145,
-      item_height: 50,
-      margin: 5,
-    };
-    let module_css = {
-      width: 150,
-      height: 100, // actually variable
-    };
-    vm.addModuleToLibrary("Sum", "Aggregates an incoming sequences of values and returns the sum",
-      library_topleft.x + library_topleft.margin,
-      library_topleft.y + library_topleft.margin);
-    vm.addModuleToLibrary("Camera", "Hooks up to hardware camera and sends out an image at 20 Hz",
-      library_topleft.x + library_topleft.margin,
-      library_topleft.y + library_topleft.margin + library_topleft.item_height);
-  }
-  init();
 }

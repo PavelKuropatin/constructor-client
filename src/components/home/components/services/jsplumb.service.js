@@ -1,10 +1,12 @@
 export default function jsplubService() {
-  this.getJsplumbInstance = () => {
+  const vm = this;
+
+  vm.getJsplumbInstance = () => {
     return jsPlumb.getInstance({
       Container: $('#container'),
       Connector : "Flowchart",
       PaintStyle: {
-        strokeWidth: 13,
+        strokeWidth: 3,
         stroke: 'rgba(200,0,0,100)'
       },
       DragOptions: {cursor: "crosshair"},

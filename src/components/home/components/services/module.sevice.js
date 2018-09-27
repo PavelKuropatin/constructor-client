@@ -10,19 +10,10 @@ export default function moduleService() {
     };
   };
 
-  this.getLibraryTopleft = () => {
-    return {
-      x: 15,
-      y: 145,
-      item_height: 50,
-      margin: 5,
-    };
-  };
-
   this.getStyleModule = ()  => {
     return {
       width: 150,
-      height: 100, // actually variable
+      height: 100,
     };
   };
 }
