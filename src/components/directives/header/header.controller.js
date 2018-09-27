@@ -1,9 +1,9 @@
-export default function headerController($scope, $mdSidenav, jsplubService) {
+export default function headerController($mdSidenav, jsplubService, stateParamsService) {
   const vm = this;
   vm.zoomValue = 1;
   vm.toggleLeft = buildToggler('left');
   vm.toggleRight = buildToggler('right');
-  vm.library = $scope.library;
+  vm.library = stateParamsService.getLibrary();
 
   vm.zoom = (transformOrigin, el) => {
     transformOrigin = transformOrigin || [ 0.5, 0.5 ];

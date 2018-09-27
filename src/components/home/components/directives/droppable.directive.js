@@ -1,4 +1,4 @@
-export default function droppable() {
+export default function droppable(stateParamsService, moduleService) {
   return {
     restrict: 'A',
     link: function (scope, element, attrs) {
@@ -9,12 +9,12 @@ export default function droppable() {
             dropEl = angular.element(this);
 
           if (dragEl.hasClass('menu-item') && dropEl.hasClass('drop-container')) {
-            let x = event.pageX - scope.home.module_css.width / 2;
-            let y = event.pageY - scope.home.module_css.height / 2;
+            //todo refactor
+            let x = event.pageX - moduleService.getStyleModule.module_css.width / 2;
+            let y = event.pageY - moduleService.getStyleModule.module_css.height / 2;
 
-            scope.home.addModuleToSchema(dragIndex, x, y);
+            stateParamsService.addModuleToSchema(dragIndex, x, y);
           }
-
           scope.$apply();
         }
       });

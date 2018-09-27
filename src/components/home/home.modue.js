@@ -8,6 +8,7 @@ import homeController from './home.controller';
 
 import jsplubService from './components/services/jsplumb.service';
 import moduleService from './components/services/module.sevice';
+import stateParamsService from './components/services/state-params.service';
 
 import draggableDirective from './components/directives/draggable.directive';
 import droppableDirective from './components/directives/droppable.directive';
@@ -27,4 +28,5 @@ export default angular.module('app.home', [uirouter])
   .directive('postRender', postRenderDirective)
   .service('jsplubService', jsplubService)
   .service('moduleService', moduleService)
+  .service('stateParamsService', stateParamsService)
 	.name;
