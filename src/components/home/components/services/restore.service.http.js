@@ -1,4 +1,5 @@
 export default function restoreService($http) {
+  'ngInject';
   //todo use $http service
 
   this.getConnections = () => {

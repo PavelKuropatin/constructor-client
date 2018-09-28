@@ -1,4 +1,5 @@
 export default function plumbItem(jsplubService) {
+  'ngInject';
   return {
     replace: true,
     link: function (scope, element, attrs) {

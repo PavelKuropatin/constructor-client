@@ -1,4 +1,5 @@
 export default function jsplubService() {
+  'ngInject';
   const vm = this;
 
   vm.getJsplumbInstance = () => {

@@ -1,4 +1,5 @@
 export default function headerController($mdSidenav, jsplubService, stateParamsService) {
+  'ngInject';
   const vm = this;
   vm.zoomValue = 1;
   vm.toggleLeft = buildToggler('left');

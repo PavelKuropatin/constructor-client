@@ -1,4 +1,5 @@
 export default function stateParamsService(moduleService, restoreService, jsplubService) {
+  'ngInject';
   const vm = this;
 
   vm.library = [];
