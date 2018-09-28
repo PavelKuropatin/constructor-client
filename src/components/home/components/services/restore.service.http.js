@@ -5,6 +5,7 @@ export default function restoreService($http) {
   this.getConnections = () => {
     return [
       {
+        connectionId: 'test',
         source:"jsPlumb_2_3",
         target:"jsPlumb_2_1",
       },
@@ -18,12 +19,14 @@ export default function restoreService($http) {
   this.getLibraryModules = () => {
     return [
       {
+        library_id: 0,
         title: "Test1",
         description: "Some text1",
         x: 20,
         y: 50
       },
       {
+        library_id: 1,
         title: "Test2",
         description: "Some text2",
         x: 20,
