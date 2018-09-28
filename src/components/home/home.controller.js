@@ -1,7 +1,7 @@
-export default function homeController(jsplubService, stateParamsService) {
+export default function homeController(jsPlumbService, stateParamsService) {
   'ngInject';
   const vm = this;
-  vm.jsPlumbInstance = jsplubService.getJsplumbInstance();
+  vm.jsPlumbInstance = jsPlumbService.getJsplumbInstance();
   vm.library = stateParamsService.getLibrary();
   vm.schema = stateParamsService.getSchema();
 

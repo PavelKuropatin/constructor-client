@@ -1,9 +1,9 @@
-export default function plumbConnect(jsplubService) {
+export default function plumbConnect(jsPlumbService) {
   'ngInject';
   return {
     replace: true,
     link: function (scope, element, attrs) {
-      scope.home.jsPlumbInstance.makeSource(element, {
+      jsPlumbService.getJsplumbInstance().makeSource(element, {
         parent: $('#container'),
         paintStyle: {
           strokeStyle: "#225588",

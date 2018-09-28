@@ -1,4 +1,4 @@
-export default function stateParamsService(moduleService, restoreService, jsplubService) {
+export default function stateParamsService(moduleService, restoreService, jsPlumbService) {
   'ngInject';
   const vm = this;
 

@@ -6,7 +6,7 @@ import uirouter from 'angular-ui-router';
 import routing from './home.route';
 import homeController from './home.controller';
 
-import jsplubService from './components/services/jsplumb.service';
+import jsPlumbService from './components/services/jsplumb.service';
 import moduleService from './components/services/module.sevice';
 import restoreService from './components/services/restore.service.http';
 import stateParamsService from './components/services/state-params.service';
@@ -27,7 +27,7 @@ export default angular.module('app.home', [uirouter])
   .directive('plumbItem', plumbItemDirective)
   .directive('plumbMenuItem', plumbMenuItemDirective)
   .directive('postRender', postRenderDirective)
-  .service('jsplubService', jsplubService)
+  .service('jsPlumbService', jsPlumbService)
   .service('moduleService', moduleService)
 	.service('restoreService', restoreService)
   .service('stateParamsService', stateParamsService)

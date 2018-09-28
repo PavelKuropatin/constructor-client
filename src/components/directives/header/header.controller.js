@@ -1,4 +1,4 @@
-export default function headerController($mdSidenav, jsplubService, stateParamsService) {
+export default function headerController($mdSidenav, jsPlumbService, stateParamsService) {
   'ngInject';
   const vm = this;
   vm.zoomValue = 1;
@@ -8,7 +8,7 @@ export default function headerController($mdSidenav, jsplubService, stateParamsS
 
   vm.zoom = (transformOrigin, el) => {
     transformOrigin = transformOrigin || [ 0.5, 0.5 ];
-    const instance = jsplubService.getJsplumbInstance() || jsPlumb;
+    const instance = jsPlumbService.getJsplumbInstance() || jsPlumb;
     el = el || instance.getContainer();
     let p = [ "webkit", "moz", "ms", "o" ],
       s = "scale(" + vm.zoomValue + ")",

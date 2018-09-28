@@ -1,9 +1,9 @@
-export default function plumbMenuItem(jsplubService) {
+export default function plumbMenuItem(jsPlumbService) {
   'ngInject';
   return {
     replace: true,
     link: function (scope, element, attrs) {
-      scope.home.jsPlumbInstance.draggable(element, {
+      jsPlumbService.getJsplumbInstance().draggable(element, {
         containment: $('#sidenav-container')
       });
     }

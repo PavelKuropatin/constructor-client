@@ -1,15 +1,15 @@
-export default function plumbItem(jsplubService) {
+export default function plumbItem(jsPlumbService) {
   'ngInject';
   return {
     replace: true,
     link: function (scope, element, attrs) {
       // todo there are problems
-      scope.home.jsPlumbInstance.makeTarget(element, {
+      jsPlumbService.getJsplumbInstance().makeTarget(element, {
         anchor: 'Continuous',
         maxConnections: 2,
       });
-      scope.home.jsPlumbInstance.draggable(element, {
-        containment: $('#container')
+      jsPlumbService.getJsplumbInstance().draggable(element, {
+        // containment: $('#container')
       });
 
       // this should actually done by a AngularJS template and subsequently a controller attached to the dbl-click event
