@@ -3,10 +3,10 @@
 <!--</div>-->
 
 <div class="drop-container" layout="row" droppable>
-    <div flex="15" sidenav class="sidenav-container"></div>
-    <div flex id="container">
-      <div plumb-item class="item" ng-repeat="module in home.schema" ng-style="{ 'left':module.x, 'top':module.y }"
-           data-identifier="{{module.schema_id}}">
+  <sidenav library="home.library"></sidenav>
+  <div id="container">
+      <div plumb-item class="item" ng-repeat="module in home.schema" ng-style="{ 'left':module.x, 'top':module.y}"
+           data-identifier="{{module.libraryId}}">
         <div class="title">{{module.title}}</div>
         <div plumb-connect class="connect"></div>
       </div>

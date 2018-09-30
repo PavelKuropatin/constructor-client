@@ -1,14 +1,16 @@
-export default function stateParamsService(moduleService, restoreService, jsPlumbService) {
+export default function stateParamsService(moduleService, jsPlumbService) {
   'ngInject';
   const vm = this;
+//todo create  sources = []
+//todo create  targets = []
+//todo delete schema = []
 
   vm.library = [];
   // library_uuid is a unique identifier per module type in the library
-  vm.library_uuid = 0;
   // state is [identifier, x position, y position, title, description]
   vm.schema = [];
   // schema_uuid should always yield a unique identifier, can never be decreased
-  vm.schema_uuid = 0;
+  vm.connections = [];
 
   vm.getLibrary = () => {
     return vm.library;
@@ -22,27 +24,38 @@ export default function stateParamsService(moduleService, restoreService, jsPlum
     return vm.schema;
   };
 
+  vm.setNewSourceId = (oldSourceId, newSourceId) => {
+    vm.schema[_.findIndex(vm.schema, {'sourceId': oldSourceId})].sourceId = newSourceId;
+  };
+
+  vm.setNewTargetId = (oldTargetId, newTargetId) => {
+    vm.schema[_.findIndex(vm.schema, {'targetId': oldTargetId})].targetId = newTargetId;
+  };
+
   vm.setSchema = (schema) => {
     vm.schema = schema;
   };
 
-  vm.addModuleToLibrary = (title, description, posX, posY) => {
-    const library_id = vm.library_uuid++;
-    const schema_id = -1;
-    const m = moduleService.createModule(library_id, schema_id, title, description, posX, posY);
-    vm.library.push(m);
+  vm.addModuleToLibrary = (libraryId, title, description) => {
+    vm.library.push(moduleService.createLibraryModule(libraryId, title, description));
   };
 
-  vm.addModuleToSchema = (library_id, posX, posY) => {
-    const schema_id = vm.schema_uuid++;
-    let title;
-    let description;
+  vm.addModuleToSchema = (libraryId, targetId, sourceId,  posX, posY, title, description) => {
     _.forEach(vm.library, (module) => {
-      if (module.library_id === library_id) {
+      if (module.libraryId === libraryId) {
         title = module.title;
         description = module.description;
       }
     });
-    vm.schema.push(moduleService.createModule(library_id, schema_id, title, description, posX, posY));
+    vm.schema.push(moduleService.createSchemaModule(libraryId, targetId, sourceId, title, description, posX, posY));
   };
+
+  jsPlumbService.getJsplumbInstance().bind("connection", (info) => {
+    vm.connections.push(moduleService.createConnection(info.connection.id, info.sourceId, info.targetId));
+  });
+
+  // jsPlumbService.getJsplumbInstance().bind("beforeDrop", (info) => {
+  //   // console.log(info);
+  //   // vm.connections.push(moduleService.createConnection(info.connection.id, info.sourceId, info.targetId));
+  // });
 }

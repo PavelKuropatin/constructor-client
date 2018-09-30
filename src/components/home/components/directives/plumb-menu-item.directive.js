@@ -4,8 +4,9 @@ export default function plumbMenuItem(jsPlumbService) {
     replace: true,
     link: function (scope, element, attrs) {
       jsPlumbService.getJsplumbInstance().draggable(element, {
-        containment: $('#sidenav-container')
+        // containment: $(element).parent()
       });
+      // console.log(element);
     }
   };
 }

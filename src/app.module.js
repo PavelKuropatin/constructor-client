@@ -24,11 +24,9 @@ import headerDirective from './components/directives/header/header.directive';
 import sidenavDirective from './components/directives/sidenav/sidenav.directive';
 
 import headerController from './components/directives/header/header.controller';
-import sidenavController from './components/directives/sidenav/sidenav.controller';
 
 angular.module('diplom', [uirouter, animate, aria, messages, material, homeModule])
 	.directive('header', headerDirective)
 	.directive('sidenav', sidenavDirective)
 	.controller('headerController', headerController)
-	.controller('sidenavController', sidenavController)
 	.config(routing);

@@ -3,9 +3,8 @@
     <!--<h1 class="md-toolbar-tools">Menu</h1>-->
   <!--</md-toolbar>-->
 
-<div ng-show="vm.isSindenavVisible" class="sidenav" id="sidenav-container">
-  <div plumb-menu-item class="menu-item" ng-repeat="module in vm.library"
-       ng-style="{ 'left':module.x, 'top':module.y }"
+<div ng-show="isSindenavVisible" class="sidenav" id="sidenav-container">
+  <div plumb-menu-item class="menu-item" ng-repeat="module in library"
        data-identifier="{{module.library_id}}" draggable>
     <div class="summary">{{module.title}}</div>
   </div>

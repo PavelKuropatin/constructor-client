@@ -1,9 +1,8 @@
-export default function plumbItem(jsPlumbService) {
+export default function plumbItem($timeout, jsPlumbService, stateParamsService) {
   'ngInject';
   return {
     replace: true,
     link: function (scope, element, attrs) {
-      // todo there are problems
       jsPlumbService.getJsplumbInstance().makeTarget(element, {
         anchor: 'Continuous',
         maxConnections: 2,
@@ -11,6 +10,11 @@ export default function plumbItem(jsPlumbService) {
       jsPlumbService.getJsplumbInstance().draggable(element, {
         // containment: $('#container')
       });
+      // $(element).attr('id', scope.module.targetId);
+
+      // console.log(element);
+      // console.log(scope);
+      stateParamsService.setNewTargetId(scope.module.targetId, $(element).attr('id'));
 
       // this should actually done by a AngularJS template and subsequently a controller attached to the dbl-click event
       // element.bind('dblclick', function(e) {
@@ -23,6 +27,7 @@ export default function plumbItem(jsPlumbService) {
       //   scope.$digest();
       // });
 
-    }
+    },
+
   };
 }

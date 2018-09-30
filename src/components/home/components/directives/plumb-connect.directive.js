@@ -1,4 +1,4 @@
-export default function plumbConnect(jsPlumbService) {
+export default function plumbConnect(jsPlumbService, stateParamsService) {
   'ngInject';
   return {
     replace: true,
@@ -12,6 +12,8 @@ export default function plumbConnect(jsPlumbService) {
           lineWidth: 2
         },
       });
+      // $(element).attr('id', scope.module.sourceId);
+      stateParamsService.setNewSourceId(scope.module.sourceId, $(element).attr('id'));
     }
   };
 }

@@ -1,12 +1,29 @@
 export default function moduleService() {
-  this.createModule = (library_id, schema_id, title, description, x, y) => {
+  this.createSchemaModule = (libraryId, targetId, sourceId, title, description, x, y) => {
     return {
-      library_id: library_id,
-      schema_id: schema_id,
+      libraryId: libraryId,
+      targetId: targetId,
+      sourceId: sourceId,
       title: title,
       description: description,
       x: x,
       y: y
+    };
+  };
+
+  this.createLibraryModule = (libraryId, title, description) => {
+    return {
+      libraryId: libraryId,
+      title: title,
+      description: description,
+    };
+  };
+
+  this.createConnection = (connectionId, targetId, sourceId) => {
+    return {
+      id: connectionId,
+      targetId: targetId,
+      sourceId: sourceId
     };
   };
 

@@ -4,8 +4,13 @@ export default function sidenavDirective() {
   return {
     restrict: 'EA',
     scope: {
+      library: '='
     },
     template: template,
-    controller: 'sidenavController as vm'
+    link: function (scope) {
+      scope.isSindenavVisible = true;
+
+
+    }
   };
 }
