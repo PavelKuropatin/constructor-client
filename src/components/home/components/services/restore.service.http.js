@@ -7,8 +7,8 @@ export default function restoreService($http) {
     return [
       {
         connectionId: 'con_9',
-        source: 'jsPlumb_2_3',
-        target: 'jsPlumb_2_1',
+        target: 'jsPlumb_2_15',
+        source: 'jsPlumb_2_12'
       }
     ];
   };
@@ -34,8 +34,8 @@ export default function restoreService($http) {
     return [
       {
         libraryId: 0,
-        targetId: 'jsPlumb_2_12312',
-        sourceId: 'jsPlumb_2_2',
+        targetId: 'jsPlumb_2_13',
+        sourceId: 'jsPlumb_2_12',
         title: "test",
         description: "test",
         x: 250,
@@ -43,8 +43,8 @@ export default function restoreService($http) {
       },
       {
         libraryId: 1,
-        targetId: 'jsPlumb_2_3',
-        sourceId: 'jsPlumb_2_4',
+        targetId: 'jsPlumb_2_15',
+        sourceId: 'jsPlumb_2_14',
         title: "test",
         description: "test",
         x: 350,

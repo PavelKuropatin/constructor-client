@@ -1,4 +1,4 @@
-export default function plumbItem($timeout, jsPlumbService, stateParamsService) {
+export default function plumbItem($timeout, jsPlumbService) {
   'ngInject';
   return {
     replace: true,
@@ -8,13 +8,14 @@ export default function plumbItem($timeout, jsPlumbService, stateParamsService) 
         maxConnections: 2,
       });
       jsPlumbService.getJsplumbInstance().draggable(element, {
-        // containment: $('#container')
+        // containment: $('#container'  )
       });
-      // $(element).attr('id', scope.module.targetId);
 
-      // console.log(element);
-      // console.log(scope);
-      stateParamsService.setNewTargetId(scope.module.targetId, $(element).attr('id'));
+      if (scope.module.targetId) {
+        $(element).attr('id', scope.module.targetId);
+      } else {
+        scope.module.targetId = $(element).attr('id');
+      }
 
       // this should actually done by a AngularJS template and subsequently a controller attached to the dbl-click event
       // element.bind('dblclick', function(e) {

@@ -1,10 +1,10 @@
-export default function plumbConnect(jsPlumbService, stateParamsService) {
+export default function plumbConnect(jsPlumbService) {
   'ngInject';
   return {
     replace: true,
     link: function (scope, element, attrs) {
       jsPlumbService.getJsplumbInstance().makeSource(element, {
-        parent: $('#container'),
+        // parent: $('#container'),
         paintStyle: {
           strokeStyle: "#225588",
           fillStyle: "transparent",
@@ -12,8 +12,12 @@ export default function plumbConnect(jsPlumbService, stateParamsService) {
           lineWidth: 2
         },
       });
-      // $(element).attr('id', scope.module.sourceId);
-      stateParamsService.setNewSourceId(scope.module.sourceId, $(element).attr('id'));
+
+      if (scope.module.sourceId) {
+        $(element).attr('id', scope.module.sourceId);
+      } else {
+        scope.module.sourceId = $(element).attr('id');
+      }
     }
   };
 }

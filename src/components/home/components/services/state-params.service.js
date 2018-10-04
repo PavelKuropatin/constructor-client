@@ -24,14 +24,6 @@ export default function stateParamsService(moduleService, jsPlumbService) {
     return vm.schema;
   };
 
-  vm.setNewSourceId = (oldSourceId, newSourceId) => {
-    vm.schema[_.findIndex(vm.schema, {'sourceId': oldSourceId})].sourceId = newSourceId;
-  };
-
-  vm.setNewTargetId = (oldTargetId, newTargetId) => {
-    vm.schema[_.findIndex(vm.schema, {'targetId': oldTargetId})].targetId = newTargetId;
-  };
-
   vm.setSchema = (schema) => {
     vm.schema = schema;
   };
@@ -48,6 +40,10 @@ export default function stateParamsService(moduleService, jsPlumbService) {
       }
     });
     vm.schema.push(moduleService.createSchemaModule(libraryId, targetId, sourceId, title, description, posX, posY));
+    console.log(jsPlumbService.getJsplumbInstance().getConnections());
+    // console.log(jsPlumbService.getJsplumbInstance().sourceEndpointDefinitions);
+    console.log(jsPlumbService.getJsplumbInstance());
+    // console.log(vm.schema);
   };
 
   jsPlumbService.getJsplumbInstance().bind("connection", (info) => {

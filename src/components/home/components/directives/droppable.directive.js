@@ -13,7 +13,6 @@ export default function droppable(stateParamsService, moduleService) {
             //todo refactor
             let x = event.pageX - moduleService.getStyleModule().width / 2;
             let y = event.pageY - moduleService.getStyleModule().height / 2;
-
             stateParamsService.addModuleToSchema(dragIndex, null, null, x, y);
           }
           scope.$apply();
