@@ -1,23 +1,22 @@
-<!--<div id="menu-container">-->
-<!---->
-<!--</div>-->
+<div style="height:100%;">
 
-<div class="drop-container" layout="row" droppable>
-  <sidenav library="home.library"></sidenav>
-  <div id="container">
-      <div plumb-item class="item" ng-repeat="module in home.schema" ng-style="{ 'left':module.x, 'top':module.y}"
-           data-identifier="{{module.libraryId}}">
-        <div class="title">{{module.title}}</div>
-        <div plumb-connect class="connect"></div>
+  <!--<div class="col-sm-3" ng-include="'../directives/sidenav/sidenav.html'" style="height:100%; overflow:scroll;"></div>-->
+
+  <div class="col-sm-9"  style="height:100%; overflow:hidden;">
+    <div class="panel panel-primary" style="height:100%;">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          jsPlumb Canvas 1 ({{pos_x}}, {{pos_y}}, {{zoomlevel}})
+          <div class="col-sm-4 pull-right">
+            <div ui-slider min="10" max="120" ng-model="zoomlevel"></div>
+          </div>
+        </h3>
+      </div>
+      <div class="panel-body" style="overflow:hidden; height:100%;">
+        <js-plumb-canvas on-connection="onConnection" x="pos_x" y="pos_y" zoom="zoomlevel">
+          <ng-include src="'partials/'+state.template+'State.html'" ng-repeat="state in stateObjects"></ng-include>
+        </js-plumb-canvas>
       </div>
     </div>
+  </div>
 </div>
-
-<post-render></post-render>
-
-
-<!--<p>-->
-<!--<md-button class="md-raised" ng-click="home.redraw()">Redraw</md-button>-->
-<!--</p>-->
-
-<!--  does not render what comes behind it, so it's probably wrong -->

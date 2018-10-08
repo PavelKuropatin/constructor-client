@@ -5,30 +5,20 @@ import uirouter from 'angular-ui-router';
 
 import routing from './home.route';
 import homeController from './home.controller';
+import storageFactory from './components/services/storage-factory';
 
-import jsPlumbService from './components/services/jsplumb.service';
-import moduleService from './components/services/module.sevice';
-import restoreService from './components/services/restore.service.http';
-import stateParamsService from './components/services/state-params.service';
-
-import draggableDirective from './components/directives/draggable.directive';
-import droppableDirective from './components/directives/droppable.directive';
-import plumbConnectDirective from './components/directives/plumb-connect.directive';
-import plumbItemDirective from './components/directives/plumb-item.directive';
-import plumbMenuItemDirective from './components/directives/plumb-menu-item.directive';
-import postRenderDirective from './components/directives/post-render.directive';
+import jsPlumbCanvasDirective from './components/directives/js-plumb-canvas.directive';
+import jsPlumbConnectionDirective from './components/directives/js-plumb-connection.directive';
+import jsPlumbEndpointDirective from './components/directives/js-plumb-endpoint.directive';
+import jsPlumbObjectDirective from './components/directives/js-plumb-object.directive';
 
 export default angular.module('app.home', [uirouter])
 	.config(routing)
-	.controller('homeController', homeController)
-  .directive('draggable', draggableDirective)
-  .directive('droppable', droppableDirective)
-  .directive('plumbConnect', plumbConnectDirective)
-  .directive('plumbItem', plumbItemDirective)
-  .directive('plumbMenuItem', plumbMenuItemDirective)
-  .directive('postRender', postRenderDirective)
-  .service('jsPlumbService', jsPlumbService)
-  .service('moduleService', moduleService)
-	.service('restoreService', restoreService)
-  .service('stateParamsService', stateParamsService)
+	.controller('FirstExampleController', homeController)
+	.factory('$localStorage', storageFactory('localStorage'))
+  .factory('$sessionStorage', storageFactory('sessionStorage'))
+	.directive(jsPlumbCanvasDirective, 'jsPlumbCanvas')
+  .directive(jsPlumbConnectionDirective, 'jsPlumbConnection')
+  .directive(jsPlumbEndpointDirective, 'jsPlumbEndpoint')
+  .directive(jsPlumbObjectDirective, 'jsPlumbObject')
 	.name;
