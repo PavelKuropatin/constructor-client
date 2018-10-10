@@ -1,6 +1,6 @@
 export default function jsPlumbEndpointDirective() {
   'ngInject';
-  var def = {
+  return {
     restrict: 'E',
     require: '^jsPlumbCanvas',
     scope: {
@@ -13,10 +13,10 @@ export default function jsPlumbEndpointDirective() {
     transclude: true,
     template: '<div ng-transclude></div>',
     link: function (scope, element, attrs, jsPlumbCanvas) {
-      var instance = jsPlumbCanvas.scope.jsPlumbInstance;
+      const instance = jsPlumbCanvas.scope.jsPlumbInstance;
       scope.jsPlumbInstance = jsPlumbCanvas.scope.jsPlumbInstance;
       scope.uuid = attrs.uuid;
-      var options = {
+      let options = {
         anchor: attrs.anchor,
         uuid: attrs.uuid
       };
@@ -25,7 +25,7 @@ export default function jsPlumbEndpointDirective() {
       $(element).addClass('_jsPlumb_endpoint');
       $(element).addClass('endpoint_' + attrs.anchor);
 
-      var ep = instance.addEndpoint(element, scope.settings, options);
+      let ep = instance.addEndpoint(element, scope.settings, options);
 
 
       scope.$on('$destroy', function () {
@@ -33,5 +33,4 @@ export default function jsPlumbEndpointDirective() {
       });
     }
   };
-  return def;
 }

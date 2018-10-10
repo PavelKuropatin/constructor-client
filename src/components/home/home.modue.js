@@ -14,9 +14,9 @@ import jsPlumbObjectDirective from './components/directives/js-plumb-object.dire
 
 export default angular.module('app.home', [uirouter])
 	.config(routing)
-	.controller('FirstExampleController', homeController)
-	.factory('$localStorage', storageFactory('localStorage'))
-  .factory('$sessionStorage', storageFactory('sessionStorage'))
+	.controller('homeController', homeController)
+	// .factory('$localStorage', storageFactory('localStorage'))
+  // .factory('$sessionStorage', storageFactory('sessionStorage'))
 	.directive(jsPlumbCanvasDirective, 'jsPlumbCanvas')
   .directive(jsPlumbConnectionDirective, 'jsPlumbConnection')
   .directive(jsPlumbEndpointDirective, 'jsPlumbEndpoint')

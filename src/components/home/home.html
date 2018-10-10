@@ -1,6 +1,6 @@
 <div style="height:100%;">
 
-  <!--<div class="col-sm-3" ng-include="'../directives/sidenav/sidenav.html'" style="height:100%; overflow:scroll;"></div>-->
+  <!--<div class="col-sm-3" ng-include="'components/directives/sidenav/sidenav.html'" style="height:100%; overflow:scroll;"></div>&ndash;&gt;-->
 
   <div class="col-sm-9"  style="height:100%; overflow:hidden;">
     <div class="panel panel-primary" style="height:100%;">
@@ -14,7 +14,14 @@
       </div>
       <div class="panel-body" style="overflow:hidden; height:100%;">
         <js-plumb-canvas on-connection="onConnection" x="pos_x" y="pos_y" zoom="zoomlevel">
-          <ng-include src="'partials/'+state.template+'State.html'" ng-repeat="state in stateObjects"></ng-include>
+            <js-plumb-object ng-repeat="state in stateObjects" state-object="state" ng-style="{ 'left':state.x, 'top':state.y }" class="state_window" >
+                <h3 ng-click="setActiveState(state)">{{state.name}}</h3>
+                ACTION // {{state.template}}
+                <div style="position:absolute; top:50%; left:0px;">
+                    <js-plumb-endpoint ng-repeat="endpoint in state.targets" anchor="LeftMiddle" uuid="{{endpoint.uuid}}" settings="targetEndpointStyle"></js-plumb-endpoint>
+                </div>
+            </js-plumb-object>
+
         </js-plumb-canvas>
       </div>
     </div>

@@ -1,6 +1,6 @@
 export default function jsPlumbObjectDirective() {
   'ngInject';
-  var def = {
+  return {
     restrict: 'E',
     require: '^jsPlumbCanvas',
     scope: {
@@ -9,7 +9,7 @@ export default function jsPlumbObjectDirective() {
     transclude: true,
     template: '<div ng-transclude></div>',
     link: function (scope, element, attrs, jsPlumbCanvas) {
-      var instance = jsPlumbCanvas.scope.jsPlumbInstance;
+      const instance = jsPlumbCanvas.scope.jsPlumbInstance;
 
       console.log('constructing object');
 
@@ -28,5 +28,4 @@ export default function jsPlumbObjectDirective() {
       });
     }
   };
-  return def;
 }

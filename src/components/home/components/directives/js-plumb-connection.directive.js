@@ -1,6 +1,6 @@
 export default function jsPlumbConnectionDirective($timeout) {
   'ngInject';
-  var def = {
+  return {
     restrict: 'E',
     require: '^jsPlumbEndpoint',
     scope: {
@@ -8,9 +8,9 @@ export default function jsPlumbConnectionDirective($timeout) {
       ngModel: '=ngModel'
     },
     link: function (scope, element, attrs, jsPlumbEndpoint) {
-      var instance = jsPlumbEndpoint.scope.jsPlumbInstance;
-      var sourceUUID = jsPlumbEndpoint.scope.uuid;
-      var targetUUID = scope.ngModel.uuid;
+      const instance = jsPlumbEndpoint.scope.jsPlumbInstance;
+      let sourceUUID = jsPlumbEndpoint.scope.uuid;
+      let targetUUID = scope.ngModel.uuid;
 
       //we delay the connections by just a small bit for loading
       console.log('[directive][jsPlumbConnection] ', scope, attrs);
@@ -32,7 +32,7 @@ export default function jsPlumbConnectionDirective($timeout) {
 
         }
 
-        var connection = jsPlumbEndpoint.connectionObjects[targetUUID];
+        let connection = jsPlumbEndpoint.connectionObjects[targetUUID];
 
         connection.bind("click", function (conn, originalEvent) {
           scope.ngClick();
@@ -51,13 +51,11 @@ export default function jsPlumbConnectionDirective($timeout) {
 
         // not really using this... but we should fix it :)
 
-        var overlay = connection.getOverlay("label");
+        let overlay = connection.getOverlay("label");
         if (overlay) {
           console.log('[getOverlay][label]', connection.getOverlay("label"));
           $(element).appendTo(overlay.canvas);
         }
-
-
       }, 300);
 
 
@@ -76,5 +74,4 @@ export default function jsPlumbConnectionDirective($timeout) {
 
     }
   };
-  return def;
 }

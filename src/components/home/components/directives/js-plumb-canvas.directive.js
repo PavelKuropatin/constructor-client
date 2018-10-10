@@ -2,10 +2,10 @@ export default function jsPlumbCanvasDirective() {
   'ngInject';
   var jsPlumbZoomCanvas = function (instance, zoom, el, transformOrigin) {
     transformOrigin = transformOrigin || [0, 0];
-    var p = ["webkit", "moz", "ms", "o"],
+    const p = ["webkit", "moz", "ms", "o"],
       s = "scale(" + zoom + ")",
       oString = (transformOrigin[0] * 100) + "% " + (transformOrigin[1] * 100) + "%";
-    for (var i = 0; i < p.length; i++) {
+    for (let i = 0; i < p.length; i++) {
       el.style[p[i] + "Transform"] = s;
       el.style[p[i] + "TransformOrigin"] = oString;
     }
@@ -14,7 +14,7 @@ export default function jsPlumbCanvasDirective() {
     instance.setZoom(zoom);
   };
 
-  var def = {
+  return {
     restrict: 'E',
     scope: {
       onConnection: '=onConnection',
@@ -96,6 +96,4 @@ export default function jsPlumbCanvasDirective() {
 
     }
   };
-
-  return def;
 }
