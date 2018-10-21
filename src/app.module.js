@@ -11,6 +11,8 @@ require('jsplumb');
 require('jquery-ui/ui/widgets/draggable');
 require('jquery-ui/ui/widgets/droppable');
 
+import './../assets/images/grid_background.gif';
+
 import routing from './app.route';
 
 import 'bootstrap/dist/css/bootstrap.css';

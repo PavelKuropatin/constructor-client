@@ -5,7 +5,6 @@ import uirouter from 'angular-ui-router';
 
 import routing from './home.route';
 import homeController from './home.controller';
-import storageFactory from './components/services/storage-factory';
 
 import jsPlumbCanvasDirective from './components/directives/js-plumb-canvas.directive';
 import jsPlumbConnectionDirective from './components/directives/js-plumb-connection.directive';
@@ -15,10 +14,8 @@ import jsPlumbObjectDirective from './components/directives/js-plumb-object.dire
 export default angular.module('app.home', [uirouter])
 	.config(routing)
 	.controller('homeController', homeController)
-	// .factory('$localStorage', storageFactory('localStorage'))
-  // .factory('$sessionStorage', storageFactory('sessionStorage'))
-	.directive(jsPlumbCanvasDirective, 'jsPlumbCanvas')
-  .directive(jsPlumbConnectionDirective, 'jsPlumbConnection')
-  .directive(jsPlumbEndpointDirective, 'jsPlumbEndpoint')
-  .directive(jsPlumbObjectDirective, 'jsPlumbObject')
+	.directive('jsPlumbCanvas', jsPlumbCanvasDirective)
+  .directive('jsPlumbConnection', jsPlumbConnectionDirective)
+  .directive('jsPlumbEndpoint', jsPlumbEndpointDirective)
+  .directive('jsPlumbObject', jsPlumbObjectDirective)
 	.name;

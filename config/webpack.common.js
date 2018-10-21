@@ -15,7 +15,7 @@ module.exports = {
   ],
   output: {
     path: dest,
-    filename: 'bundle.[hash].js'
+    filename: '[name].[hash].js'
   },
   plugins: [
     new webpack.ProvidePlugin({

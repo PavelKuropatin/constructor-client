@@ -1,6 +1,6 @@
 export default function jsPlumbCanvasDirective() {
-  'ngInject';
-  var jsPlumbZoomCanvas = function (instance, zoom, el, transformOrigin) {
+  // 'ngInject';
+  const jsPlumbZoomCanvas = function (instance, zoom, el, transformOrigin) {
     transformOrigin = transformOrigin || [0, 0];
     const p = ["webkit", "moz", "ms", "o"],
       s = "scale(" + zoom + ")",
@@ -28,17 +28,8 @@ export default function jsPlumbCanvasDirective() {
     transclude: true,
     template: '<div ng-transclude></div>',
     link: function (scope, element, attr) {
-
-      // +
-
-//           instance.bind("connectionDrag", function(connection, originalEvent) {
-//               console.log("connectionDrag " + connection.id + " is being dragged. suspendedElement is ", connection.suspendedElement, " of type ", connection.suspendedElementType);
-//               console.log("connectionDrag", connection, originalEvent);
-//           });
-//
-//           instance.bind("connectionMoved", function(params) {
-//               console.log("connection " + params.connection.id + " was moved");
-//           });
+      var instance = jsPlumb.getInstance();
+      scope.jsPlumbInstance = instance;
 
       instance.bind("connection", function (info, origEvent) {
         if (typeof origEvent !== 'undefined' && origEvent.type === 'drop') {
@@ -46,10 +37,9 @@ export default function jsPlumbCanvasDirective() {
           var targetUUID = $(info.target).attr('uuid');
           var sourceUUID = $(info.source).attr('uuid');
           scope.onConnection(instance, info.connection, targetUUID, sourceUUID);
-          instance.detach(info.connection);
+          // instance.detach(info.connection);
         }
       });
-
 
       $(element).css({
         minWidth: '1000px',
@@ -74,7 +64,7 @@ export default function jsPlumbCanvasDirective() {
       });
 
       $(element).bind('mousewheel', function (e) {
-        if (e.originalEvent.wheelDelta / 120 > 0) {
+        if (e.originalEvent.wheelDelta / 200 > 0) {
           scope.zoom += 10;
           scope.$apply();
 
@@ -84,15 +74,6 @@ export default function jsPlumbCanvasDirective() {
           scope.$apply();
         }
       });
-
-
-//           scope.$watch('x', function(newVal, oldVal){
-//               $(element).css('left', newVal);
-//           });
-//           scope.$watch('y', function(newVal, oldVal){
-//               $(element).css('top', newVal);
-//           });
-
 
     }
   };
