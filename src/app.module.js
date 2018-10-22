@@ -13,13 +13,14 @@ require('jquery-ui/ui/widgets/droppable');
 
 import './../assets/images/grid_background.gif';
 
-import routing from './app.route';
-
+import 'jsplumb/css/jsplumbtoolkit-defaults.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'angular-material/angular-material.scss';
+
 import './components/directives/sidenav/sidenav.scss';
 import './global.scss';
 
+import routing from './app.route';
 import homeModule from './components/home/home.modue';
 
 

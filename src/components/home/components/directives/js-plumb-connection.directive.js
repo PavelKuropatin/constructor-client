@@ -21,15 +21,15 @@ export default function jsPlumbConnectionDirective($timeout) {
               targetUUID,
               sourceUUID
             ],
-            // overlays: [
-            //   ["Label", {label: "", id: "label"}]
-            // ], editable: true
+            overlays: [
+              ["Label", {label: "", id: "label"}]
+            ], editable: true
           });
         }
 
         let connection = jsPlumbEndpoint.connectionObjects[targetUUID];
 
-        // console.log(jsPlumbEndpoint.connectionObjects);
+        console.log(jsPlumbEndpoint.connectionObjects);
 
         connection.bind("click", function (conn, originalEvent) {
           scope.ngClick();
