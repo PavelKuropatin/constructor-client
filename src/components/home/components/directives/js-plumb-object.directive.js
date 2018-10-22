@@ -11,11 +11,13 @@ export default function jsPlumbObjectDirective() {
     link: function (scope, element, attrs, jsPlumbCanvas) {
       const instance = jsPlumbCanvas.scope.jsPlumbInstance;
 
-      console.log('constructing object');
+      // console.log('constructing object');
 
       instance.draggable(element, {
 
         drag: function (event, ui) {
+          // scope.stateObject.x = ui.position.left;
+          // scope.stateObject.y = ui.position.top;
           scope.stateObject.x = event.pos[0];
           scope.stateObject.y = event.pos[1];
 

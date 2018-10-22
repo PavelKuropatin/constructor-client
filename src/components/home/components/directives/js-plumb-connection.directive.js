@@ -12,27 +12,24 @@ export default function jsPlumbConnectionDirective($timeout) {
       let sourceUUID = jsPlumbEndpoint.scope.uuid;
       let targetUUID = scope.ngModel.uuid;
 
-      //we delay the connections by just a small bit for loading
-      console.log('[directive][jsPlumbConnection] ', scope, attrs);
-
-      $timeout(function () {
-        console.log(scope.ngModel.conn);
+      $timeout(() => {
         if (typeof jsPlumbEndpoint.connectionObjects[targetUUID] === 'undefined') {
           jsPlumbEndpoint.connectionObjects[targetUUID] = instance.connect({
+            // source: targetUUID,
+            // target: sourceUUID,
             uuids: [
               targetUUID,
               sourceUUID
             ],
-            overlays: [
-              ["Label", {label: "", id: "label"}]
-            ], editable: true
+            // overlays: [
+            //   ["Label", {label: "", id: "label"}]
+            // ], editable: true
           });
-
-          console.log('[created---------][directive][jsPlumbConnection] ');
-
         }
 
         let connection = jsPlumbEndpoint.connectionObjects[targetUUID];
+
+        // console.log(jsPlumbEndpoint.connectionObjects);
 
         connection.bind("click", function (conn, originalEvent) {
           scope.ngClick();
@@ -53,14 +50,14 @@ export default function jsPlumbConnectionDirective($timeout) {
 
         let overlay = connection.getOverlay("label");
         if (overlay) {
-          console.log('[getOverlay][label]', connection.getOverlay("label"));
+          // console.log('[getOverlay][label]', connection.getOverlay("label"));
           $(element).appendTo(overlay.canvas);
         }
       }, 300);
 
 
       scope.$on('$destroy', function () {
-        console.log('jsPlumbConnection for $destroy');
+        // console.log('jsPlumbConnection for $destroy');
         try {
           instance.detach(jsPlumbEndpoint.connectionObjects[targetUUID]);
         } catch (err) {

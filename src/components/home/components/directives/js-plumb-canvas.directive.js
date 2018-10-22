@@ -33,11 +33,11 @@ export default function jsPlumbCanvasDirective() {
 
       instance.bind("connection", function (info, origEvent) {
         if (typeof origEvent !== 'undefined' && origEvent.type === 'drop') {
-          console.log("[connection] event in jsPlumbCanvas Directive [DRAG & DROP]", info, origEvent);
+          // console.log("[connection] event in jsPlumbCanvas Directive [DRAG & DROP]", info, origEvent);
           var targetUUID = $(info.target).attr('uuid');
           var sourceUUID = $(info.source).attr('uuid');
           scope.onConnection(instance, info.connection, targetUUID, sourceUUID);
-          // instance.detach(info.connection);
+          instance.detach(info.connection);
         }
       });
 

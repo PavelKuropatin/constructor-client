@@ -21,12 +21,12 @@ export default function jsPlumbEndpointDirective() {
         uuid: attrs.uuid
       };
 
-      console.log('rigging up endpoint');
+      // console.log('rigging up endpoint');
       $(element).addClass('_jsPlumb_endpoint');
       $(element).addClass('endpoint_' + attrs.anchor);
 
       let ep = instance.addEndpoint(element, scope.settings, options);
-
+      console.log(ep);
 
       scope.$on('$destroy', function () {
         instance.deleteEndpoint(ep);
