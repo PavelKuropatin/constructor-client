@@ -15,21 +15,22 @@ export default function jsPlumbConnectionDirective($timeout) {
       $timeout(() => {
         if (typeof jsPlumbEndpoint.connectionObjects[targetUUID] === 'undefined') {
           jsPlumbEndpoint.connectionObjects[targetUUID] = instance.connect({
-            // source: targetUUID,
-            // target: sourceUUID,
             uuids: [
               targetUUID,
               sourceUUID
             ],
-            overlays: [
-              ["Label", {label: "", id: "label"}]
-            ], editable: true
+            // overlays: [
+            //   ["Label", {label: "", id: "label"}]
+            // ],
+            // editable: true
           });
         }
 
         let connection = jsPlumbEndpoint.connectionObjects[targetUUID];
-
-        console.log(jsPlumbEndpoint.connectionObjects);
+        // connection.addOverlay(["Label", {
+        //   label: "",
+        //   id:"label"
+        // } ]);
 
         connection.bind("click", function (conn, originalEvent) {
           scope.ngClick();
@@ -48,18 +49,18 @@ export default function jsPlumbConnectionDirective($timeout) {
 
         // not really using this... but we should fix it :)
 
-        let overlay = connection.getOverlay("label");
-        if (overlay) {
-          // console.log('[getOverlay][label]', connection.getOverlay("label"));
-          $(element).appendTo(overlay.canvas);
-        }
+        // let overlay = connection.getOverlay("label");
+        // if (overlay) {
+        //   console.log('[getOverlay][label]', connection.getOverlay("label"));
+        //   $(element).appendTo(overlay.canvas);
+        // }
       }, 300);
 
 
       scope.$on('$destroy', function () {
         // console.log('jsPlumbConnection for $destroy');
         try {
-          instance.detach(jsPlumbEndpoint.connectionObjects[targetUUID]);
+          instance.deleteConnection(jsPlumbEndpoint.connectionObjects[targetUUID]);
         } catch (err) {
           console.log('error', err, jsPlumbEndpoint.connectionObjects[targetUUID]);
 
