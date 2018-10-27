@@ -19,29 +19,25 @@ export default function jsPlumbConnectionDirective($timeout) {
               targetUUID,
               sourceUUID
             ],
-            // overlays: [
-            //   ["Label", {label: "", id: "label"}]
-            // ],
-            // editable: true
+            overlays: [
+              ["Label", {label: "", id: "label"}]
+            ],
+            editable: true
           });
         }
 
         let connection = jsPlumbEndpoint.connectionObjects[targetUUID];
-        // connection.addOverlay(["Label", {
-        //   label: "",
-        //   id:"label"
-        // } ]);
 
         connection.bind("click", function (conn, originalEvent) {
           scope.ngClick();
           scope.$apply();
         });
 
-        connection.bind("mouseenter", function (conn, originalEvent) {
+        connection.bind("mouseover", function (conn, originalEvent) {
           scope.ngModel.mouseover = true;
           scope.$apply();
         });
-        connection.bind("mouseleave", function (conn, originalEvent) {
+        connection.bind("mouseout", function (conn, originalEvent) {
           scope.ngModel.mouseover = false;
           scope.$apply();
         });
@@ -49,11 +45,10 @@ export default function jsPlumbConnectionDirective($timeout) {
 
         // not really using this... but we should fix it :)
 
-        // let overlay = connection.getOverlay("label");
-        // if (overlay) {
-        //   console.log('[getOverlay][label]', connection.getOverlay("label"));
-        //   $(element).appendTo(overlay.canvas);
-        // }
+        let overlay = connection.getOverlay("label");
+        if (overlay) {
+          $(element).appendTo(overlay.canvas);
+        }
       }, 300);
 
 

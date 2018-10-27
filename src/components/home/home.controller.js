@@ -8,7 +8,7 @@ export default function homeController($scope, $http) {
 
   vm.targetEndpointStyle = {
     endpoint: "Dot",
-    paintStyle: {fillStyle: "#7AB02C", radius: 11},
+    paintStyle: {fill: "#7AB02C", radius: 11},
     maxConnections: -1,
     isTarget: true
   };
@@ -16,24 +16,19 @@ export default function homeController($scope, $http) {
   vm.sourceEndpointStyle = {
     endpoint: "Dot",
     paintStyle: {
-      strokeStyle: "#7AB02C",
-      fillStyle: "transparent",
-      radius: 7,
-      lineWidth: 3
+      stroke: "#7AB02C",
+      fill: "transparent",
+      strokeWidth: 3
     },
     isSource: true,
     maxConnections: -1,
     connector: ["Flowchart", {stub: [30, 30], gap: 20, cornerRadius: 10, alwaysRespectStubs: true}],
-    connectorPaintStyle: {
-      lineWidth: 4,
-      strokeStyle: "#61B7CF",
-      joinStyle: "round",
-      outlineColor: "white",
-      outlineWidth: 2
+    connectorStyle: {
+      strokeWidth: 4,
+      stroke: "#61B7CF"
     },
-    connectorHoverPaintStyle: {
-      fillStyle: "#216477",
-      strokeStyle: "#216477"
+    connectorHoverStyle: {
+      stroke: "#216477"
     }
   };
 
@@ -58,7 +53,12 @@ export default function homeController($scope, $http) {
           "uuid": 2001
         },
         {
-          "uuid": 2002
+          "uuid": 2002,
+          "connections": [
+            {
+              "uuid": "2007"
+            }
+          ]
         }
       ],
       "targets": [
@@ -69,8 +69,8 @@ export default function homeController($scope, $http) {
           "uuid": 2004
         }
       ],
-      "x": 526.625,
-      "y": 462.5625
+      "x": 415,
+      "y": 752.625
     },
     {
       "name": "New State",
@@ -80,12 +80,7 @@ export default function homeController($scope, $http) {
           "uuid": 2005
         },
         {
-          "uuid": 2006,
-          "connections": [
-            {
-              "uuid": "2003"
-            }
-          ]
+          "uuid": 2006
         }
       ],
       "targets": [
@@ -96,8 +91,8 @@ export default function homeController($scope, $http) {
           "uuid": 2008
         }
       ],
-      "x": 544.9354838709678,
-      "y": 761
+      "x": 447.5,
+      "y": 350.625
     }
   ];
 
@@ -105,8 +100,8 @@ export default function homeController($scope, $http) {
   //   $scope.stateObjects = $localStorage.stateObjects;
   // } else {
   //   $http({method: 'GET', url: 'data.json'}).then(function (data, status, headers, config) {
-      // when the response is available
-    // });
+  // when the response is available
+  // });
   // }
 
   // $scope.$watch('stateObjects', function (newVal, oldVal) {

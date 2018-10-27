@@ -15,12 +15,9 @@ export default function jsPlumbObjectDirective() {
 
       instance.draggable(element, {
 
-        drag: function (event, ui) {
-          // scope.stateObject.x = ui.position.left;
-          // scope.stateObject.y = ui.position.top;
+        drag: function (event) {
           scope.stateObject.x = event.pos[0];
           scope.stateObject.y = event.pos[1];
-
           scope.$apply();
         }
       });

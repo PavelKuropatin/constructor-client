@@ -81,10 +81,10 @@
                   <div ng-repeat="connection in source.connections" ng-class="{'btn-warning': connection.mouseover}" style="padding:5px;">
                     <div class="btn-group btn-group-justified">
                       <div class="btn-group">
-                        <button ng-if="connection.type != 'Action'" class="btn btn-default" ng-click="connection.type = 'Action'">
+                        <button ng-if="connection.type !== 'Action'" class="btn btn-default" ng-click="connection.type = 'Action'">
                           <span style="color:#3860ff;" class="glyphicon glyphicon-retweet" title="Transition To {{connection.uuid}}"></span>
                         </button>
-                        <button ng-if="connection.type == 'Action'" class="btn btn-default" ng-click="connection.type = 'Transition'">
+                        <button ng-if="connection.type === 'Action'" class="btn btn-default" ng-click="connection.type = 'Transition'">
                           <span style="color:#ff7805;" class="glyphicon glyphicon-flash" title="Trigger Action {{connection.uuid}}"></span>
                         </button>
                       </div>

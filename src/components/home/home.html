@@ -187,16 +187,16 @@
                                            uuid="{{endpoint.uuid}}" settings="home.sourceEndpointStyle">
                             <js-plumb-connection ng-click="setActiveConnection($index)"
                                                  ng-repeat="connection in endpoint.connections" ng-model="connection">
-                                <!--<div style="background-color:#ccc; border-radius:20px; width:40px; text-align:center; height:40px; position:relative; top:-20px; left:-20px;">-->
-                                    <!--<span ng-if="connection.type != 'Action'"-->
-                                          <!--style="margin-top:5px; color:#3860ff; font-size:25px;"-->
-                                          <!--class="glyphicon glyphicon-retweet"-->
-                                          <!--title="Transition To {{connection.uuid}}"></span>-->
-                                    <!--<span ng-if="connection.type == 'Action'"-->
-                                          <!--style="margin-top:5px;color:#ff7805; font-size:25px;"-->
-                                          <!--class="glyphicon glyphicon-flash"-->
-                                          <!--title="Trigger Action {{connection.uuid}}"></span>-->
-                                <!--</div>-->
+                                <div style="background-color:#ccc; border-radius:20px; width:40px; text-align:center; height:40px; position:relative; top:-20px; left:-20px;">
+                                    <span ng-if="connection.type !== 'Action'"
+                                          style="margin-top:5px; color:#3860ff; font-size:25px;"
+                                          class="glyphicon glyphicon-retweet"
+                                          title="Transition To {{connection.uuid}}"></span>
+                                    <span ng-if="connection.type === 'Action'"
+                                          style="margin-top:5px;color:#ff7805; font-size:25px;"
+                                          class="glyphicon glyphicon-flash"
+                                          title="Trigger Action {{connection.uuid}}"></span>
+                                </div>
                             </js-plumb-connection>
                         </js-plumb-endpoint>
                     </div>
