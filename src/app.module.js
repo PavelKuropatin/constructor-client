@@ -17,7 +17,7 @@ import 'jsplumb/css/jsplumbtoolkit-defaults.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'angular-material/angular-material.scss';
 
-import './components/directives/sidenav/sidenav.scss';
+import './components/home/components/directives/sidenav/sidenav.scss';
 import './global.scss';
 
 import routing from './app.route';

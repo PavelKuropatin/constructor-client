@@ -4,7 +4,7 @@ export default function homeController($scope, $http) {
   vm.zoomlevel = 64;
   vm.pos_x = 214;
   vm.pos_y = 148;
-  vm.stateObjects = [];
+  vm.activeState = null;
 
   vm.targetEndpointStyle = {
     endpoint: "Dot",
@@ -32,110 +32,6 @@ export default function homeController($scope, $http) {
     }
   };
 
-  vm.removeIndex = function (index, object) {
-    object.splice(index, 1);
-  };
-
-  vm.removeState = function (state) {
-    var index = vm.stateObjects.indexOf(state);
-    if (index !== -1) {
-      vm.stateObjects.splice(index, 1);
-    }
-  };
-
-
-  vm.stateObjects = [
-    {
-      "name": "New State",
-      "template": "default",
-      "sources": [
-        {
-          "uuid": 2001
-        },
-        {
-          "uuid": 2002,
-          "connections": [
-            {
-              "uuid": "2007"
-            }
-          ]
-        }
-      ],
-      "targets": [
-        {
-          "uuid": 2003
-        },
-        {
-          "uuid": 2004
-        }
-      ],
-      "x": 415,
-      "y": 752.625
-    },
-    {
-      "name": "New State",
-      "template": "default",
-      "sources": [
-        {
-          "uuid": 2005
-        },
-        {
-          "uuid": 2006
-        }
-      ],
-      "targets": [
-        {
-          "uuid": 2007
-        },
-        {
-          "uuid": 2008
-        }
-      ],
-      "x": 447.5,
-      "y": 350.625
-    }
-  ];
-
-  // if (typeof $localStorage.stateObjects !== 'undefined') {
-  //   $scope.stateObjects = $localStorage.stateObjects;
-  // } else {
-  //   $http({method: 'GET', url: 'data.json'}).then(function (data, status, headers, config) {
-  // when the response is available
-  // });
-  // }
-
-  // $scope.$watch('stateObjects', function (newVal, oldVal) {
-  //   $localStorage.stateObjects = $scope.stateObjects;
-  // }, true);
-
-
-  // if (typeof $localStorage.lastUUID === 'undefined') {
-  vm.lastUUID = 2000;
-  // }
-  var getNextUUID = function () {
-    vm.lastUUID++;
-    return vm.lastUUID;
-  };
-  vm.newState = function () {
-    console.log(vm.stateObjects);
-    vm.stateObjects.push({
-      'name': 'New State',
-      'template': 'default',
-      'sources': [
-        {uuid: getNextUUID()},
-        {uuid: getNextUUID()},
-      ],
-      'targets': [
-        {uuid: getNextUUID()},
-        {uuid: getNextUUID()}
-      ],
-      'x': 10,
-      'y': 10
-    });
-  };
-
-  vm.activeState = null;
-
   vm.setActiveState = function (state) {
     vm.activeState = state;
   };
@@ -150,7 +46,59 @@ export default function homeController($scope, $http) {
         }
       });
     });
-
   };
 
+  jsPlumb.ready(() => {
+    vm.stateObjects = [
+      {
+        "name": "New State",
+        "template": "default",
+        "sources": [
+          {
+            "uuid": 2001
+          },
+          {
+            "uuid": 2002,
+            "connections": [
+              {
+                "uuid": "2007"
+              }
+            ]
+          }
+        ],
+        "targets": [
+          {
+            "uuid": 2003
+          },
+          {
+            "uuid": 2004
+          }
+        ],
+        "x": 415,
+        "y": 752.625
+      },
+      {
+        "name": "New State",
+        "template": "default",
+        "sources": [
+          {
+            "uuid": 2005
+          },
+          {
+            "uuid": 2006
+          }
+        ],
+        "targets": [
+          {
+            "uuid": 2007
+          },
+          {
+            "uuid": 2008
+          }
+        ],
+        "x": 447.5,
+        "y": 350.625
+      }
+    ];
+  });
 }

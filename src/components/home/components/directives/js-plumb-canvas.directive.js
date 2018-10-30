@@ -32,16 +32,12 @@ export default function jsPlumbCanvasDirective() {
       scope.jsPlumbInstance = instance;
 
       instance.bind("connection", function (info, origEvent) {
-        // console.log("[connection] event in jsPlumbCanvas Directive [DRAG & DROP]", info, origEvent);
         if (origEvent && origEvent.type == 'mouseup') {
-          console.log(origEvent);
-          console.log(origEvent.type);
 
           var targetUUID = $(info.target).attr('uuid');
           var sourceUUID = $(info.source).attr('uuid');
           scope.onConnection(instance, info.connection, targetUUID, sourceUUID);
           instance.deleteConnection(info.connection);
-          // instance.repaintEverything();
         }
       });
 
