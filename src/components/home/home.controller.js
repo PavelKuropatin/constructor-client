@@ -1,4 +1,4 @@
-export default function homeController($scope, stateObjectHttpService) {
+export default function homeController($scope, stateObjectHttpService, env) {
   'ngInject';
   const vm = this;
   vm.zoomlevel = 64;
@@ -49,6 +49,7 @@ export default function homeController($scope, stateObjectHttpService) {
   };
 
   jsPlumb.ready(() => {
+    console.log(env);
     console.log(stateObjectHttpService.getAllStateObject());
     vm.stateObjects = [
       {
