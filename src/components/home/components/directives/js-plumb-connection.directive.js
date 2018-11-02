@@ -42,9 +42,6 @@ export default function jsPlumbConnectionDirective($timeout) {
           scope.$apply();
         });
 
-
-        // not really using this... but we should fix it :)
-
         let overlay = connection.getOverlay("label");
         if (overlay) {
           $(element).appendTo(overlay.canvas);
@@ -53,15 +50,12 @@ export default function jsPlumbConnectionDirective($timeout) {
 
 
       scope.$on('$destroy', function () {
-        // console.log('jsPlumbConnection for $destroy');
         try {
           instance.deleteConnection(jsPlumbEndpoint.connectionObjects[targetUUID]);
         } catch (err) {
           console.log('error', err, jsPlumbEndpoint.connectionObjects[targetUUID]);
 
         }
-        // if the connection is destroyed, I am assuming the parent endPoint is also destroyed, and we need to remove
-        // the reference that a link exists, so it will be rendered again
         jsPlumbEndpoint.connectionObjects[targetUUID] = undefined;
       });
 
