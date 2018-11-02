@@ -1,6 +1,15 @@
 export default function stateObjectHttpService($http, env) {
   const STATE_OBJECT_URL = '/api/schema/1';
 
+  const saveAllStateObject = function (stateObjects) {
+    restructureBeforeSending(stateObjects);
+    return $http({
+      method: 'POST',
+      url: env.api + STATE_OBJECT_URL,
+      data: stateObjects
+    });
+  };
+
   const getAllStateObject = function () {
     $http.get(env.api + STATE_OBJECT_URL).then(
       (response) => {
@@ -62,7 +71,8 @@ export default function stateObjectHttpService($http, env) {
 
 
   return {
-    getAllStateObject: getAllStateObject
+    getAllStateObject: getAllStateObject,
+    saveAllStateObject: saveAllStateObject
   };
 }
 

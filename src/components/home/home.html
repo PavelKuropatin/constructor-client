@@ -1,12 +1,14 @@
 <div class="col-sm-3" style="height:100%">
-  <sidenav state-objects="home.stateObjects"
-           active-state="home.activeState"></sidenav>
+    <sidenav state-objects="home.stateObjects"
+             active-state="home.activeState"></sidenav>
 </div>
 <div id="container" class="col-sm-9" style="height:100%; overflow:hidden;">
     <div class="panel panel-primary" style="height:100%;">
         <div class="panel-heading">
             <h3 class="panel-title">
-                jsPlumb Canvas 1 ({{home.pos_x}}, {{home.pos_y}}, {{home.zoomlevel}})
+                jsPlumb Canvas 1 ({{home.pos_x}}, {{home.pos_y}},
+                <md-button class="md-raised" ng-click="home.saveStateObjects()">Save</md-button>
+                <md-button class="md-raised" ng-click="home.loadStateObjects()">Load</md-button>
                 <!--<div class="col-sm-4 pull-right">-->
                 <md-slider min="0" max="200" ng-model="home.zoomlevel" step="10" aria-label="red" id="red-slider"
                            class="md-warn">
@@ -16,7 +18,8 @@
         </div>
         <div class="panel-body" style="overflow:hidden; height:100%;">
             <js-plumb-canvas on-connection="home.onConnection" x="home.pos_x" y="home.pos_y" zoom="home.zoomlevel">
-                <js-plumb-object state-object="state" ng-style="{ 'left':state.x, 'top':state.y }" class="state_window" ng-repeat="state in home.stateObjects">
+                <js-plumb-object state-object="state" ng-style="{ 'left':state.x, 'top':state.y }" class="state_window"
+                                 ng-repeat="state in home.stateObjects">
                     <h3 ng-click="home.setActiveState(state)">{{state.name}}</h3>
                     {{state.template}}
                     <div style="position:absolute; top:50%; right:0px;">

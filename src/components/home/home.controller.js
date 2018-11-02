@@ -5,6 +5,7 @@ export default function homeController($scope, stateObjectHttpService, env) {
   vm.pos_x = 214;
   vm.pos_y = 148;
   vm.activeState = null;
+  vm.stateObjects = [];
 
   vm.targetEndpointStyle = {
     endpoint: "Dot",
@@ -48,59 +49,65 @@ export default function homeController($scope, stateObjectHttpService, env) {
     });
   };
 
+  vm.saveStateObjects = () => {
+    stateObjectHttpService.saveAllStateObject(vm.stateObjects);
+  };
+
+  vm.loadStateObjects = () => {
+    vm.stateObjects = stateObjectHttpService.getAllStateObject();
+  };
+
   jsPlumb.ready(() => {
-    console.log(env);
-    console.log(stateObjectHttpService.getAllStateObject());
-    vm.stateObjects = [
-      {
-        "name": "New State",
-        "template": "default",
-        "sources": [
-          {
-            "uuid": 2001
-          },
-          {
-            "uuid": 2002,
-            "connections": [
-              {
-                "uuid": "2007"
-              }
-            ]
-          }
-        ],
-        "targets": [
-          {
-            "uuid": 2003
-          },
-          {
-            "uuid": 2004
-          }
-        ],
-        "x": 415,
-        "y": 752.625
-      },
-      {
-        "name": "New State",
-        "template": "default",
-        "sources": [
-          {
-            "uuid": 2005
-          },
-          {
-            "uuid": 2006
-          }
-        ],
-        "targets": [
-          {
-            "uuid": 2007
-          },
-          {
-            "uuid": 2008
-          }
-        ],
-        "x": 447.5,
-        "y": 350.625
-      }
-    ];
+    // vm.stateObjects = [
+    //   {
+    //     "name": "New State",
+    //     "template": "default",
+    //     "sources": [
+    //       {
+    //         "uuid": 2001
+    //       },
+    //       {
+    //         "uuid": 2002,
+    //         "connections": [
+    //           {
+    //             "uuid": "2007"
+    //           }
+    //         ]
+    //       }
+    //     ],
+    //     "targets": [
+    //       {
+    //         "uuid": 2003
+    //       },
+    //       {
+    //         "uuid": 2004
+    //       }
+    //     ],
+    //     "x": 415,
+    //     "y": 752.625
+    //   },
+    //   {
+    //     "name": "New State",
+    //     "template": "default",
+    //     "sources": [
+    //       {
+    //         "uuid": 2005
+    //       },
+    //       {
+    //         "uuid": 2006
+    //       }
+    //     ],
+    //     "targets": [
+    //       {
+    //         "uuid": 2007
+    //       },
+    //       {
+    //         "uuid": 2008
+    //       }
+    //     ],
+    //     "x": 447.5,
+    //     "y": 350.625
+    //   }
+    // ];
   });
 }
