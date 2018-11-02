@@ -54,60 +54,8 @@ export default function homeController($scope, stateObjectHttpService, env) {
   };
 
   vm.loadStateObjects = () => {
-    vm.stateObjects = stateObjectHttpService.getAllStateObject();
+    jsPlumb.ready(() => {
+      vm.stateObjects = stateObjectHttpService.getAllStateObject();
+    });
   };
-
-  jsPlumb.ready(() => {
-    // vm.stateObjects = [
-    //   {
-    //     "name": "New State",
-    //     "template": "default",
-    //     "sources": [
-    //       {
-    //         "uuid": 2001
-    //       },
-    //       {
-    //         "uuid": 2002,
-    //         "connections": [
-    //           {
-    //             "uuid": "2007"
-    //           }
-    //         ]
-    //       }
-    //     ],
-    //     "targets": [
-    //       {
-    //         "uuid": 2003
-    //       },
-    //       {
-    //         "uuid": 2004
-    //       }
-    //     ],
-    //     "x": 415,
-    //     "y": 752.625
-    //   },
-    //   {
-    //     "name": "New State",
-    //     "template": "default",
-    //     "sources": [
-    //       {
-    //         "uuid": 2005
-    //       },
-    //       {
-    //         "uuid": 2006
-    //       }
-    //     ],
-    //     "targets": [
-    //       {
-    //         "uuid": 2007
-    //       },
-    //       {
-    //         "uuid": 2008
-    //       }
-    //     ],
-    //     "x": 447.5,
-    //     "y": 350.625
-    //   }
-    // ];
-  });
 }

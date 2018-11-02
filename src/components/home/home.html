@@ -6,14 +6,14 @@
     <div class="panel panel-primary" style="height:100%;">
         <div class="panel-heading">
             <h3 class="panel-title">
-                jsPlumb Canvas 1 ({{home.pos_x}}, {{home.pos_y}},
+                <span>
+                    Current position [{{home.pos_x}}, {{home.pos_y}}]
+                </span>
                 <md-button class="md-raised" ng-click="home.saveStateObjects()">Save</md-button>
                 <md-button class="md-raised" ng-click="home.loadStateObjects()">Load</md-button>
-                <!--<div class="col-sm-4 pull-right">-->
                 <md-slider min="0" max="200" ng-model="home.zoomlevel" step="10" aria-label="red" id="red-slider"
                            class="md-warn">
                 </md-slider>
-                <!--</div>-->
             </h3>
         </div>
         <div class="panel-body" style="overflow:hidden; height:100%;">
