@@ -1,52 +1,60 @@
-<div class="col-sm-3" style="height:100%">
+<div layout="row">
+  <div flex="20" class="sidenav-container">
     <sidenav state-objects="home.stateObjects"
              active-state="home.activeState"></sidenav>
-</div>
-<div id="container" class="col-sm-9" style="height:100%; overflow:hidden;">
-    <div class="panel panel-primary" style="height:100%;">
-        <div class="panel-heading">
-            <h3 class="panel-title">
-                <span>
-                    Current position [{{home.pos_x}}, {{home.pos_y}}]
+  </div>
+  <div class="schema-container" flex="80">
+    <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+        <h2 flex md-truncate>Current position [{{home.pos_x}}, {{home.pos_y}}]</h2>
+        <md-button class="md-icon-button" aria-label="Favorite">
+          <md-icon md-svg-icon="img/icons/favorite.svg" class="favorite-icon"></md-icon>
+        </md-button>
+        <md-button class="md-raised" ng-click="home.saveStateObjects()">Save</md-button>
+        <md-button class="md-raised" ng-click="home.loadStateObjects()">Load</md-button>
+        <md-slider min="0" max="200" ng-model="home.zoomlevel" step="10" aria-label="red" id="red-slider"
+                   class="md-warn">
+        </md-slider>
+      </div>
+    </md-toolbar>
+
+    <div id="container">
+      <js-plumb-canvas on-connection="home.onConnection"
+                       x="home.pos_x"
+                       y="home.pos_y"
+                       zoom="home.zoomlevel">
+        <js-plumb-object class="state_window"
+                         state-object="state"
+                         ng-style="{ 'left':state.x, 'top':state.y }"
+                         ng-repeat="state in home.stateObjects">
+          <h3 ng-click="home.setActiveState(state)">{{state.name}}</h3>
+          {{state.template}}
+          <js-plumb-endpoint class="endpoint-style-right"
+                             ng-repeat="endpoint in state.sources"
+                             anchor="RightMiddle"
+                             uuid="{{endpoint.uuid}}"
+                             settings="home.sourceEndpointStyle">
+            <js-plumb-connection ng-click="setActiveConnection($index)"
+                                 ng-repeat="connection in endpoint.connections"
+                                 ng-model="connection">
+              <div class="connection-label">
+                <span ng-if="connection.type !== 'Action'"
+                      class="glyphicon glyphicon-retweet connection-label-active"
+                      title="Transition To {{connection.uuid}}">
                 </span>
-                <md-button class="md-raised" ng-click="home.saveStateObjects()">Save</md-button>
-                <md-button class="md-raised" ng-click="home.loadStateObjects()">Load</md-button>
-                <md-slider min="0" max="200" ng-model="home.zoomlevel" step="10" aria-label="red" id="red-slider"
-                           class="md-warn">
-                </md-slider>
-            </h3>
-        </div>
-        <div class="panel-body" style="overflow:hidden; height:100%;">
-            <js-plumb-canvas on-connection="home.onConnection" x="home.pos_x" y="home.pos_y" zoom="home.zoomlevel">
-                <js-plumb-object state-object="state" ng-style="{ 'left':state.x, 'top':state.y }" class="state_window"
-                                 ng-repeat="state in home.stateObjects">
-                    <h3 ng-click="home.setActiveState(state)">{{state.name}}</h3>
-                    {{state.template}}
-                    <div style="position:absolute; top:50%; right:0px;">
-                        <js-plumb-endpoint ng-repeat="endpoint in state.sources" anchor="RightMiddle"
-                                           uuid="{{endpoint.uuid}}" settings="home.sourceEndpointStyle">
-                            <js-plumb-connection ng-click="setActiveConnection($index)"
-                                                 ng-repeat="connection in endpoint.connections" ng-model="connection">
-                                <div style="background-color:#ccc; border-radius:20px; width:40px; text-align:center; height:40px; position:relative; top:-20px; left:-20px;">
-                                    <span ng-if="connection.type !== 'Action'"
-                                          style="margin-top:5px; color:#3860ff; font-size:25px;"
-                                          class="glyphicon glyphicon-retweet"
-                                          title="Transition To {{connection.uuid}}"></span>
-                                    <span ng-if="connection.type === 'Action'"
-                                          style="margin-top:5px;color:#ff7805; font-size:25px;"
-                                          class="glyphicon glyphicon-flash"
-                                          title="Trigger Action {{connection.uuid}}"></span>
-                                </div>
-                            </js-plumb-connection>
-                        </js-plumb-endpoint>
-                    </div>
-                    <div style="position:absolute; top:50%; left:0px;">
-                        <js-plumb-endpoint ng-repeat="endpoint in state.targets" anchor="LeftMiddle"
-                                           uuid="{{endpoint.uuid}}"
-                                           settings="home.targetEndpointStyle"></js-plumb-endpoint>
-                    </div>
-                </js-plumb-object>
-            </js-plumb-canvas>
-        </div>
+                <span ng-if="connection.type === 'Action'"
+                      class="glyphicon glyphicon-flash connection-label-inactive"
+                      title="Trigger Action {{connection.uuid}}"></span>
+              </div>
+            </js-plumb-connection>
+          </js-plumb-endpoint>
+          <js-plumb-endpoint class="endpoint-style-left"
+                             ng-repeat="endpoint in state.targets"
+                             anchor="LeftMiddle"
+                             uuid="{{endpoint.uuid}}"
+                             settings="home.targetEndpointStyle"></js-plumb-endpoint>
+        </js-plumb-object>
+      </js-plumb-canvas>
     </div>
+  </div>
 </div>

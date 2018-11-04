@@ -14,7 +14,6 @@ require('jquery-ui/ui/widgets/droppable');
 import './../assets/images/grid_background.gif';
 
 import 'jsplumb/css/jsplumbtoolkit-defaults.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import 'angular-material/angular-material.scss';
 
 import './components/home/components/directives/sidenav/sidenav.scss';

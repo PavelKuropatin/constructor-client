@@ -1,68 +1,48 @@
-//.title {
-//  padding: 10px;
-//  cursor: move;
-//  font-weight: bold;
-//  font-size: 120%;
-//}
-//
-//.connect {
-//  position: absolute;
-//  top: 8px;
-//  left: 12px;
-//  margin: 0 auto;
-//  width: 20%;
-//  height: 20px;
-//  cursor: pointer;
-//  background-color: #40B3DF;
-//}
-//
-//.summary {
-//  padding: 10px;
-//  cursor: move;
-//  font-weight: bold;
-//  font-size: 120%;
-//}
-//
-//.menu-item {
-//  position: absolute;
-//  border: 1px solid black;
-//  width: 150px;
-//  font-size: 80%;
-//  background-color: #FFFFFF;
-//  text-align: center;
-//  -moz-box-shadow: 2px 2px 3px 1px #AAA;
-//  -webkit-box-shadow: 2px 2px 3px 1px #AAA;
-//  box-shadow: 2px 2px 3px 1px #AAA;
-//}
-//
-//.item {
-//  border-radius: 30px;
-//  position: absolute;
-//  border: 1px solid black;
-//  width: 150px;
-//  font-size: 80%;
-//  background-color: #FFFFFF;
-//  text-align: center;
-//  -moz-box-shadow: 2px 2px 3px 1px #AAA;
-//  -webkit-box-shadow: 2px 2px 3px 1px #AAA;
-//  box-shadow: 2px 2px 3px 1px #AAA;
-//}
-//
-//.drop-container {
-//  height: 100%;
-//  width: 100%;
-//}
-//
-////.sidenav-container {
-////  background-color: #3F51B5;
-////}
-
-
-
-.endpoint_TopCenter, .endpoint_BottomCenter, .endpoint_LeftMiddle, .endpoint_RightMiddle{
-  display:inline-block;
-
+.sidenav-container {
+  overflow: auto;
 }
+
+.endpoint-style-right {
+  position:absolute;
+  top:50%;
+  right:0;
+}
+
+.endpoint-style-left {
+  position:absolute;
+  top:50%;
+  left:0;
+}
+
+.connection-label-active {
+  margin-top:5px;
+  color:#ff7805;
+  font-size:25px;
+}
+
+.connection-label-inactive {
+  margin-top:5px;
+  color:#3860ff;
+  font-size:25px;
+}
+
+.connection-label {
+  background-color:#ccc;
+  border-radius:20px;
+  width:40px;
+  text-align:center;
+  height:40px;
+  position:relative;
+}
+
+.schema-container {
+  overflow:hidden;
+}
+
+.endpoint_TopCenter, .endpoint_BottomCenter, .endpoint_LeftMiddle, .endpoint_RightMiddle {
+  display:inline-block;
+}
+
 js-plumb-canvas {
   background-image:url(/assets/images/grid_background.gif);
   background-repeat: repeat;
@@ -72,6 +52,7 @@ js-plumb-canvas {
   left:-100px;
   top:-100px;
 }
+
 .state_window {
   border:1px solid #346789;
   box-shadow: 2px 2px 19px #aaa;

@@ -14,6 +14,7 @@ import sidenavDirective from './components/directives/sidenav/sidenav.directive'
 
 import uuidService from './components/services/uuid.service';
 import stateObjectHttpService from './components/services/state-object.http.service';
+import jsPlumbStyleService from './components/services/js-plumb-style.service';
 
 export default angular.module('app.home', [uirouter])
 	.config(routing)
@@ -25,4 +26,5 @@ export default angular.module('app.home', [uirouter])
 	.directive('sidenav', sidenavDirective)
 	.service('uuidService', uuidService)
 	.service('stateObjectHttpService', stateObjectHttpService)
+  .service('jsPlumbStyleService', jsPlumbStyleService)
 	.name;

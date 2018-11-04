@@ -10,8 +10,6 @@ export default function sidenavDirective(uuidService) {
     template: template,
     link: function (scope, element, attr) {
       scope.newState = function () {
-        console.log(scope.activeState);
-        console.log(scope.setActiveState);
         scope.stateObjects.push({
           'name': 'New State',
           'template': 'default',

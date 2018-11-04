@@ -1,5 +1,5 @@
 export default function jsPlumbCanvasDirective() {
-  // 'ngInject';
+  'ngInject';
   const jsPlumbZoomCanvas = function (instance, zoom, el, transformOrigin) {
     transformOrigin = transformOrigin || [0, 0];
     const p = ["webkit", "moz", "ms", "o"],
