@@ -18,11 +18,7 @@ export default function jsPlumbConnectionDirective($timeout) {
             uuids: [
               targetUUID,
               sourceUUID
-            ],
-            overlays: [
-              ["Label", {label: "", id: "label"}]
-            ],
-            editable: true
+            ]
           });
         }
 
@@ -34,20 +30,18 @@ export default function jsPlumbConnectionDirective($timeout) {
         });
 
         connection.bind("mouseover", function (conn, originalEvent) {
+          let title = 'UUID Target: ' + targetUUID;
+          conn.addOverlay(["Label", {label: "<md-card style='padding: 4px'>" + title + "</md-card>", location: 0.5, id: "connLabel"}]);
           scope.ngModel.mouseover = true;
           scope.$apply();
         });
         connection.bind("mouseout", function (conn, originalEvent) {
+          conn.removeOverlay("connLabel");
           scope.ngModel.mouseover = false;
           scope.$apply();
         });
 
-        let overlay = connection.getOverlay("label");
-        if (overlay) {
-          $(element).appendTo(overlay.canvas);
-        }
       }, 300);
-
 
       scope.$on('$destroy', function () {
         try {

@@ -38,7 +38,11 @@ export default function sidenavDirective(uuidService) {
       };
 
       scope.setActiveState = function (state) {
-        scope.activeState = state;
+        if (scope.activeState === state) {
+          scope.activeState = null;
+        } else {
+          scope.activeState = state;
+        }
       };
     }
   };

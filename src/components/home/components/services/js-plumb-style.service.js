@@ -17,7 +17,7 @@ export default function jsPlumbStyleService() {
     maxConnections: -1,
     connector: ["Flowchart", {stub: [30, 30], gap: 20, cornerRadius: 10, alwaysRespectStubs: true}],
     connectorStyle: {
-      strokeWidth: 4,
+      strokeWidth: 6,
       stroke: "#61B7CF"
     },
     connectorHoverStyle: {

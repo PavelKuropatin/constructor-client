@@ -20,10 +20,6 @@ export default function jsPlumbEndpointDirective() {
         anchor: attrs.anchor,
         uuid: attrs.uuid
       };
-//todo $(element).addClass('jsplumb-endpoint');
-      // console.log('rigging up endpoint');
-      // $(element).addClass('_jsPlumb_endpoint');
-      // $(element).addClass('endpoint_' + attrs.anchor);
 
       let ep = instance.addEndpoint(element, scope.settings, options);
 

@@ -1,23 +1,22 @@
 <div layout="row">
-    <div flex="20" class="sidenav-container">
+    <div flex="25" class="sidenav-container">
         <sidenav state-objects="home.stateObjects"
                  active-state="home.activeState"></sidenav>
     </div>
-    <div class="schema-container" flex="80">
+    <div class="schema-container" flex="75">
         <md-toolbar class="md-hue-2">
             <div class="md-toolbar-tools">
                 <h2 flex md-truncate>Current position [{{home.pos_x}}, {{home.pos_y}}]</h2>
-                <md-button class="md-icon-button" aria-label="Favorite">
-                    <md-icon class="material-icons">face</md-icon>
-                </md-button>
                 <md-button class="md-raised" ng-click="home.saveStateObjects()">Save</md-button>
                 <md-button class="md-raised" ng-click="home.loadStateObjects()">Load</md-button>
-                <md-slider min="0" max="200" ng-model="home.zoomlevel" step="10" aria-label="red" id="red-slider"
+                <md-slider min="0" max="200"
+                           ng-model="home.zoomlevel"
+                           step="10" aria-label="red"
+                           id="red-slider"
                            class="md-warn">
                 </md-slider>
             </div>
         </md-toolbar>
-
         <div id="container">
             <js-plumb-canvas on-connection="home.onConnection"
                              x="home.pos_x"
@@ -37,15 +36,6 @@
                         <js-plumb-connection ng-click="setActiveConnection($index)"
                                              ng-repeat="connection in endpoint.connections"
                                              ng-model="connection">
-                            <div class="connection-label">
-                <span ng-if="connection.type !== 'Action'"
-                      class="glyphicon glyphicon-retweet connection-label-active"
-                      title="Transition To {{connection.uuid}}">
-                </span>
-                                <span ng-if="connection.type === 'Action'"
-                                      class="glyphicon glyphicon-flash connection-label-inactive"
-                                      title="Trigger Action {{connection.uuid}}"></span>
-                            </div>
                         </js-plumb-connection>
                     </js-plumb-endpoint>
                     <js-plumb-endpoint class="endpoint-style-left"

@@ -22,7 +22,7 @@ import './global.scss';
 
 import routing from './app.route';
 import homeModule from './components/home/home.modue';
-import configModule from './config/env/env.config.module';
+import configModule from './config/config.module';
 
 angular.module('diplom', [uirouter, animate, aria, messages, material, homeModule, configModule])
 	.config(routing);
