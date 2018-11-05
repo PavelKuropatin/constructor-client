@@ -1,4 +1,4 @@
-import template from './sidenav.html';
+import template from "./sidenav.html";
 
 export default function sidenavDirective(uuidService) {
   return {

@@ -1,93 +1,102 @@
 <md-card class="sidenav">
-  <md-card-header>
-    <md-card-title>
-      <md-card-title-text>
-        <md-headline>
-          States
-        </md-headline>
-      </md-card-title-text>
-    </md-card-title>
-    <md-card-actions layout="row" layout-align="end center">
-      <md-button ng-click="newState()">Add</md-button>
-      <md-button ng-click="showjson=!showjson">Json</md-button>
-    </md-card-actions>
-  </md-card-header>
-  <md-card-content>
-    <div ng-if="!showjson">
-      <div ng-repeat="state in stateObjects">
-        <div layout="column">
-          <span class="big-text">{{state.name}}</span>
-          <span layout-align="end center">Position: [{{state.x| number}}, {{state.y| number}}]</span>
+    <md-card-header>
+        <div layout="row">
+            <div class="sidenav-header">States</div>
+            <md-button class="md-icon-button" ng-click="newState(state)">
+                <md-icon>playlist_add</md-icon>
+            </md-button>
+            <md-button class="md-icon-button" ng-click="showjson=!showjson">
+                <md-icon ng-if="!showjson">create</md-icon>
+                <md-icon ng-if="showjson">remove</md-icon>
+            </md-button>
         </div>
-        <md-card-actions layout="row" layout-align="start center">
-          <md-button ng-click="setActiveState(state)">See</md-button>
-          <md-button ng-click="removeState(state)">Remove</md-button>
-        </md-card-actions>
-        <div ng-hide="activeState != state">
-          <div layout="row">
-            <md-input-container>
-              <label>Name of State</label>
-              <input name="stateName"
-                     ng-model="state.name">
-            </md-input-container>
-          </div>
-          <div layout="row">
-            <md-input-container>
-              <label>Template</label>
-              <md-select name="templateName" ng-model="state.template">
-                <md-option value="default">default</md-option>
-                <md-option value="secondary">secondary</md-option>
-                <md-option value="action">action</md-option>
-              </md-select>
-            </md-input-container>
-          </div>
-          <md-card ng-repeat="source in state.sources">
-            <md-card-header>
-              <div layout="column">
-                <div layout-align="center center">
-                  <div class="medium-text">UUID - {{source.uuid}}</div>
-                  <small class="small-text">SOURCE</small>
+    </md-card-header>
+    <md-divider></md-divider>
+    <md-card-content ng-if="stateObjects.length >= 1 || showjson">
+        <div ng-if="!showjson">
+            <div ng-repeat="state in stateObjects">
+                <div layout="column">
+                    <span class="big-text">{{state.name}}</span>
+                    <span layout-align="end center">Position: [{{state.x| number}}, {{state.y| number}}]</span>
                 </div>
-              </div>
-              <md-button ng-click="removeIndex($index, state.sources)">Remove</md-button>
-            </md-card-header>
-            <md-card-content ng-if="source.connections.length">
-              <div ng-repeat="connection in source.connections" ng-class="{'color-red': connection.mouseover}">
-                <md-card-actions layout="row" layout-align="end center">
-                  <md-button ng-if="connection.type != 'Action'"
-                             ng-click="connection.type = 'Action'">Change
-                    <span style="color:#3860ff;" class="glyphicon glyphicon-retweet"
-                          title="Transition To {{connection.uuid}}"></span>
-                  </md-button>
-                  <md-button ng-if="connection.type == 'Action'"
-                             ng-click="connection.type = 'Transition'">Change
-                    <span style="color:#ff7805;" class="glyphicon glyphicon-flash"
-                          title="Trigger Action {{connection.uuid}}"></span>
-                  </md-button>
-                </md-card-actions>
-                <md-button ng-click="removeIndex($index, source.connections)">Delete Connection</md-button>
-                <md-input-container>
-                  <label>Condition</label>
-                  <input name="conditionName"
-                         ng-model="connection.condition">
-                </md-input-container>
-              </div>
-            </md-card-content>
-          </md-card>
-          <md-card ng-repeat="target in state.targets">
-            <md-card-header>
-              <div layout="column">
-                <div layout-align="center center">
-                  <div class="medium-text">UUID - {{target.uuid}}</div>
-                  <small class="small-text">TARGET</small>
+                <md-button class="md-icon-button" ng-click="setActiveState(state)">
+                    <md-icon>visibility</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="removeState(state)">
+                    <md-icon>delete_sweep</md-icon>
+                </md-button>
+                <div ng-hide="activeState != state">
+                    <div layout="row">
+                        <md-input-container>
+                            <label>Name of State</label>
+                            <input name="stateName"
+                                   ng-model="state.name">
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-input-container>
+                            <label>Template</label>
+                            <md-select name="templateName" ng-model="state.template">
+                                <md-option value="default">default</md-option>
+                                <md-option value="secondary">secondary</md-option>
+                                <md-option value="action">action</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <md-card ng-repeat="source in state.sources">
+                        <md-card-header>
+                            <div layout="column">
+                                <div layout-align="center center">
+                                    <div class="medium-text">UUID - {{source.uuid}}</div>
+                                    <small class="small-text">SOURCE</small>
+                                </div>
+                            </div>
+                            <md-button class="md-icon-button" ng-click="removeIndex($index, state.sources)">
+                                <md-icon>delete_sweep</md-icon>
+                            </md-button>
+                        </md-card-header>
+                        <md-card-content ng-if="source.connections.length">
+                            <div ng-repeat="connection in source.connections"
+                                 ng-class="{'color-red': connection.mouseover}">
+                                <!--<md-card-actions layout="row" layout-align="end center">-->
+                                    <!--<md-button ng-if="connection.type != 'Action'"-->
+                                               <!--ng-click="connection.type = 'Action'">Change-->
+                                        <!--<span style="color:#3860ff;" class="glyphicon glyphicon-retweet"-->
+                                              <!--title="Transition To {{connection.uuid}}"></span>-->
+                                    <!--</md-button>-->
+                                    <!--<md-button ng-if="connection.type == 'Action'"-->
+                                               <!--ng-click="connection.type = 'Transition'">Change-->
+                                        <!--<span style="color:#ff7805;" class="glyphicon glyphicon-flash"-->
+                                              <!--title="Trigger Action {{connection.uuid}}"></span>-->
+                                    <!--</md-button>-->
+                                <!--</md-card-actions>-->
+                                <md-button class="md-icon-button" ng-click="removeIndex($index, source.connections)">
+                                    <md-icon>link_off</md-icon>
+                                </md-button>
+                                <md-input-container>
+                                    <label>Condition</label>
+                                    <input name="conditionName"
+                                           ng-model="connection.condition">
+                                </md-input-container>
+                            </div>
+                        </md-card-content>
+                    </md-card>
+                    <md-card ng-repeat="target in state.targets">
+                        <md-card-header>
+                            <div layout="column">
+                                <div layout-align="center center">
+                                    <div class="medium-text">UUID - {{target.uuid}}</div>
+                                    <small class="small-text">TARGET</small>
+                                </div>
+                            </div>
+                            <md-button class="md-icon-button" ng-click="removeIndex($index, state.targets)">
+                                <md-icon>delete_sweep</md-icon>
+                            </md-button>
+                        </md-card-header>
+                    </md-card>
                 </div>
-              </div>
-              <md-button ng-click="removeIndex($index, state.targets)">Remove</md-button>
-            </md-card-header>
-          </md-card>
+            </div>
         </div>
-      </div>
-    </div>
-    <textarea class="json-container" ng-if="showjson">{{stateObjects | json }}</textarea>
-  </md-card-content>
+        <textarea class="json-container" ng-if="showjson">{{stateObjects | json }}</textarea>
+    </md-card-content>
 </md-card>

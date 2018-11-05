@@ -15,6 +15,7 @@ import './../assets/images/grid_background.gif';
 
 import 'jsplumb/css/jsplumbtoolkit-defaults.css';
 import 'angular-material/angular-material.scss';
+import 'material-icons/iconfont/material-icons.scss';
 
 import './components/home/components/directives/sidenav/sidenav.scss';
 import './global.scss';
