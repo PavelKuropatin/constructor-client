@@ -22,28 +22,8 @@
                              x="home.pos_x"
                              y="home.pos_y"
                              zoom="home.zoomlevel">
-                <js-plumb-object class="state_window"
-                                 state-object="state"
-                                 ng-style="{ 'left':state.x, 'top':state.y }"
-                                 ng-repeat="state in home.stateObjects">
-                    <h3 ng-click="home.setActiveState(state)">{{state.name}}</h3>
-                    {{state.template}}
-                    <js-plumb-endpoint class="endpoint-style-right"
-                                       ng-repeat="endpoint in state.sources"
-                                       anchor="RightMiddle"
-                                       uuid="{{endpoint.uuid}}"
-                                       settings="home.sourceEndpointStyle">
-                        <js-plumb-connection ng-click="setActiveConnection($index)"
-                                             ng-repeat="connection in endpoint.connections"
-                                             ng-model="connection">
-                        </js-plumb-connection>
-                    </js-plumb-endpoint>
-                    <js-plumb-endpoint class="endpoint-style-left"
-                                       ng-repeat="endpoint in state.targets"
-                                       anchor="LeftMiddle"
-                                       uuid="{{endpoint.uuid}}"
-                                       settings="home.targetEndpointStyle"></js-plumb-endpoint>
-                </js-plumb-object>
+                <ng-include src="state.template +'.html'"
+                            ng-repeat="state in home.stateObjects"></ng-include>
             </js-plumb-canvas>
         </div>
     </div>

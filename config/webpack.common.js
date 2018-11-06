@@ -6,15 +6,15 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
-const dest = Path.join(__dirname, '../dist');
+const dist = Path.join(__dirname, '../dist');
 
 module.exports = {
   entry: [
+    Path.resolve(__dirname, '../src/app.module'),
     Path.resolve(__dirname, './polyfills'),
-    Path.resolve(__dirname, '../src/app.module')
   ],
   output: {
-    path: dest,
+    path: dist,
     filename: '[name].[hash].js'
   },
   plugins: [
@@ -22,12 +22,12 @@ module.exports = {
       $: require.resolve('jquery'),
       jQuery: require.resolve('jquery')
     }),
-    new CleanWebpackPlugin([dest], {root: Path.resolve(__dirname, '..')}),
+    new CleanWebpackPlugin([dist], {root: Path.resolve(__dirname, '..')}),
     new CopyWebpackPlugin([
       {from: Path.resolve(__dirname, '../public'), to: 'public'}
     ]),
     new HtmlWebpackPlugin({
-      template: Path.resolve(__dirname, '../src/index.html')
+      template: Path.resolve(__dirname, '../src/index.ejs')
     })
   ],
   resolve: {
@@ -46,7 +46,10 @@ module.exports = {
           }
         }
       },
-      {test: /\.html$/, loader: 'html-loader'}
+      {
+        test: /\.html$/,
+        loader: 'ng-cache-loader?prefix=[dir]/[dir]'
+      }
     ]
   }
 };
