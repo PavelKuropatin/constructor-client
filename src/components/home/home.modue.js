@@ -3,6 +3,8 @@ import './home.scss';
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
 
+import partialsConfig from './components/partials/partials.config';
+import partialsConstants from '../constants/partials.constants';
 import routing from './home.route';
 import homeController from './home.controller';
 
@@ -15,6 +17,7 @@ import sidenavDirective from './components/directives/sidenav/sidenav.directive'
 import uuidService from './components/services/uuid.service';
 import stateObjectHttpService from './components/services/state-object.http.service';
 import jsPlumbStyleService from './components/services/js-plumb-style.service';
+import stateObjectService from './components/services/state-object.service';
 
 export default angular.module('app.home', [uirouter])
 	.config(routing)
@@ -27,4 +30,7 @@ export default angular.module('app.home', [uirouter])
 	.service('uuidService', uuidService)
 	.service('stateObjectHttpService', stateObjectHttpService)
   .service('jsPlumbStyleService', jsPlumbStyleService)
+  .service('stateObjectService', stateObjectService)
+  .constant('partialsConstants', partialsConstants)
+  .run(partialsConfig)
 	.name;

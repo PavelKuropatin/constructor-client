@@ -3,7 +3,7 @@
         <md-card-header-text>
             <div class="title-text">States</div>
         </md-card-header-text>
-        <md-button class="md-icon-button" ng-click="newState(state)">
+        <md-button class="md-icon-button" ng-click="newState(stateObjects, state)">
             <md-icon>playlist_add</md-icon>
         </md-button>
         <md-button class="md-icon-button" ng-click="showjson=!showjson">
@@ -27,7 +27,7 @@
                     <md-icon ng-if="activeState !== state">visibility</md-icon>
                     <md-icon ng-if="activeState === state">visibility_off</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="removeState(state)">
+                <md-button class="md-icon-button" ng-click="removeState(stateObjects, state)">
                     <md-icon>delete_sweep</md-icon>
                 </md-button>
             </md-card-header>
@@ -43,9 +43,8 @@
                     <md-input-container>
                         <label>Template</label>
                         <md-select name="templateName" ng-model="state.template">
-                            <md-option value="default">default</md-option>
-                            <md-option value="secondary">secondary</md-option>
                             <md-option value="action">action</md-option>
+                            <md-option value="circle">circle</md-option>
                         </md-select>
                     </md-input-container>
                 </div>

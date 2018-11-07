@@ -59,7 +59,7 @@ js-plumb-canvas {
   top: -100px;
 }
 
-.state_window {
+.action-state {
   border: 1px solid #346789;
   box-shadow: 2px 2px 19px #aaa;
   -o-box-shadow: 2px 2px 19px #aaa;
@@ -80,13 +80,22 @@ js-plumb-canvas {
   width: 200px;
 }
 
-.window:hover {
-  box-shadow: 2px 2px 19px #444;
-  -o-box-shadow: 2px 2px 19px #444;
-  -webkit-box-shadow: 2px 2px 19px #444;
-  -moz-box-shadow: 2px 2px 19px #444;
-  opacity: 0.6;
-  filter: alpha(opacity=60);
+.circle-state {
+  border-radius: 50%;
+  border: 1px solid #346789;
+  box-shadow: 2px 2px 19px #aaa;
+  -o-box-shadow: 2px 2px 19px #aaa;
+  -webkit-box-shadow: 2px 2px 19px #aaa;
+  -moz-box-shadow: 2px 2px 19px #aaa;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+  text-align: center;
+  z-index: 10;
+  position: absolute;
+  background-color: #eeeeef;
+  color: black;
+  font-family: helvetica;
+  padding: 0.5em;
+  font-size: 0.9em;
 }
-
 

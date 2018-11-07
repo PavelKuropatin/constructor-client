@@ -1,6 +1,6 @@
 import template from "./sidenav.html";
 
-export default function sidenavDirective(uuidService) {
+export default function sidenavDirective(stateObjectService) {
   return {
     restrict: 'EA',
     scope: {
@@ -9,33 +9,9 @@ export default function sidenavDirective(uuidService) {
     },
     template: template,
     link: function (scope, element, attr) {
-      scope.newState = function () {
-        scope.stateObjects.push({
-          'name': 'New State',
-          'template': 'default',
-          'sources': [
-            {uuid: uuidService.getNextUUID()},
-            {uuid: uuidService.getNextUUID()},
-          ],
-          'targets': [
-            {uuid: uuidService.getNextUUID()},
-            {uuid: uuidService.getNextUUID()}
-          ],
-          'x': 10,
-          'y': 10
-        });
-      };
-
-      scope.removeState = function (state) {
-        const index = scope.stateObjects.indexOf(state);
-        if (index !== -1) {
-          scope.stateObjects.splice(index, 1);
-        }
-      };
-
-      scope.removeIndex = function (index, object) {
-        object.splice(index, 1);
-      };
+      scope.newState = stateObjectService.getNewState;
+      scope.removeState = stateObjectService.removeState;
+      scope.removeIndex = stateObjectService.removeIndex;
 
       scope.setActiveState = function (state) {
         if (scope.activeState === state) {

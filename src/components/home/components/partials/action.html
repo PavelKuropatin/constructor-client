@@ -1,8 +1,9 @@
-<js-plumb-object class="state_window"
+<js-plumb-object class="action-state"
                  state-object="state"
                  ng-style="{ 'left':state.x, 'top':state.y }">
     <h3 ng-click="home.setActiveState(state)">{{state.name}}</h3>
     {{state.template}}
+
     <js-plumb-endpoint class="endpoint-style-right"
                        ng-repeat="endpoint in state.sources"
                        anchor="RightMiddle"
