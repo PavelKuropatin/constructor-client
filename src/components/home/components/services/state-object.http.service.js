@@ -1,7 +1,7 @@
 export default function stateObjectHttpService($http, env) {
   const STATE_OBJECT_URL = '/api/schema/1';
 
-  const saveAllStateObject = function (stateObjects) {
+  const saveAllStateObject = (stateObjects) => {
     restructureBeforeSending(stateObjects);
     return $http({
       method: 'POST',
@@ -10,7 +10,7 @@ export default function stateObjectHttpService($http, env) {
     });
   };
 
-  const getAllStateObject = function () {
+  const getAllStateObject = () => {
     $http.get(env.api + STATE_OBJECT_URL).then(
       (response) => {
         return restructureFromGetting(response.data);

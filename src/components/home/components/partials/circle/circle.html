@@ -1,10 +1,16 @@
-<js-plumb-object class="action-state"
+<js-plumb-object class="circle-state"
                  state-object="state"
-                 ng-style="{ 'left':state.x, 'top':state.y }">
-    <h3 ng-click="home.setActiveState(state)">{{state.name}}</h3>
-    {{state.template}}
-
-    <js-plumb-endpoint class="endpoint-style-right"
+                 ng-style="{ 'left':state.x, 'top':state.y }"
+                 ng-click="home.setActiveState(state)">
+    <md-input-container class="circle-state-top-container">
+        <label>v5</label>
+        <input ng-model="state.v5" />
+    </md-input-container>
+    <md-input-container class="circle-state-bottom-container">
+        <label>v6</label>
+        <input ng-model="state.v6" />
+    </md-input-container>
+    <js-plumb-endpoint class="endpoint-circle-style-right"
                        ng-repeat="endpoint in state.sources"
                        anchor="RightMiddle"
                        uuid="{{endpoint.uuid}}"
@@ -14,7 +20,7 @@
                              ng-model="connection">
         </js-plumb-connection>
     </js-plumb-endpoint>
-    <js-plumb-endpoint class="endpoint-style-left"
+    <js-plumb-endpoint class="endpoint-circle-style-left"
                        ng-repeat="endpoint in state.targets"
                        anchor="LeftMiddle"
                        uuid="{{endpoint.uuid}}"

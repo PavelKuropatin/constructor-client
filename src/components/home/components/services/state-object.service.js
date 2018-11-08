@@ -1,4 +1,4 @@
-export default function stateObjectService(uuidService, partialsConstants) {
+export default function stateObjectService(uuidService, CONSTANTS) {
   const DEFAULT_POSITION_X = 10;
   const DEFAULT_POSITION_Y = 10;
   const DEFAULT_NAME = 'New State';
@@ -6,7 +6,8 @@ export default function stateObjectService(uuidService, partialsConstants) {
   const getNewState = (stateObjects) => {
     stateObjects.push({
       'name': DEFAULT_NAME,
-      'template': partialsConstants.PARTIALS.ACTION,
+      'template': CONSTANTS.PARTIALS.ACTION,
+      'color': CONSTANTS.TYPE_ACTION.MAIN.color,
       'sources': [
         {uuid: uuidService.getNextUUID()},
         {uuid: uuidService.getNextUUID()},

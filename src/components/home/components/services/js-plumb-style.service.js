@@ -1,7 +1,7 @@
 export default function jsPlumbStyleService() {
   const targetEndpointStyle = {
     endpoint: "Dot",
-    paintStyle: {fill: "#7AB02C", radius: 11},
+    paintStyle: {fill: "#BCAAA4"},
     maxConnections: -1,
     isTarget: true
   };
@@ -9,7 +9,7 @@ export default function jsPlumbStyleService() {
   const sourceEndpointStyle = {
     endpoint: "Dot",
     paintStyle: {
-      stroke: "#7AB02C",
+      stroke: "#BCAAA4",
       fill: "transparent",
       strokeWidth: 3
     },

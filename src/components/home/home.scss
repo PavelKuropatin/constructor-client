@@ -1,3 +1,16 @@
+.jtk-drag-select * {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.cursor-default {
+  cursor: default;
+}
+
 .connectorHoverClass {
   color: red;
 }
@@ -18,27 +31,6 @@
   left: 0;
 }
 
-.connection-label-active {
-  margin-top: 5px;
-  color: #ff7805;
-  font-size: 25px;
-}
-
-.connection-label-inactive {
-  margin-top: 5px;
-  color: #3860ff;
-  font-size: 25px;
-}
-
-.connection-label {
-  background-color: #ccc;
-  border-radius: 20px;
-  width: 40px;
-  text-align: center;
-  height: 40px;
-  position: relative;
-}
-
 .schema-container {
   overflow: hidden;
 }
@@ -50,7 +42,7 @@
 js-plumb-canvas {
   //background-image:url(/assets/images/grid_background.gif);
   //background-repeat: repeat;
-  background: #CFD8DC;
+  background: #ECF5F9;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   width: 55000px;
   height: 55000px;
@@ -58,44 +50,3 @@ js-plumb-canvas {
   left: -100px;
   top: -100px;
 }
-
-.action-state {
-  border: 1px solid #346789;
-  box-shadow: 2px 2px 19px #aaa;
-  -o-box-shadow: 2px 2px 19px #aaa;
-  -webkit-box-shadow: 2px 2px 19px #aaa;
-  -moz-box-shadow: 2px 2px 19px #aaa;
-  -moz-border-radius: 0.5em;
-  border-radius: 0.5em;
-  opacity: 0.8;
-  filter: alpha(opacity=80);
-  text-align: center;
-  z-index: 10;
-  position: absolute;
-  background-color: #eeeeef;
-  color: black;
-  font-family: helvetica;
-  padding: 0.5em;
-  font-size: 0.9em;
-  width: 200px;
-}
-
-.circle-state {
-  border-radius: 50%;
-  border: 1px solid #346789;
-  box-shadow: 2px 2px 19px #aaa;
-  -o-box-shadow: 2px 2px 19px #aaa;
-  -webkit-box-shadow: 2px 2px 19px #aaa;
-  -moz-box-shadow: 2px 2px 19px #aaa;
-  opacity: 0.8;
-  filter: alpha(opacity=80);
-  text-align: center;
-  z-index: 10;
-  position: absolute;
-  background-color: #eeeeef;
-  color: black;
-  font-family: helvetica;
-  padding: 0.5em;
-  font-size: 0.9em;
-}
-

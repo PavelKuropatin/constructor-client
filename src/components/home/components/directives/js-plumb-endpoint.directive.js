@@ -23,7 +23,7 @@ export default function jsPlumbEndpointDirective() {
 
       let ep = instance.addEndpoint(element, scope.settings, options);
 
-      scope.$on('$destroy', function () {
+      scope.$on('$destroy', () => {
         instance.deleteEndpoint(ep);
       });
     }

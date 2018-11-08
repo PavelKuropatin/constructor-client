@@ -1,0 +1,39 @@
+<js-plumb-object class="action-state"
+                 state-object="state"
+                 ng-style="{ 'left':state.x, 'top':state.y, 'box-shadow': '0 15px 35px' + state.color}"
+                 ng-click="home.setActiveState(state)">
+    <h3 class="cursor-default">{{state.name}}</h3>
+    <div layout="row" class="action-input-container">
+        <md-input-container>
+            <label>v1</label>
+            <input ng-model="state.v1" />
+        </md-input-container>
+        <md-input-container>
+            <label>v2</label>
+            <input ng-model="state.v2" />
+        </md-input-container>
+        <md-input-container>
+            <label>v3</label>
+            <input ng-model="state.v3" />
+        </md-input-container>
+        <md-input-container>
+            <label>v4</label>
+            <input ng-model="state.v4" />
+        </md-input-container>
+    </div>
+    <js-plumb-endpoint class="endpoint-style-right"
+                       ng-repeat="endpoint in state.sources"
+                       anchor="RightMiddle"
+                       uuid="{{endpoint.uuid}}"
+                       settings="home.sourceEndpointStyle">
+        <js-plumb-connection ng-click="setActiveConnection($index)"
+                             ng-repeat="connection in endpoint.connections"
+                             ng-model="connection">
+        </js-plumb-connection>
+    </js-plumb-endpoint>
+    <js-plumb-endpoint class="endpoint-style-left"
+                       ng-repeat="endpoint in state.targets"
+                       anchor="LeftMiddle"
+                       uuid="{{endpoint.uuid}}"
+                       settings="home.targetEndpointStyle"></js-plumb-endpoint>
+</js-plumb-object>

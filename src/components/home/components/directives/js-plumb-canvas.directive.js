@@ -1,6 +1,6 @@
 export default function jsPlumbCanvasDirective() {
   'ngInject';
-  const jsPlumbZoomCanvas = function (instance, zoom, el, transformOrigin) {
+  const jsPlumbZoomCanvas = (instance, zoom, el, transformOrigin) => {
     transformOrigin = transformOrigin || [0, 0];
     const p = ["webkit", "moz", "ms", "o"],
       s = "scale(" + zoom + ")",
@@ -31,7 +31,7 @@ export default function jsPlumbCanvasDirective() {
       var instance = jsPlumb.getInstance();
       scope.jsPlumbInstance = instance;
 
-      instance.bind("connection", function (info, origEvent) {
+      instance.bind("connection", (info, origEvent) => {
         if (origEvent && origEvent.type == 'mouseup') {
 
           var targetUUID = $(info.target).attr('uuid');
@@ -59,11 +59,11 @@ export default function jsPlumbCanvasDirective() {
       var zoom = (typeof scope.zoom === 'undefined') ? 1 : scope.zoom / 100;
       jsPlumbZoomCanvas(instance, zoom, $(element)[0]);
 
-      scope.$watch('zoom', function (newVal, oldVal) {
+      scope.$watch('zoom', (newVal, oldVal) => {
         jsPlumbZoomCanvas(instance, newVal / 100, $(element)[0]);
       });
 
-      $(element).bind('mousewheel', function (e) {
+      $(element).bind('mousewheel', (e) => {
         if (e.originalEvent.wheelDelta / 200 > 0) {
           scope.zoom += 10;
           scope.$apply();

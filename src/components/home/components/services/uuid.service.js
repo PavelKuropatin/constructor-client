@@ -1,7 +1,7 @@
 export default function uuidService() {
   let lastUUID = 2000;
 
-  const getNextUUID = function () {
+  const getNextUUID = () => {
     lastUUID++;
     return lastUUID;
   };

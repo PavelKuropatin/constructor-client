@@ -1,10 +1,12 @@
 import './home.scss';
+import './components/partials/action/action.scss';
+import './components/partials/circle/circle.scss';
 
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
 
 import partialsConfig from './components/partials/partials.config';
-import partialsConstants from '../constants/partials.constants';
+import constants from '../constants/buissnes.constants';
 import routing from './home.route';
 import homeController from './home.controller';
 
@@ -31,6 +33,6 @@ export default angular.module('app.home', [uirouter])
 	.service('stateObjectHttpService', stateObjectHttpService)
   .service('jsPlumbStyleService', jsPlumbStyleService)
   .service('stateObjectService', stateObjectService)
-  .constant('partialsConstants', partialsConstants)
+  .constant('CONSTANTS', constants)
   .run(partialsConfig)
 	.name;

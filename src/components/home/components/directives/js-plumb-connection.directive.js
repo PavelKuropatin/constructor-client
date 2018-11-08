@@ -24,18 +24,18 @@ export default function jsPlumbConnectionDirective($timeout) {
 
         let connection = jsPlumbEndpoint.connectionObjects[targetUUID];
 
-        connection.bind("click", function (conn, originalEvent) {
+        connection.bind("click", (conn, originalEvent) => {
           scope.ngClick();
           scope.$apply();
         });
 
-        connection.bind("mouseover", function (conn, originalEvent) {
+        connection.bind("mouseover", (conn, originalEvent) => {
           let title = 'UUID Target: ' + targetUUID;
           conn.addOverlay(["Label", {label: "<md-card style='padding: 4px'>" + title + "</md-card>", location: 0.5, id: "connLabel"}]);
           scope.ngModel.mouseover = true;
           scope.$apply();
         });
-        connection.bind("mouseout", function (conn, originalEvent) {
+        connection.bind("mouseout", (conn, originalEvent) => {
           conn.removeOverlay("connLabel");
           scope.ngModel.mouseover = false;
           scope.$apply();
@@ -43,7 +43,7 @@ export default function jsPlumbConnectionDirective($timeout) {
 
       }, 300);
 
-      scope.$on('$destroy', function () {
+      scope.$on('$destroy', () => {
         try {
           instance.deleteConnection(jsPlumbEndpoint.connectionObjects[targetUUID]);
         } catch (err) {

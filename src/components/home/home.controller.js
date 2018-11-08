@@ -9,13 +9,13 @@ export default function homeController($scope, stateObjectHttpService, jsPlumbSt
   vm.targetEndpointStyle = jsPlumbStyleService.getTargetEndpointStyle();
   vm.sourceEndpointStyle = jsPlumbStyleService.getSourceEndpointStyle();
 
-  vm.setActiveState = function (state) {
+  vm.setActiveState = (state) => {
     vm.activeState = state;
   };
 
-  vm.onConnection = function (instance, connection, targetUUID, sourceUUID) {
-    angular.forEach(vm.stateObjects, function (state) {
-      angular.forEach(state.sources, function (source) {
+  vm.onConnection = (instance, connection, targetUUID, sourceUUID) => {
+    angular.forEach(vm.stateObjects, (state) => {
+      angular.forEach(state.sources, (source) => {
         if (source.uuid == sourceUUID) {
           if (typeof source.connections === 'undefined') source.connections = [];
           source.connections.push({'uuid': targetUUID});
