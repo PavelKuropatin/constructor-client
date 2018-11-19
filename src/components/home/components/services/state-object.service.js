@@ -5,19 +5,23 @@ export default function stateObjectService(uuidService, CONSTANTS) {
 
   const getNewState = (stateObjects) => {
     stateObjects.push({
-      'name': DEFAULT_NAME,
-      'template': CONSTANTS.PARTIALS.ACTION,
-      'color': CONSTANTS.TYPE_ACTION.MAIN.color,
-      'sources': [
+      name: DEFAULT_NAME,
+      template: CONSTANTS.PARTIALS.ACTION,
+      color: CONSTANTS.TYPE_ACTION.MAIN.color,
+      endpointStyle: {
+        targetEndpoint: CONSTANTS.ENDPOINT_STYLE.LEFT,
+        sourceEndpoint: CONSTANTS.ENDPOINT_STYLE.RIGHT
+      },
+      sources: [
         {uuid: uuidService.getNextUUID()},
         {uuid: uuidService.getNextUUID()},
       ],
-      'targets': [
+      targets: [
         {uuid: uuidService.getNextUUID()},
         {uuid: uuidService.getNextUUID()}
       ],
-      'x': DEFAULT_POSITION_X,
-      'y': DEFAULT_POSITION_Y
+      x: DEFAULT_POSITION_X,
+      y: DEFAULT_POSITION_Y
     });
   };
 

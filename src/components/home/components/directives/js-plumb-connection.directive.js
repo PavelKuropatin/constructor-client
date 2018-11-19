@@ -5,7 +5,8 @@ export default function jsPlumbConnectionDirective($timeout) {
     require: '^jsPlumbEndpoint',
     scope: {
       ngClick: '&ngClick',
-      ngModel: '=ngModel'
+      ngModel: '=ngModel',
+      stateObjects: '='
     },
     link: function (scope, element, attrs, jsPlumbEndpoint) {
       const instance = jsPlumbEndpoint.scope.jsPlumbInstance;
@@ -31,7 +32,11 @@ export default function jsPlumbConnectionDirective($timeout) {
 
         connection.bind("mouseover", (conn, originalEvent) => {
           let title = 'UUID Target: ' + targetUUID;
-          conn.addOverlay(["Label", {label: "<md-card style='padding: 4px'>" + title + "</md-card>", location: 0.5, id: "connLabel"}]);
+          conn.addOverlay(["Label", {
+            label: "<md-card style='padding: 4px'>" + title + "</md-card>",
+            location: 0.5,
+            id: "connLabel"
+          }]);
           scope.ngModel.mouseover = true;
           scope.$apply();
         });
@@ -42,6 +47,17 @@ export default function jsPlumbConnectionDirective($timeout) {
         });
 
       }, 300);
+
+      // scope.$watchCollection('stateObjects', () => {
+      //   if (typeof jsPlumbEndpoint.connectionObjects[targetUUID] === 'undefined') {
+      //     jsPlumbEndpoint.connectionObjects[targetUUID] = instance.connect({
+      //       uuids: [
+      //         targetUUID,
+      //         sourceUUID
+      //       ]
+      //     });
+      //   }
+      // }, 300);
 
       scope.$on('$destroy', () => {
         try {

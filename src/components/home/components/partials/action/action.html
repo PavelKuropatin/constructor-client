@@ -21,19 +21,18 @@
             <input ng-model="state.v4" />
         </md-input-container>
     </div>
-    <js-plumb-endpoint class="endpoint-style-right"
+    <js-plumb-endpoint class={{state.endpointStyle.sourceEndpoint}}
                        ng-repeat="endpoint in state.sources"
-                       anchor="RightMiddle"
                        uuid="{{endpoint.uuid}}"
                        settings="home.sourceEndpointStyle">
         <js-plumb-connection ng-click="setActiveConnection($index)"
                              ng-repeat="connection in endpoint.connections"
-                             ng-model="connection">
+                             ng-model="connection"
+                             state-objects="home.stateObjects">
         </js-plumb-connection>
     </js-plumb-endpoint>
-    <js-plumb-endpoint class="endpoint-style-left"
+    <js-plumb-endpoint class={{state.endpointStyle.targetEndpoint}}
                        ng-repeat="endpoint in state.targets"
-                       anchor="LeftMiddle"
                        uuid="{{endpoint.uuid}}"
                        settings="home.targetEndpointStyle"></js-plumb-endpoint>
 </js-plumb-object>

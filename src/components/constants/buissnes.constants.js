@@ -16,5 +16,9 @@ export default {
       color: '#2bbfcc',
       abbr: 'blue'
     }
+  },
+  ENDPOINT_STYLE: {
+    RIGHT: 'endpoint-style-right',
+    LEFT: 'endpoint-circle-style-left'
   }
 };

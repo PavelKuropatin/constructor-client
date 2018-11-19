@@ -10,7 +10,7 @@
         <label>v6</label>
         <input ng-model="state.v6" />
     </md-input-container>
-    <js-plumb-endpoint class="endpoint-circle-style-right"
+    <js-plumb-endpoint class="{{state.endpointStyle.sourceEndpoint}}"
                        ng-repeat="endpoint in state.sources"
                        anchor="RightMiddle"
                        uuid="{{endpoint.uuid}}"
@@ -20,7 +20,7 @@
                              ng-model="connection">
         </js-plumb-connection>
     </js-plumb-endpoint>
-    <js-plumb-endpoint class="endpoint-circle-style-left"
+    <js-plumb-endpoint class="{{state.endpointStyle.targetEndpoint}}"
                        ng-repeat="endpoint in state.targets"
                        anchor="LeftMiddle"
                        uuid="{{endpoint.uuid}}"
