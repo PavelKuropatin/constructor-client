@@ -9,11 +9,10 @@ export default function jsPlumbConnectionDirective($timeout) {
       stateObjects: '='
     },
     link: function (scope, element, attrs, jsPlumbEndpoint) {
-      const instance = jsPlumbEndpoint.scope.jsPlumbInstance;
-      let sourceUUID = jsPlumbEndpoint.scope.uuid;
-      let targetUUID = scope.ngModel.uuid;
-
       $timeout(() => {
+        const instance = jsPlumbEndpoint.scope.jsPlumbInstance;
+        let sourceUUID = jsPlumbEndpoint.scope.uuid;
+        let targetUUID = scope.ngModel.uuid;
         if (typeof jsPlumbEndpoint.connectionObjects[targetUUID] === 'undefined') {
           jsPlumbEndpoint.connectionObjects[targetUUID] = instance.connect({
             uuids: [
@@ -40,35 +39,24 @@ export default function jsPlumbConnectionDirective($timeout) {
           scope.ngModel.mouseover = true;
           scope.$apply();
         });
+
         connection.bind("mouseout", (conn, originalEvent) => {
           conn.removeOverlay("connLabel");
           scope.ngModel.mouseover = false;
           scope.$apply();
         });
 
-      }, 300);
+        scope.$on('$destroy', () => {
+          try {
+            instance.deleteConnection(jsPlumbEndpoint.connectionObjects[targetUUID]);
+          } catch (err) {
+            console.log('error', err, jsPlumbEndpoint.connectionObjects[targetUUID]);
 
-      // scope.$watchCollection('stateObjects', () => {
-      //   if (typeof jsPlumbEndpoint.connectionObjects[targetUUID] === 'undefined') {
-      //     jsPlumbEndpoint.connectionObjects[targetUUID] = instance.connect({
-      //       uuids: [
-      //         targetUUID,
-      //         sourceUUID
-      //       ]
-      //     });
-      //   }
-      // }, 300);
+          }
+          jsPlumbEndpoint.connectionObjects[targetUUID] = undefined;
+        });
 
-      scope.$on('$destroy', () => {
-        try {
-          instance.deleteConnection(jsPlumbEndpoint.connectionObjects[targetUUID]);
-        } catch (err) {
-          console.log('error', err, jsPlumbEndpoint.connectionObjects[targetUUID]);
-
-        }
-        jsPlumbEndpoint.connectionObjects[targetUUID] = undefined;
       });
-
     }
   };
 }

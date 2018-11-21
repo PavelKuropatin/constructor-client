@@ -26,7 +26,7 @@ export default function jsPlumbEndpointDirective($timeout) {
         scope.$on('$destroy', () => {
           instance.deleteEndpoint(ep);
         });
-      }, 100);
+      });
     }
   };
 }
