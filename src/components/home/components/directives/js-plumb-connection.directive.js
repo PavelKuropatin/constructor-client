@@ -55,8 +55,7 @@ export default function jsPlumbConnectionDirective($timeout) {
           }
           jsPlumbEndpoint.connectionObjects[targetUUID] = undefined;
         });
-
-      });
+      }, 50);
     }
   };
 }

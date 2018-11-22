@@ -1,17 +1,25 @@
 export default function jsPlumbStyleService() {
+  'ngInject';
+
   const targetEndpointStyle = {
-    endpoint: "Dot",
-    paintStyle: {fill: "#BCAAA4"},
+    endpoint: "Rectangle",
+    paintStyle: {
+      fill: "#BCAAA4",
+      width: 10,
+      height: 100,
+    },
     maxConnections: -1,
     isTarget: true
   };
 
   const sourceEndpointStyle = {
-    endpoint: "Dot",
+    endpoint: "Rectangle",
     paintStyle: {
       stroke: "#BCAAA4",
       fill: "transparent",
-      strokeWidth: 3
+      strokeWidth: 3,
+      width: 10,
+      height: 100,
     },
     isSource: true,
     maxConnections: -1,

@@ -1,4 +1,6 @@
 export default function uuidService() {
+  'ngInject';
+
   let lastUUID = 2000;
 
   const getNextUUID = () => {

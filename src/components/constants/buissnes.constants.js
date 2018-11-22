@@ -18,7 +18,13 @@ export default {
     }
   },
   ENDPOINT_STYLE: {
-    RIGHT: 'endpoint-style-right',
-    LEFT: 'endpoint-circle-style-left'
+    ACTION: {
+      RIGHT: 'endpoint-style-right',
+      LEFT: 'endpoint-style-left'
+    },
+    CIRCLE: {
+      RIGHT: 'endpoint-circle-style-right',
+      LEFT: 'endpoint-circle-style-left'
+    }
   }
 };

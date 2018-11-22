@@ -8,6 +8,7 @@ export default function homeController($scope, stateObjectHttpService, jsPlumbSt
   vm.stateObjects = [];
   vm.targetEndpointStyle = jsPlumbStyleService.getTargetEndpointStyle();
   vm.sourceEndpointStyle = jsPlumbStyleService.getSourceEndpointStyle();
+  vm.isActiveSetting = false;
 
   vm.setActiveState = (state) => {
     vm.activeState = state;

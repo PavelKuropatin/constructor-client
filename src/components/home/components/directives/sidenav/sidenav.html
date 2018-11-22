@@ -11,7 +11,9 @@
             <md-icon ng-if="showjson">remove</md-icon>
         </md-button>
     </md-card-header>
+
     <md-divider></md-divider>
+
     <md-card-content ng-if="stateObjects.length >= 1 || showjson">
         <md-card ng-if="!showjson" ng-repeat="state in stateObjects">
             <md-card-header>
@@ -23,6 +25,9 @@
                             </span>
                     </div>
                 </md-card-header-text>
+                <md-button class="md-icon-button" ng-click="configState(state)">
+                    <md-icon>settings_applications</md-icon>
+                </md-button>
                 <md-button class="md-icon-button" ng-click="setActiveState(state)">
                     <md-icon ng-if="activeState !== state">visibility</md-icon>
                     <md-icon ng-if="activeState === state">visibility_off</md-icon>
@@ -31,6 +36,7 @@
                     <md-icon>delete_sweep</md-icon>
                 </md-button>
             </md-card-header>
+
             <md-card-content ng-hide="activeState != state">
                 <div layout="row" layout-align="space-between">
                     <md-input-container>
@@ -42,6 +48,7 @@
                         <md-icon>compare_arrows</md-icon>
                     </md-button>
                 </div>
+
                 <div layout="row" layout-align="space-between">
                     <md-input-container>
                         <label>Template</label>
@@ -56,25 +63,40 @@
                         </md-select>
                     </md-input-container>
                 </div>
-                <div layout="row" ng-if="isActionState(state)">
-                    <md-input-container>
-                        <label>v1</label>
-                        <input ng-model="state.v1"/>
+
+                <md-card layout="row" class="action-input-container" ng-if="isActionState(state)">
+                    <md-icon>call_received</md-icon>
+                    <md-input-container ng-repeat="input in state.inputContainer">
+                        <label>{{input.label}}</label>
+                        <input ng-model="input.value"/>
                     </md-input-container>
-                    <md-input-container>
-                        <label>v2</label>
-                        <input ng-model="state.v2"/>
+                    <div layout="column">
+                        <md-button class="md-icon-button" ng-click="addInput(state)">
+                            <md-icon>add</md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" ng-click="deleteInput(state)">
+                            <md-icon>remove</md-icon>
+                        </md-button>
+                    </div>
+                </md-card>
+
+                <md-card layout="row" class="action-input-container" ng-if="isActionState(state)">
+                    <md-icon>call_made</md-icon>
+                    <md-input-container ng-repeat="output in state.outputContainer">
+                        <label>{{output.label}}</label>
+                        <input ng-model="output.value"/>
                     </md-input-container>
-                    <md-input-container>
-                        <label>v3</label>
-                        <input ng-model="state.v3"/>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>v4</label>
-                        <input ng-model="state.v4"/>
-                    </md-input-container>
-                </div>
-                <div layout="row" ng-if="isCircleState(state)">
+                    <div layout="column">
+                        <md-button class="md-icon-button" ng-click="addOutput(state)">
+                            <md-icon>add</md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" ng-click="deleteOutput(state)">
+                            <md-icon>remove</md-icon>
+                        </md-button>
+                    </div>
+                </md-card>
+
+                <md-card layout="row" ng-if="isCircleState(state)">
                     <md-input-container>
                         <label>v5</label>
                         <input ng-model="state.v5"/>
@@ -83,7 +105,8 @@
                         <label>v6</label>
                         <input ng-model="state.v6"/>
                     </md-input-container>
-                </div>
+                </md-card>
+
                 <md-card ng-repeat="source in state.sources">
                     <md-card-header>
                         <md-card-header-text>
@@ -119,6 +142,7 @@
                         </md-card>
                     </md-card-content>
                 </md-card>
+
                 <md-card ng-repeat="target in state.targets">
                     <md-card-header>
                         <md-card-header-text>
@@ -133,6 +157,7 @@
                     </md-card-header>
                 </md-card>
             </md-card-content>
+
         </md-card>
         <md-card ng-if="showjson">
             <textarea class="json-container">{{stateObjects | json }}</textarea>

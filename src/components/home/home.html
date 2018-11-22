@@ -1,9 +1,11 @@
 <div layout="row">
     <div flex="25" class="sidenav-container">
         <sidenav state-objects="home.stateObjects"
-                 active-state="home.activeState"></sidenav>
+                 active-state="home.activeState"
+                 is-active-setting="home.isActiveSetting">
+        </sidenav>
     </div>
-    <div class="schema-container" flex="75">
+    <div class="schema-container" ng-if="!home.isActiveSetting" flex="75">
         <md-toolbar class="md-hue-2">
             <div class="md-toolbar-tools">
                 <h2 flex md-truncate>Current position [{{home.pos_x}}, {{home.pos_y}}]</h2>
@@ -17,14 +19,17 @@
                 </md-slider>
             </div>
         </md-toolbar>
-        <div id="container">
-            <js-plumb-canvas on-connection="home.onConnection"
-                             x="home.pos_x"
-                             y="home.pos_y"
-                             zoom="home.zoomlevel">
-                <ng-include src="state.template"
-                            ng-repeat="state in home.stateObjects"></ng-include>
-            </js-plumb-canvas>
-        </div>
+
+        <js-plumb-canvas
+                id="container"
+                on-connection="home.onConnection"
+                x="home.pos_x"
+                y="home.pos_y"
+                zoom="home.zoomlevel">
+            <ng-include src="state.template"
+                        ng-repeat="state in home.stateObjects"></ng-include>
+        </js-plumb-canvas>
     </div>
+
+    <setting flex="75" ng-if="home.isActiveSetting"></setting>
 </div>

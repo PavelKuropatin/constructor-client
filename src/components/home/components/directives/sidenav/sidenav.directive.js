@@ -1,11 +1,13 @@
 import template from "./sidenav.html";
 
 export default function sidenavDirective($timeout, stateObjectService, CONSTANTS) {
+  'ngInject';
   return {
     restrict: 'EA',
     scope: {
       stateObjects: '=',
-      activeState: '='
+      activeState: '=',
+      isActiveSetting: '='
     },
     template: template,
     link: function (scope, element, attr) {
@@ -34,19 +36,42 @@ export default function sidenavDirective($timeout, stateObjectService, CONSTANTS
       scope.swapEndpointState = (state) => {
         state.endpointStyle.targetEndpoint = swapStyles(state.endpointStyle.targetEndpoint);
         state.endpointStyle.sourceEndpoint = swapStyles(state.endpointStyle.sourceEndpoint);
-        let bufState = _.cloneDeep(state);
-        scope.stateObjects.splice(scope.stateObjects.indexOf(state), 1);
+        let bufStateObjects = scope.stateObjects.slice();
+        scope.stateObjects = [];
         $timeout(() => {
-          scope.stateObjects.push(bufState);
-          scope.activeState = bufState;
+          scope.stateObjects = bufStateObjects;
         });
       };
 
-      function swapStyles(endpoint) {
-        if (endpoint === CONSTANTS.ENDPOINT_STYLE.RIGHT) {
-          return CONSTANTS.ENDPOINT_STYLE.LEFT;
+      scope.addInput = (state) => {
+        state.inputContainer.push({label: 'vt', value: undefined});
+      };
+
+      scope.deleteInput = (state) => {
+        state.inputContainer.pop();
+      };
+
+      scope.addOutput = (state) => {
+        state.outputContainer.push({label: 'vt', value: undefined});
+      };
+
+      scope.deleteOutput = (state) => {
+        state.outputContainer.pop();
+      };
+
+      scope.configState = (state) => {
+        if (scope.isActiveSetting) {
+          scope.isActiveSetting = false;
         } else {
-          return CONSTANTS.ENDPOINT_STYLE.RIGHT;
+          scope.isActiveSetting = true;
+        }
+      };
+
+      function swapStyles(endpoint) {
+        if (endpoint === CONSTANTS.ENDPOINT_STYLE.ACTION.RIGHT) {
+          return CONSTANTS.ENDPOINT_STYLE.ACTION.LEFT;
+        } else {
+          return CONSTANTS.ENDPOINT_STYLE.ACTION.RIGHT;
         }
       }
     }

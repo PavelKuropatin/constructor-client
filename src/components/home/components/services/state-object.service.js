@@ -1,16 +1,48 @@
 export default function stateObjectService(uuidService, CONSTANTS) {
+  'ngInject';
+
   const DEFAULT_POSITION_X = 10;
   const DEFAULT_POSITION_Y = 10;
   const DEFAULT_NAME = 'New State';
+  const DEFAULT_INPUT_CONTAINER = [
+    {
+      label: 'v1',
+      value: undefined
+    },
+    {
+      label: 'v2',
+      value: undefined
+    },
+    {
+      label: 'v3',
+      value: undefined
+    },
+  ];
+  const DEFAULT_OUTPUT_CONTAINER = [
+    {
+      label: 'v4',
+      value: undefined
+    },
+    {
+      label: 'v5',
+      value: undefined
+    },
+    {
+      label: 'v6',
+      value: undefined
+    },
+  ];
 
   const getNewState = (stateObjects) => {
     stateObjects.push({
       name: DEFAULT_NAME,
       template: CONSTANTS.PARTIALS.ACTION,
       color: CONSTANTS.TYPE_ACTION.MAIN.color,
+      outputContainer: DEFAULT_OUTPUT_CONTAINER,
+      inputContainer: DEFAULT_INPUT_CONTAINER,
       endpointStyle: {
-        targetEndpoint: CONSTANTS.ENDPOINT_STYLE.LEFT,
-        sourceEndpoint: CONSTANTS.ENDPOINT_STYLE.RIGHT
+        targetEndpoint: CONSTANTS.ENDPOINT_STYLE.ACTION.LEFT,
+        sourceEndpoint: CONSTANTS.ENDPOINT_STYLE.ACTION.RIGHT
       },
       sources: [
         {uuid: uuidService.getNextUUID()},

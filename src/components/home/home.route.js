@@ -1,7 +1,7 @@
 import homeTemplate from './home.html';
 
 export default function homeRouteConfig($stateProvider) {
-	"ngInject";
+  'ngInject';
 	$stateProvider
 		.state('home', {
 			url: '/',
