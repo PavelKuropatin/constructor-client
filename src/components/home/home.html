@@ -8,7 +8,6 @@
     <div class="schema-container" ng-if="!home.isActiveSetting" flex="75">
         <md-toolbar class="md-hue-2">
             <div class="md-toolbar-tools">
-                <h2 flex md-truncate>Current position [{{home.pos_x}}, {{home.pos_y}}]</h2>
                 <md-button class="md-raised" ng-click="home.saveStateObjects()">Save</md-button>
                 <md-button class="md-raised" ng-click="home.loadStateObjects()">Load</md-button>
                 <md-slider min="0" max="200"

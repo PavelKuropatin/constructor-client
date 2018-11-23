@@ -3,6 +3,10 @@ export default {
     ACTION: 'action',
     CIRCLE: 'circle'
   },
+  ANCHOR: {
+    LEFT_MIDDLE: 'LeftMiddle',
+    RIGHT_MIDDLE: 'RightMiddle'
+  },
   TYPE_ACTION: {
     MAIN: {
       color: '#CC1A55',

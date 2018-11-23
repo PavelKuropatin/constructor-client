@@ -42,7 +42,9 @@ export default function stateObjectService(uuidService, CONSTANTS) {
       inputContainer: DEFAULT_INPUT_CONTAINER,
       endpointStyle: {
         targetEndpoint: CONSTANTS.ENDPOINT_STYLE.ACTION.LEFT,
-        sourceEndpoint: CONSTANTS.ENDPOINT_STYLE.ACTION.RIGHT
+        sourceEndpoint: CONSTANTS.ENDPOINT_STYLE.ACTION.RIGHT,
+        targetAnchor:  CONSTANTS.ANCHOR.LEFT_MIDDLE,
+        sourceAnchor: CONSTANTS.ANCHOR.RIGHT_MIDDLE
       },
       sources: [
         {uuid: uuidService.getNextUUID()},

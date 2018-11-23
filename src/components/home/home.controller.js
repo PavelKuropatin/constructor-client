@@ -2,8 +2,6 @@ export default function homeController($scope, stateObjectHttpService, jsPlumbSt
   'ngInject';
   const vm = this;
   vm.zoomlevel = 64;
-  vm.pos_x = 214;
-  vm.pos_y = 148;
   vm.activeState = null;
   vm.stateObjects = [];
   vm.targetEndpointStyle = jsPlumbStyleService.getTargetEndpointStyle();

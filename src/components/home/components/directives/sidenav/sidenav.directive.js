@@ -34,8 +34,12 @@ export default function sidenavDirective($timeout, stateObjectService, CONSTANTS
       };
 
       scope.swapEndpointState = (state) => {
-        state.endpointStyle.targetEndpoint = swapStyles(state.endpointStyle.targetEndpoint);
-        state.endpointStyle.sourceEndpoint = swapStyles(state.endpointStyle.sourceEndpoint);
+        state.endpointStyle.targetEndpoint = swapEndpointStyles(state.endpointStyle.targetEndpoint);
+        state.endpointStyle.sourceEndpoint = swapEndpointStyles(state.endpointStyle.sourceEndpoint);
+
+        state.endpointStyle.targetAnchor = swapAnchorStyles(state.endpointStyle.targetAnchor);
+        state.endpointStyle.sourceAnchor = swapAnchorStyles(state.endpointStyle.sourceAnchor);
+
         let bufStateObjects = scope.stateObjects.slice();
         scope.stateObjects = [];
         $timeout(() => {
@@ -67,11 +71,19 @@ export default function sidenavDirective($timeout, stateObjectService, CONSTANTS
         }
       };
 
-      function swapStyles(endpoint) {
+      function swapEndpointStyles(endpoint) {
         if (endpoint === CONSTANTS.ENDPOINT_STYLE.ACTION.RIGHT) {
           return CONSTANTS.ENDPOINT_STYLE.ACTION.LEFT;
         } else {
           return CONSTANTS.ENDPOINT_STYLE.ACTION.RIGHT;
+        }
+      }
+
+      function swapAnchorStyles(anchor) {
+        if (anchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) {
+          return CONSTANTS.ANCHOR.LEFT_MIDDLE;
+        } else {
+          return CONSTANTS.ANCHOR.RIGHT_MIDDLE;
         }
       }
     }

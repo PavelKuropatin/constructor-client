@@ -6,7 +6,7 @@
         <md-icon>call_received</md-icon>
         <md-input-container ng-repeat="input in state.inputContainer">
             <label>{{input.label}}</label>
-            <input ng-model="input.value" />
+            <input ng-model="input.value"/>
         </md-input-container>
     </div>
     <h3 class="cursor-default">{{state.name}}</h3>
@@ -14,11 +14,11 @@
         <md-icon>call_made</md-icon>
         <md-input-container ng-repeat="output in state.outputContainer">
             <label>{{output.label}}</label>
-            <input ng-model="output.value" />
+            <input ng-model="output.value"/>
         </md-input-container>
     </div>
     <js-plumb-endpoint class={{state.endpointStyle.sourceEndpoint}}
-                       anchor="RightMiddle"
+                       anchor={{state.endpointStyle.sourceAnchor}}
                        ng-repeat="endpoint in state.sources"
                        uuid="{{endpoint.uuid}}"
                        settings="home.sourceEndpointStyle">
@@ -29,7 +29,7 @@
         </js-plumb-connection>
     </js-plumb-endpoint>
     <js-plumb-endpoint class={{state.endpointStyle.targetEndpoint}}
-                       anchor="LeftMiddle"
+                       anchor={{state.endpointStyle.targetAnchor}}
                        ng-repeat="endpoint in state.targets"
                        uuid="{{endpoint.uuid}}"
                        settings="home.targetEndpointStyle"></js-plumb-endpoint>
