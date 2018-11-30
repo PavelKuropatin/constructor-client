@@ -69,6 +69,7 @@ export default function sidenavDirective($timeout, stateObjectService, CONSTANTS
         } else {
           scope.isActiveSetting = true;
         }
+        stateObjectService.setConfigState(state);
       };
 
       function swapEndpointStyles(endpoint) {

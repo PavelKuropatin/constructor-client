@@ -33,6 +33,8 @@ export default function stateObjectService(uuidService, CONSTANTS) {
     },
   ];
 
+  var configState;
+
   const getNewState = (stateObjects) => {
     stateObjects.push({
       name: DEFAULT_NAME,
@@ -70,10 +72,20 @@ export default function stateObjectService(uuidService, CONSTANTS) {
     object.splice(index, 1);
   };
 
+  const setConfigState =  (state) => {
+    configState = state;
+  };
+
+  const getConfigState = () => {
+    return configState;
+  };
+
   return {
     getNewState: getNewState,
     removeState: removeState,
-    removeIndex: removeIndex
+    removeIndex: removeIndex,
+    setConfigState: setConfigState,
+    getConfigState: getConfigState
   };
 }
 

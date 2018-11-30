@@ -1,2 +1,22 @@
-There will be config of state
-<!--todo-->
+<md-card layout="row" class="action-input-container">
+    <md-icon>call_received</md-icon>
+    <md-input-container ng-repeat="input in state.inputContainer">
+        <label>{{input.label}}</label>
+        <input ng-model="input.value"/>
+    </md-input-container>
+</md-card>
+
+<md-card layout="row" class="action-input-container">
+    <md-icon>call_made</md-icon>
+    <md-input-container ng-repeat="output in state.outputContainer">
+        <label>{{output.label}}</label>
+        <input ng-model="output.value"/>
+    </md-input-container>
+</md-card>
+
+<!--<md-card layout="row">-->
+    <md-input-container>
+        <label>Enter Function</label>
+        <input/>
+    </md-input-container>
+<!--</md-card>-->
