@@ -51,5 +51,11 @@ module.exports = {
         loader: 'ng-cache-loader?prefix=[dir]/[dir]'
       }
     ]
+  },
+
+  devServer: {
+    inline: true,
+    contentBase: './dist',
+    port: 5000
   }
 };
