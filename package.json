@@ -6,7 +6,6 @@
   "scripts": {
     "start": "webpack-dev-server --open --config config/webpack.config.dev.js",
     "prod": "NODE_ENV=production node server.js",
-    "postinstall": "webpack -p",
     "dev": "webpack-dev-server --open --config config/webpack.config.dev.js"
   },
   "babel": {
