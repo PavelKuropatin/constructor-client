@@ -7,7 +7,7 @@
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "postinstall": "webpack -p",
     "dev": "webpack-dev-server --open --config config/webpack.config.dev.js",
-    "prod": "webpack --config config/webpack.config.prod.js  --colors",
+    "prod": "webpack --config config/webpack.config.prod.js  --colors"
   },
   "babel": {
     "presets": [
