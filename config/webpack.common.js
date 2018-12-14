@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
-const dist = Path.join(__dirname, '../dist');
+const dist   = Path.join(__dirname, '../dist');
 
 module.exports = {
   entry: [
