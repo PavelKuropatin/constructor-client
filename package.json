@@ -4,11 +4,11 @@
   "description": "Diplom",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "heroku-postbuild": "webpack -p",
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "postinstall": "webpack -p",
     "dev": "webpack-dev-server --open --config config/webpack.config.dev.js",
     "prod": "webpack --config config/webpack.config.prod.js  --colors",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:watch": "npm run test -- --watch"
   },
   "babel": {
     "presets": [
