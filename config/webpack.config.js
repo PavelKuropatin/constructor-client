@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
-const dist   = Path.join(__dirname, '../dist');
+const dist = Path.join(__dirname, '../dist');
 
 module.exports = {
   entry: [
@@ -28,7 +28,7 @@ module.exports = {
       {from: Path.resolve(__dirname, '../public'), to: 'public'}
     ]),
     new HtmlWebpackPlugin({
-      template: Path.resolve(__dirname, '../src/index.ejs')
+      template: Path.resolve(__dirname, '../index.ejs')
     })
   ],
   resolve: {
@@ -53,9 +53,4 @@ module.exports = {
       }
     ]
   },
-
-  devServer: {
-    historyApiFallback: true,
-    contentBase: './'
-  }
 };
