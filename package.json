@@ -5,7 +5,7 @@
   "main": "app.module.js",
   "scripts": {
     "start": "node server.js",
-    "heroku-postbuild": "webpack-dev-server --open --config config/webpack.config.dev.js",
+    "heroku-postbuild": "webpack -p",
     "prod": "NODE_ENV=production node server.js",
     "dev": "webpack-dev-server --open --config config/webpack.config.dev.js"
   },
