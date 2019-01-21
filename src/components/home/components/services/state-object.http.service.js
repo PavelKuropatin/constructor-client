@@ -6,7 +6,7 @@ export default function stateObjectHttpService($http, env) {
   const saveAllStateObject = (stateObjects) => {
     return $http({
       method: 'POST',
-      url: env.api + STATE_OBJECT_URL,
+      url: env.api + '/api/diagram',
       data: stateObjects
     });
   };
