@@ -24,9 +24,9 @@ module.exports = {
       jQuery: require.resolve('jquery')
     }),
     new CleanWebpackPlugin([dist], {root: Path.resolve(__dirname, '..')}),
-    new CopyWebpackPlugin([
-      {from: Path.resolve(__dirname, '../public'), to: 'public'}
-    ]),
+    // new CopyWebpackPlugin([
+    //   {from: Path.resolve(__dirname, '../public'), to: 'public'}
+    // ]),
     new HtmlWebpackPlugin({
       template: Path.resolve(__dirname, '../index.ejs')
     })
