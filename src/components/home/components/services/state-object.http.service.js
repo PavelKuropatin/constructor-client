@@ -1,7 +1,7 @@
 export default function stateObjectHttpService($http, env) {
   'ngInject';
 
-  const STATE_OBJECT_URL = '/api/schema/1';
+  const STATE_OBJECT_URL = '/api/diagram/1';
 
   const saveAllStateObject = (stateObjects) => {
     return $http({
