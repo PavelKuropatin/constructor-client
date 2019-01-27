@@ -28,7 +28,7 @@ module.exports = {
       {from: Path.resolve(__dirname, '../public'), to: 'public'}
     ]),
     new HtmlWebpackPlugin({
-      template: Path.resolve(__dirname, '../index.ejs')
+      template: Path.resolve(__dirname, '../src/index.ejs')
     })
   ],
   resolve: {

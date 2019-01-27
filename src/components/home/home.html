@@ -8,6 +8,22 @@
     <div class="schema-container" ng-if="!home.isActiveSetting" flex="75">
         <md-toolbar class="md-hue-2">
             <div class="md-toolbar-tools">
+                <div class="md-menu-demo">
+                    <div class="menu-demo-container" layout-align="center center" layout="column">
+                        <md-menu>
+                            <md-button aria-label="Open menu with custom trigger" class="md-icon-button" ng-mouseenter="$mdMenu.open()">
+                                <md-icon>menu</md-icon>
+                            </md-button>
+                            <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+                                <md-menu-item>
+                                    <md-button ng-click="home.openDiagram($event)">
+                                        Open diagram..
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </div>
+                </div>
                 <md-button class="md-raised" ng-click="home.saveStateObjects()">Save</md-button>
                 <md-button class="md-raised" ng-click="home.loadStateObjects()">Load</md-button>
                 <md-slider min="0" max="200"

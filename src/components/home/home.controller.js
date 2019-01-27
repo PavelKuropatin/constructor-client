@@ -1,4 +1,4 @@
-export default function homeController($scope, stateObjectHttpService, jsPlumbStyleService) {
+export default function homeController($scope, $mdDialog, stateObjectHttpService, jsPlumbStyleService) {
   'ngInject';
   const vm = this;
   vm.zoomlevel = 64;
@@ -32,5 +32,19 @@ export default function homeController($scope, stateObjectHttpService, jsPlumbSt
     jsPlumb.ready(() => {
       vm.stateObjects = stateObjectHttpService.getAllStateObject();
     });
+  };
+
+  vm.openDiagram = function (ev) {
+    $mdDialog.show({
+      controller: DialogController,
+      templateUrl: 'tabDialog.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+    }).then(function (answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function () {
+        $scope.status = 'You cancelled the dialog.';
+      });
   };
 }
