@@ -11,10 +11,10 @@ import routing from './home.route';
 import homeController from './home.controller';
 import openDiagramController from './components/dialogs/open_diagram/open-diagram.controller';
 
-import jsPlumbCanvasDirective from './components/directives/js-plumb-canvas.directive';
-import jsPlumbConnectionDirective from './components/directives/js-plumb-connection.directive';
-import jsPlumbEndpointDirective from './components/directives/js-plumb-endpoint.directive';
-import jsPlumbObjectDirective from './components/directives/js-plumb-object.directive';
+import jsPlumbCanvasDirective from './components/directives/js_plumb/js-plumb-canvas.directive';
+import jsPlumbConnectionDirective from './components/directives/js_plumb/js-plumb-connection.directive';
+import jsPlumbEndpointDirective from './components/directives/js_plumb/js-plumb-endpoint.directive';
+import jsPlumbObjectDirective from './components/directives/js_plumb/js-plumb-object.directive';
 import sidenavDirective from './components/directives/sidenav/sidenav.directive';
 import settingDirective from './components/directives/setting/setting.directive';
 

@@ -1,4 +1,4 @@
-export default function jsPlumbConnectionDirective($timeout) {
+export default function jsPlumbConnectionDirective($timeout, jsPlumbStyleService) {
   'ngInject';
   return {
     restrict: 'E',
@@ -23,11 +23,6 @@ export default function jsPlumbConnectionDirective($timeout) {
         }
 
         let connection = jsPlumbEndpoint.connectionObjects[targetUUID];
-
-        connection.bind("click", (conn, originalEvent) => {
-          scope.ngClick();
-          scope.$apply();
-        });
 
         connection.bind("mouseover", (conn, originalEvent) => {
           let title = 'UUID Target: ' + targetUUID;
