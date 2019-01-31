@@ -9,6 +9,7 @@ import partialsConfig from './components/partials/partials.config';
 import constants from '../constants/buissnes.constants';
 import routing from './home.route';
 import homeController from './home.controller';
+import openDiagramController from './components/dialogs/open_diagram/open-diagram.controller';
 
 import jsPlumbCanvasDirective from './components/directives/js-plumb-canvas.directive';
 import jsPlumbConnectionDirective from './components/directives/js-plumb-connection.directive';
@@ -25,6 +26,7 @@ import stateObjectService from './components/services/state-object.service';
 export default angular.module('app.home', [uirouter])
 	.config(routing)
 	.controller('homeController', homeController)
+  .controller('openDiagramController', openDiagramController)
 	.directive('jsPlumbCanvas', jsPlumbCanvasDirective)
   .directive('jsPlumbConnection', jsPlumbConnectionDirective)
   .directive('jsPlumbEndpoint', jsPlumbEndpointDirective)

@@ -1,3 +1,5 @@
+import openDiagramTemplate from './components/dialogs/open_diagram/open-diagram.html';
+
 export default function homeController($scope, $mdDialog, stateObjectHttpService, jsPlumbStyleService) {
   'ngInject';
   const vm = this;
@@ -34,17 +36,13 @@ export default function homeController($scope, $mdDialog, stateObjectHttpService
     });
   };
 
-  vm.openDiagram = function (ev) {
+  vm.openDiagram = function () {
     $mdDialog.show({
-      controller: DialogController,
-      templateUrl: 'tabDialog.tmpl.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
+      controller: 'openDiagramController as vm',
+      template: openDiagramTemplate,
       clickOutsideToClose: true,
-    }).then(function (answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function () {
-        $scope.status = 'You cancelled the dialog.';
-      });
+    }).then(function (diagram) {
+      console.log(diagram);
+    });
   };
 }
