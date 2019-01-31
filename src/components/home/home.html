@@ -6,9 +6,9 @@
         </sidenav>
     </div>
     <div class="schema-container" ng-if="!home.isActiveSetting" flex="75">
-        <md-toolbar class="md-hue-2">
+        <md-toolbar class="md-hue-2" layout="row">
             <div class="md-toolbar-tools">
-                <div class="md-menu-demo">
+                <div class="md-menu-demo" layout-align="start center">
                     <div class="menu-demo-container" layout-align="center center" layout="column">
                         <md-menu>
                             <md-button aria-label="Open menu with custom trigger" class="md-icon-button" ng-mouseenter="$mdMenu.open()">
@@ -20,13 +20,18 @@
                                         Open diagram..
                                     </md-button>
                                 </md-menu-item>
+                                <md-menu-item>
+                                    <md-button ng-click="home.saveStateObjects()">
+                                        Save current diagram
+                                    </md-button>
+                                </md-menu-item>
+
+                                <!--<md-button class="md-raised" ng-click="home.loadStateObjects()">Load</md-button>-->
                             </md-menu-content>
                         </md-menu>
                     </div>
                 </div>
-                <md-button class="md-raised" ng-click="home.saveStateObjects()">Save</md-button>
-                <md-button class="md-raised" ng-click="home.loadStateObjects()">Load</md-button>
-                <md-slider min="0" max="200"
+                <md-slider layout-align="end center" min="0" max="200"
                            ng-model="home.zoomlevel"
                            step="10" aria-label="red"
                            id="red-slider"
