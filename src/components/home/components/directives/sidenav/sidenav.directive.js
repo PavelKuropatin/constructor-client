@@ -5,7 +5,7 @@ export default function sidenavDirective($timeout, stateObjectService, CONSTANTS
   return {
     restrict: 'EA',
     scope: {
-      stateObjects: '=',
+      diagramInfo: '=',
       activeState: '=',
       isActiveSetting: '='
     },
@@ -40,10 +40,10 @@ export default function sidenavDirective($timeout, stateObjectService, CONSTANTS
         state.endpointStyle.targetAnchor = swapAnchorStyles(state.endpointStyle.targetAnchor);
         state.endpointStyle.sourceAnchor = swapAnchorStyles(state.endpointStyle.sourceAnchor);
 
-        let bufStateObjects = scope.stateObjects.slice();
-        scope.stateObjects = [];
+        let bufStateObjects = scope.diagramInfo.modules.slice();
+        scope.diagramInfo.modules = [];
         $timeout(() => {
-          scope.stateObjects = bufStateObjects;
+          scope.diagramInfo.modules = bufStateObjects;
         });
       };
 
@@ -64,11 +64,7 @@ export default function sidenavDirective($timeout, stateObjectService, CONSTANTS
       };
 
       scope.configState = (state) => {
-        if (scope.isActiveSetting) {
-          scope.isActiveSetting = false;
-        } else {
-          scope.isActiveSetting = true;
-        }
+        scope.isActiveSetting = !scope.isActiveSetting;
         stateObjectService.setConfigState(state);
       };
 

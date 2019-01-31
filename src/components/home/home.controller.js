@@ -5,17 +5,21 @@ export default function homeController($scope, $mdDialog, stateObjectHttpService
   const vm = this;
   vm.zoomlevel = 64;
   vm.activeState = null;
-  vm.stateObjects = [];
   vm.targetEndpointStyle = jsPlumbStyleService.getTargetEndpointStyle();
   vm.sourceEndpointStyle = jsPlumbStyleService.getSourceEndpointStyle();
   vm.isActiveSetting = false;
+  vm.diagramInfo = {
+    name: 'undefined',
+    description: 'undefined',
+    modules: []
+  };
 
   vm.setActiveState = (state) => {
     vm.activeState = state;
   };
 
   vm.onConnection = (instance, connection, targetUUID, sourceUUID) => {
-    angular.forEach(vm.stateObjects, (state) => {
+    angular.forEach(vm.diagramInfo.modules, (state) => {
       angular.forEach(state.sources, (source) => {
         if (source.uuid == sourceUUID) {
           if (typeof source.connections === 'undefined') source.connections = [];
@@ -27,13 +31,7 @@ export default function homeController($scope, $mdDialog, stateObjectHttpService
   };
 
   vm.saveStateObjects = () => {
-    stateObjectHttpService.saveAllStateObject(vm.stateObjects);
-  };
-
-  vm.loadStateObjects = () => {
-    jsPlumb.ready(() => {
-      vm.stateObjects = stateObjectHttpService.getAllStateObject();
-    });
+    stateObjectHttpService.saveDiagram(vm.diagramInfo);
   };
 
   vm.openDiagram = function () {
@@ -42,7 +40,11 @@ export default function homeController($scope, $mdDialog, stateObjectHttpService
       template: openDiagramTemplate,
       clickOutsideToClose: true,
     }).then(function (diagram) {
-      console.log(diagram);
+      jsPlumb.ready(() => {
+        stateObjectHttpService.getAllStateObject(diagram).then((response) => {
+          vm.diagramInfo = response.data;
+          });
+      });
     });
   };
 }

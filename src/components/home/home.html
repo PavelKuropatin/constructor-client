@@ -1,14 +1,14 @@
 <div layout="row">
     <div flex="25" class="sidenav-container">
-        <sidenav state-objects="home.stateObjects"
+        <sidenav diagram-info="home.diagramInfo"
                  active-state="home.activeState"
                  is-active-setting="home.isActiveSetting">
         </sidenav>
     </div>
     <div class="schema-container" ng-if="!home.isActiveSetting" flex="75">
-        <md-toolbar class="md-hue-2" layout="row">
-            <div class="md-toolbar-tools">
-                <div class="md-menu-demo" layout-align="start center">
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools"  layout="row" layout-align="space-between center">
+                <div class="md-menu-demo">
                     <div class="menu-demo-container" layout-align="center center" layout="column">
                         <md-menu>
                             <md-button aria-label="Open menu with custom trigger" class="md-icon-button" ng-mouseenter="$mdMenu.open()">
@@ -25,13 +25,11 @@
                                         Save current diagram
                                     </md-button>
                                 </md-menu-item>
-
-                                <!--<md-button class="md-raised" ng-click="home.loadStateObjects()">Load</md-button>-->
                             </md-menu-content>
                         </md-menu>
                     </div>
                 </div>
-                <md-slider layout-align="end center" min="0" max="200"
+                <md-slider min="0" max="200"
                            ng-model="home.zoomlevel"
                            step="10" aria-label="red"
                            id="red-slider"
@@ -47,7 +45,7 @@
                 y="home.pos_y"
                 zoom="home.zoomlevel">
             <ng-include src="state.template"
-                        ng-repeat="state in home.stateObjects"></ng-include>
+                        ng-repeat="state in home.diagramInfo.modules"></ng-include>
         </js-plumb-canvas>
     </div>
 

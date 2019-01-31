@@ -1,9 +1,10 @@
 <md-card class="sidenav">
     <md-card-header>
         <md-card-header-text>
-            <div class="title-text">States</div>
+            <div class="title-text">{{diagramInfo.name}}</div>
+            <div>{{diagramInfo.description}}</div>
         </md-card-header-text>
-        <md-button class="md-icon-button" ng-click="newState(stateObjects, state)">
+        <md-button class="md-icon-button" ng-click="newState(diagramInfo.modules, state)">
             <md-icon>playlist_add</md-icon>
         </md-button>
         <md-button class="md-icon-button" ng-click="showjson=!showjson">
@@ -14,8 +15,8 @@
 
     <md-divider></md-divider>
 
-    <md-card-content ng-if="stateObjects.length >= 1 || showjson">
-        <md-card ng-if="!showjson" ng-repeat="state in stateObjects">
+    <md-card-content ng-if="diagramInfo.modules.length >= 1 || showjson">
+        <md-card ng-if="!showjson" ng-repeat="state in diagramInfo.modules">
             <md-card-header>
                 <md-card-header-text>
                     <div layout="column">
@@ -32,7 +33,7 @@
                     <md-icon ng-if="activeState !== state">visibility</md-icon>
                     <md-icon ng-if="activeState === state">visibility_off</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="removeState(stateObjects, state)">
+                <md-button class="md-icon-button" ng-click="removeState(diagramInfo.modules, state)">
                     <md-icon>delete_sweep</md-icon>
                 </md-button>
             </md-card-header>
@@ -162,7 +163,28 @@
 
         </md-card>
         <md-card ng-if="showjson">
-            <textarea class="json-container">{{stateObjects | json }}</textarea>
+            <md-card>
+                <md-card-header>
+                    <md-card-header-text>
+                        <div class="title-text">Diagram info</div>
+                    </md-card-header-text>
+                </md-card-header>
+                <md-card-content>
+                    <md-input-container>
+                        <label>Name</label>
+                        <input ng-model="diagramInfo.name"/>
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Description</label>
+                        <input ng-model="diagramInfo.description"/>
+                    </md-input-container>
+                </md-card-content>
+            </md-card>
+
+        </md-card>
+
+        <md-card ng-if="showjson">
+            <textarea class="json-container">{{diagramInfo.modules | json }}</textarea>
         </md-card>
     </md-card-content>
 </md-card>

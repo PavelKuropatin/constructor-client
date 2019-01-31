@@ -19,7 +19,7 @@ import sidenavDirective from './components/directives/sidenav/sidenav.directive'
 import settingDirective from './components/directives/setting/setting.directive';
 
 import uuidService from './components/services/uuid.service';
-import stateObjectHttpService from './components/services/state-object.http.service';
+import stateObjectHttpService from './components/services/http/state-object.http.service';
 import jsPlumbStyleService from './components/services/js-plumb-style.service';
 import stateObjectService from './components/services/state-object.service';
 

@@ -25,7 +25,7 @@
         <js-plumb-connection ng-click="setActiveConnection($index)"
                              ng-repeat="connection in endpoint.connections"
                              ng-model="connection"
-                             state-objects="home.stateObjects">
+                             state-objects="home.diagramInfo.modules">
         </js-plumb-connection>
     </js-plumb-endpoint>
     <js-plumb-endpoint class={{state.endpointStyle.targetEndpoint}}

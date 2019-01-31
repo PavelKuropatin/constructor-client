@@ -1,11 +1,18 @@
-export default function openDiagramController($mdDialog) {
+export default function openDiagramController($mdDialog, stateObjectHttpService) {
   "ngInject";
   let vm = this;
 
   vm.hideDialog = hideDialog;
   vm.chooseDiagram = chooseDiagram;
-  vm.digrams = ['test1', 'test2'];
-  vm.choosenDiagram = _.head(vm.digrams);
+  vm.diagrams = [];
+
+  vm.$onInit = function () {
+    stateObjectHttpService.getAllDiagramInfo()
+      .then((response) => {
+        vm.choosenDiagram = _.head(response.data);
+        vm.diagrams = response.data;
+      });
+  };
 
   function chooseDiagram() {
     $mdDialog.hide(vm.choosenDiagram);
