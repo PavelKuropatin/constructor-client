@@ -4,7 +4,7 @@
             <div class="title-text">{{diagramInfo.name}}</div>
             <div>{{diagramInfo.description}}</div>
         </md-card-header-text>
-        <md-button class="md-icon-button" ng-click="newState(diagramInfo.modules, state)">
+        <md-button class="md-icon-button" ng-click="newState(diagramInfo.uuid, diagramInfo.modules, state)">
             <md-icon>playlist_add</md-icon>
         </md-button>
         <md-button class="md-icon-button" ng-click="showjson=!showjson">
@@ -33,7 +33,7 @@
                     <md-icon ng-if="activeState !== state">visibility</md-icon>
                     <md-icon ng-if="activeState === state">visibility_off</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="removeState(diagramInfo.modules, state)">
+                <md-button class="md-icon-button" ng-click="removeState(diagramInfo.uuid, diagramInfo.modules, state)">
                     <md-icon>delete_sweep</md-icon>
                 </md-button>
             </md-card-header>

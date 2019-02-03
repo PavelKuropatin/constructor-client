@@ -8,11 +8,6 @@ export default function homeController($scope, $mdDialog, stateObjectHttpService
   vm.targetEndpointStyle = jsPlumbStyleService.getTargetEndpointStyle();
   vm.sourceEndpointStyle = jsPlumbStyleService.getSourceEndpointStyle();
   vm.isActiveSetting = false;
-  vm.diagramInfo = {
-    name: 'undefined',
-    description: 'undefined',
-    modules: []
-  };
 
   vm.setActiveState = (state) => {
     vm.activeState = state;
@@ -30,8 +25,16 @@ export default function homeController($scope, $mdDialog, stateObjectHttpService
     });
   };
 
-  vm.saveStateObjects = () => {
-    stateObjectHttpService.saveDiagram(vm.diagramInfo);
+  vm.updateDiagram = () => {
+    stateObjectHttpService.updateDiagram(vm.diagramInfo).then(response => {
+      vm.diagramInfo = response.data;
+    });
+  };
+
+  vm.createNewDiagram = () => {
+    stateObjectHttpService.createNewDiagram().then(response => {
+      vm.diagramInfo = response.data;
+    });
   };
 
   vm.openDiagram = function () {
@@ -43,7 +46,7 @@ export default function homeController($scope, $mdDialog, stateObjectHttpService
       jsPlumb.ready(() => {
         stateObjectHttpService.getAllStateObject(diagram).then((response) => {
           vm.diagramInfo = response.data;
-          });
+        });
       });
     });
   };

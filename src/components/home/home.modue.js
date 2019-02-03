@@ -18,7 +18,6 @@ import jsPlumbObjectDirective from './components/directives/js_plumb/js-plumb-ob
 import sidenavDirective from './components/directives/sidenav/sidenav.directive';
 import settingDirective from './components/directives/setting/setting.directive';
 
-import uuidService from './components/services/uuid.service';
 import stateObjectHttpService from './components/services/http/state-object.http.service';
 import jsPlumbStyleService from './components/services/js-plumb-style.service';
 import stateObjectService from './components/services/state-object.service';
@@ -33,7 +32,6 @@ export default angular.module('app.home', [uirouter])
   .directive('jsPlumbObject', jsPlumbObjectDirective)
   .directive('setting', settingDirective)
   .directive('sidenav', sidenavDirective)
-	.service('uuidService', uuidService)
 	.service('stateObjectHttpService', stateObjectHttpService)
   .service('jsPlumbStyleService', jsPlumbStyleService)
   .service('stateObjectService', stateObjectService)

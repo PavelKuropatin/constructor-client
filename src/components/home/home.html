@@ -1,11 +1,11 @@
 <div layout="row">
-    <div flex="25" class="sidenav-container">
+    <div ng-if="home.diagramInfo" flex="25" class="sidenav-container">
         <sidenav diagram-info="home.diagramInfo"
                  active-state="home.activeState"
                  is-active-setting="home.isActiveSetting">
         </sidenav>
     </div>
-    <div class="schema-container" ng-if="!home.isActiveSetting" flex="75">
+    <div class="schema-container" ng-if="!home.isActiveSetting" flex>
         <md-toolbar class="md-hue-2">
             <div class="md-toolbar-tools"  layout="row" layout-align="space-between center">
                 <div class="md-menu-demo">
@@ -16,13 +16,18 @@
                             </md-button>
                             <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
                                 <md-menu-item>
-                                    <md-button ng-click="home.openDiagram()">
-                                        Open diagram..
+                                    <md-button ng-click="home.createNewDiagram()">
+                                        Create new diagram
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item ng-if="home.diagramInfo">
+                                    <md-button ng-click="home.updateDiagram()">
+                                        Update current diagram
                                     </md-button>
                                 </md-menu-item>
                                 <md-menu-item>
-                                    <md-button ng-click="home.saveStateObjects()">
-                                        Save current diagram
+                                    <md-button ng-click="home.openDiagram()">
+                                        Open diagram..
                                     </md-button>
                                 </md-menu-item>
                             </md-menu-content>
