@@ -18,7 +18,12 @@ export default function jsPlumbConnectionDirective($timeout, jsPlumbStyleService
             uuids: [
               targetUUID,
               sourceUUID
-            ]
+            ],
+            paintStyle: {
+              strokeWidth: 6,
+              stroke: "#61B7CF"
+            },
+            connector: ["Flowchart", {stub: [30, 30], gap: 20, cornerRadius: 10, alwaysRespectStubs: true}],
           });
         }
 
