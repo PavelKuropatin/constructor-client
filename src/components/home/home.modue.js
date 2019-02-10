@@ -10,6 +10,7 @@ import constants from '../constants/buissnes.constants';
 import routing from './home.route';
 import homeController from './home.controller';
 import openDiagramController from './components/dialogs/open_diagram/open-diagram.controller';
+import containerController from './components/dialogs/container/container.controller';
 
 import jsPlumbCanvasDirective from './components/directives/js_plumb/js-plumb-canvas.directive';
 import jsPlumbConnectionDirective from './components/directives/js_plumb/js-plumb-connection.directive';
@@ -26,6 +27,7 @@ export default angular.module('app.home', [uirouter])
 	.config(routing)
 	.controller('homeController', homeController)
   .controller('openDiagramController', openDiagramController)
+	.controller('containerController', containerController)
 	.directive('jsPlumbCanvas', jsPlumbCanvasDirective)
   .directive('jsPlumbConnection', jsPlumbConnectionDirective)
   .directive('jsPlumbEndpoint', jsPlumbEndpointDirective)

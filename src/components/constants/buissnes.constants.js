@@ -30,5 +30,9 @@ export default {
       RIGHT: 'endpoint-circle-style-right',
       LEFT: 'endpoint-circle-style-left'
     }
+  },
+  CONTAINER_TYPE: {
+    INPUT: 'INPUT',
+    OUTPUT: 'OUTPUT'
   }
 };

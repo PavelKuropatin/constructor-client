@@ -73,7 +73,7 @@
                             <input ng-model="input.value"/>
                         </md-input-container>
                         <div layout="column">
-                            <md-button class="md-icon-button" ng-click="addInput(state)">
+                            <md-button class="md-icon-button" ng-click="openContainerDiagram(state, CONSTANTS.CONTAINER_TYPE.INPUT)">
                                 <md-icon>add</md-icon>
                             </md-button>
                             <md-button class="md-icon-button" ng-click="deleteInput(state)">
@@ -89,7 +89,7 @@
                             <input ng-model="output.value"/>
                         </md-input-container>
                         <div layout="column">
-                            <md-button class="md-icon-button" ng-click="addOutput(state)">
+                            <md-button class="md-icon-button" ng-click="openContainerDiagram(state, CONSTANTS.CONTAINER_TYPE.OUTPUT)">
                                 <md-icon>add</md-icon>
                             </md-button>
                             <md-button class="md-icon-button" ng-click="deleteOutput(state)">

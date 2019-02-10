@@ -1,6 +1,7 @@
-import template from "./sidenav.html";
+import template from './sidenav.html';
+import containerTemplate from '../../dialogs/container/container.html';
 
-export default function sidenavDirective($timeout, stateObjectService, CONSTANTS) {
+export default function sidenavDirective($timeout, $mdDialog, stateObjectService, CONSTANTS) {
   'ngInject';
   return {
     restrict: 'EA',
@@ -11,11 +12,22 @@ export default function sidenavDirective($timeout, stateObjectService, CONSTANTS
     },
     template: template,
     link: function (scope, element, attr) {
+      scope.CONSTANTS = CONSTANTS;
       scope.newState = stateObjectService.getNewState;
       scope.removeState = stateObjectService.removeState;
       scope.removeIndex = stateObjectService.removeIndex;
       scope.partials = _.values(CONSTANTS.PARTIALS);
       scope.colors = _.values(CONSTANTS.TYPE_ACTION);
+
+      scope.openContainerDiagram = (state, type) => {
+        $mdDialog.show({
+          controller: 'containerController as vm',
+          template: containerTemplate,
+          clickOutsideToClose: true,
+        }).then(function (model) {
+          stateObjectService.addContainer(state, type, model.param, model.value);
+        });
+      };
 
       scope.setActiveState = (state) => {
         if (scope.activeState === state) {
@@ -47,16 +59,8 @@ export default function sidenavDirective($timeout, stateObjectService, CONSTANTS
         });
       };
 
-      scope.addInput = (state) => {
-        state.inputContainer.push({label: 'vt', value: undefined});
-      };
-
       scope.deleteInput = (state) => {
         state.inputContainer.pop();
-      };
-
-      scope.addOutput = (state) => {
-        state.outputContainer.push({label: 'vt', value: undefined});
       };
 
       scope.deleteOutput = (state) => {
