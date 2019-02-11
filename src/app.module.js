@@ -7,6 +7,7 @@ import material from 'angular-material';
 
 require('lodash');
 require('jsplumb');
+require('mathjs');
 
 require('jquery-ui/ui/widgets/draggable');
 require('jquery-ui/ui/widgets/droppable');

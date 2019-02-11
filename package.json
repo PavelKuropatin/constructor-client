@@ -54,6 +54,7 @@
     "jsplumb": "^2.8.0",
     "lodash": "^4.17.10",
     "material-icons": "^0.2.3",
+    "mathjs": "^5.4.2",
     "path": "^0.12.7"
   }
 }

@@ -39,7 +39,11 @@ export default function stateObjectHttpService($http, env, CONSTANTS) {
   };
 
   const putNewContainer = (stateUuid, type, param, value) => {
-    return $http.put(env.api + DEFAULT_STATE_URL + '/' + stateUuid  + '/container?type=' + type + '&param=' + param + '&value=' + value);
+    return $http.put(env.api + DEFAULT_STATE_URL + '/' + stateUuid + '/container', {
+      type: type,
+      param: param,
+      value: value
+    });
   };
 
 

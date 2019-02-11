@@ -14,9 +14,21 @@
     </md-input-container>
 </md-card>
 
-<!--<md-card layout="row">-->
-    <md-input-container>
-        <label>Enter Function</label>
-        <input/>
-    </md-input-container>
-<!--</md-card>-->
+<md-card layout="column">
+    <md-card ng-repeat="output in state.outputContainer">
+        <md-card-header>
+            <md-icon>call_made</md-icon>
+            {{output.label}}
+        </md-card-header>
+        <md-content>
+            <md-input-container>
+                <label>Enter Function</label>
+                <input ng-change="countFunction(output)" ng-model="output.stringFunction"/>
+            </md-input-container>
+            <md-input-container>
+                <label>Result</label>
+                <input ng-model="output.resultFunction"/>
+            </md-input-container>
+        </md-content>
+    </md-card>
+</md-card>
