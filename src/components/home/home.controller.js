@@ -1,4 +1,4 @@
-import openDiagramTemplate from './components/dialogs/open_diagram/open-diagram.html';
+import openDiagramTemplate from "./components/dialogs/open_diagram/open-diagram.html";
 
 export default function homeController($scope, $mdDialog, stateObjectHttpService, jsPlumbStyleService) {
   'ngInject';
@@ -17,12 +17,19 @@ export default function homeController($scope, $mdDialog, stateObjectHttpService
     angular.forEach(vm.diagramInfo.modules, (state) => {
       angular.forEach(state.sources, (source) => {
         if (source.uuid == sourceUUID) {
-          if (typeof source.connections === 'undefined') source.connections = [];
           source.connections.push({'uuid': targetUUID});
           $scope.$apply();
         }
       });
     });
+    let sourceState = _.find(vm.diagramInfo.modules, state => {
+      return state.sources[0].uuid == sourceUUID;
+    });
+
+    let targetState = _.find(vm.diagramInfo.modules, state => {
+      return state.targets[0].uuid == targetUUID;
+    });
+    targetState.inputContainer = sourceState.outputContainer;
   };
 
   vm.updateDiagram = () => {
