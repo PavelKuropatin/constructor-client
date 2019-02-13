@@ -1,4 +1,4 @@
-export default function jsPlumbConnectionDirective($timeout, jsPlumbStyleService) {
+export default function jsPlumbConnectionDirective($timeout) {
   'ngInject';
   return {
     restrict: 'E',

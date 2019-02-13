@@ -1,4 +1,4 @@
-export default function stateObjectHttpService($http, env, CONSTANTS) {
+export default function stateObjectHttpService($http, env) {
   'ngInject';
 
   const DEFAULT_DIAGRAM_URL = '/api/diagram';
@@ -46,6 +46,10 @@ export default function stateObjectHttpService($http, env, CONSTANTS) {
     });
   };
 
+  const deleteDiagram = (uuidDiagram) => {
+    return $http.delete(env.api + DEFAULT_PROVIDER_DIAGRAM_URL + '/diagram/' + uuidDiagram);
+  };
+
 
   return {
     createNewDiagram: createNewDiagram,
@@ -55,7 +59,8 @@ export default function stateObjectHttpService($http, env, CONSTANTS) {
     createState: createState,
     deleteState: deleteState,
     updateDiagram: updateDiagram,
-    putNewContainer: putNewContainer
+    putNewContainer: putNewContainer,
+    deleteDiagram: deleteDiagram
   };
 }
 

@@ -34,5 +34,8 @@ export default {
   CONTAINER_TYPE: {
     INPUT: 'INPUT',
     OUTPUT: 'OUTPUT'
+  },
+  EVENT_CONSTANTS: {
+    SUCCESS_DIAGRAM_DELETE: 'SUCCESS_DIAGRAM_DELETE'
   }
 };

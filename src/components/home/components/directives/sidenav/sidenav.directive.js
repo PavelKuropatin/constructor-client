@@ -13,9 +13,11 @@ export default function sidenavDirective($timeout, $mdDialog, stateObjectService
     template: template,
     link: function (scope, element, attr) {
       scope.CONSTANTS = CONSTANTS;
-      scope.newState = stateObjectService.getNewState;
-      scope.removeState = stateObjectService.removeState;
+      scope.newState = stateObjectService.createState;
+      scope.deleteState = stateObjectService.deleteState;
       scope.removeIndex = stateObjectService.removeIndex;
+      scope.deleteDiagram = stateObjectService.deleteDiagram;
+      scope.countFunction = stateObjectService.countFunction;
       scope.partials = _.values(CONSTANTS.PARTIALS);
       scope.colors = _.values(CONSTANTS.TYPE_ACTION);
 

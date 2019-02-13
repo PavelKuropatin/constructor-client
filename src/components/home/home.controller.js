@@ -1,13 +1,18 @@
 import openDiagramTemplate from "./components/dialogs/open_diagram/open-diagram.html";
 
-export default function homeController($scope, $mdDialog, stateObjectHttpService, jsPlumbStyleService) {
+export default function homeController($scope, $mdDialog, stateObjectHttpService, jsPlumbStyleService, stateObjectService, CONSTANTS) {
   'ngInject';
   const vm = this;
   vm.zoomlevel = 64;
   vm.activeState = null;
   vm.targetEndpointStyle = jsPlumbStyleService.getTargetEndpointStyle();
   vm.sourceEndpointStyle = jsPlumbStyleService.getSourceEndpointStyle();
+  vm.countFunction = stateObjectService.countFunction;
   vm.isActiveSetting = false;
+
+  $scope.$on(CONSTANTS.EVENT_CONSTANTS.SUCCESS_DIAGRAM_DELETE, () => {
+    vm.diagramInfo = undefined;
+  });
 
   vm.setActiveState = (state) => {
     vm.activeState = state;
@@ -22,14 +27,7 @@ export default function homeController($scope, $mdDialog, stateObjectHttpService
         }
       });
     });
-    let sourceState = _.find(vm.diagramInfo.modules, state => {
-      return state.sources[0].uuid == sourceUUID;
-    });
-
-    let targetState = _.find(vm.diagramInfo.modules, state => {
-      return state.targets[0].uuid == targetUUID;
-    });
-    targetState.inputContainer = sourceState.outputContainer;
+    stateObjectService.updateContainer(vm.diagramInfo.modules, targetUUID, sourceUUID);
   };
 
   vm.updateDiagram = () => {

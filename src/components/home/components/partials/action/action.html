@@ -6,7 +6,7 @@
         <md-icon>call_received</md-icon>
         <md-input-container ng-repeat="input in state.inputContainer">
             <label>{{input.label}}</label>
-            <input ng-model="input.value"/>
+            <input ng-change="home.countFunction(state.outputContainer, state.inputContainer)" ng-model="input.value"/>
         </md-input-container>
     </div>
     <h3 class="cursor-default">{{state.name}}</h3>
@@ -14,7 +14,7 @@
         <md-icon>call_made</md-icon>
         <md-input-container ng-repeat="output in state.outputContainer">
             <label>{{output.label}}</label>
-            <input ng-model="output.value"/>
+            <input ng-change="home.countFunction(state.outputContainer, state.inputContainer)" ng-model="output.value"/>
         </md-input-container>
     </div>
     <js-plumb-endpoint class={{state.endpointStyle.sourceEndpoint}}

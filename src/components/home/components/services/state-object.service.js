@@ -1,21 +1,31 @@
-export default function stateObjectService(stateObjectHttpService) {
+const math = require('mathjs');
+
+export default function stateObjectService($rootScope, stateObjectHttpService, CONSTANTS) {
   'ngInject';
 
   var configState;
 
-  const getNewState = (diagramUuid, stateObjects) => {
+  const createState = (diagramUuid, stateObjects) => {
     stateObjectHttpService.createState(diagramUuid).then(response => {
       stateObjects.push(response.data);
     });
   };
 
-  const removeState = (diagramUuid, stateObjects, state) => {
+  const deleteState = (diagramUuid, stateObjects, state) => {
     stateObjectHttpService.deleteState(diagramUuid, state.uuid).then(response => {
       if (response.status === 202) {
         const index = stateObjects.indexOf(state);
         if (index !== -1) {
           stateObjects.splice(index, 1);
         }
+      }
+    });
+  };
+
+  const deleteDiagram = (diagram) => {
+    stateObjectHttpService.deleteDiagram(diagram.uuid).then(response => {
+      if (response.status === 202) {
+        $rootScope.$broadcast(CONSTANTS.EVENT_CONSTANTS.SUCCESS_DIAGRAM_DELETE);
       }
     });
   };
@@ -39,13 +49,44 @@ export default function stateObjectService(stateObjectHttpService) {
     });
   };
 
+  const updateContainer = (modules, sourceUuid, targetUuid) => {
+    findTargetState(targetUuid).inputContainer = findSourceState(sourceUuid).outputContainer;
+  };
+
+  const countFunction = (outputContainer, inputContainer) => {
+    let bufFunction = _.clone(outputContainer.stringFunction);
+    _.forEach(inputContainer, item => {
+      bufFunction = _.replace(bufFunction, item.label, item.value);
+    });
+    try {
+      outputContainer.resultFunction = math.eval(bufFunction);
+    } catch (err) {}
+
+    outputContainer.value = outputContainer.resultFunction;
+  };
+
+  function findSourceState(sourceUuid) {
+    return _.find(modules, state => {
+      return state.sources[0].uuid == sourceUuid;
+    });
+  }
+
+  function findTargetState(targetUuid) {
+    return _.find(modules, state => {
+      return state.targets[0].uuid == targetUuid;
+    });
+  }
+
   return {
-    getNewState: getNewState,
-    removeState: removeState,
+    createState: createState,
+    deleteState: deleteState,
     removeIndex: removeIndex,
     setConfigState: setConfigState,
     getConfigState: getConfigState,
-    addContainer: addContainer
+    addContainer: addContainer,
+    updateContainer: updateContainer,
+    deleteDiagram: deleteDiagram,
+    countFunction: countFunction
   };
 }
 
