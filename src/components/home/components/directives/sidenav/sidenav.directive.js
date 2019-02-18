@@ -17,7 +17,6 @@ export default function sidenavDirective($timeout, $mdDialog, stateObjectService
       scope.deleteState = stateObjectService.deleteState;
       scope.removeIndex = stateObjectService.removeIndex;
       scope.deleteDiagram = stateObjectService.deleteDiagram;
-      scope.countFunction = stateObjectService.countFunction;
       scope.partials = _.values(CONSTANTS.PARTIALS);
       scope.colors = _.values(CONSTANTS.TYPE_ACTION);
 

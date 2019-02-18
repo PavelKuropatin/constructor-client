@@ -7,7 +7,6 @@ export default function homeController($scope, $mdDialog, stateObjectHttpService
   vm.activeState = null;
   vm.targetEndpointStyle = jsPlumbStyleService.getTargetEndpointStyle();
   vm.sourceEndpointStyle = jsPlumbStyleService.getSourceEndpointStyle();
-  vm.countFunction = stateObjectService.countFunction;
   vm.isActiveSetting = false;
 
   $scope.$on(CONSTANTS.EVENT_CONSTANTS.SUCCESS_DIAGRAM_DELETE, () => {
