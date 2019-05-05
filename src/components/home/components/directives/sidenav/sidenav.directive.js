@@ -19,6 +19,7 @@ export default function sidenavDirective($timeout, $mdDialog, stateObjectService
       scope.deleteDiagram = stateObjectService.deleteDiagram;
       scope.partials = _.values(CONSTANTS.PARTIALS);
       scope.colors = _.values(CONSTANTS.TYPE_ACTION);
+      scope.countFunction = stateObjectService.countFunction;
 
       scope.openContainerDiagram = (state, type) => {
         $mdDialog.show({
@@ -35,6 +36,7 @@ export default function sidenavDirective($timeout, $mdDialog, stateObjectService
           scope.activeState = null;
         } else {
           scope.activeState = state;
+          scope.countFunction(scope.activeState);
         }
       };
 

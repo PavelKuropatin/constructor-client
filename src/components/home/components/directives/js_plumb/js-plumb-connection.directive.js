@@ -16,8 +16,8 @@ export default function jsPlumbConnectionDirective($timeout) {
         if (typeof jsPlumbEndpoint.connectionObjects[targetUUID] === 'undefined') {
           jsPlumbEndpoint.connectionObjects[targetUUID] = instance.connect({
             uuids: [
-              targetUUID,
-              sourceUUID
+              sourceUUID,
+              targetUUID
             ],
             paintStyle: {
               strokeWidth: 6,
@@ -28,6 +28,7 @@ export default function jsPlumbConnectionDirective($timeout) {
         }
 
         let connection = jsPlumbEndpoint.connectionObjects[targetUUID];
+        console.log(connection);
 
         connection.bind("mouseover", (conn, originalEvent) => {
           let title = 'UUID Target: ' + targetUUID;

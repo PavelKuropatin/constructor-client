@@ -6,7 +6,7 @@ import angular from 'angular';
 import uirouter from 'angular-ui-router';
 
 import partialsConfig from './components/partials/partials.config';
-import constants from '../constants/buissnes.constants';
+import routes from '../constants/routes.constants';
 import routing from './home.route';
 import homeController from './home.controller';
 import openDiagramController from './components/dialogs/open_diagram/open-diagram.controller';
@@ -22,6 +22,7 @@ import settingDirective from './components/directives/setting/setting.directive'
 import stateObjectHttpService from './components/services/http/state-object.http.service';
 import jsPlumbStyleService from './components/services/js-plumb-style.service';
 import stateObjectService from './components/services/state-object.service';
+import constants from '../constants/buissnes.constants';
 
 export default angular.module('app.home', [uirouter])
 	.config(routing)
@@ -37,6 +38,7 @@ export default angular.module('app.home', [uirouter])
 	.service('stateObjectHttpService', stateObjectHttpService)
   .service('jsPlumbStyleService', jsPlumbStyleService)
   .service('stateObjectService', stateObjectService)
-  .constant('CONSTANTS', constants)
-  .run(partialsConfig)
+  .constant('ROUTES', routes)
+	.constant('CONSTANTS', constants)
+	.run(partialsConfig)
 	.name;

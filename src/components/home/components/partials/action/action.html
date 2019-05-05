@@ -6,7 +6,7 @@
         <md-icon>call_received</md-icon>
         <md-input-container ng-repeat="input in state.inputContainer">
             <label>{{input.label}}</label>
-            <input ng-model="input.value"/>
+            <input ng-change="home.countFunction(state)" ng-model="input.value"/>
         </md-input-container>
     </div>
     <h3 class="cursor-default">{{state.name}}</h3>
@@ -22,8 +22,7 @@
                        ng-repeat="endpoint in state.sources"
                        uuid="{{endpoint.uuid}}"
                        settings="home.sourceEndpointStyle">
-        <js-plumb-connection ng-click="setActiveConnection($index)"
-                             ng-repeat="connection in endpoint.connections"
+        <js-plumb-connection ng-repeat="connection in endpoint.connections"
                              ng-model="connection"
                              state-objects="home.diagramInfo.modules">
         </js-plumb-connection>

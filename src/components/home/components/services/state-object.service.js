@@ -1,3 +1,5 @@
+const math = require('mathjs');
+
 export default function stateObjectService($rootScope, stateObjectHttpService, CONSTANTS) {
   'ngInject';
 
@@ -48,16 +50,28 @@ export default function stateObjectService($rootScope, stateObjectHttpService, C
   };
 
   const updateContainer = (modules, sourceUuid, targetUuid) => {
-    findTargetState(targetUuid).inputContainer = findSourceState(sourceUuid).outputContainer;
+    findTargetState(modules, targetUuid).inputContainer = findSourceState(modules, sourceUuid).outputContainer;
   };
 
-  function findSourceState(sourceUuid) {
+  const countFunction = (state) => {
+    _.forEach(state.outputContainer, container => {
+      let bufFunction = _.clone(container.stringFunction);
+      _.forEach(state.inputContainer, item => {
+        bufFunction = _.replace(bufFunction, new RegExp(item.label,'g'), item.value);
+      });
+      try {
+        container.value = math.eval(bufFunction);
+      } catch (err) {}
+    });
+  };
+
+  function findSourceState(modules, sourceUuid) {
     return _.find(modules, state => {
       return state.sources[0].uuid == sourceUuid;
     });
   }
 
-  function findTargetState(targetUuid) {
+  function findTargetState(modules, targetUuid) {
     return _.find(modules, state => {
       return state.targets[0].uuid == targetUuid;
     });
@@ -71,7 +85,8 @@ export default function stateObjectService($rootScope, stateObjectHttpService, C
     getConfigState: getConfigState,
     addContainer: addContainer,
     updateContainer: updateContainer,
-    deleteDiagram: deleteDiagram
+    deleteDiagram: deleteDiagram,
+    countFunction: countFunction
   };
 }
 

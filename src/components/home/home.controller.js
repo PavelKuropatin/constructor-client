@@ -1,32 +1,38 @@
 import openDiagramTemplate from "./components/dialogs/open_diagram/open-diagram.html";
 
-export default function homeController($scope, $mdDialog, stateObjectHttpService, jsPlumbStyleService, stateObjectService, CONSTANTS) {
+export default function homeController($scope, $state, $mdDialog, stateObjectHttpService, jsPlumbStyleService,
+                                       stateObjectService, CONSTANTS, ROUTES) {
   'ngInject';
   const vm = this;
   vm.zoomlevel = 64;
   vm.activeState = null;
   vm.targetEndpointStyle = jsPlumbStyleService.getTargetEndpointStyle();
   vm.sourceEndpointStyle = jsPlumbStyleService.getSourceEndpointStyle();
+  vm.countFunction = stateObjectService.countFunction;
   vm.isActiveSetting = false;
 
   $scope.$on(CONSTANTS.EVENT_CONSTANTS.SUCCESS_DIAGRAM_DELETE, () => {
     vm.diagramInfo = undefined;
   });
 
+  vm.goToModel = ()  => {
+    $state.go(ROUTES.MODEL);
+  };
+
   vm.setActiveState = (state) => {
     vm.activeState = state;
   };
 
   vm.onConnection = (instance, connection, targetUUID, sourceUUID) => {
-    angular.forEach(vm.diagramInfo.modules, (state) => {
-      angular.forEach(state.sources, (source) => {
+    _.forEach(vm.diagramInfo.modules, state => {
+      _.forEach(state.sources, source => {
         if (source.uuid == sourceUUID) {
           source.connections.push({'uuid': targetUUID});
           $scope.$apply();
         }
       });
     });
-    stateObjectService.updateContainer(vm.diagramInfo.modules, targetUUID, sourceUUID);
+    stateObjectService.updateContainer(vm.diagramInfo.modules, sourceUUID, targetUUID);
   };
 
   vm.updateDiagram = () => {

@@ -1,9 +1,9 @@
 import homeTemplate from './home.html';
 
-export default function homeRouteConfig($stateProvider) {
+export default function homeRouteConfig($stateProvider, ROUTES) {
   'ngInject';
 	$stateProvider
-		.state('home', {
+		.state(ROUTES.HOME, {
 			url: '/',
 			views: {
 				'main':{
