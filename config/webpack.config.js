@@ -20,6 +20,7 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
+      "window.jQuery": "jquery",
       $: require.resolve('jquery'),
       jQuery: require.resolve('jquery')
     }),

@@ -28,7 +28,6 @@ export default function jsPlumbConnectionDirective($timeout) {
         }
 
         let connection = jsPlumbEndpoint.connectionObjects[targetUUID];
-        console.log(connection);
 
         connection.bind("mouseover", (conn, originalEvent) => {
           let title = 'UUID Target: ' + targetUUID;
@@ -49,6 +48,7 @@ export default function jsPlumbConnectionDirective($timeout) {
 
         scope.$on('$destroy', () => {
           try {
+            console.log(targetUUID);
             instance.deleteConnection(jsPlumbEndpoint.connectionObjects[targetUUID]);
           } catch (err) {
             console.log('error', err, jsPlumbEndpoint.connectionObjects[targetUUID]);

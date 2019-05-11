@@ -1,1 +1,46 @@
-lol
+<div layout="row">
+    <div flex="25" class="sidenav-container">
+        <model-sidenav states="model.diagramInfo.modules">
+        </model-sidenav>
+    </div>
+    <div class="model-container" flex>
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                <div class="md-menu-demo">
+                    <div class="menu-demo-container" layout-align="space-between center" layout="column">
+                        <md-menu>
+                            <md-button aria-label="Open menu with custom trigger" class="md-icon-button"
+                                       ng-mouseenter="$mdMenu.open()">
+                                <md-icon>menu</md-icon>
+                            </md-button>
+                            <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+                                <md-menu-item>
+                                    <md-button ng-click="model.openDiagram()">
+                                        Open diagram..
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </div>
+                </div>
+                <md-button ng-click="model.goToSchema()" class="md-raised">Schema</md-button>
+                <div></div>
+            </div>
+        </md-toolbar>
+
+        <div layout="row" class="connectedItems">
+            <md-card-content flex ui-sortable="model.sortableOptions" ng-model="model.rightArray" class="list">
+                <md-card ng-repeat="state in model.rightArray" class="list">
+                    <md-card-header>
+                        <md-card-header-text>
+                            <div layout="column">
+                                <span class="title-text">{{state.name}}</span>
+                            </div>
+                        </md-card-header-text>
+                    </md-card-header>
+                </md-card>
+            </md-card-content>
+        </div>
+    </div>
+</div>
+</div>

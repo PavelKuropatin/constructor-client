@@ -46,6 +46,17 @@ export default function homeController($scope, $state, $mdDialog, stateObjectHtt
       vm.diagramInfo = response.data;
     });
   };
+  //
+  // jsPlumb.ready(() => {
+  //   stateObjectHttpService.getAllStateObject({uuid: 1}).then((response) => {
+  //     vm.diagramInfo = response.data;
+  //     vm.diagramInfo.modules[0].sources[0].uuid = 5;
+  //     vm.diagramInfo.modules[0].targets[0].uuid = 6;
+  //
+  //     vm.diagramInfo.modules[1].sources[0].uuid = 7;
+  //     vm.diagramInfo.modules[1].targets[0].uuid = 8;
+  //   });
+  // });
 
   vm.openDiagram = function () {
     $mdDialog.show({

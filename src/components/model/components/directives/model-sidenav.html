@@ -1,0 +1,13 @@
+<md-card class="model-sidenav" class="connectedItems">
+    <md-card-content ui-sortable="sortableOptions" ng-model="states" class="list">
+        <md-card ng-repeat="state in states" class="list">
+            <md-card-header>
+                <md-card-header-text>
+                    <div layout="column">
+                        <span class="title-text">{{state.name}}</span>
+                    </div>
+                </md-card-header-text>
+            </md-card-header>
+        </md-card>
+    </md-card-content>
+</md-card>
