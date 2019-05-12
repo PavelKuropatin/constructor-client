@@ -10,7 +10,7 @@ export default function modelSidenavDirective() {
     template: template,
     link: function (scope, element, attr) {
       scope.sortableOptions = {
-        connectWith: '.connectedItems .list'
+        connectWith: '.connectedItems'
       };
     }
   };
