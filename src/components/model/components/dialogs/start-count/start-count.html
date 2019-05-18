@@ -1,0 +1,33 @@
+<md-card>
+    <md-card-header>
+        <md-card-header-text>
+            <div class="title-text">Model settings</div>
+        </md-card-header-text>
+    </md-card-header>
+    <md-card-content>
+        <md-input-container>
+            <label>Start value</label>
+            <input ng-model="vm.countModel.startValue"/>
+        </md-input-container>
+        <md-input-container>
+            <label>Step value</label>
+            <input ng-model="vm.countModel.stepValue"/>
+        </md-input-container>
+        <md-input-container>
+            <label>Interval (ms)</label>
+            <input ng-model="vm.countModel.interval"/>
+        </md-input-container>
+        <md-input-container>
+            <label>Value name</label>
+            <input ng-model="vm.countModel.valueName"/>
+        </md-input-container>
+    </md-card-content>
+    <md-input-container>
+        <md-button ng-click="vm.chooseDiagram()">
+            Apply
+        </md-button>
+        <md-button ng-click="vm.hideDialog()">
+            Close
+        </md-button>
+    </md-input-container>
+</md-card>

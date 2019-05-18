@@ -23,213 +23,25 @@
                         </md-menu>
                     </div>
                 </div>
-                <md-button ng-click="model.startCount()" class="md-raised">Start</md-button>
-                <md-button ng-click="model.killtimer()" class="md-raised">Stop</md-button>
+                <md-button ng-click="model.openStartCountDiagram()" class="md-raised">Start</md-button>
+                <md-button ng-click="model.stopCount()" class="md-raised">Stop</md-button>
                 <md-button ng-click="model.goToSchema()" class="md-raised">Schema</md-button>
                 <div></div>
             </div>
         </md-toolbar>
 
         <div layout="row" class="connectedItems">
-            <md-card-content class="model" ng-style="{'background-image': 'url({{model.backgroundImg}})'}"
-                             flex="75">
-                <md-card ui-sortable="model.sortableOptions"
-                         ng-model="model.modelInfo"
-                         ui-sortable-update="model.saveId"
-                         class="cell connectedItems"
-                         id="c1"
-                         ng-click="model.setActiveState(model.findById('c1'))">
-                    <div ng-if="model.findById('c1')">
-                        <md-card class="c1_name title-text">
-                            {{model.findById("c1").name}}
-                        </md-card>
-                        <div class="value" ng-repeat="output in model.findById('c1').outputContainer">
-                            {{output.label}}: {{output.value}}
-                        </div>
-                    </div>
-                </md-card>
+            <ng-include ng-style="{'background-image': 'url({{model.backgroundImg}})'}"
+                        flex="75"
+                        class="model"
+                        src="model.modelTemplate"/>
 
-                <md-card ui-sortable="model.sortableOptions" ng-model="model.modelInfo"
-                         ui-sortable-update="model.saveId"
-                         class="cell connectedItems"
-                         id="c2"
-                         ng-click="model.setActiveState(model.findById('c2'))">
-                    <div ng-if="model.findById('c2')">
-                        <md-card class="c1_name title-text">
-                            {{model.findById("c2").name}}
-                        </md-card>
-                        <div class="value" ng-repeat="output in model.findById('c2').outputContainer">
-                            {{output.label}}: {{output.value}}
-                        </div>
-                    </div>
-                </md-card>
-
-                <md-card ui-sortable="model.sortableOptions" ng-model="model.modelInfo"
-                         ui-sortable-update="model.saveId"
-                         class="cell connectedItems"
-                         id="c3"
-                         ng-click="model.setActiveState(model.findById('c3'))">
-                    <div ng-if="model.findById('c3')">
-                        <md-card class="c1_name title-text">
-                            {{model.findById("c3").name}}
-                        </md-card>
-                        <div class="value" ng-repeat="output in model.findById('c3').outputContainer">
-                            {{output.label}}: {{output.value}}
-                        </div>
-                    </div>
-                </md-card>
-
-                <md-card ui-sortable="model.sortableOptions" ng-model="model.modelInfo"
-                         ui-sortable-update="model.saveId"
-                         class="cell connectedItems"
-                         id="c4"
-                         ng-click="model.setActiveState(model.findById('c4'))">
-                    <div ng-if="model.findById('c4')">
-                        <md-card class="c1_name title-text">
-                            {{model.findById("c4").name}}
-                        </md-card>
-                        <div class="value" ng-repeat="output in model.findById('c4').outputContainer">
-                            {{output.label}}: {{output.value}}
-                        </div>
-                    </div>
-                </md-card>
-            </md-card-content>
-            <md-card flex="25">
-                <md-card ng-repeat="state in model.modelInfo">
-                    <md-card-header>
-                        <md-card-header-text>
-                            <div layout="column">
-                                <span class="title-text">{{state.name}}</span>
-                                <span class="medium-text">
-                                Position: [{{state.x| number}}, {{state.y| number}}]
-                            </span>
-                            </div>
-                        </md-card-header-text>
-                        <md-button class="md-icon-button" ng-click="configState(state)">
-                            <md-icon>settings_applications</md-icon>
-                        </md-button>
-                        <md-button class="md-icon-button" ng-click="model.setActiveState(state)">
-                            <md-icon ng-if="activeState !== state">visibility</md-icon>
-                            <md-icon ng-if="activeState === state">visibility_off</md-icon>
-                        </md-button>
-                        <md-button class="md-icon-button" ng-click="deleteState(diagramInfo.uuid, diagramInfo.modules, state)">
-                            <md-icon>delete_sweep</md-icon>
-                        </md-button>
-                    </md-card-header>
-
-                    <md-card-content ng-hide="model.activeState != state">
-                        <div layout="row" layout-align="space-between">
-                            <md-input-container>
-                                <label>Name of State</label>
-                                <input name="stateName"
-                                       ng-model="state.name">
-                            </md-input-container>
-                            <md-button class="md-icon-button" ng-click="swapEndpointState(state)">
-                                <md-icon>compare_arrows</md-icon>
-                            </md-button>
-                        </div>
-
-                        <div layout="row" layout-align="space-between">
-                            <md-input-container>
-                                <label>Template</label>
-                                <md-select name="templateName" ng-model="state.template">
-                                    <md-option ng-value="partial" ng-repeat="partial in partials">{{partial}}</md-option>
-                                </md-select>
-                            </md-input-container>
-                            <md-input-container ng-if="isActionState(state)">
-                                <label>Color</label>
-                                <md-select name="colorName" ng-model="state.color">
-                                    <md-option ng-value="color.color" ng-repeat="color in colors">{{color.abbr}}</md-option>
-                                </md-select>
-                            </md-input-container>
-                        </div>
-
-                        <div>
-                            <md-card layout="row" class="action-input-container">
-                                <md-icon>call_received</md-icon>
-                                <md-input-container ng-repeat="input in state.inputContainer">
-                                    <label>{{input.label}}</label>
-                                    <input ng-change="countFunction(activeState)" ng-model="input.value"/>
-                                </md-input-container>
-                                <div layout="column">
-                                    <md-button class="md-icon-button" ng-click="openContainerDiagram(state, CONSTANTS.CONTAINER_TYPE.INPUT)">
-                                        <md-icon>add</md-icon>
-                                    </md-button>
-                                    <md-button class="md-icon-button" ng-click="deleteInput(state)">
-                                        <md-icon>remove</md-icon>
-                                    </md-button>
-                                </div>
-                            </md-card>
-
-                            <md-card layout="row" class="action-input-container" ng-if="isActionState(state)">
-                                <md-icon>call_made</md-icon>
-                                <md-input-container ng-repeat="output in state.outputContainer">
-                                    <label>{{output.label}}</label>
-                                    <input ng-model="output.value"/>
-                                </md-input-container>
-                                <div layout="column">
-                                    <md-button class="md-icon-button" ng-click="openContainerDiagram(state, CONSTANTS.CONTAINER_TYPE.OUTPUT)">
-                                        <md-icon>add</md-icon>
-                                    </md-button>
-                                    <md-button class="md-icon-button" ng-click="deleteOutput(state)">
-                                        <md-icon>remove</md-icon>
-                                    </md-button>
-                                </div>
-                            </md-card>
-                        </div>
-
-                        <md-card ng-repeat="source in state.sources">
-                            <md-card-header>
-                                <md-card-header-text>
-                                    <div layout="column">
-                                        <div class="big-text">UUID - {{source.uuid}}</div>
-                                        <small class="small-text">SOURCE</small>
-                                    </div>
-                                </md-card-header-text>
-                                <md-button class="md-icon-button" ng-click="removeIndex($index, state.sources)">
-                                    <md-icon>delete_sweep</md-icon>
-                                </md-button>
-                            </md-card-header>
-                            <md-card-content ng-if="source.connections.length"
-                                             ng-class="{'active-state': connection.mouseover}"
-                                             ng-repeat="connection in source.connections">
-                                <md-card>
-                                    <md-card-header>
-                                        <md-card-header-text>
-                                            <div class="big-text">Connection</div>
-                                        </md-card-header-text>
-                                        <md-button class="md-icon-button"
-                                                   ng-click="removeIndex($index, source.connections)">
-                                            <md-icon>delete_sweep</md-icon>
-                                        </md-button>
-                                    </md-card-header>
-                                    <md-card-content>
-                                        <md-input-container>
-                                            <label>Condition</label>
-                                            <input name="conditionName"
-                                                   ng-model="connection.condition">
-                                        </md-input-container>
-                                    </md-card-content>
-                                </md-card>
-                            </md-card-content>
-                        </md-card>
-
-                        <md-card ng-repeat="target in state.targets">
-                            <md-card-header>
-                                <md-card-header-text>
-                                    <div layout="column">
-                                        <div class="big-text">UUID - {{target.uuid}}</div>
-                                        <small class="small-text">TARGET</small>
-                                    </div>
-                                </md-card-header-text>
-                                <md-button class="md-icon-button" ng-click="removeIndex($index, state.targets)">
-                                    <md-icon>delete_sweep</md-icon>
-                                </md-button>
-                            </md-card-header>
-                        </md-card>
-                    </md-card-content>
-                </md-card>
-            </md-card>
+            <md-card flex="35">
+                <sidenav diagram-info="model.modelInfo"
+                         active-state="model.activeState"
+                         is-active-setting="true"
+                         is-active-model="true">
+                </sidenav>
         </div>
     </div>
 </div>

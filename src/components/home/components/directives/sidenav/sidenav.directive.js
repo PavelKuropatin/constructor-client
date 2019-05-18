@@ -8,7 +8,8 @@ export default function sidenavDirective($timeout, $mdDialog, stateObjectService
     scope: {
       diagramInfo: '=',
       activeState: '=',
-      isActiveSetting: '='
+      isActiveSetting: '=',
+      isActiveModel: '=?'
     },
     template: template,
     link: function (scope, element, attr) {

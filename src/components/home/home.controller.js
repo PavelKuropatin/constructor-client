@@ -20,6 +20,7 @@ export default function homeController($scope, $state, $mdDialog, stateObjectHtt
   };
 
   vm.setActiveState = (state) => {
+    console.log(state);
     vm.activeState = state;
   };
 
@@ -48,7 +49,7 @@ export default function homeController($scope, $state, $mdDialog, stateObjectHtt
   };
 
   jsPlumb.ready(() => {
-    stateObjectHttpService.getAllStateObject({uuid: 'f9bc9b13-4f6a-4951-bfe2-f5735b12a479'}).then((response) => {
+    stateObjectHttpService.getAllStateObject({uuid: '712941e9-7525-4d8a-a7b7-49a35df7a790'}).then((response) => {
       vm.diagramInfo = response.data;
     });
   });

@@ -3,6 +3,9 @@ export default {
     ACTION: 'action',
     CIRCLE: 'circle'
   },
+  MODEL: {
+    CAR: 'car'
+  },
   ANCHOR: {
     LEFT_MIDDLE: 'LeftMiddle',
     RIGHT_MIDDLE: 'RightMiddle'

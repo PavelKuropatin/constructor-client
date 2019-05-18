@@ -2,15 +2,14 @@ export default function stateObjectHttpService($http, env) {
   'ngInject';
 
   const DEFAULT_DIAGRAM_URL = '/api/diagram';
-  const DEFAULT_PROVIDER_DIAGRAM_URL = '/api/provider';
   const DEFAULT_STATE_URL = '/api/state';
 
   const deleteState = (uuidDiagram, uuidState) => {
-    return $http.delete(env.api + DEFAULT_PROVIDER_DIAGRAM_URL + '/diagram/' + uuidDiagram + '/state/' + uuidState);
+    return $http.delete(env.api + DEFAULT_DIAGRAM_URL + '/' + uuidDiagram + '/state/' + uuidState);
   };
 
   const createState = (uuidDiagram) => {
-    return $http.post(env.api + DEFAULT_PROVIDER_DIAGRAM_URL + '/diagram/' + uuidDiagram + '/state');
+    return $http.post(env.api + DEFAULT_DIAGRAM_URL + '/' + uuidDiagram + '/state');
   };
 
   const getAllDiagramInfo = () => {
@@ -27,7 +26,7 @@ export default function stateObjectHttpService($http, env) {
   };
 
   const updateDiagram = (diagram) => {
-    return $http.put(env.api + DEFAULT_DIAGRAM_URL + '/' + diagram.uuid, diagram);
+    return $http.post(env.api + DEFAULT_DIAGRAM_URL, diagram);
   };
 
   const getAllStateObject = (diagram) => {
@@ -35,7 +34,7 @@ export default function stateObjectHttpService($http, env) {
   };
 
   const createNewDiagram = () => {
-    return $http.post(env.api + DEFAULT_PROVIDER_DIAGRAM_URL + '/diagram');
+    return $http.post(env.api + DEFAULT_DIAGRAM_URL + '/new');
   };
 
   const putNewContainer = (stateUuid, type, param, value) => {
@@ -47,7 +46,7 @@ export default function stateObjectHttpService($http, env) {
   };
 
   const deleteDiagram = (uuidDiagram) => {
-    return $http.delete(env.api + DEFAULT_PROVIDER_DIAGRAM_URL + '/diagram/' + uuidDiagram);
+    return $http.delete(env.api + DEFAULT_DIAGRAM_URL + '/' + uuidDiagram);
   };
 
 
