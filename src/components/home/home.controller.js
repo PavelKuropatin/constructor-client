@@ -1,4 +1,4 @@
-import openDiagramTemplate from "./components/dialogs/open_diagram/open-diagram.html";
+import openDiagramTemplate from "./components/dialogs/open-diagram/open-diagram.html";
 
 export default function homeController($scope, $state, $mdDialog, stateObjectHttpService, jsPlumbStyleService,
                                        stateObjectService, CONSTANTS, ROUTES) {
