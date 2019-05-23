@@ -80,7 +80,7 @@ export default function modelController($scope, $state, $mdDialog, $timeout, ROU
   };
 
   const updateCounter = function () {
-    vm.modelSettings.startValue += vm.modelSettings.stepValue;
+    vm.modelSettings.startValue += +vm.modelSettings.stepValue;
     changeParam();
     vm.timer = $timeout(updateCounter, vm.modelSettings.interval);
   };
