@@ -1,5 +1,6 @@
 import template from './sidenav.html';
-import containerTemplate from '../../dialogs/container/container.html';
+import containerTemplate from '../../dialogs/add-container/add-container.html';
+import delContainerTemplate from '../../dialogs/del-container/del-container.html';
 
 export default function sidenavDirective($timeout, $mdDialog, stateObjectService, CONSTANTS) {
   'ngInject';
@@ -24,7 +25,7 @@ export default function sidenavDirective($timeout, $mdDialog, stateObjectService
 
       scope.openContainerDiagram = (state, type) => {
         $mdDialog.show({
-          controller: 'containerController as vm',
+          controller: 'addContainerController as vm',
           template: containerTemplate,
           clickOutsideToClose: true,
         }).then(function (model) {
@@ -64,17 +65,25 @@ export default function sidenavDirective($timeout, $mdDialog, stateObjectService
       };
 
       scope.deleteInput = (state, type) => {
-       let _var = state.inputContainer.pop();
-       if (_var){
-          stateObjectService.deleteContainer(state, type, _var.label);
-       }
-     };
+        $mdDialog.show({
+           locals: {container: state.inputContainer},
+                controller: 'delContainerController as vm',
+                template: delContainerTemplate,
+                clickOutsideToClose: true,
+              }).then(function (param) {
+                stateObjectService.deleteContainer(state, type, param);
+              });
+        };
 
       scope.deleteOutput = (state, type) => {
-        let _var = state.outputContainer.pop();
-        if (_var){
-          stateObjectService.deleteContainer(state, type, _var.label);
-        }
+        $mdDialog.show({
+           locals: {container: state.outputContainer},
+           controller: 'delContainerController as vm',
+              template: delContainerTemplate,
+              clickOutsideToClose: true,
+          }).then(function (param) {
+             stateObjectService.deleteContainer(state, type, param);
+         });
       };
 
       scope.configState = (state) => {

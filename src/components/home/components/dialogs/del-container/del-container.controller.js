@@ -1,12 +1,13 @@
-export default function containerController($mdDialog) {
+export default function delContainerController($mdDialog, container) {
   "ngInject";
   let vm = this;
 
+  vm.container = container;
   vm.hideDialog = hideDialog;
   vm.chooseDiagram = chooseDiagram;
 
-  function chooseDiagram() {
-    $mdDialog.hide(vm.inputModel);
+  function deleteVar(param) {
+    $mdDialog.hide(param);
   }
 
   function hideDialog() {
