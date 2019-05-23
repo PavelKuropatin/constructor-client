@@ -34,6 +34,7 @@ export default function homeController($scope, $state, $mdDialog, stateObjectHtt
       });
     });
     stateObjectService.updateContainer(vm.diagramInfo.modules, sourceUUID, targetUUID);
+    vm.updateDiagram();
   };
 
   vm.updateDiagram = () => {
@@ -49,9 +50,9 @@ export default function homeController($scope, $state, $mdDialog, stateObjectHtt
   };
 
   jsPlumb.ready(() => {
-    stateObjectHttpService.getAllStateObject({uuid: '712941e9-7525-4d8a-a7b7-49a35df7a790'}).then((response) => {
-      vm.diagramInfo = response.data;
-    });
+//    stateObjectHttpService.getAllStateObject({uuid: '712941e9-7525-4d8a-a7b7-49a35df7a790'}).then((response) => {
+//      vm.diagramInfo = response.data;
+//    });
   });
 
   vm.openDiagram = function () {

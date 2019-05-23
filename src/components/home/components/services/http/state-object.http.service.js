@@ -45,6 +45,14 @@ export default function stateObjectHttpService($http, env) {
     });
   };
 
+  const deleteContainer = (stateUuid, type, param) => {
+      return $http.post(env.api + DEFAULT_STATE_URL + '/' + stateUuid + '/container', {
+        type: type,
+        param: param,
+        value: 0
+      });
+    };
+
   const deleteDiagram = (uuidDiagram) => {
     return $http.delete(env.api + DEFAULT_DIAGRAM_URL + '/' + uuidDiagram);
   };
@@ -59,6 +67,7 @@ export default function stateObjectHttpService($http, env) {
     deleteState: deleteState,
     updateDiagram: updateDiagram,
     putNewContainer: putNewContainer,
+    deleteContainer: deleteContainer,
     deleteDiagram: deleteDiagram
   };
 }

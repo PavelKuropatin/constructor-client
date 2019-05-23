@@ -57,6 +57,7 @@ export default function modelController($scope, $state, $mdDialog, $timeout, ROU
 
   vm.openStartCountDiagram = () => {
     $mdDialog.show({
+      locals: {countModel: vm.modelSettings},
       controller: 'startCountController as vm',
       template: startCountTemplate,
       clickOutsideToClose: true,
@@ -68,9 +69,9 @@ export default function modelController($scope, $state, $mdDialog, $timeout, ROU
   };
 
   jsPlumb.ready(() => {
-    stateObjectHttpService.getAllStateObject({uuid: '712941e9-7525-4d8a-a7b7-49a35df7a790'}).then((response) => {
-      vm.diagramInfo = response.data;
-    });
+//    stateObjectHttpService.getAllStateObject({uuid: '712941e9-7525-4d8a-a7b7-49a35df7a790'}).then((response) => {
+//      vm.diagramInfo = response.data;
+//    });
   });
 
   const startCounter = function () {
@@ -80,16 +81,20 @@ export default function modelController($scope, $state, $mdDialog, $timeout, ROU
   };
 
   const updateCounter = function () {
-    vm.modelSettings.startValue += +vm.modelSettings.stepValue;
+    _.forEach(vm.modelSettings.vars, _var => {
+        _var.startValue = +_var.startValue + +_var.stepValue;
+    });
     changeParam();
     vm.timer = $timeout(updateCounter, vm.modelSettings.interval);
   };
 
   const changeParam = () => {
+  console.log(vm.modelSettings.vars);
     _.forEach(vm.modelInfo.modules, state => {
       _.forEach(state.inputContainer, item => {
-        if (item.label === vm.modelSettings.valueName) {
-          item.value = vm.modelSettings.startValue;
+        let values = vm.modelSettings.vars.find(_var => _var.valueName === item.label);
+        if (values) {
+          item.value = values.startValue;
         }
       });
       stateObjectService.countFunction(state);

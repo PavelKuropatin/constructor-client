@@ -5,22 +5,30 @@
         </md-card-header-text>
     </md-card-header>
     <md-card-content>
-        <md-input-container>
-            <label>Start value</label>
-            <input ng-model="vm.countModel.startValue"/>
-        </md-input-container>
-        <md-input-container>
-            <label>Step value</label>
-            <input ng-model="vm.countModel.stepValue"/>
-        </md-input-container>
-        <md-input-container>
-            <label>Interval (ms)</label>
-            <input ng-model="vm.countModel.interval"/>
-        </md-input-container>
-        <md-input-container>
-            <label>Value name</label>
-            <input ng-model="vm.countModel.valueName"/>
-        </md-input-container>
+        <md-list>
+            <md-list-item>
+                <md-input-container>
+                    <label>Interval (ms)</label>
+                    <input ng-model="vm.countModel.interval"/>
+                </md-input-container>
+                <md-button ng-click="vm.addVar()">+</md-button>
+            </md-list-item>
+            <md-list-item ng-repeat="(index, var) in vm.countModel.vars">
+                <md-input-container>
+                    <label>Value name</label>
+                    <input ng-model="var.valueName"/>
+                </md-input-container>
+                <md-input-container>
+                    <label>Start value</label>
+                    <input ng-model="var.startValue"/>
+                </md-input-container>
+                <md-input-container>
+                    <label>Step value</label>
+                    <input ng-model="var.stepValue"/>
+                </md-input-container>
+                <md-button ng-click="vm.delVar(index)">-</md-button>
+            </md-list-item>
+        </md-list>
     </md-card-content>
     <md-input-container>
         <md-button ng-click="vm.chooseDiagram()">

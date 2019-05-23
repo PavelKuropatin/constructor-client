@@ -63,12 +63,18 @@ export default function sidenavDirective($timeout, $mdDialog, stateObjectService
         });
       };
 
-      scope.deleteInput = (state) => {
-        state.inputContainer.pop();
-      };
+      scope.deleteInput = (state, type) => {
+       let _var = state.inputContainer.pop();
+       if (_var){
+          stateObjectService.deleteContainer(state, type, _var.label);
+       }
+     };
 
-      scope.deleteOutput = (state) => {
-        state.outputContainer.pop();
+      scope.deleteOutput = (state, type) => {
+        let _var = state.outputContainer.pop();
+        if (_var){
+          stateObjectService.deleteContainer(state, type, _var.label);
+        }
       };
 
       scope.configState = (state) => {

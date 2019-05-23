@@ -49,6 +49,13 @@ export default function stateObjectService($rootScope, stateObjectHttpService, C
     });
   };
 
+  const deleteContainer = (state, type, param) => {
+      stateObjectHttpService.deleteContainer(state.uuid, type, param).then(response => {
+        state.inputContainer = response.data.inputContainer;
+        state.outputContainer = response.data.outputContainer;
+      });
+    };
+
   const updateContainer = (modules, sourceUuid, targetUuid) => {
     findTargetState(modules, targetUuid).inputContainer = findSourceState(modules, sourceUuid).outputContainer;
   };
@@ -84,6 +91,7 @@ export default function stateObjectService($rootScope, stateObjectHttpService, C
     setConfigState: setConfigState,
     getConfigState: getConfigState,
     addContainer: addContainer,
+    deleteContainer: deleteContainer,
     updateContainer: updateContainer,
     deleteDiagram: deleteDiagram,
     countFunction: countFunction
