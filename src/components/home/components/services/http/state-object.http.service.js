@@ -38,7 +38,7 @@ export default function stateObjectHttpService($http, env) {
   };
 
   const putNewContainer = (stateUuid, type, param, value) => {
-    return $http.put(env.api + DEFAULT_STATE_URL + '/' + stateUuid + '/container', {
+    return $http.post(env.api + DEFAULT_STATE_URL + '/' + stateUuid + '/container/create', {
       type: type,
       param: param,
       value: value
@@ -46,7 +46,7 @@ export default function stateObjectHttpService($http, env) {
   };
 
   const deleteContainer = (stateUuid, type, param) => {
-      return $http.post(env.api + DEFAULT_STATE_URL + '/' + stateUuid + '/container', {
+      return $http.post(env.api + DEFAULT_STATE_URL + '/' + stateUuid + '/container/delete', {
         type: type,
         param: param,
         value: 0
