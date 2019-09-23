@@ -4,7 +4,7 @@ export default function delContainerController($mdDialog, container) {
 
   vm.container = container;
   vm.hideDialog = hideDialog;
-  vm.chooseDiagram = chooseDiagram;
+  vm.deleteVar = deleteVar;
 
   function deleteVar(param) {
     $mdDialog.hide(param);

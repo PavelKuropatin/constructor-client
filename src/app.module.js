@@ -29,26 +29,17 @@ import 'material-icons/iconfont/material-icons.scss';
 import './components/home/components/directives/sidenav/sidenav.scss';
 import './global.scss';
 
-import routing from './app.route';
+import config from './app.config';
 import homeModule from './components/home/home.modue';
 import modelModule from './components/model/model.module';
 import configModule from './config/config.module';
 
-angular.module('diplom', ['ui.sortable', 
-'pascalprecht.translate',
-uirouter, animate, aria, messages, material, homeModule, modelModule, configModule])
-.config(function($urlRouterProvider, $locationProvider, $translateProvider) {
-  "use strict";
-
-  $urlRouterProvider.otherwise('/');
-
-  $translateProvider.useStaticFilesLoader({
-    prefix: '/assets/i18n/',
-    suffix: '.json'
-  });
-
-  $translateProvider.preferredLanguage("ru");
-  $translateProvider.fallbackLanguage("en");
-
-  // $locationProvider.html5Mode(true);
-});
+angular
+  .module('diplom', [
+    'ui.sortable',
+    'pascalprecht.translate',
+    uirouter, animate, aria,
+    messages, material, homeModule,
+    modelModule, configModule
+  ])
+  .config(config);
