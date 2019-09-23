@@ -2,12 +2,12 @@ import openDiagramTemplate from '../home/components/dialogs/open-diagram/open-di
 import img from './../../../assets/images/Background.png';
 import startCountTemplate from './components/dialogs/start-count/start-count.html';
 
-export default function modelController($scope, $state, $mdDialog, $timeout, ROUTES, stateObjectHttpService,
-                                        stateObjectService, CONSTANTS) {
+export default function modelController($scope, $state, $mdDialog, $timeout, $translate, ROUTES, stateObjectHttpService,
+  stateObjectService, CONSTANTS) {
   'ngInject';
   const vm = this;
   vm.backgroundImg = img;
-  vm.modelInfo = {modules: []};
+  vm.modelInfo = { modules: [] };
   vm.sortableOptions = {
     connectWith: '.connectedItems',
   };
@@ -57,7 +57,7 @@ export default function modelController($scope, $state, $mdDialog, $timeout, ROU
 
   vm.openStartCountDiagram = () => {
     $mdDialog.show({
-      locals: {countModel: vm.modelSettings},
+      locals: { countModel: vm.modelSettings },
       controller: 'startCountController as vm',
       template: startCountTemplate,
       clickOutsideToClose: true,
@@ -69,9 +69,9 @@ export default function modelController($scope, $state, $mdDialog, $timeout, ROU
   };
 
   jsPlumb.ready(() => {
-//    stateObjectHttpService.getAllStateObject({uuid: '712941e9-7525-4d8a-a7b7-49a35df7a790'}).then((response) => {
-//      vm.diagramInfo = response.data;
-//    });
+    //    stateObjectHttpService.getAllStateObject({uuid: '712941e9-7525-4d8a-a7b7-49a35df7a790'}).then((response) => {
+    //      vm.diagramInfo = response.data;
+    //    });
   });
 
   const startCounter = function () {
@@ -82,14 +82,14 @@ export default function modelController($scope, $state, $mdDialog, $timeout, ROU
 
   const updateCounter = function () {
     _.forEach(vm.modelSettings.vars, _var => {
-        _var.startValue = +_var.startValue + +_var.stepValue;
+      _var.startValue = +_var.startValue + +_var.stepValue;
     });
     changeParam();
     vm.timer = $timeout(updateCounter, vm.modelSettings.interval);
   };
 
   const changeParam = () => {
-  console.log(vm.modelSettings.vars);
+    console.log(vm.modelSettings.vars);
     _.forEach(vm.modelInfo.modules, state => {
       _.forEach(state.inputContainer, item => {
         let values = vm.modelSettings.vars.find(_var => _var.valueName === item.label);
@@ -99,5 +99,9 @@ export default function modelController($scope, $state, $mdDialog, $timeout, ROU
       });
       stateObjectService.countFunction(state);
     });
+  };
+
+  vm.setLanguage = (lang) => {
+    $translate.use(lang);
   };
 }

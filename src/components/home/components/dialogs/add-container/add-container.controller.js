@@ -3,9 +3,9 @@ export default function addContainerController($mdDialog) {
   let vm = this;
 
   vm.hideDialog = hideDialog;
-  vm.chooseDiagram = chooseDiagram;
+  vm.addVar = addVar;
 
-  function chooseDiagram() {
+  function addVar() {
     $mdDialog.hide(vm.inputModel);
   }
 
