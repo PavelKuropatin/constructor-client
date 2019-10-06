@@ -1,57 +1,72 @@
 <div layout="row">
     <div ng-if="home.diagramInfo" flex="25" class="sidenav-container">
-        <sidenav diagram-info="home.diagramInfo"
-                 active-state="home.activeState"
-                 is-active-setting="home.isActiveSetting">
+        <sidenav diagram-info="home.diagramInfo" active-state="home.activeState"
+            is-active-setting="home.isActiveSetting">
         </sidenav>
     </div>
     <div class="schema-container" ng-if="!home.isActiveSetting" flex>
         <md-toolbar class="md-hue-2">
-            <div class="md-toolbar-tools"  layout="row" layout-align="space-between center">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
                 <div class="md-menu-demo">
                     <div class="menu-demo-container" layout-align="center center" layout="column">
                         <md-menu>
-                            <md-button aria-label="Open menu with custom trigger" class="md-icon-button" ng-mouseenter="$mdMenu.open()">
+                            <md-button aria-label="Open menu with custom trigger" class="md-icon-button"
+                                ng-mouseenter="$mdMenu.open()">
                                 <md-icon>menu</md-icon>
                             </md-button>
                             <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
                                 <md-menu-item>
                                     <md-button ng-click="home.createNewDiagram()">
-                                        Create new diagram
+                                        {{ 'diagram.create' | translate }}
                                     </md-button>
                                 </md-menu-item>
                                 <md-menu-item ng-if="home.diagramInfo">
                                     <md-button ng-click="home.updateDiagram()">
-                                        Update current diagram
+                                        {{ 'diagram.update' | translate }}
                                     </md-button>
                                 </md-menu-item>
                                 <md-menu-item>
                                     <md-button ng-click="home.openDiagram()">
-                                        Open diagram..
+                                        {{ 'diagram.open' | translate }}
                                     </md-button>
                                 </md-menu-item>
                             </md-menu-content>
                         </md-menu>
                     </div>
                 </div>
-                <md-button ng-click="home.goToModel()" class="md-raised">Model</md-button>
-                <md-slider min="0" max="200"
-                           ng-model="home.zoomlevel"
-                           step="10" aria-label="red"
-                           id="red-slider"
-                           class="md-warn">
+                <md-button ng-click="home.goToModel()" class="md-raised">{{ 'model.self' | translate }}</md-button>
+                <md-slider min="0" max="200" ng-model="home.zoomlevel" step="10" aria-label="red" id="red-slider"
+                    class="md-warn">
                 </md-slider>
+                <div class="md-menu-demo">
+                    <div class="menu-demo-container" layout-align="center right" layout="column">
+                        <md-menu>
+                            <md-button aria-label="Сhoose language" class="md-icon-button"
+                                ng-mouseenter="$mdMenu.open()">
+                                <md-icon>language</md-icon>
+                            </md-button>
+                            <md-menu-content width="2" ng-mouseleave="$mdMenu.close()">
+                                <md-menu-item>
+                                    <md-button ng-click="home.setLanguage('en')">
+                                        {{ 'language.en' | translate }}
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button ng-click="home.setLanguage('ru')">
+                                        {{ 'language.ru' | translate }}
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </div>
+                </div>
+
             </div>
         </md-toolbar>
 
-        <js-plumb-canvas
-                id="container"
-                on-connection="home.onConnection"
-                x="home.pos_x"
-                y="home.pos_y"
-                zoom="home.zoomlevel">
-            <ng-include src="state.template"
-                        ng-repeat="state in home.diagramInfo.modules"></ng-include>
+        <js-plumb-canvas id="container" on-connection="home.onConnection" x="home.pos_x" y="home.pos_y"
+            zoom="home.zoomlevel">
+            <ng-include src="state.template" ng-repeat="state in home.diagramInfo.modules"></ng-include>
         </js-plumb-canvas>
     </div>
 

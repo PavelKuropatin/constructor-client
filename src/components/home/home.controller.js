@@ -1,7 +1,7 @@
 import openDiagramTemplate from "./components/dialogs/open-diagram/open-diagram.html";
 
-export default function homeController($scope, $state, $mdDialog, stateObjectHttpService, jsPlumbStyleService,
-                                       stateObjectService, CONSTANTS, ROUTES) {
+export default function homeController($scope, $state, $mdDialog, $translate, stateObjectHttpService, jsPlumbStyleService,
+  stateObjectService, CONSTANTS, ROUTES) {
   'ngInject';
   const vm = this;
   vm.zoomlevel = 64;
@@ -15,7 +15,7 @@ export default function homeController($scope, $state, $mdDialog, stateObjectHtt
     vm.diagramInfo = undefined;
   });
 
-  vm.goToModel = ()  => {
+  vm.goToModel = () => {
     $state.go(ROUTES.MODEL);
   };
 
@@ -28,7 +28,7 @@ export default function homeController($scope, $state, $mdDialog, stateObjectHtt
     _.forEach(vm.diagramInfo.modules, state => {
       _.forEach(state.sources, source => {
         if (source.uuid == sourceUUID) {
-          source.connections.push({'uuid': targetUUID});
+          source.connections.push({ 'uuid': targetUUID });
           $scope.$apply();
         }
       });
@@ -50,12 +50,12 @@ export default function homeController($scope, $state, $mdDialog, stateObjectHtt
   };
 
   jsPlumb.ready(() => {
-//    stateObjectHttpService.getAllStateObject({uuid: '712941e9-7525-4d8a-a7b7-49a35df7a790'}).then((response) => {
-//      vm.diagramInfo = response.data;
-//    });
+    //    stateObjectHttpService.getAllStateObject({uuid: '712941e9-7525-4d8a-a7b7-49a35df7a790'}).then((response) => {
+    //      vm.diagramInfo = response.data;
+    //    });
   });
 
-  vm.openDiagram = function () {
+  vm.openDiagram = () => {
     $mdDialog.show({
       controller: 'openDiagramController as vm',
       template: openDiagramTemplate,
@@ -67,5 +67,9 @@ export default function homeController($scope, $state, $mdDialog, stateObjectHtt
         });
       });
     });
+  };
+
+  vm.setLanguage = (lang) => {
+    $translate.use(lang);
   };
 }
