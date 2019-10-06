@@ -14,11 +14,11 @@ import modelSidenavDirective from './components/directives/model-sidenav.directi
 import modelPartialsConfig from './components/model-partials/model-partials.config';
 
 export default angular.module('app.model', [uirouter])
-  .config(routing)
-  .controller('modelController', modelController)
-  .controller('startCountController', startCountController)
-  .directive('modelSidenav', modelSidenavDirective)
-  .constant('CONSTANTS', constants)
-  .constant('ROUTES', routes)
-  .run(modelPartialsConfig)
-  .name;
+    .config(routing)
+    .controller('modelController', modelController)
+    .controller('startCountController', startCountController)
+    .directive('modelSidenav', modelSidenavDirective)
+    .constant('CONSTANTS', constants)
+    .constant('ROUTES', routes)
+    .run(modelPartialsConfig)
+    .name;

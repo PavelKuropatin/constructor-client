@@ -13,6 +13,11 @@ module.exports = merge(common, {
 	optimization: {
 		minimize: true
 	},
+	node: {
+		fs: 'empty',
+		tls: 'empty',
+		net: 'empty'
+	}
 	plugins: [
 		new Webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')
@@ -37,7 +42,7 @@ module.exports = merge(common, {
 			},
 			{
 				test: /\.s?css/i,
-				use : [
+				use: [
 					MiniCssExtractPlugin.loader,
 					'css-loader',
 					'sass-loader'

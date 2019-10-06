@@ -12,14 +12,6 @@ import animate from 'angular-animate';
 import aria from 'angular-aria';
 import messages from 'angular-messages';
 import material from 'angular-material';
-
-require('lodash');
-require('jsplumb');
-require('mathjs');
-require('angular-translate');
-require('angular-translate-storage-local');
-require('angular-translate-loader-static-files');
-
 import './../assets/images/grid_background.gif';
 
 import 'jsplumb/css/jsplumbtoolkit-defaults.css';
@@ -30,16 +22,26 @@ import './components/home/components/directives/sidenav/sidenav.scss';
 import './global.scss';
 
 import config from './app.config';
-import homeModule from './components/home/home.modue';
+import homeModule from './components/home/home.module';
 import modelModule from './components/model/model.module';
+import socketModule from './components/socket/socket.module';
 import configModule from './config/config.module';
 
+
+require('lodash');
+require('jsplumb');
+require('mathjs');
+require('angular-translate');
+require('angular-translate-storage-local');
+require('angular-translate-loader-static-files');
+
 angular
-  .module('diplom', [
-    'ui.sortable',
-    'pascalprecht.translate',
-    uirouter, animate, aria,
-    messages, material, homeModule,
-    modelModule, configModule
-  ])
-  .config(config);
+    .module('diplom', [
+        'ui.sortable',
+        'pascalprecht.translate',
+        uirouter, animate, aria,
+        messages, material, homeModule,
+        modelModule, configModule,
+        socketModule
+    ])
+    .config(config);

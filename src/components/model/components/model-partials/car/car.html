@@ -1,12 +1,12 @@
 <md-card-content>
-    <md-card ng-repeat="cell in ['c1', 'c2', 'c3', 'c4']"
-             ui-sortable="model.sortableOptions"
-             ng-model="model.modelInfo.modules"
-             ui-sortable-update="model.saveId"
-             class="cell connectedItems"
-             ng-class="{'start-count': model.timer}"
+    <md-card class="cell connectedItems"
              id="{{cell}}"
-             ng-click="model.setActiveState(model.findById(cell))">
+             ng-class="{'start-count': model.timer}"
+             ng-click="model.setActiveState(model.findById(cell))"
+             ng-model="model.modelInfo.modules"
+             ng-repeat="cell in ['c1', 'c2', 'c3', 'c4']"
+             ui-sortable="model.sortableOptions"
+             ui-sortable-update="model.saveId">
         <div ng-if="model.findById(cell)">
             <md-card class="cell_name title-text">
                 {{model.findById(cell).name}}

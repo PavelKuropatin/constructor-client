@@ -1,8 +1,8 @@
 <js-plumb-object class="action-state"
-                 state-object="state"
+                 ng-click="home.setActiveState(state)"
                  ng-style="{ 'left':state.x, 'top':state.y, 'box-shadow': '0 15px 35px' + state.color}"
-                 ng-click="home.setActiveState(state)">
-    <div layout="row" class="action-input-container">
+                 state-object="state">
+    <div class="action-input-container" layout="row">
         <md-icon>call_received</md-icon>
         <md-input-container ng-repeat="input in state.inputContainer">
             <label>{{input.label}}</label>
@@ -10,26 +10,26 @@
         </md-input-container>
     </div>
     <h3 class="cursor-default">{{state.name}}</h3>
-    <div layout="row" class="action-input-container">
+    <div class="action-input-container" layout="row">
         <md-icon>call_made</md-icon>
         <md-input-container ng-repeat="output in state.outputContainer">
             <label>{{output.label}}</label>
             <input ng-model="output.value"/>
         </md-input-container>
     </div>
-    <js-plumb-endpoint class={{state.endpointStyle.sourceEndpoint}}
-                       anchor={{state.endpointStyle.sourceAnchor}}
+    <js-plumb-endpoint anchor={{state.endpointStyle.sourceAnchor}}
+                       class={{state.endpointStyle.sourceEndpoint}}
                        ng-repeat="endpoint in state.sources"
-                       uuid="{{endpoint.uuid}}"
-                       settings="home.sourceEndpointStyle">
-        <js-plumb-connection ng-repeat="connection in endpoint.connections"
-                             ng-model="connection"
+                       settings="home.sourceEndpointStyle"
+                       uuid="{{endpoint.uuid}}">
+        <js-plumb-connection ng-model="connection"
+                             ng-repeat="connection in endpoint.connections"
                              state-objects="home.diagramInfo.modules">
         </js-plumb-connection>
     </js-plumb-endpoint>
-    <js-plumb-endpoint class={{state.endpointStyle.targetEndpoint}}
-                       anchor={{state.endpointStyle.targetAnchor}}
+    <js-plumb-endpoint anchor={{state.endpointStyle.targetAnchor}}
+                       class={{state.endpointStyle.targetEndpoint}}
                        ng-repeat="endpoint in state.targets"
-                       uuid="{{endpoint.uuid}}"
-                       settings="home.targetEndpointStyle"></js-plumb-endpoint>
+                       settings="home.targetEndpointStyle"
+                       uuid="{{endpoint.uuid}}"></js-plumb-endpoint>
 </js-plumb-object>
