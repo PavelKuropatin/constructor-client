@@ -8,8 +8,6 @@ export default function socketController($scope, $state, $translate, $mdDialog, 
 
     'ngInject';
     const vm = this;
-    $scope.message = [];
-    $scope.max = 140;
 
     vm.backgroundImg = img;
     vm.connectSettings = {};
@@ -21,16 +19,26 @@ export default function socketController($scope, $state, $translate, $mdDialog, 
     vm.modelTemplate = CONSTANTS.SOCKET.CAR;
 
 
-    socketService.receive().then(null, null, (message) => {
-        console.log(message);
-    });
-
     vm.goToSchema = () => {
         $state.go(ROUTES.SCHEMA);
     };
 
     vm.goToModel = () => {
         $state.go(ROUTES.MODEL);
+    };
+
+    vm.setActiveState = (state) => {
+            vm.activeState = state;
+        };
+
+    vm.saveId = (e, ui) => {
+            _.head(vm.modelInfo.modules).targetId = e.target.id;
+    };
+
+    vm.findById = (id) => {
+            return _.find(vm.modelInfo.modules, function (model) {
+                return model.targetId == id;
+            });
     };
 
     vm.openConnectDialog = () => {
@@ -63,21 +71,18 @@ export default function socketController($scope, $state, $translate, $mdDialog, 
         };
 
 
-   vm.setActiveState = (state) => {
-        vm.activeState = state;
-    };
-
-    vm.saveId = (e, ui) => {
-        _.head(vm.modelInfo.modules).targetId = e.target.id;
-    };
-
-    vm.findById = (id) => {
-        return _.find(vm.modelInfo.modules, function (model) {
-            return model.targetId == id;
-        });
-    };
+    vm.stopMonitor = () => {
+        socketHttpService.stopGetState(vm.cmdUUID);
+    }
 
     vm.setLanguage = (lang) => {
         $translate.use(lang);
-    };
+    };    socketService.receive().then(null, null, (message) => {
+              console.log(message);
+          });
+
+    socketService.receive().then(null, null, (message) => {
+        console.log(message);
+    });
+
 }
