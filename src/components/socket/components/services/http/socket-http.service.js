@@ -13,14 +13,14 @@ export default function socketHttpService($http, env, CONSTANTS){
         });
     };
 
-    const stopGetState = (uuid) => {
+    const stopMonitor = (uuid) => {
         return  $http.post(env.socket + DEFAULT_SOCKET_URL + '/stop', {
                            uuid: uuid
                        });
-    }
+    };
 
     return {
-    stopGetState : stopGetState,
+        stopMonitor : stopMonitor,
         startGetState : startGetState
     };
 }

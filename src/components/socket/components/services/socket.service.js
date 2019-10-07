@@ -23,7 +23,6 @@ export default function socketService($q, $timeout, CONSTANTS, env) {
 //
 //    const startListener = () => {
 //        socket.stomp.subscribe(CONSTANTS.SOCKET.TOPIC, (data) => {
-//            console.log(data.body);
 //            listener.notify(data.body);
 //        });
 //    };
@@ -38,7 +37,6 @@ export default function socketService($q, $timeout, CONSTANTS, env) {
             socket.stomp.subscribe(
                 CONSTANTS.SOCKET.TOPIC,
                 (data) => {
-//                   processor(data.body);
                    listener.notify(data.body);
                 });
         });
