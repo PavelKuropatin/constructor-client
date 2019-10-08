@@ -8,7 +8,7 @@ export default function modelRouteConfig($stateProvider, ROUTES) {
             views: {
                 'main': {
                     template: modelTemplate,
-                    controller: 'modelController as model',
+                    controller: 'modelController as vm',
                 }
             },
         });

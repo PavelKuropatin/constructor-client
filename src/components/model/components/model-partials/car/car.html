@@ -1,17 +1,17 @@
 <md-card-content>
     <md-card class="cell connectedItems"
              id="{{cell}}"
-             ng-class="{'start-count': model.timer}"
-             ng-click="model.setActiveState(model.findById(cell))"
-             ng-model="model.modelInfo.modules"
+             ng-class="{'start-count': vm.timer}"
+             ng-click="vm.setActiveState(vm.findById(cell))"
+             ng-model="vm.modelInfo.modules"
              ng-repeat="cell in ['c1', 'c2', 'c3', 'c4']"
-             ui-sortable="model.sortableOptions"
-             ui-sortable-update="model.saveId">
-        <div ng-if="model.findById(cell)">
+             ui-sortable="vm.sortableOptions"
+             ui-sortable-update="vm.saveId">
+        <div ng-if="vm.findById(cell)">
             <md-card class="cell_name title-text">
-                {{model.findById(cell).name}}
+                {{vm.findById(cell).name}}
             </md-card>
-            <div class="value" ng-repeat="output in model.findById(cell).outputContainer">
+            <div class="value" ng-repeat="output in vm.findById(cell).outputContainer">
                 {{output.label}}: {{output.value}}
             </div>
         </div>

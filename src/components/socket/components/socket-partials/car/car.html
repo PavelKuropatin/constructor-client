@@ -1,17 +1,17 @@
 <md-card-content>
     <md-card class="cell connectedItems"
              id="{{cell}}"
-             ng-class="{'start-count': socket.timer}"
-             ng-click="socket.setActiveState(socket.findById(cell))"
-             ng-model="socket.modelInfo.modules"
+             ng-class="{'start-count': vm.timer}"
+             ng-click="vm.setActiveState(vm.findById(cell))"
+             ng-model="vm.modelInfo.modules"
              ng-repeat="cell in ['c1', 'c2', 'c3', 'c4']"
-             ui-sortable="socket.sortableOptions"
-             ui-sortable-update="socket.saveId">
-        <div ng-if="socket.findById(cell)">
+             ui-sortable="vm.sortableOptions"
+             ui-sortable-update="vm.saveId">
+        <div ng-if="vm.findById(cell)">
             <md-card class="cell_name title-text">
-                {{socket.findById(cell).name}}
+                {{vm.findById(cell).name}}
             </md-card>
-            <div class="value" ng-repeat="output in socket.findById(cell).outputContainer">
+            <div class="value" ng-repeat="output in vm.findById(cell).outputContainer">
                 {{output.label}}: {{output.value}}
             </div>
         </div>

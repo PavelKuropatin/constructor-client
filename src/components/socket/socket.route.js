@@ -8,7 +8,7 @@ export default function socketRouteConfig($stateProvider, ROUTES) {
             views: {
                 'main': {
                     template: socketTemplate,
-                    controller: 'socketController as socket',
+                    controller: 'socketController as vm',
                 }
             },
         });

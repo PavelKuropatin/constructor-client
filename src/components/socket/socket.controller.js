@@ -84,7 +84,7 @@ export default function socketController($scope, $state, $translate, $mdDialog, 
         let out = JSON.parse(message);
         _.forEach(vm.modelInfo.modules, state => {
             if (state.name in out) {
-                state.outputContainer = [{ "label": "x", "value": out[state.name] }]
+                state.outputContainer = [{ "label": "x", "value": out[state.name] }];
             }
         });
         console.log(message);
