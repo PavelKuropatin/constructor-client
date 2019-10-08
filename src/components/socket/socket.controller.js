@@ -52,7 +52,11 @@ export default function socketController($scope, $state, $translate, $mdDialog, 
             vm.connectSettings = connectSettings;
 
             socketService.initSocket(console.log);
-            vm.cmdUUID = socketHttpService.startGetState(connectSettings);
+            socketHttpService.startGetState(connectSettings).then((response) => {
+                 console.log(response);
+                 vm.cmdUUID = response.data.uuid;
+            });
+
         });
     };
 
