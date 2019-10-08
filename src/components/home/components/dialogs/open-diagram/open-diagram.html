@@ -8,7 +8,7 @@
         <md-input-container>
             <label>{{ 'diagram.self' | translate }}</label>
             <md-select name="templateName" ng-model="vm.choosenDiagram">
-                <md-option ng-value="diagram" ng-repeat="diagram in vm.diagrams">{{diagram.name}}</md-option>
+                <md-option ng-repeat="diagram in vm.diagrams" ng-value="diagram">{{diagram.name}}</md-option>
             </md-select>
         </md-input-container>
     </md-card-content>

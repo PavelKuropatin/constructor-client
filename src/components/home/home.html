@@ -1,20 +1,20 @@
 <div layout="row">
-    <div ng-if="home.diagramInfo" flex="25" class="sidenav-container">
-        <sidenav diagram-info="home.diagramInfo" active-state="home.activeState"
-            is-active-setting="home.isActiveSetting">
+    <div class="sidenav-container" flex="25" ng-if="home.diagramInfo">
+        <sidenav active-state="home.activeState" diagram-info="home.diagramInfo"
+                 is-active-setting="home.isActiveSetting">
         </sidenav>
     </div>
-    <div class="schema-container" ng-if="!home.isActiveSetting" flex>
+    <div class="schema-container" flex ng-if="!home.isActiveSetting">
         <md-toolbar class="md-hue-2">
             <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
                 <div class="md-menu-demo">
-                    <div class="menu-demo-container" layout-align="center center" layout="column">
+                    <div class="menu-demo-container" layout="column" layout-align="center center">
                         <md-menu>
                             <md-button aria-label="Open menu with custom trigger" class="md-icon-button"
-                                ng-mouseenter="$mdMenu.open()">
+                                       ng-mouseenter="$mdMenu.open()">
                                 <md-icon>menu</md-icon>
                             </md-button>
-                            <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+                            <md-menu-content ng-mouseleave="$mdMenu.close()" width="4">
                                 <md-menu-item>
                                     <md-button ng-click="home.createNewDiagram()">
                                         {{ 'diagram.create' | translate }}
@@ -34,18 +34,19 @@
                         </md-menu>
                     </div>
                 </div>
-                <md-button ng-click="home.goToModel()" class="md-raised">{{ 'model.self' | translate }}</md-button>
-                <md-slider min="0" max="200" ng-model="home.zoomlevel" step="10" aria-label="red" id="red-slider"
-                    class="md-warn">
+                <md-button class="md-raised" ng-click="home.goToModel()">{{ 'model.self' | translate }}</md-button>
+                <md-button class="md-raised" ng-click="home.goToSocket()">{{ 'socket.self' | translate }}</md-button>
+                <md-slider aria-label="red" class="md-warn" id="red-slider" max="200" min="0" ng-model="home.zoomlevel"
+                           step="10">
                 </md-slider>
                 <div class="md-menu-demo">
-                    <div class="menu-demo-container" layout-align="center right" layout="column">
+                    <div class="menu-demo-container" layout="column" layout-align="center right">
                         <md-menu>
                             <md-button aria-label="Сhoose language" class="md-icon-button"
-                                ng-mouseenter="$mdMenu.open()">
+                                       ng-mouseenter="$mdMenu.open()">
                                 <md-icon>language</md-icon>
                             </md-button>
-                            <md-menu-content width="2" ng-mouseleave="$mdMenu.close()">
+                            <md-menu-content ng-mouseleave="$mdMenu.close()" width="2">
                                 <md-menu-item>
                                     <md-button ng-click="home.setLanguage('en')">
                                         {{ 'language.en' | translate }}
@@ -65,8 +66,8 @@
         </md-toolbar>
 
         <js-plumb-canvas id="container" on-connection="home.onConnection" x="home.pos_x" y="home.pos_y"
-            zoom="home.zoomlevel">
-            <ng-include src="state.template" ng-repeat="state in home.diagramInfo.modules"></ng-include>
+                         zoom="home.zoomlevel">
+            <ng-include ng-repeat="state in home.diagramInfo.modules" src="state.template"></ng-include>
         </js-plumb-canvas>
     </div>
 

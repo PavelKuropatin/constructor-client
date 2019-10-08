@@ -3,7 +3,9 @@
     "en": "English",
     "ru": "Russian"
   },
-  "schema": "Schema",
+  "schema": {
+    "self" : "Schema"
+  },
   "diagram": {
     "self": "Diagram",
     "open": "Open diargam",
@@ -42,5 +44,10 @@
     "position": "Position",
     "template": "Template",
     "color": "Color"
+  },
+  "socket" :{
+    "start" : "Start",
+    "stop" : "Stop",
+    "self" : "Monitor"
   }
 }

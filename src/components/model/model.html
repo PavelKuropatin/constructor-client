@@ -1,21 +1,21 @@
 <div layout="row">
-    <div flex="25" class="sidenav-container">
-        <model-sidenav states="model.diagramInfo.modules">
+    <div class="sidenav-container" flex="25">
+        <model-sidenav states="vm.diagramInfo.modules">
         </model-sidenav>
     </div>
     <div class="model-container" flex>
         <md-toolbar class="md-hue-2">
             <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
                 <div class="md-menu-demo">
-                    <div class="menu-demo-container" layout-align="space-between center" layout="column">
+                    <div class="menu-demo-container" layout="column" layout-align="space-between center">
                         <md-menu>
                             <md-button aria-label="Open menu with custom trigger" class="md-icon-button"
-                                ng-mouseenter="$mdMenu.open()">
+                                       ng-mouseenter="$mdMenu.open()">
                                 <md-icon>menu</md-icon>
                             </md-button>
-                            <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+                            <md-menu-content ng-mouseleave="$mdMenu.close()" width="4">
                                 <md-menu-item>
-                                    <md-button ng-click="model.openDiagram()">
+                                    <md-button ng-click="vm.openDiagram()">
                                         {{ 'diagram.open' | translate }}
                                     </md-button>
                                 </md-menu-item>
@@ -23,26 +23,27 @@
                         </md-menu>
                     </div>
                 </div>
-                <md-button ng-click="model.openStartCountDiagram()" class="md-raised"> {{ 'model.start' | translate }}
+                <md-button class="md-raised" ng-click="vm.openStartCountDiagram()"> {{ 'model.start' | translate }}
                 </md-button>
-                <md-button ng-click="model.stopCount()" class="md-raised">{{ 'model.stop' | translate }}</md-button>
-                <md-button ng-click="model.goToSchema()" class="md-raised">{{ 'schema' | translate }}</md-button>
+                <md-button class="md-raised" ng-click="vm.stopCount()">{{ 'model.stop' | translate }}</md-button>
+                <md-button class="md-raised" ng-click="vm.goToSchema()">{{ 'schema.self' | translate }}</md-button>
+                <md-button class="md-raised" ng-click="vm.goToSocket()">{{ 'socket.self' | translate }}</md-button>
 
                 <div class="md-menu-demo">
-                    <div class="menu-demo-container" layout-align="center right" layout="column">
+                    <div class="menu-demo-container" layout="column" layout-align="center right">
                         <md-menu>
                             <md-button aria-label="Сhoose language" class="md-icon-button"
-                                ng-mouseenter="$mdMenu.open()">
+                                       ng-mouseenter="$mdMenu.open()">
                                 <md-icon>language</md-icon>
                             </md-button>
-                            <md-menu-content width="2" ng-mouseleave="$mdMenu.close()">
+                            <md-menu-content ng-mouseleave="$mdMenu.close()" width="2">
                                 <md-menu-item>
-                                    <md-button ng-click="model.setLanguage('en')">
+                                    <md-button ng-click="vm.setLanguage('en')">
                                         {{ 'language.en' | translate }}
                                     </md-button>
                                 </md-menu-item>
                                 <md-menu-item>
-                                    <md-button ng-click="model.setLanguage('ru')">
+                                    <md-button ng-click="vm.setLanguage('ru')">
                                         {{ 'language.ru' | translate }}
                                     </md-button>
                                 </md-menu-item>
@@ -53,13 +54,13 @@
             </div>
         </md-toolbar>
 
-        <div layout="row" class="connectedItems">
-            <ng-include ng-style="{'background-image': 'url({{model.backgroundImg}})'}" flex="75" class="model"
-                src="model.modelTemplate" />
+        <div class="connectedItems" layout="row">
+            <ng-include class="model" flex="75" ng-style="{'background-image': 'url({{vm.backgroundImg}})'}"
+                        src="vm.modelTemplate"/>
 
             <md-card flex="35">
-                <sidenav diagram-info="model.modelInfo" active-state="model.activeState" is-active-setting="true"
-                    is-active-model="true">
+                <sidenav active-state="vm.activeState" diagram-info="vm.modelInfo" is-active-model="true"
+                         is-active-setting="true">
                 </sidenav>
         </div>
     </div>

@@ -24,13 +24,13 @@ module.exports = {
       $: require.resolve('jquery'),
       jQuery: require.resolve('jquery')
     }),
-    new CleanWebpackPlugin([dist], {root: Path.resolve(__dirname, '..')}),
+    new CleanWebpackPlugin([dist], { root: Path.resolve(__dirname, '..') }),
     new CopyWebpackPlugin([
-      {from: Path.resolve(__dirname, '../public'), to: 'public'}
+      { from: Path.resolve(__dirname, '../public'), to: 'public' }
     ]),
     new CopyWebpackPlugin([
-      {from: Path.resolve(__dirname, '../assets'), to: 'assets'}
-  ]),
+      { from: Path.resolve(__dirname, '../assets'), to: 'assets' }
+    ]),
     new HtmlWebpackPlugin({
       template: Path.resolve(__dirname, '../src/index.ejs')
     })

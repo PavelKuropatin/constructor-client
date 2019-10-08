@@ -6,7 +6,7 @@
     </md-card-header>
     <md-card-content>
         <md-input-container ng-repeat="var in vm.container">
-            <md-button style="text-transform:none" ng-click="vm.deleteVar(var.label)">
+            <md-button ng-click="vm.deleteVar(var.label)" style="text-transform:none">
                 {{ var.label }}
             </md-button>
         </md-input-container>

@@ -21,12 +21,12 @@
                 <md-card-header-text>
                     <div layout="column">
                         <span class="title-text">{{state.name}}</span>
-                        <span ng-if="!isActiveModel" class="medium-text">
+                        <span class="medium-text" ng-if="!isActiveModel">
                             {{ 'state.position' | translate }}: [{{state.x| number}}, {{state.y| number}}]
                         </span>
                     </div>
                 </md-card-header-text>
-                <md-button ng-if="!isActiveModel" class="md-icon-button" ng-click="configState(state)">
+                <md-button class="md-icon-button" ng-click="configState(state)" ng-if="!isActiveModel">
                     <md-icon>settings_applications</md-icon>
                 </md-button>
                 <md-button class="md-icon-button" ng-click="setActiveState(state)">
@@ -44,58 +44,58 @@
                         <label> {{ 'state.name' | translate}}</label>
                         <input name="stateName" ng-model="state.name">
                     </md-input-container>
-                    <md-button ng-if="!isActiveModel" class="md-icon-button" ng-click="swapEndpointState(state)">
+                    <md-button class="md-icon-button" ng-click="swapEndpointState(state)" ng-if="!isActiveModel">
                         <md-icon>compare_arrows</md-icon>
                     </md-button>
                 </div>
 
-                <div ng-if="!isActiveModel" layout="row" layout-align="space-between">
+                <div layout="row" layout-align="space-between" ng-if="!isActiveModel">
                     <md-input-container>
                         <label>{{ 'state.template' | translate }}</label>
                         <md-select name="templateName" ng-model="state.template">
-                            <md-option ng-value="partial" ng-repeat="partial in partials">{{partial}}</md-option>
+                            <md-option ng-repeat="partial in partials" ng-value="partial">{{partial}}</md-option>
                         </md-select>
                     </md-input-container>
                     <md-input-container ng-if="isActionState(state)">
                         <label>{{ 'state.color' | translate }}</label>
                         <md-select name="colorName" ng-model="state.color">
-                            <md-option ng-value="color.color" ng-repeat="color in colors">{{color.abbr}}</md-option>
+                            <md-option ng-repeat="color in colors" ng-value="color.color">{{color.abbr}}</md-option>
                         </md-select>
                     </md-input-container>
                 </div>
 
                 <div ng-if="isActionState(state)">
-                    <md-card layout="row" class="action-input-container">
+                    <md-card class="action-input-container" layout="row">
                         <md-icon>call_received</md-icon>
                         <md-input-container ng-repeat="input in state.inputContainer">
                             <label>{{input.label}}</label>
-                            <input ng-change="countFunction(activeState)" ng-model="input.value" />
+                            <input ng-change="countFunction(activeState)" ng-model="input.value"/>
                         </md-input-container>
                         <div layout="column">
                             <md-button class="md-icon-button"
-                                ng-click="openContainerDiagram(state, CONSTANTS.CONTAINER_TYPE.INPUT)">
+                                       ng-click="openContainerDiagram(state, CONSTANTS.CONTAINER_TYPE.INPUT)">
                                 <md-icon>add</md-icon>
                             </md-button>
                             <md-button class="md-icon-button"
-                                ng-click="deleteInput(state, CONSTANTS.CONTAINER_TYPE.INPUT)">
+                                       ng-click="deleteInput(state, CONSTANTS.CONTAINER_TYPE.INPUT)">
                                 <md-icon>remove</md-icon>
                             </md-button>
                         </div>
                     </md-card>
 
-                    <md-card layout="row" class="action-input-container" ng-if="isActionState(state)">
+                    <md-card class="action-input-container" layout="row" ng-if="isActionState(state)">
                         <md-icon>call_made</md-icon>
                         <md-input-container ng-repeat="output in state.outputContainer">
                             <label>{{output.label}}</label>
-                            <input ng-model="output.value" />
+                            <input ng-model="output.value"/>
                         </md-input-container>
                         <div layout="column">
                             <md-button class="md-icon-button"
-                                ng-click="openContainerDiagram(state, CONSTANTS.CONTAINER_TYPE.OUTPUT)">
+                                       ng-click="openContainerDiagram(state, CONSTANTS.CONTAINER_TYPE.OUTPUT)">
                                 <md-icon>add</md-icon>
                             </md-button>
                             <md-button class="md-icon-button"
-                                ng-click="deleteOutput(state, CONSTANTS.CONTAINER_TYPE.OUTPUT)">
+                                       ng-click="deleteOutput(state, CONSTANTS.CONTAINER_TYPE.OUTPUT)">
                                 <md-icon>remove</md-icon>
                             </md-button>
                         </div>
@@ -105,11 +105,11 @@
                 <md-card layout="row" ng-if="isCircleState(state) && !isActiveModel">
                     <md-input-container>
                         <label>v5</label>
-                        <input ng-model="state.v5" />
+                        <input ng-model="state.v5"/>
                     </md-input-container>
                     <md-input-container>
                         <label>v6</label>
-                        <input ng-model="state.v6" />
+                        <input ng-model="state.v6"/>
                     </md-input-container>
                 </md-card>
 
@@ -125,8 +125,8 @@
                             <md-icon>delete_sweep</md-icon>
                         </md-button>
                     </md-card-header>
-                    <md-card-content ng-if="source.connections.length" ng-class="{'active-state': connection.mouseover}"
-                        ng-repeat="connection in source.connections">
+                    <md-card-content ng-class="{'active-state': connection.mouseover}" ng-if="source.connections.length"
+                                     ng-repeat="connection in source.connections">
                         <md-card>
                             <md-card-header>
                                 <md-card-header-text>
@@ -176,11 +176,11 @@
                 <md-card-content>
                     <md-input-container>
                         <label>{{ 'diagram.name' | translate}}</label>
-                        <input ng-model="diagramInfo.name" />
+                        <input ng-model="diagramInfo.name"/>
                     </md-input-container>
                     <md-input-container>
                         <label>{{ 'diagram.description' | translate}}</label>
-                        <input ng-model="diagramInfo.description" />
+                        <input ng-model="diagramInfo.description"/>
                     </md-input-container>
                 </md-card-content>
             </md-card>

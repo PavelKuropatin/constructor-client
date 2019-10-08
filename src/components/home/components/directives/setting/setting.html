@@ -1,16 +1,16 @@
-<md-card layout="row" class="action-input-container">
+<md-card class="action-input-container" layout="row">
     <md-icon>call_received</md-icon>
     <md-input-container ng-repeat="input in state.inputContainer">
         <label>{{input.label}}</label>
-        <input ng-model="input.value" />
+        <input ng-model="input.value"/>
     </md-input-container>
 </md-card>
 
-<md-card layout="row" class="action-input-container">
+<md-card class="action-input-container" layout="row">
     <md-icon>call_made</md-icon>
     <md-input-container ng-repeat="output in state.outputContainer">
         <label>{{output.label}}</label>
-        <input ng-model="output.value" />
+        <input ng-model="output.value"/>
     </md-input-container>
 </md-card>
 
@@ -23,11 +23,11 @@
         <md-content>
             <md-input-container>
                 <label>{{ 'function.enter' | translate }}</label>
-                <input ng-change="countFunction(state)" ng-model="output.stringFunction" />
+                <input ng-change="countFunction(state)" ng-model="output.stringFunction"/>
             </md-input-container>
             <md-input-container>
                 <label>{{ 'function.result' | translate }}</label>
-                <input ng-model="output.value" />
+                <input ng-model="output.value"/>
             </md-input-container>
         </md-content>
     </md-card>

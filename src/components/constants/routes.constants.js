@@ -1,4 +1,5 @@
 export default {
-  HOME: 'home',
-  MODEL: 'model'
+    SCHEMA: 'home',
+    MODEL: 'model',
+    SOCKET: 'socket'
 };
