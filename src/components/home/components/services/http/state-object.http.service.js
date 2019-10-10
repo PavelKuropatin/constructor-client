@@ -12,7 +12,7 @@ export default function stateObjectHttpService($http, env) {
         return $http.post(env.api + DEFAULT_DIAGRAM_URL + '/' + uuidDiagram + '/state');
     };
 
-    const getAllDiagramInfo = () => {
+    const getDiagramsMeta = () => {
         return $http.get(env.api + DEFAULT_DIAGRAM_URL);
     };
 
@@ -29,8 +29,8 @@ export default function stateObjectHttpService($http, env) {
         return $http.post(env.api + DEFAULT_DIAGRAM_URL, diagram);
     };
 
-    const getAllStateObject = (diagram) => {
-        return $http.get(env.api + DEFAULT_DIAGRAM_URL + '/' + diagram.uuid);
+    const getDiagram = (uuid) => {
+        return $http.get(env.api + DEFAULT_DIAGRAM_URL + '/' + uuid);
     };
 
     const createNewDiagram = () => {
@@ -60,9 +60,9 @@ export default function stateObjectHttpService($http, env) {
 
     return {
         createNewDiagram: createNewDiagram,
-        getAllStateObject: getAllStateObject,
+        getDiagram: getDiagram,
         saveDiagram: saveDiagram,
-        getAllDiagramInfo: getAllDiagramInfo,
+        getDiagramsMeta: getDiagramsMeta,
         createState: createState,
         deleteState: deleteState,
         updateDiagram: updateDiagram,

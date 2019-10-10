@@ -1,6 +1,6 @@
 <div layout="row">
-    <div class="sidenav-container" flex="25" ng-if="home.diagramInfo">
-        <sidenav active-state="home.activeState" diagram-info="home.diagramInfo"
+    <div class="sidenav-container" flex="25" ng-if="home.diagram">
+        <sidenav active-state="home.activeState" diagram="home.diagram"
                  is-active-setting="home.isActiveSetting">
         </sidenav>
     </div>
@@ -20,7 +20,7 @@
                                         {{ 'diagram.create' | translate }}
                                     </md-button>
                                 </md-menu-item>
-                                <md-menu-item ng-if="home.diagramInfo">
+                                <md-menu-item ng-if="home.diagram">
                                     <md-button ng-click="home.updateDiagram()">
                                         {{ 'diagram.update' | translate }}
                                     </md-button>
@@ -67,7 +67,7 @@
 
         <js-plumb-canvas id="container" on-connection="home.onConnection" x="home.pos_x" y="home.pos_y"
                          zoom="home.zoomlevel">
-            <ng-include ng-repeat="state in home.diagramInfo.modules" src="state.template"></ng-include>
+            <ng-include ng-repeat="state in home.diagram.modules" src="state.template"></ng-include>
         </js-plumb-canvas>
     </div>
 
