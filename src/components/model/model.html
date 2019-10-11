@@ -1,6 +1,6 @@
 <div layout="row">
     <div class="sidenav-container" flex="25">
-        <model-sidenav states="vm.diagramInfo.modules">
+        <model-sidenav states="vm.diagram.modules">
         </model-sidenav>
     </div>
     <div class="model-container" flex>
@@ -59,7 +59,7 @@
                         src="vm.modelTemplate"/>
 
             <md-card flex="35">
-                <sidenav active-state="vm.activeState" diagram-info="vm.modelInfo" is-active-model="true"
+                <sidenav active-state="vm.activeState" diagram="vm.modelInfo" is-active-model="true"
                          is-active-setting="true">
                 </sidenav>
         </div>

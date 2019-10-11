@@ -52,11 +52,11 @@ export default function modelController($scope, $state, $mdDialog, $timeout, $tr
             clickOutsideToClose: true,
         }).then((diagram) => {
             jsPlumb.ready(() => {
-                stateObjectHttpService.getAllStateObject(diagram).then((response) => {
-                    vm.diagramInfo = response.data;
+                stateObjectHttpService.getDiagram(diagram).then((response) => {
+                    vm.diagram = response.data;
+                    vm.modelInfo = {modules: []};
                 });
             });
-            console.log(vm.diagramInfo);
         });
     };
 
@@ -67,15 +67,14 @@ export default function modelController($scope, $state, $mdDialog, $timeout, $tr
             template: startCountTemplate,
             clickOutsideToClose: true,
         }).then((modelSettings) => {
-            console.log(modelSettings);
             vm.modelSettings = modelSettings;
             startCounter();
         });
     };
 
     jsPlumb.ready(() => {
-        //    stateObjectHttpService.getAllStateObject({uuid: '712941e9-7525-4d8a-a7b7-49a35df7a790'}).then((response) => {
-        //      vm.diagramInfo = response.data;
+        //    stateObjectHttpService.getDiagram({uuid: '712941e9-7525-4d8a-a7b7-49a35df7a790'}).then((response) => {
+        //      vm.diagram = response.data;
         //    });
     });
 

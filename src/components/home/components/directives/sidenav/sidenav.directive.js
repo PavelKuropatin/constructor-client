@@ -7,7 +7,7 @@ export default function sidenavDirective($timeout, $mdDialog, stateObjectService
     return {
         restrict: 'EA',
         scope: {
-            diagramInfo: '=',
+            diagram: '=',
             activeState: '=',
             isActiveSetting: '=',
             isActiveModel: '=?'
@@ -57,10 +57,10 @@ export default function sidenavDirective($timeout, $mdDialog, stateObjectService
                 state.endpointStyle.targetAnchor = swapAnchorStyles(state.endpointStyle.targetAnchor);
                 state.endpointStyle.sourceAnchor = swapAnchorStyles(state.endpointStyle.sourceAnchor);
 
-                let bufStateObjects = scope.diagramInfo.modules.slice();
-                scope.diagramInfo.modules = [];
+                let bufStateObjects = scope.diagram.modules.slice();
+                scope.diagram.modules = [];
                 $timeout(() => {
-                    scope.diagramInfo.modules = bufStateObjects;
+                    scope.diagram.modules = bufStateObjects;
                 });
             };
 

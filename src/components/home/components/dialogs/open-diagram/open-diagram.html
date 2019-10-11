@@ -1,17 +1,44 @@
 <md-card>
+
     <md-card-header>
         <md-card-header-text>
             <div class="title-text"> {{ 'diagram.choose' | translate }}</div>
         </md-card-header-text>
     </md-card-header>
-    <md-card-content>
-        <md-input-container>
-            <label>{{ 'diagram.self' | translate }}</label>
-            <md-select name="templateName" ng-model="vm.choosenDiagram">
-                <md-option ng-repeat="diagram in vm.diagrams" ng-value="diagram">{{diagram.name}}</md-option>
-            </md-select>
-        </md-input-container>
-    </md-card-content>
+
+    <table class="md-table">
+        <thead>
+        <tr>
+            <th class="md-table-header"
+                ng-repeat="header in vm.headers">
+                {{ header.name }}
+            </th>
+            <th class="md-table-header">Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-class="{'selected-background' : diagram.uuid == vm.chosenUUID }"
+            ng-click="vm.setDiagramToLoad(diagram.uuid)"
+            ng-model="diagram"
+            ng-repeat="diagram in vm.diagrams">
+
+            <td ng-repeat="header in vm.headers">
+                <div class="md-table-content">
+                    {{ diagram[header.label] }}
+                </div>
+            </td>
+
+            <td>
+                <md-button class="md-table-action"
+                           ng-click="vm.deleteDiagram(diagram.uuid)">
+                    <span class="material-icons md-18">delete_forever</span>
+                </md-button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
     <md-input-container>
         <md-button ng-click="vm.chooseDiagram()">
             {{ 'apply' | translate }}
@@ -20,4 +47,5 @@
             {{ 'close' | translate }}
         </md-button>
     </md-input-container>
+
 </md-card>

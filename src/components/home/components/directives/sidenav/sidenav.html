@@ -1,10 +1,10 @@
 <md-card class="sidenav">
     <md-card-header ng-if="!isActiveModel">
         <md-card-header-text>
-            <div class="title-text">{{diagramInfo.name}}</div>
-            <div>{{diagramInfo.description}}</div>
+            <div class="title-text">{{diagram.name}}</div>
+            <div>{{diagram.description}}</div>
         </md-card-header-text>
-        <md-button class="md-icon-button" ng-click="newState(diagramInfo.uuid, diagramInfo.modules, state)">
+        <md-button class="md-icon-button" ng-click="newState(diagram.uuid, diagram.modules, state)">
             <md-icon>playlist_add</md-icon>
         </md-button>
         <md-button class="md-icon-button" ng-click="showjson=!showjson">
@@ -15,8 +15,8 @@
 
     <md-divider></md-divider>
 
-    <md-card-content ng-if="diagramInfo.modules.length >= 1 || showjson">
-        <md-card ng-if="!showjson" ng-repeat="state in diagramInfo.modules">
+    <md-card-content ng-if="diagram.modules.length >= 1 || showjson">
+        <md-card ng-if="!showjson" ng-repeat="state in diagram.modules">
             <md-card-header>
                 <md-card-header-text>
                     <div layout="column">
@@ -33,7 +33,7 @@
                     <md-icon ng-if="activeState !== state">visibility</md-icon>
                     <md-icon ng-if="activeState === state">visibility_off</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="deleteState(diagramInfo.uuid, diagramInfo.modules, state)">
+                <md-button class="md-icon-button" ng-click="deleteState(diagram.uuid, diagram.modules, state)">
                     <md-icon>delete_sweep</md-icon>
                 </md-button>
             </md-card-header>
@@ -169,18 +169,18 @@
                     <md-card-header-text>
                         <div class="title-text">{{ 'diagram.info' | translate}}</div>
                     </md-card-header-text>
-                    <md-button class="md-icon-button" ng-click="deleteDiagram(diagramInfo)">
+                    <md-button class="md-icon-button" ng-click="deleteDiagram(diagram)">
                         <md-icon>delete_sweep</md-icon>
                     </md-button>
                 </md-card-header>
                 <md-card-content>
                     <md-input-container>
                         <label>{{ 'diagram.name' | translate}}</label>
-                        <input ng-model="diagramInfo.name"/>
+                        <input ng-model="diagram.name"/>
                     </md-input-container>
                     <md-input-container>
                         <label>{{ 'diagram.description' | translate}}</label>
-                        <input ng-model="diagramInfo.description"/>
+                        <input ng-model="diagram.description"/>
                     </md-input-container>
                 </md-card-content>
             </md-card>
@@ -188,7 +188,7 @@
         </md-card>
 
         <md-card ng-if="showjson">
-            <textarea class="json-container">{{diagramInfo.modules | json }}</textarea>
+            <textarea class="json-container">{{diagram.modules | json }}</textarea>
         </md-card>
     </md-card-content>
 </md-card>

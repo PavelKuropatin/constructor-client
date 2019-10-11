@@ -12,7 +12,7 @@ export default function homeController($scope, $state, $mdDialog, $translate, st
     vm.isActiveSetting = false;
 
     $scope.$on(CONSTANTS.EVENT_CONSTANTS.SUCCESS_DIAGRAM_DELETE, () => {
-        vm.diagramInfo = undefined;
+        vm.diagram = undefined;
     });
 
     vm.goToModel = () => {
@@ -28,7 +28,7 @@ export default function homeController($scope, $state, $mdDialog, $translate, st
     };
 
     vm.onConnection = (instance, connection, targetUUID, sourceUUID) => {
-        _.forEach(vm.diagramInfo.modules, state => {
+        _.forEach(vm.diagram.modules, state => {
             _.forEach(state.sources, source => {
                 if (source.uuid == sourceUUID) {
                     source.connections.push({'uuid': targetUUID});
@@ -36,25 +36,25 @@ export default function homeController($scope, $state, $mdDialog, $translate, st
                 }
             });
         });
-        stateObjectService.updateContainer(vm.diagramInfo.modules, sourceUUID, targetUUID);
+        stateObjectService.updateContainer(vm.diagram.modules, sourceUUID, targetUUID);
         vm.updateDiagram();
     };
 
     vm.updateDiagram = () => {
-        stateObjectHttpService.updateDiagram(vm.diagramInfo).then(response => {
-            vm.diagramInfo = response.data;
+        stateObjectHttpService.updateDiagram(vm.diagram).then(response => {
+            vm.diagram = response.data;
         });
     };
 
     vm.createNewDiagram = () => {
         stateObjectHttpService.createNewDiagram().then(response => {
-            vm.diagramInfo = response.data;
+            vm.diagram = response.data;
         });
     };
 
     jsPlumb.ready(() => {
-        //    stateObjectHttpService.getAllStateObject({uuid: '712941e9-7525-4d8a-a7b7-49a35df7a790'}).then((response) => {
-        //      vm.diagramInfo = response.data;
+        //    stateObjectHttpService.getDiagram({uuid: "8d51047f-9dba-4239-b1e2-b3977ac4d8d5"}).then((response) => {
+        //      vm.diagram = response.data;
         //    });
     });
 
@@ -63,10 +63,11 @@ export default function homeController($scope, $state, $mdDialog, $translate, st
             controller: 'openDiagramController as vm',
             template: openDiagramTemplate,
             clickOutsideToClose: true,
-        }).then((diagram) => {
+        }).then((uuid) => {
             jsPlumb.ready(() => {
-                stateObjectHttpService.getAllStateObject(diagram).then((response) => {
-                    vm.diagramInfo = response.data;
+                stateObjectHttpService.getDiagram(uuid).then((response) => {
+                    vm.diagram = response.data;
+                    console.log(vm.diagram);
                 });
             });
         });

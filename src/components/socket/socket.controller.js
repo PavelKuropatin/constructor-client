@@ -12,7 +12,7 @@ export default function socketController($scope, $state, $translate, $mdDialog, 
     vm.backgroundImg = img;
     vm.connectSettings = {};
     vm.modelInfo = { modules: [] };
-    vm.diagramInfo = { modules: [] };
+    vm.diagram = { modules: [] };
     vm.sortableOptions = {
         connectWith: '.connectedItems',
     };
@@ -67,8 +67,8 @@ export default function socketController($scope, $state, $translate, $mdDialog, 
             clickOutsideToClose: true,
         }).then((diagram) => {
             jsPlumb.ready(() => {
-                stateObjectHttpService.getAllStateObject(diagram).then((response) => {
-                    vm.diagramInfo = response.data;
+                stateObjectHttpService.getDiagram(diagram).then((response) => {
+                    vm.diagram = response.data;
                 });
             });
         });

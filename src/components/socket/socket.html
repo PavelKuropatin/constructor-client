@@ -1,6 +1,6 @@
 <div layout="row">
     <div class="sidenav-container" flex="25">
-        <socket-sidenav states="vm.diagramInfo.modules">
+        <socket-sidenav states="vm.diagram.modules">
         </socket-sidenav>
     </div>
     <div class="model-container" flex>
@@ -59,7 +59,7 @@
                         src="vm.modelTemplate"/>
 
             <md-card flex="35">
-                <sidenav active-state="vm.activeState" diagram-info="vm.modelInfo" is-active-model="true"
+                <sidenav active-state="vm.activeState" diagram="vm.modelInfo" is-active-model="true"
                          is-active-setting="true">
                 </sidenav>
             </md-card>
