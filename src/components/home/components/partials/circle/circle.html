@@ -1,5 +1,5 @@
 <js-plumb-object class="circle-state"
-                 ng-click="home.setActiveState(state)"
+                 ng-click="vm.setActiveState(state)"
                  ng-style="{ 'left':state.x, 'top':state.y }"
                  state-object="state">
     <md-input-container class="circle-state-top-container">
@@ -13,7 +13,7 @@
     <js-plumb-endpoint anchor="RightMiddle"
                        class="{{state.endpointStyle.sourceEndpoint}}"
                        ng-repeat="endpoint in state.sources"
-                       settings="home.sourceEndpointStyle"
+                       settings="vm.sourceEndpointStyle"
                        uuid="{{endpoint.uuid}}">
         <js-plumb-connection ng-click="setActiveConnection($index)"
                              ng-model="connection"
@@ -23,6 +23,6 @@
     <js-plumb-endpoint anchor="LeftMiddle"
                        class="{{state.endpointStyle.targetEndpoint}}"
                        ng-repeat="endpoint in state.targets"
-                       settings="home.targetEndpointStyle"
+                       settings="vm.targetEndpointStyle"
                        uuid="{{endpoint.uuid}}"></js-plumb-endpoint>
 </js-plumb-object>

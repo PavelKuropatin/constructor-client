@@ -8,7 +8,7 @@ export default function homeRouteConfig($stateProvider, ROUTES) {
             views: {
                 'main': {
                     template: homeTemplate,
-                    controller: 'homeController as home',
+                    controller: 'homeController as vm',
                 }
             },
         });

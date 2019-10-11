@@ -18,7 +18,9 @@
 .sidenav-container {
   overflow: auto;
 }
-
+.scrollable {
+    overflow-y: scroll;
+}
 .schema-container {
   overflow: hidden;
 }

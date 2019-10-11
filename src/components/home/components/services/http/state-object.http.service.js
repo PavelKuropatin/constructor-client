@@ -19,7 +19,7 @@ export default function stateObjectHttpService($http, env) {
     const saveDiagram = (diagram) => {
         return $http.post(env.api + DEFAULT_DIAGRAM_URL,
             {
-                modules: diagram.modules,
+                states: diagram.states,
                 name: diagram.name,
                 description: diagram.description
             });

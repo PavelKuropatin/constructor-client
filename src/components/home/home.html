@@ -1,10 +1,10 @@
 <div layout="row">
-    <div class="sidenav-container" flex="25" ng-if="home.diagram">
-        <sidenav active-state="home.activeState" diagram="home.diagram"
-                 is-active-setting="home.isActiveSetting">
+    <div class="sidenav-container" flex="25" ng-if="vm.diagram">
+        <sidenav active-state="vm.activeState" diagram="vm.diagram"
+                 is-active-setting="vm.isActiveSetting">
         </sidenav>
     </div>
-    <div class="schema-container" flex ng-if="!home.isActiveSetting">
+    <div class="schema-container" flex ng-if="!vm.isActiveSetting">
         <md-toolbar class="md-hue-2">
             <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
                 <div class="md-menu-demo">
@@ -16,17 +16,17 @@
                             </md-button>
                             <md-menu-content ng-mouseleave="$mdMenu.close()" width="4">
                                 <md-menu-item>
-                                    <md-button ng-click="home.createNewDiagram()">
+                                    <md-button ng-click="vm.createNewDiagram()">
                                         {{ 'diagram.create' | translate }}
                                     </md-button>
                                 </md-menu-item>
-                                <md-menu-item ng-if="home.diagram">
-                                    <md-button ng-click="home.updateDiagram()">
+                                <md-menu-item ng-if="vm.diagram">
+                                    <md-button ng-click="vm.updateDiagram()">
                                         {{ 'diagram.update' | translate }}
                                     </md-button>
                                 </md-menu-item>
                                 <md-menu-item>
-                                    <md-button ng-click="home.openDiagram()">
+                                    <md-button ng-click="vm.openDiagram()">
                                         {{ 'diagram.open' | translate }}
                                     </md-button>
                                 </md-menu-item>
@@ -34,9 +34,9 @@
                         </md-menu>
                     </div>
                 </div>
-                <md-button class="md-raised" ng-click="home.goToModel()">{{ 'model.self' | translate }}</md-button>
-                <md-button class="md-raised" ng-click="home.goToSocket()">{{ 'socket.self' | translate }}</md-button>
-                <md-slider aria-label="red" class="md-warn" id="red-slider" max="200" min="0" ng-model="home.zoomlevel"
+                <md-button class="md-raised" ng-click="vm.goToModel()">{{ 'model.self' | translate }}</md-button>
+
+                <md-slider aria-label="red" class="md-warn" id="red-slider" max="200" min="0" ng-model="vm.zoomlevel"
                            step="10">
                 </md-slider>
                 <div class="md-menu-demo">
@@ -48,12 +48,12 @@
                             </md-button>
                             <md-menu-content ng-mouseleave="$mdMenu.close()" width="2">
                                 <md-menu-item>
-                                    <md-button ng-click="home.setLanguage('en')">
+                                    <md-button ng-click="vm.setLanguage('en')">
                                         {{ 'language.en' | translate }}
                                     </md-button>
                                 </md-menu-item>
                                 <md-menu-item>
-                                    <md-button ng-click="home.setLanguage('ru')">
+                                    <md-button ng-click="vm.setLanguage('ru')">
                                         {{ 'language.ru' | translate }}
                                     </md-button>
                                 </md-menu-item>
@@ -65,11 +65,11 @@
             </div>
         </md-toolbar>
 
-        <js-plumb-canvas id="container" on-connection="home.onConnection" x="home.pos_x" y="home.pos_y"
-                         zoom="home.zoomlevel">
-            <ng-include ng-repeat="state in home.diagram.modules" src="state.template"></ng-include>
+        <js-plumb-canvas id="container" on-connection="vm.onConnection" x="vm.pos_x" y="vm.pos_y"
+                         zoom="vm.zoomlevel">
+            <ng-include ng-repeat="state in vm.diagram.states" src="state.template"></ng-include>
         </js-plumb-canvas>
     </div>
 
-    <setting flex="75" ng-if="home.isActiveSetting"></setting>
+    <setting flex="75" ng-if="vm.isActiveSetting"></setting>
 </div>

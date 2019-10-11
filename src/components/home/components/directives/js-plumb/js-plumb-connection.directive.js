@@ -11,13 +11,13 @@ export default function jsPlumbConnectionDirective($timeout) {
         link: function (scope, element, attrs, jsPlumbEndpoint) {
             $timeout(() => {
                 const instance = jsPlumbEndpoint.scope.jsPlumbInstance;
-                let sourceUUID = jsPlumbEndpoint.scope.uuid;
-                let targetUUID = scope.ngModel.uuid;
-                if (typeof jsPlumbEndpoint.connectionObjects[targetUUID] === 'undefined') {
-                    jsPlumbEndpoint.connectionObjects[targetUUID] = instance.connect({
+                let sourceUuid = jsPlumbEndpoint.scope.uuid;
+                let targetUuid = scope.ngModel.uuid;
+                if (typeof jsPlumbEndpoint.connectionObjects[targetUuid] === 'undefined') {
+                    jsPlumbEndpoint.connectionObjects[targetUuid] = instance.connect({
                         uuids: [
-                            sourceUUID,
-                            targetUUID
+                            sourceUuid,
+                            targetUuid
                         ],
                         paintStyle: {
                             strokeWidth: 6,
@@ -27,10 +27,10 @@ export default function jsPlumbConnectionDirective($timeout) {
                     });
                 }
 
-                let connection = jsPlumbEndpoint.connectionObjects[targetUUID];
+                let connection = jsPlumbEndpoint.connectionObjects[targetUuid];
 
                 connection.bind("mouseover", (conn, originalEvent) => {
-                    let title = 'UUID Target: ' + targetUUID;
+                    let title = 'Uuid Target: ' + targetUuid;
                     conn.addOverlay(["Label", {
                         label: "<md-card style='padding: 4px'>" + title + "</md-card>",
                         location: 0.5,
@@ -48,13 +48,12 @@ export default function jsPlumbConnectionDirective($timeout) {
 
                 scope.$on('$destroy', () => {
                     try {
-                        console.log(targetUUID);
-                        instance.deleteConnection(jsPlumbEndpoint.connectionObjects[targetUUID]);
+                        instance.deleteConnection(jsPlumbEndpoint.connectionObjects[targetUuid]);
                     } catch (err) {
-                        console.log('error', err, jsPlumbEndpoint.connectionObjects[targetUUID]);
+                        console.log('error', err, jsPlumbEndpoint.connectionObjects[targetUuid]);
 
                     }
-                    jsPlumbEndpoint.connectionObjects[targetUUID] = undefined;
+                    jsPlumbEndpoint.connectionObjects[targetUuid] = undefined;
                 });
             }, 50);
         }

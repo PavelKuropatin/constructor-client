@@ -4,19 +4,19 @@
             <div class="title-text">{{diagram.name}}</div>
             <div>{{diagram.description}}</div>
         </md-card-header-text>
-        <md-button class="md-icon-button" ng-click="newState(diagram.uuid, diagram.modules, state)">
+        <md-button class="md-icon-button" ng-click="newState(diagram.uuid, diagram.states, state)">
             <md-icon>playlist_add</md-icon>
         </md-button>
-        <md-button class="md-icon-button" ng-click="showjson=!showjson">
-            <md-icon ng-if="!showjson">create</md-icon>
-            <md-icon ng-if="showjson">remove</md-icon>
-        </md-button>
+        <!--        <md-button class="md-icon-button"  aria_label="show json" ng-click="showjson=!showjson">-->
+        <!--            <md-icon ng-if="!showjson">create</md-icon>-->
+        <!--            <md-icon ng-if="showjson">remove</md-icon>-->
+        <!--        </md-button>-->
     </md-card-header>
 
     <md-divider></md-divider>
 
-    <md-card-content ng-if="diagram.modules.length >= 1 || showjson">
-        <md-card ng-if="!showjson" ng-repeat="state in diagram.modules">
+    <md-card-content class="scrollable" flex ng-if="diagram.states.length >= 1 || showjson" style="max-height: 800px">
+        <md-card ng-if="!showjson" ng-repeat="state in diagram.states">
             <md-card-header>
                 <md-card-header-text>
                     <div layout="column">
@@ -29,11 +29,11 @@
                 <md-button class="md-icon-button" ng-click="configState(state)" ng-if="!isActiveModel">
                     <md-icon>settings_applications</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="setActiveState(state)">
+                <md-button aria-label="hide/show state info" class="md-icon-button" ng-click="setActiveState(state)">
                     <md-icon ng-if="activeState !== state">visibility</md-icon>
                     <md-icon ng-if="activeState === state">visibility_off</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="deleteState(diagram.uuid, diagram.modules, state)">
+                <md-button class="md-icon-button" ng-click="deleteState(diagram.uuid, diagram.states, state)">
                     <md-icon>delete_sweep</md-icon>
                 </md-button>
             </md-card-header>
@@ -52,9 +52,14 @@
                 <div layout="row" layout-align="space-between" ng-if="!isActiveModel">
                     <md-input-container>
                         <label>{{ 'state.template' | translate }}</label>
-                        <md-select name="templateName" ng-model="state.template">
-                            <md-option ng-repeat="partial in partials" ng-value="partial">{{partial}}</md-option>
-                        </md-select>
+                        <div layout="row">
+                            <md-select name="templateName" ng-model="state.template">
+                                <md-option ng-repeat="partial in partials" ng-value="partial">{{partial}}</md-option>
+                            </md-select>
+                            <md-button class="md-icon-button" ng-click="editEndpoints(state)" ng-if="!isActiveModel">
+                                <md-icon>settings_applications</md-icon>
+                            </md-button>
+                        </div>
                     </md-input-container>
                     <md-input-container ng-if="isActionState(state)">
                         <label>{{ 'state.color' | translate }}</label>
@@ -69,7 +74,7 @@
                         <md-icon>call_received</md-icon>
                         <md-input-container ng-repeat="input in state.inputContainer">
                             <label>{{input.label}}</label>
-                            <input ng-change="countFunction(activeState)" ng-model="input.value"/>
+                            <input ng-change="countFunction(diagram.states, activeState)" ng-model="input.value"/>
                         </md-input-container>
                         <div layout="column">
                             <md-button class="md-icon-button"
@@ -117,7 +122,7 @@
                     <md-card-header>
                         <md-card-header-text>
                             <div layout="column">
-                                <div class="big-text">UUID - {{source.uuid}}</div>
+                                <div class="big-text">Uuid - {{source.uuid}}</div>
                                 <small class="small-text">{{ 'state.source' | translate }}</small>
                             </div>
                         </md-card-header-text>
@@ -150,7 +155,7 @@
                     <md-card-header>
                         <md-card-header-text>
                             <div layout="column">
-                                <div class="big-text">UUID - {{target.uuid}}</div>
+                                <div class="big-text">Uuid - {{target.uuid}}</div>
                                 <small class="small-text">{{ 'state.target' | translate }}</small>
                             </div>
                         </md-card-header-text>
@@ -188,7 +193,7 @@
         </md-card>
 
         <md-card ng-if="showjson">
-            <textarea class="json-container">{{diagram.modules | json }}</textarea>
+            <textarea class="json-container">{{diagram.states | json }}</textarea>
         </md-card>
     </md-card-content>
 </md-card>

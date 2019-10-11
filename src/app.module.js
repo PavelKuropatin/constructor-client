@@ -23,8 +23,7 @@ import './global.scss';
 
 import config from './app.config';
 import homeModule from './components/home/home.module';
-import modelModule from './components/model/model.module';
-import socketModule from './components/socket/socket.module';
+import customHomeModule from './components/custom-home/custom-home.module';
 import configModule from './config/config.module';
 
 
@@ -40,8 +39,9 @@ angular
         'ui.sortable',
         'pascalprecht.translate',
         uirouter, animate, aria,
-        messages, material, homeModule,
-        modelModule, configModule,
-        socketModule
+        messages, material,
+        homeModule,
+        configModule,
+        customHomeModule
     ])
     .config(config);

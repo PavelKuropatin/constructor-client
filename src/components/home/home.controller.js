@@ -3,11 +3,17 @@ import openDiagramTemplate from "./components/dialogs/open-diagram/open-diagram.
 export default function homeController($scope, $state, $mdDialog, $translate, stateObjectHttpService, jsPlumbStyleService,
                                        stateObjectService, CONSTANTS, ROUTES) {
     'ngInject';
+    $scope.CONSTANTS = CONSTANTS;
     const vm = this;
     vm.zoomlevel = 64;
     vm.activeState = null;
-    vm.targetEndpointStyle = jsPlumbStyleService.getTargetEndpointStyle();
-    vm.sourceEndpointStyle = jsPlumbStyleService.getSourceEndpointStyle();
+
+    vm.targetEndpointStyle1 = jsPlumbStyleService.getTargetEndpointStyle1();
+    vm.targetEndpointStyle2 = jsPlumbStyleService.getTargetEndpointStyle2();
+
+    vm.sourceEndpointStyle1 = jsPlumbStyleService.getSourceEndpointStyle1();
+    vm.sourceEndpointStyle2 = jsPlumbStyleService.getSourceEndpointStyle2();
+
     vm.countFunction = stateObjectService.countFunction;
     vm.isActiveSetting = false;
 
@@ -19,24 +25,23 @@ export default function homeController($scope, $state, $mdDialog, $translate, st
         $state.go(ROUTES.MODEL);
     };
     vm.goToSocket = () => {
-        $state.go(ROUTES.SOCKET);
+        $state.go(ROUTES.MODEL);
     };
 
     vm.setActiveState = (state) => {
-        console.log(state);
         vm.activeState = state;
     };
 
-    vm.onConnection = (instance, connection, targetUUID, sourceUUID) => {
-        _.forEach(vm.diagram.modules, state => {
+    vm.onConnection = (instance, connection, targetUuid, sourceUuid) => {
+        _.forEach(vm.diagram.states, state => {
             _.forEach(state.sources, source => {
-                if (source.uuid == sourceUUID) {
-                    source.connections.push({'uuid': targetUUID});
+                if (source.uuid == sourceUuid) {
+                    source.connections.push({'uuid': targetUuid});
                     $scope.$apply();
                 }
             });
         });
-        stateObjectService.updateContainer(vm.diagram.modules, sourceUUID, targetUUID);
+        stateObjectService.updateContainer(vm.diagram.states, sourceUuid, targetUuid);
         vm.updateDiagram();
     };
 
@@ -52,11 +57,11 @@ export default function homeController($scope, $state, $mdDialog, $translate, st
         });
     };
 
-    jsPlumb.ready(() => {
-        //    stateObjectHttpService.getDiagram({uuid: "8d51047f-9dba-4239-b1e2-b3977ac4d8d5"}).then((response) => {
-        //      vm.diagram = response.data;
-        //    });
-    });
+//    jsPlumb.ready(() => {
+//            stateObjectHttpService.getDiagram("468b7557-77d8-40c0-baf5-d6201562f348").then((response) => {
+//                vm.diagram = response.data;
+//          });
+//    });
 
     vm.openDiagram = () => {
         $mdDialog.show({
@@ -67,7 +72,6 @@ export default function homeController($scope, $state, $mdDialog, $translate, st
             jsPlumb.ready(() => {
                 stateObjectHttpService.getDiagram(uuid).then((response) => {
                     vm.diagram = response.data;
-                    console.log(vm.diagram);
                 });
             });
         });

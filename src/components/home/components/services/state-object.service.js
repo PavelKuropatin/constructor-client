@@ -56,11 +56,46 @@ export default function stateObjectService($rootScope, stateObjectHttpService, C
         });
     };
 
-    const updateContainer = (modules, sourceUuid, targetUuid) => {
-        findTargetState(modules, targetUuid).inputContainer = findSourceState(modules, sourceUuid).outputContainer;
+    const updateContainer = (states, sourceUuid, targetUuid) => {
+        let inputContainer = findTargetState(states, targetUuid).inputContainer;
+        _.forEach(findSourceState(states, sourceUuid).outputContainer, (oVar) => {
+            let _var = _.find(inputContainer, (iVar) => iVar.label === oVar.label);
+            if (_var){
+                _var.value = oVar.value;
+            } else {
+                inputContainer.push({
+                    label : oVar.label,
+                    value : oVar.value
+                });
+            }
+        });
     };
 
-    const countFunction = (state) => {
+    function getParentStates(states, targets){
+        return _.filter(states, (state) => {
+           return _.find(state.sources, (source) => {
+                return _.find(source.connections, (connection) => {
+                    return targets.includes(connection.uuid);
+                });
+           });
+        });
+
+    };
+
+    function applyParentContainer(parentContainer,childContainer){
+        _.forEach(childContainer, (childVar) => {
+            let parentVar = _.find(parentContainer, (parentVar) => parentVar.label === childVar.label);
+            if (parentVar){
+                childVar.value = parentVar.value;
+            }
+        });
+    }
+
+    const countFunction = (states, state) => {
+        let parentStates = getParentStates(states, _.map(state.targets, (target) => target.uuid));
+        _.forEach(parentStates, (parentState) => {
+            applyParentContainer(parentState.outputContainer, state.inputContainer);
+        });
         _.forEach(state.outputContainer, container => {
             let bufFunction = _.clone(container.stringFunction);
             _.forEach(state.inputContainer, item => {
@@ -73,14 +108,15 @@ export default function stateObjectService($rootScope, stateObjectHttpService, C
         });
     };
 
-    function findSourceState(modules, sourceUuid) {
-        return _.find(modules, state => {
+
+    function findSourceState(states, sourceUuid) {
+        return _.find(states, state => {
             return state.sources[0].uuid == sourceUuid;
         });
     }
 
-    function findTargetState(modules, targetUuid) {
-        return _.find(modules, state => {
+    function findTargetState(states, targetUuid) {
+        return _.find(states, state => {
             return state.targets[0].uuid == targetUuid;
         });
     }

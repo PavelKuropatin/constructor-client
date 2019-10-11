@@ -1,6 +1,7 @@
 import template from './sidenav.html';
 import containerTemplate from '../../dialogs/add-container/add-container.html';
 import delContainerTemplate from '../../dialogs/del-container/del-container.html';
+import editEndpointsLayoutTemplate from '../../dialogs/edit-endpoints-layout/edit-endpoints-layout.html';
 
 export default function sidenavDirective($timeout, $mdDialog, stateObjectService, CONSTANTS) {
     'ngInject';
@@ -38,7 +39,7 @@ export default function sidenavDirective($timeout, $mdDialog, stateObjectService
                     scope.activeState = null;
                 } else {
                     scope.activeState = state;
-                    scope.countFunction(scope.activeState);
+                    scope.countFunction(scope.diagram.states, scope.activeState);
                 }
             };
 
@@ -57,11 +58,26 @@ export default function sidenavDirective($timeout, $mdDialog, stateObjectService
                 state.endpointStyle.targetAnchor = swapAnchorStyles(state.endpointStyle.targetAnchor);
                 state.endpointStyle.sourceAnchor = swapAnchorStyles(state.endpointStyle.sourceAnchor);
 
-                let bufStateObjects = scope.diagram.modules.slice();
-                scope.diagram.modules = [];
-                $timeout(() => {
-                    scope.diagram.modules = bufStateObjects;
-                });
+                refreshStates();
+            };
+
+            function refreshStates(){
+                let bufStateObjects = scope.diagram.states.slice();
+                            scope.diagram.states = [];
+                            $timeout(() => {
+                                scope.diagram.states = bufStateObjects;
+                            });
+            }
+            scope.editEndpoints = (state) => {
+                        $mdDialog.show({
+                                locals: {endpointStyle : state.endpointStyle},
+                                controller: 'editEndpointsLayoutController as vm',
+                                template: editEndpointsLayoutTemplate,
+                                clickOutsideToClose: true,
+                            }).then(function (endpointStyle) {
+                            state.endpointStyle = endpointStyle;
+                            refreshStates();
+                         });
             };
 
             scope.deleteInput = (state, type) => {
