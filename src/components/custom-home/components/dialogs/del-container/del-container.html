@@ -1,0 +1,19 @@
+<md-card>
+    <md-card-header>
+        <md-card-header-text>
+            <div class="title-text">{{ 'param.delete' | translate }}</div>
+        </md-card-header-text>
+    </md-card-header>
+    <md-card-content>
+        <md-input-container ng-repeat="var in vm.container">
+            <md-button ng-click="vm.deleteVar(var.label)" style="text-transform:none">
+                {{ var.label }}
+            </md-button>
+        </md-input-container>
+    </md-card-content>
+    <md-input-container>
+        <md-button ng-click="vm.hideDialog()">
+            {{ 'close' | translate}}
+        </md-button>
+    </md-input-container>
+</md-card>

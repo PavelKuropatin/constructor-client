@@ -34,9 +34,9 @@ export default function jsPlumbCanvasDirective() {
             instance.bind("connection", (info, origEvent) => {
                 if (origEvent && origEvent.type == 'mouseup') {
 
-                    var targetUUID = $(info.target).attr('uuid');
-                    var sourceUUID = $(info.source).attr('uuid');
-                    scope.onConnection(instance, info.connection, targetUUID, sourceUUID);
+                    var targetUuid = $(info.target).attr('uuid');
+                    var sourceUuid = $(info.source).attr('uuid');
+                    scope.onConnection(instance, info.connection, targetUuid, sourceUuid);
                     instance.deleteConnection(info.connection);
                 }
             });
@@ -46,6 +46,7 @@ export default function jsPlumbCanvasDirective() {
                 minHeight: '1000px',
                 display: 'block',
             }).draggable({
+//                axis: "y",
                 stop: function (event, ui) {
                     var position = $(this).position();
                     scope.x = position.left;
@@ -65,11 +66,15 @@ export default function jsPlumbCanvasDirective() {
 
             $(element).bind('mousewheel', (e) => {
                 if (e.originalEvent.wheelDelta / 200 > 0) {
-                    scope.zoom += 10;
+                    if (scope.zoom < 200){
+                        scope.zoom += 10;
+                    }
                     scope.$apply();
 
                 } else {
-                    scope.zoom -= 10;
+                    if (scope.zoom >= 20){
+                        scope.zoom -= 10;
+                    }
                     scope.$apply();
                 }
             });

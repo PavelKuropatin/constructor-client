@@ -61,6 +61,7 @@
     "material-icons": "^0.2.3",
     "mathjs": "^5.4.2",
     "net": "^1.0.2",
+    "ng-filedialog": "^1.0.0",
     "path": "^0.12.7",
     "sockjs-client": "^1.4.0",
     "standard": "^14.3.1",

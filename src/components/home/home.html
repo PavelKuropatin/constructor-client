@@ -35,7 +35,6 @@
                     </div>
                 </div>
                 <md-button class="md-raised" ng-click="vm.goToModel()">{{ 'model.self' | translate }}</md-button>
-                <md-button class="md-raised" ng-click="vm.goToSocket()">{{ 'socket.self' | translate }}</md-button>
                 <md-slider aria-label="red" class="md-warn" id="red-slider" max="200" min="0" ng-model="vm.zoomlevel"
                            step="10">
                 </md-slider>
@@ -67,7 +66,7 @@
 
         <js-plumb-canvas id="container" on-connection="vm.onConnection" x="vm.pos_x" y="vm.pos_y"
                          zoom="vm.zoomlevel">
-            <ng-include ng-repeat="state in vm.diagram.modules" src="state.template"></ng-include>
+            <ng-include ng-repeat="state in vm.diagram.states" src="state.template"></ng-include>
         </js-plumb-canvas>
     </div>
 

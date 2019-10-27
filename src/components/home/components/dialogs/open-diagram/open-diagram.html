@@ -9,23 +9,22 @@
     <table class="md-table">
         <thead>
         <tr>
-            <th class="md-table-header"
-                ng-repeat="header in vm.headers">
-                {{ header.name }}
+            <th class="md-table-header">
+                {{ 'diagram.name' | translate }}
             </th>
-            <th class="md-table-header">Action</th>
+            <th class="md-table-header">{{'diagram.action' | translate }}</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr ng-class="{'selected-background' : diagram.uuid == vm.chosenUUID }"
+        <tr ng-class="{'selected-background' : diagram.uuid == vm.chosenUuid }"
             ng-click="vm.setDiagramToLoad(diagram.uuid)"
             ng-model="diagram"
             ng-repeat="diagram in vm.diagrams">
 
-            <td ng-repeat="header in vm.headers">
+            <td>
                 <div class="md-table-content">
-                    {{ diagram[header.label] }}
+                    {{ diagram.name }}
                 </div>
             </td>
 

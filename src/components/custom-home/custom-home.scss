@@ -1,0 +1,46 @@
+#file-input {
+    display: none;
+}
+
+.jtk-drag-select * {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.cursor-default {
+  cursor: default;
+}
+
+.connectorHoverClass {
+  color: red;
+}
+
+.sidenav-container {
+  overflow: auto;
+}
+
+.schema-container {
+  overflow: hidden;
+}
+
+.endpoint_TopCenter, .endpoint_BottomCenter, .endpoint_LeftMiddle, .endpoint_RightMiddle {
+  display: inline-block;
+}
+
+.model-container {
+   height: 93vh;
+}
+
+custom-js-plumb-canvas {
+  background: #ECF5F9;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+
+  position: relative;
+  left: 2vw;
+  top: 2vh;
+}
+

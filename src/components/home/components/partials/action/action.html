@@ -6,7 +6,7 @@
         <md-icon>call_received</md-icon>
         <md-input-container ng-repeat="input in state.inputContainer">
             <label>{{input.label}}</label>
-            <input ng-change="vm.countFunction(state)" ng-model="input.value"/>
+            <input ng-change="vm.countFunction(states,state)" ng-model="input.value"/>
         </md-input-container>
     </div>
     <h3 class="cursor-default">{{state.name}}</h3>
@@ -17,19 +17,21 @@
             <input ng-model="output.value"/>
         </md-input-container>
     </div>
+
     <js-plumb-endpoint anchor={{state.endpointStyle.sourceAnchor}}
                        class={{state.endpointStyle.sourceEndpoint}}
                        ng-repeat="endpoint in state.sources"
-                       settings="vm.sourceEndpointStyle"
+                       settings="(state.endpointStyle.sourceAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || state.endpointStyle.sourceAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.sourceEndpointStyle1 : vm.sourceEndpointStyle2"
                        uuid="{{endpoint.uuid}}">
         <js-plumb-connection ng-model="connection"
+                             ng-if="connection.is_visible"
                              ng-repeat="connection in endpoint.connections"
-                             state-objects="vm.diagram.modules">
+                             state-objects="vm.diagram.states">
         </js-plumb-connection>
     </js-plumb-endpoint>
     <js-plumb-endpoint anchor={{state.endpointStyle.targetAnchor}}
                        class={{state.endpointStyle.targetEndpoint}}
                        ng-repeat="endpoint in state.targets"
-                       settings="vm.targetEndpointStyle"
+                       settings="((state.endpointStyle.targetAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || state.endpointStyle.targetAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.targetEndpointStyle1 : vm.targetEndpointStyle2)"
                        uuid="{{endpoint.uuid}}"></js-plumb-endpoint>
 </js-plumb-object>

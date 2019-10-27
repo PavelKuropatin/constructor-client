@@ -1,14 +1,17 @@
 export default {
     PARTIALS: {
         ACTION: 'action',
-        CIRCLE: 'circle'
+//        CIRCLE: 'circle'
     },
-    MODEL: {
-        CAR: 'car'
+    CUSTOM_PARTIALS: {
+        ACTION: 'custom_action',
+//        CIRCLE: 'custom_circle'
     },
     ANCHOR: {
         LEFT_MIDDLE: 'LeftMiddle',
-        RIGHT_MIDDLE: 'RightMiddle'
+        RIGHT_MIDDLE: 'RightMiddle',
+        TOP_CENTER: 'TopCenter',
+        BOTTOM_CENTER: 'BottomCenter'
     },
     TYPE_ACTION: {
         MAIN: {
@@ -27,11 +30,9 @@ export default {
     ENDPOINT_STYLE: {
         ACTION: {
             RIGHT: 'endpoint-style-right',
-            LEFT: 'endpoint-style-left'
-        },
-        CIRCLE: {
-            RIGHT: 'endpoint-circle-style-right',
-            LEFT: 'endpoint-circle-style-left'
+            LEFT: 'endpoint-style-left',
+            TOP: 'endpoint-style-top',
+            BOTTOM: 'endpoint-style-bottom',
         }
     },
     CONTAINER_TYPE: {
@@ -46,5 +47,9 @@ export default {
         URL: '/socket',
         TOPIC: '/topic',
         CAR: 'car'
+    },
+    MODEL: {
+        GENERATOR : "Generator",
+        SOCKET : "Socket"
     }
 };

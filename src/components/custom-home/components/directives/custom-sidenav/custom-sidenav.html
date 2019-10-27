@@ -1,0 +1,53 @@
+<md-card class="model-sidenav">
+    <md-card-content class="connectedItems" ng-model="diagram.states" ui-sortable="sortableOptions"
+                     ui-sortable-update="refresh()">
+        <md-card ng-click="setActiveState(state)" ng-repeat="state in diagram.states">
+            <md-card-header>
+                <md-card-header-text>
+                    <div layout="row" layout-align="space-between center">
+                        <span class="title-text">{{state.name}}</span>
+                        <span class="medium-text">
+                            {{ 'state.position' | translate }}: [{{state.x| number}}, {{state.y| number}}]
+                        </span>
+                        <md-button class="md-icon-button" ng-click="editEndpoints(state)" ng-if="editable">
+                            <md-icon>settings_applications</md-icon>
+                        </md-button>
+                    </div>
+                </md-card-header-text>
+            </md-card-header>
+
+            <div ng-if="isActiveState(state)">
+                <md-card class="action-input-container" layout="row">
+                    <md-icon>call_received</md-icon>
+                    <md-input-container ng-repeat="input in state.inputContainer">
+                        <label>{{input.label}}</label>
+                        <input disabled ng-change="countFunction(diagram.states, activeState)" ng-model="input.value"/>
+                    </md-input-container>
+                </md-card>
+
+                <md-card class="action-input-container" layout="row" ng-if="isActiveState(state)">
+                    <md-icon>call_made</md-icon>
+                    <md-input-container ng-repeat="output in state.outputContainer">
+                        <label>{{output.label}}</label>
+                        <input disabled ng-model="output.value"/>
+                    </md-input-container>
+                </md-card>
+            </div>
+            <div>
+                <md-card ng-if="isActiveState(state)" ng-repeat="source in state.sources">
+                    <md-card-content ng-class="{'active-state': connection.mouseover}" ng-if="source.connections.length"
+                                     ng-repeat="connection in source.connections">
+                        <div class="big-text">{{ 'state.connection.self' | translate }} {{connection.uuid}}
+                            <md-icon ng-click="changeVisibility(connection)" ng-if="connection.is_visible">visibility
+                            </md-icon>
+                            <md-icon ng-click="changeVisibility(connection)" ng-if="connection.is_visible === false">
+                                visibility_off
+                            </md-icon>
+                        </div>
+
+                    </md-card-content>
+                </md-card>
+            </div>
+        </md-card>
+    </md-card-content>
+</md-card>

@@ -12,6 +12,7 @@ import homeController from './home.controller';
 import openDiagramController from './components/dialogs/open-diagram/open-diagram.controller';
 import addContainerController from './components/dialogs/add-container/add-container.controller';
 import delContainerController from './components/dialogs/del-container/del-container.controller';
+import editEndpointsLayoutController from './components/dialogs/edit-endpoints-layout/edit-endpoints-layout.controller';
 
 import jsPlumbCanvasDirective from './components/directives/js-plumb/js-plumb-canvas.directive';
 import jsPlumbConnectionDirective from './components/directives/js-plumb/js-plumb-connection.directive';
@@ -31,6 +32,7 @@ export default angular.module('app.home', [uirouter])
     .controller('openDiagramController', openDiagramController)
     .controller('addContainerController', addContainerController)
     .controller('delContainerController', delContainerController)
+    .controller('editEndpointsLayoutController', editEndpointsLayoutController)
     .directive('jsPlumbCanvas', jsPlumbCanvasDirective)
     .directive('jsPlumbConnection', jsPlumbConnectionDirective)
     .directive('jsPlumbEndpoint', jsPlumbEndpointDirective)
