@@ -24,9 +24,6 @@ export default function homeController($scope, $state, $mdDialog, $translate, st
     vm.goToModel = () => {
         $state.go(ROUTES.MODEL);
     };
-    vm.goToSocket = () => {
-        $state.go(ROUTES.MODEL);
-    };
 
     vm.setActiveState = (state) => {
         vm.activeState = state;
