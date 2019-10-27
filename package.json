@@ -3,6 +3,9 @@
   "version": "1.0.1",
   "description": "Diplom",
   "main": "app.module.js",
+  "engines": {
+    "node": "10.16.3"
+  },
   "scripts": {
     "start": "node server.js",
     "heroku-postbuild": "webpack --open --config config/webpack.config.dev.js",
