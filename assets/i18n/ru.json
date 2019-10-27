@@ -57,5 +57,7 @@
     "position": "Позиция",
     "template": "Шаблон",
     "color": "Цвет"
-  }
+  },
+  "Generator": "Генерация",
+  "Socket": "Сокет"
 }

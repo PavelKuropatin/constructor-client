@@ -6,7 +6,7 @@
     </md-card-header>
     <md-card-content>
         <md-select aria-label="source type" name="sourceType" ng-model="vm.selectedSourceType">
-            <md-option ng-repeat="source in CONSTANTS.MODEL" ng-value="source">{{source}}</md-option>
+            <md-option ng-repeat="source in CONSTANTS.MODEL" ng-value="source">{{source | translate}}</md-option>
         </md-select>
         <div ng-switch="vm.selectedSourceType">
             <md-list ng-switch-when="Generator">

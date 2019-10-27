@@ -57,5 +57,7 @@
     "position": "Position",
     "template": "Template",
     "color": "Color"
-  }
+  },
+  "Generator": "Generator",
+  "Socket": "Socket"
 }
