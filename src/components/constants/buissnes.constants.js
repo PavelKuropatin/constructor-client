@@ -1,11 +1,9 @@
 export default {
   PARTIALS: {
-    ACTION: 'action',
-//        CIRCLE: 'circle'
+    ACTION: 'action'
   },
   CUSTOM_PARTIALS: {
-    ACTION: 'custom_action',
-//        CIRCLE: 'custom_circle'
+    ACTION: 'custom_action'
   },
   ANCHOR: {
     LEFT_MIDDLE: 'LeftMiddle',
@@ -32,7 +30,7 @@ export default {
       RIGHT: 'endpoint-style-right',
       LEFT: 'endpoint-style-left',
       TOP: 'endpoint-style-top',
-      BOTTOM: 'endpoint-style-bottom',
+      BOTTOM: 'endpoint-style-bottom'
     }
   },
   CONTAINER_TYPE: {
@@ -52,4 +50,4 @@ export default {
     GENERATOR: 'Generator',
     SOCKET: 'Socket'
   }
-}
+};

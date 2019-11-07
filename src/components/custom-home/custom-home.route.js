@@ -1,7 +1,7 @@
-import homeTemplate from './custom-home.html'
+import homeTemplate from './custom-home.html';
 
 export default function homeRouteConfig ($stateProvider, ROUTES) {
-  'ngInject'
+  'ngInject';
   $stateProvider
     .state(ROUTES.MODEL, {
       url: '/model',

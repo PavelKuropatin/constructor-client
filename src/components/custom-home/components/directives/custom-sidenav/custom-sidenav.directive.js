@@ -1,9 +1,9 @@
-import template from './custom-sidenav.html'
+import template from './custom-sidenav.html';
 import editEndpointsLayoutTemplate
-  from '../../../../home/components/dialogs/edit-endpoints-layout/edit-endpoints-layout.html'
+  from '../../../../home/components/dialogs/edit-endpoints-layout/edit-endpoints-layout.html';
 
 export default function customSidenavDirective ($timeout, $mdDialog) {
-  'ngInject'
+  'ngInject';
   return {
     restrict: 'EA',
     scope: {
@@ -19,11 +19,11 @@ export default function customSidenavDirective ($timeout, $mdDialog) {
     link: (scope, element, attr) => {
       scope.sortableOptions = {
         connectWith: '.connectedItems'
-      }
+      };
 
       function refreshStates () {
-        let bufStateObjects = scope.diagram.states.slice()
-        scope.diagram.states = []
+        let bufStateObjects = scope.diagram.states.slice();
+        scope.diagram.states = [];
         $timeout(() => {
           scope.diagram.states = bufStateObjects
         })
@@ -36,7 +36,7 @@ export default function customSidenavDirective ($timeout, $mdDialog) {
           template: editEndpointsLayoutTemplate,
           clickOutsideToClose: true,
         }).then(function (endpointStyle) {
-          state.endpointStyle = endpointStyle
+          state.endpointStyle = endpointStyle;
           refreshStates()
         })
       }
