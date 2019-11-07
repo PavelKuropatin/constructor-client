@@ -23,8 +23,8 @@
                        ng-repeat="endpoint in state.sources"
                        settings="(state.endpointStyle.sourceAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || state.endpointStyle.sourceAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.sourceEndpointStyle1 : vm.sourceEndpointStyle2"
                        uuid="{{endpoint.uuid}}">
-        <js-plumb-connection ng-model="connection"
-                             ng-if="connection.is_visible"
+        <js-plumb-connection ng-if="connection.is_visible"
+                             ng-model="connection"
                              ng-repeat="connection in endpoint.connections"
                              state-objects="vm.diagram.states">
         </js-plumb-connection>
