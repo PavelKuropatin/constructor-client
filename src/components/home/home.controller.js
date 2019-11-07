@@ -18,15 +18,15 @@ export default function homeController ($scope, $state, $mdDialog, $translate, s
   vm.isActiveSetting = false;
 
   $scope.$on(CONSTANTS.EVENT_CONSTANTS.SUCCESS_DIAGRAM_DELETE, () => {
-    vm.diagram = undefined
+    vm.diagram = undefined;
   });
 
   vm.goToModel = () => {
-    $state.go(ROUTES.MODEL)
+    $state.go(ROUTES.MODEL);
   };
 
   vm.setActiveState = (state) => {
-    vm.activeState = state
+    vm.activeState = state;
   };
 
   vm.onConnection = (instance, connection, targetUuid, sourceUuid) => {
@@ -34,24 +34,24 @@ export default function homeController ($scope, $state, $mdDialog, $translate, s
       _.forEach(state.sources, source => {
         if (source.uuid == sourceUuid) {
           source.connections.push({ 'uuid': targetUuid });
-          $scope.$apply()
+          $scope.$apply();
         }
-      })
+      });
     });
     stateObjectService.updateContainer(vm.diagram.states, sourceUuid, targetUuid);
-    vm.updateDiagram()
+    vm.updateDiagram();
   };
 
   vm.updateDiagram = () => {
     stateObjectHttpService.updateDiagram(vm.diagram).then(response => {
-      vm.diagram = response.data
-    })
+      vm.diagram = response.data;
+    });
   };
 
   vm.createNewDiagram = () => {
     stateObjectHttpService.createNewDiagram().then(response => {
-      vm.diagram = response.data
-    })
+      vm.diagram = response.data;
+    });
   };
 
 //    jsPlumb.ready(() => {
@@ -64,17 +64,17 @@ export default function homeController ($scope, $state, $mdDialog, $translate, s
     $mdDialog.show({
       controller: 'openDiagramController as vm',
       template: openDiagramTemplate,
-      clickOutsideToClose: true,
+      clickOutsideToClose: true
     }).then((uuid) => {
       jsPlumb.ready(() => {
         stateObjectHttpService.getDiagram(uuid).then((response) => {
-          vm.diagram = response.data
-        })
-      })
-    })
+          vm.diagram = response.data;
+        });
+      });
+    });
   };
 
   vm.setLanguage = (lang) => {
-    $translate.use(lang)
-  }
+    $translate.use(lang);
+  };
 }

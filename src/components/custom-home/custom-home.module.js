@@ -45,4 +45,4 @@ export default angular.module('app.custom-home', [uirouter])
   .constant('ROUTES', routes)
   .constant('CONSTANTS', constants)
   .run(customPartialsConfig)
-  .name
+  .name;

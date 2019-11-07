@@ -25,8 +25,8 @@ export default function customSidenavDirective ($timeout, $mdDialog) {
         let bufStateObjects = scope.diagram.states.slice();
         scope.diagram.states = [];
         $timeout(() => {
-          scope.diagram.states = bufStateObjects
-        })
+          scope.diagram.states = bufStateObjects;
+        });
       }
 
       scope.editEndpoints = (state) => {
@@ -34,12 +34,12 @@ export default function customSidenavDirective ($timeout, $mdDialog) {
           locals: { endpointStyle: state.endpointStyle },
           controller: 'editEndpointsLayoutController as vm',
           template: editEndpointsLayoutTemplate,
-          clickOutsideToClose: true,
+          clickOutsideToClose: true
         }).then(function (endpointStyle) {
           state.endpointStyle = endpointStyle;
-          refreshStates()
-        })
-      }
+          refreshStates();
+        });
+      };
     }
-  }
+  };
 }

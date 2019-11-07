@@ -1,29 +1,29 @@
 export default function customJsPlumbStyleService (CONSTANTS) {
-  'ngInject'
+  'ngInject';
 
   const targetEndpointStyle1 = {
     endpoint: 'Rectangle',
     paintStyle: {
       fill: '#BCAAA4',
       width: 10,
-      height: 20,
+      height: 20
     },
     enabled: false,
     maxConnections: -1,
     isTarget: true
-  }
+  };
 
   const targetEndpointStyle2 = {
     endpoint: 'Rectangle',
     paintStyle: {
       fill: '#BCAAA4',
       width: 20,
-      height: 10,
+      height: 10
     },
     enabled: false,
     maxConnections: -1,
     isTarget: true
-  }
+  };
 
   const sourceEndpointStyle1 = {
     endpoint: 'Rectangle',
@@ -32,7 +32,7 @@ export default function customJsPlumbStyleService (CONSTANTS) {
       fill: 'transparent',
       strokeWidth: 3,
       width: 10,
-      height: 20,
+      height: 20
     },
     isSource: true,
     enabled: false,
@@ -45,7 +45,7 @@ export default function customJsPlumbStyleService (CONSTANTS) {
     connectorHoverStyle: {
       stroke: '#216477'
     }
-  }
+  };
 
   const sourceEndpointStyle2 = {
     endpoint: 'Rectangle',
@@ -54,7 +54,7 @@ export default function customJsPlumbStyleService (CONSTANTS) {
       fill: 'transparent',
       strokeWidth: 3,
       width: 20,
-      height: 10,
+      height: 10
     },
     isSource: true,
     enabled: false,
@@ -67,19 +67,19 @@ export default function customJsPlumbStyleService (CONSTANTS) {
     connectorHoverStyle: {
       stroke: '#216477'
     }
-  }
+  };
 
-  const getTargetEndpointStyle1 = () => targetEndpointStyle1
-  const getTargetEndpointStyle2 = () => targetEndpointStyle2
+  const getTargetEndpointStyle1 = () => targetEndpointStyle1;
+  const getTargetEndpointStyle2 = () => targetEndpointStyle2;
 
-  const getSourceEndpointStyle1 = () => sourceEndpointStyle1
-  const getSourceEndpointStyle2 = () => sourceEndpointStyle2
+  const getSourceEndpointStyle1 = () => sourceEndpointStyle1;
+  const getSourceEndpointStyle2 = () => sourceEndpointStyle2;
 
   return {
     getTargetEndpointStyle1: getTargetEndpointStyle1,
     getTargetEndpointStyle2: getTargetEndpointStyle2,
     getSourceEndpointStyle2: getSourceEndpointStyle2,
     getSourceEndpointStyle1: getSourceEndpointStyle1
-  }
+  };
 }
 

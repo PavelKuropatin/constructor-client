@@ -9,7 +9,7 @@ export default function settingDirective (stateObjectService) {
     template: template,
     link: function (scope, element, attr) {
       scope.state = stateObjectService.getConfigState();
-      scope.countFunction = stateObjectService.countFunction
+      scope.countFunction = stateObjectService.countFunction;
     }
-  }
+  };
 }

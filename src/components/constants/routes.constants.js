@@ -1,4 +1,4 @@
 export default {
   SCHEMA: 'home',
-  MODEL: 'model',
-}
+  MODEL: 'model'
+};

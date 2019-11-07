@@ -28,27 +28,27 @@ export default function sidenavDirective ($timeout, $mdDialog, stateObjectServic
         $mdDialog.show({
           controller: 'addContainerController as vm',
           template: containerTemplate,
-          clickOutsideToClose: true,
+          clickOutsideToClose: true
         }).then(function (model) {
-          stateObjectService.addContainer(state, type, model.param, model.value)
-        })
+          stateObjectService.addContainer(state, type, model.param, model.value);
+        });
       };
 
       scope.setActiveState = (state) => {
         if (scope.activeState === state) {
-          scope.activeState = null
+          scope.activeState = null;
         } else {
           scope.activeState = state;
-          scope.countFunction(scope.diagram.states, scope.activeState)
+          scope.countFunction(scope.diagram.states, scope.activeState);
         }
       };
 
       scope.isActionState = (state) => {
-        return state.template === CONSTANTS.PARTIALS.ACTION
+        return state.template === CONSTANTS.PARTIALS.ACTION;
       };
 
       scope.isCircleState = (state) => {
-        return state.template === CONSTANTS.PARTIALS.CIRCLE
+        return state.template === CONSTANTS.PARTIALS.CIRCLE;
       };
 
       scope.swapEndpointState = (state) => {
@@ -58,15 +58,15 @@ export default function sidenavDirective ($timeout, $mdDialog, stateObjectServic
         state.endpointStyle.targetAnchor = swapAnchorStyles(state.endpointStyle.targetAnchor);
         state.endpointStyle.sourceAnchor = swapAnchorStyles(state.endpointStyle.sourceAnchor);
 
-        refreshStates()
+        refreshStates();
       };
 
       function refreshStates () {
         let bufStateObjects = scope.diagram.states.slice();
         scope.diagram.states = [];
         $timeout(() => {
-          scope.diagram.states = bufStateObjects
-        })
+          scope.diagram.states = bufStateObjects;
+        });
       }
 
       scope.editEndpoints = (state) => {
@@ -74,11 +74,11 @@ export default function sidenavDirective ($timeout, $mdDialog, stateObjectServic
           locals: { endpointStyle: state.endpointStyle },
           controller: 'editEndpointsLayoutController as vm',
           template: editEndpointsLayoutTemplate,
-          clickOutsideToClose: true,
+          clickOutsideToClose: true
         }).then(function (endpointStyle) {
           state.endpointStyle = endpointStyle;
-          refreshStates()
-        })
+          refreshStates();
+        });
       };
 
       scope.deleteInput = (state, type) => {
@@ -86,10 +86,10 @@ export default function sidenavDirective ($timeout, $mdDialog, stateObjectServic
           locals: { container: state.inputContainer },
           controller: 'delContainerController as vm',
           template: delContainerTemplate,
-          clickOutsideToClose: true,
+          clickOutsideToClose: true
         }).then(function (param) {
-          stateObjectService.deleteContainer(state, type, param)
-        })
+          stateObjectService.deleteContainer(state, type, param);
+        });
       };
 
       scope.deleteOutput = (state, type) => {
@@ -97,32 +97,32 @@ export default function sidenavDirective ($timeout, $mdDialog, stateObjectServic
           locals: { container: state.outputContainer },
           controller: 'delContainerController as vm',
           template: delContainerTemplate,
-          clickOutsideToClose: true,
+          clickOutsideToClose: true
         }).then(function (param) {
-          stateObjectService.deleteContainer(state, type, param)
-        })
+          stateObjectService.deleteContainer(state, type, param);
+        });
       };
 
       scope.configState = (state) => {
         scope.isActiveSetting = !scope.isActiveSetting;
-        stateObjectService.setConfigState(state)
+        stateObjectService.setConfigState(state);
       };
 
       function swapEndpointStyles (endpoint) {
         if (endpoint === CONSTANTS.ENDPOINT_STYLE.ACTION.RIGHT) {
-          return CONSTANTS.ENDPOINT_STYLE.ACTION.LEFT
+          return CONSTANTS.ENDPOINT_STYLE.ACTION.LEFT;
         } else {
-          return CONSTANTS.ENDPOINT_STYLE.ACTION.RIGHT
+          return CONSTANTS.ENDPOINT_STYLE.ACTION.RIGHT;
         }
       }
 
       function swapAnchorStyles (anchor) {
         if (anchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) {
-          return CONSTANTS.ANCHOR.LEFT_MIDDLE
+          return CONSTANTS.ANCHOR.LEFT_MIDDLE;
         } else {
-          return CONSTANTS.ANCHOR.RIGHT_MIDDLE
+          return CONSTANTS.ANCHOR.RIGHT_MIDDLE;
         }
       }
     }
-  }
+  };
 }

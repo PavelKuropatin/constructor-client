@@ -1,5 +1,5 @@
 export default function customJsPlumbConnectionDirective ($timeout) {
-  'ngInject'
+  'ngInject';
   return {
     restrict: 'E',
     require: '^customJsPlumbEndpoint',
@@ -10,9 +10,9 @@ export default function customJsPlumbConnectionDirective ($timeout) {
     },
     link: function (scope, element, attrs, customJsPlumbEndpoint) {
       $timeout(() => {
-        const instance = customJsPlumbEndpoint.scope.jsPlumbInstance
-        let sourceUuid = customJsPlumbEndpoint.scope.uuid
-        let targetUuid = scope.ngModel.uuid
+        const instance = customJsPlumbEndpoint.scope.jsPlumbInstance;
+        let sourceUuid = customJsPlumbEndpoint.scope.uuid;
+        let targetUuid = scope.ngModel.uuid;
         if (typeof customJsPlumbEndpoint.connectionObjects[targetUuid] === 'undefined') {
           customJsPlumbEndpoint.connectionObjects[targetUuid] = instance.connect({
             uuids: [
@@ -23,11 +23,11 @@ export default function customJsPlumbConnectionDirective ($timeout) {
               strokeWidth: 6,
               stroke: '#61B7CF'
             },
-            connector: ['Flowchart', { stub: [30, 30], gap: 20, cornerRadius: 10, alwaysRespectStubs: true }],
-          })
+            connector: ['Flowchart', { stub: [30, 30], gap: 20, cornerRadius: 10, alwaysRespectStubs: true }]
+          });
         }
 
-        let connection = customJsPlumbEndpoint.connectionObjects[targetUuid]
+        let connection = customJsPlumbEndpoint.connectionObjects[targetUuid];
 
 //                connection.bind("mouseover", (conn, originalEvent) => {
 //                    let title = 'Uuid Target: ' + targetUuid;
@@ -41,21 +41,21 @@ export default function customJsPlumbConnectionDirective ($timeout) {
 //                });
 
         connection.bind('mouseout', (conn, originalEvent) => {
-          conn.removeOverlay('connLabel')
-          scope.ngModel.mouseover = false
-          scope.$apply()
-        })
+          conn.removeOverlay('connLabel');
+          scope.ngModel.mouseover = false;
+          scope.$apply();
+        });
 
         scope.$on('$destroy', () => {
           try {
-            instance.deleteConnection(customJsPlumbEndpoint.connectionObjects[targetUuid])
+            instance.deleteConnection(customJsPlumbEndpoint.connectionObjects[targetUuid]);
           } catch (err) {
-            console.log('error', err, customJsPlumbEndpoint.connectionObjects[targetUuid])
+            console.log('error', err, customJsPlumbEndpoint.connectionObjects[targetUuid]);
 
           }
-          customJsPlumbEndpoint.connectionObjects[targetUuid] = undefined
-        })
-      }, 50)
+          customJsPlumbEndpoint.connectionObjects[targetUuid] = undefined;
+        });
+      }, 50);
     }
-  }
+  };
 }

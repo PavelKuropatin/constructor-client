@@ -6,4 +6,4 @@ require('restangular');
 
 export default angular.module('diplom.config', [envConfigModule, 'restangular'])
   .config(restangularConfig)
-  .name
+  .name;

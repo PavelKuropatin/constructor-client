@@ -1,18 +1,18 @@
 export default function jsPlumbCanvasDirective () {
-  'ngInject'
+  'ngInject';
   const jsPlumbZoomCanvas = (instance, zoom, el, transformOrigin) => {
-    transformOrigin = transformOrigin || [0, 0]
+    transformOrigin = transformOrigin || [0, 0];
     const p = ['webkit', 'moz', 'ms', 'o'],
       s = 'scale(' + zoom + ')',
-      oString = (transformOrigin[0] * 100) + '% ' + (transformOrigin[1] * 100) + '%'
+      oString = (transformOrigin[0] * 100) + '% ' + (transformOrigin[1] * 100) + '%';
     for (let i = 0; i < p.length; i++) {
-      el.style[p[i] + 'Transform'] = s
-      el.style[p[i] + 'TransformOrigin'] = oString
+      el.style[p[i] + 'Transform'] = s;
+      el.style[p[i] + 'TransformOrigin'] = oString;
     }
-    el.style['transform'] = s
-    el.style['transformOrigin'] = oString
-    instance.setZoom(zoom)
-  }
+    el.style['transform'] = s;
+    el.style['transformOrigin'] = oString;
+    instance.setZoom(zoom);
+  };
 
   return {
     restrict: 'E',
@@ -23,62 +23,62 @@ export default function jsPlumbCanvasDirective () {
       y: '='
     },
     controller: function ($scope) {
-      this.scope = $scope
+      this.scope = $scope;
     },
     transclude: true,
     template: '<div ng-transclude></div>',
     link: function (scope, element, attr) {
-      var instance = jsPlumb.getInstance()
-      scope.jsPlumbInstance = instance
+      var instance = jsPlumb.getInstance();
+      scope.jsPlumbInstance = instance;
 
       instance.bind('connection', (info, origEvent) => {
         if (origEvent && origEvent.type == 'mouseup') {
 
-          var targetUuid = $(info.target).attr('uuid')
-          var sourceUuid = $(info.source).attr('uuid')
-          scope.onConnection(instance, info.connection, targetUuid, sourceUuid)
-          instance.deleteConnection(info.connection)
+          var targetUuid = $(info.target).attr('uuid');
+          var sourceUuid = $(info.source).attr('uuid');
+          scope.onConnection(instance, info.connection, targetUuid, sourceUuid);
+          instance.deleteConnection(info.connection);
         }
-      })
+      });
 
       $(element).css({
         minWidth: '1000px',
         minHeight: '1000px',
-        display: 'block',
+        display: 'block'
       }).draggable({
 //                axis: "y",
         stop: function (event, ui) {
-          var position = $(this).position()
-          scope.x = position.left
-          scope.y = position.top
-          scope.$parent.$apply()
+          var position = $(this).position();
+          scope.x = position.left;
+          scope.y = position.top;
+          scope.$parent.$apply();
         }
-      })
+      });
 
-      instance.setContainer($(element))
+      instance.setContainer($(element));
 
-      var zoom = (typeof scope.zoom === 'undefined') ? 1 : scope.zoom / 100
-      jsPlumbZoomCanvas(instance, zoom, $(element)[0])
+      var zoom = (typeof scope.zoom === 'undefined') ? 1 : scope.zoom / 100;
+      jsPlumbZoomCanvas(instance, zoom, $(element)[0]);
 
       scope.$watch('zoom', (newVal, oldVal) => {
-        jsPlumbZoomCanvas(instance, newVal / 100, $(element)[0])
-      })
+        jsPlumbZoomCanvas(instance, newVal / 100, $(element)[0]);
+      });
 
       $(element).bind('mousewheel', (e) => {
         if (e.originalEvent.wheelDelta / 200 > 0) {
           if (scope.zoom < 200) {
-            scope.zoom += 10
+            scope.zoom += 10;
           }
-          scope.$apply()
+          scope.$apply();
 
         } else {
           if (scope.zoom >= 20) {
-            scope.zoom -= 10
+            scope.zoom -= 10;
           }
-          scope.$apply()
+          scope.$apply();
         }
-      })
+      });
 
     }
-  }
+  };
 }

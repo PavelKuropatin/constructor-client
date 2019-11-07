@@ -13,7 +13,7 @@ export default function socketService ($q, $timeout, CONSTANTS, env) {
   const receive = () => listener.promise;
 
   service.send = (message) => {
-    socket.stomp.send(CONSTANTS.SOCKET.BROKER, {}, JSON.stringify({ message: message }))
+    socket.stomp.send(CONSTANTS.SOCKET.BROKER, {}, JSON.stringify({ message: message }));
   };
 
 //    const reconnect = () => {
@@ -36,18 +36,18 @@ export default function socketService ($q, $timeout, CONSTANTS, env) {
       socket.stomp.subscribe(
         CONSTANTS.SOCKET.TOPIC,
         (data) => {
-          listener.notify(data.body)
-        })
+          listener.notify(data.body);
+        });
     });
 
     socket.stomp.onclose = () => {
-      $timeout(() => initSocket(processor), this.RECONNECT_TIMEOUT)
-    }
+      $timeout(() => initSocket(processor), this.RECONNECT_TIMEOUT);
+    };
   };
 
 //    initialize();
   return {
     initSocket: initSocket,
     receive: receive
-  }
+  };
 };

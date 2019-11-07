@@ -1,11 +1,11 @@
 export default function editEndpointsLayoutController ($mdDialog, endpointStyle, CONSTANTS) {
-  'ngInject'
-  let vm = this
+  'ngInject';
+  let vm = this;
 
-  vm.endpointStyle = endpointStyle
+  vm.endpointStyle = endpointStyle;
 
-  vm.sourceLayout = getByAnchor(vm.endpointStyle.sourceAnchor)
-  vm.targetLayout = getByAnchor(vm.endpointStyle.targetAnchor)
+  vm.sourceLayout = getByAnchor(vm.endpointStyle.sourceAnchor);
+  vm.targetLayout = getByAnchor(vm.endpointStyle.targetAnchor);
 
   vm.endpointLayouts = {
     border_left: {
@@ -23,19 +23,19 @@ export default function editEndpointsLayoutController ($mdDialog, endpointStyle,
     border_bottom: {
       a: CONSTANTS.ANCHOR.BOTTOM_CENTER,
       e: CONSTANTS.ENDPOINT_STYLE.ACTION.BOTTOM
-    },
-  }
+    }
+  };
 
   function getByAnchor (endpointAnchor) {
     switch (endpointAnchor) {
       case CONSTANTS.ANCHOR.TOP_CENTER:
-        return 'border_top'
+        return 'border_top';
       case CONSTANTS.ANCHOR.BOTTOM_CENTER:
-        return 'border_bottom'
+        return 'border_bottom';
       case CONSTANTS.ANCHOR.LEFT_MIDDLE:
-        return 'border_left'
+        return 'border_left';
       case CONSTANTS.ANCHOR.RIGHT_MIDDLE:
-        return 'border_right'
+        return 'border_right';
     }
   }
 
@@ -47,10 +47,10 @@ export default function editEndpointsLayoutController ($mdDialog, endpointStyle,
         targetAnchor: vm.endpointLayouts[vm.targetLayout].a,
         targetEndpoint: vm.endpointLayouts[vm.targetLayout].e
       })
-    )
-  }
+    );
+  };
 
   vm.hideDialog = () => {
-    $mdDialog.cancel()
-  }
+    $mdDialog.cancel();
+  };
 }

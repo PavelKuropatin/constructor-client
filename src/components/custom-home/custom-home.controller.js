@@ -20,20 +20,20 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
   vm.modelSettings = {};
   vm.isActiveSetting = false;
   vm.sortableOptions = {
-    connectWith: '.connectedItems',
+    connectWith: '.connectedItems'
   };
   vm.movedStates = { states: [] };
   $scope.backgroundImg = { 'name': '' };
 
   $scope.$on(CONSTANTS.EVENT_CONSTANTS.SUCCESS_DIAGRAM_DELETE, () => {
-    vm.diagram = undefined
+    vm.diagram = undefined;
   });
 
   vm.goToSchema = () => $state.go(ROUTES.SCHEMA);
 
   vm.refresh = () => {
     vm.movedStates.states = vm.movedStates.states.splice(0, vm.movedStates.states.length);
-    $scope.$apply()
+    $scope.$apply();
   };
 
   vm.setActiveState = (state) => vm.activeState = state;
@@ -46,8 +46,8 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
     _.forEach(diagram.states, state => {
       state.template = 'custom_' + state.template;
       state.x = 10;
-      state.y = 10
-    })
+      state.y = 10;
+    });
   }
 
   vm.refreshStates = () => {
@@ -55,8 +55,8 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
     let bufStateObjects = vm.movedStates.states.slice();
     vm.movedStates.states = [];
     $timeout(() => {
-      vm.movedStates.states = bufStateObjects
-    })
+      vm.movedStates.states = bufStateObjects;
+    });
   };
 
 //    jsPlumb.ready(() => {
@@ -78,31 +78,31 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
               minWidth: img.width + 'px',
               minHeight: img.height + 'px',
               'background-image': 'url(' + result + ')'
-            })
-        }
-      })
+            });
+        };
+      });
   };
 
   vm.openDiagram = () => {
     $mdDialog.show({
       controller: 'openDiagramController as vm',
       template: openDiagramTemplate,
-      clickOutsideToClose: true,
+      clickOutsideToClose: true
     }).then((uuid) => {
       console.log(uuid);
       jsPlumb.ready(() => {
         stateObjectHttpService.getDiagram(uuid).then((response) => {
           vm.movedStates = { states: [] };
           vm.diagram = response.data;
-          resetStates(vm.diagram)
-        })
-      })
-    })
+          resetStates(vm.diagram);
+        });
+      });
+    });
   };
 
   vm.setLanguage = (lang) => {
     console.log(lang);
-    $translate.use(lang)
+    $translate.use(lang);
   };
 
   vm.stopCount = () => {
@@ -113,7 +113,7 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
         break;
       case CONSTANTS.MODEL.SOCKET:
         socketHttpService.stopMonitor(vm.cmdUUID);
-        break
+        break;
     }
 
   };
@@ -124,7 +124,7 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
       locals: { modelSettings: vm.modelSettings },
       controller: 'startCountController as vm',
       template: startCountTemplate,
-      clickOutsideToClose: true,
+      clickOutsideToClose: true
     }).then((modelSettings) => {
       vm.modelSettings = modelSettings;
       console.log(vm.modelSettings);
@@ -136,25 +136,25 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
           socketService.initSocket(console.log);
           socketHttpService.startGetState(vm.modelSettings).then((response) => {
             console.log(response.data);
-            vm.cmdUUID = response.data.uuid
+            vm.cmdUUID = response.data.uuid;
           });
-          break
+          break;
       }
-    })
+    });
   };
 
   const startCounter = () => {
     if (!vm.timer) {
-      updateCounter()
+      updateCounter();
     }
   };
 
   const updateCounter = () => {
     _.forEach(vm.modelSettings.vars, _var => {
-      _var.startValue = +_var.startValue + +_var.stepValue
+      _var.startValue = +_var.startValue + +_var.stepValue;
     });
     changeParam();
-    vm.timer = $timeout(updateCounter, vm.modelSettings.interval)
+    vm.timer = $timeout(updateCounter, vm.modelSettings.interval);
   };
 
   const changeParam = () => {
@@ -162,11 +162,11 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
       _.forEach(state.inputContainer, item => {
         let values = vm.modelSettings.vars.find(_var => _var.valueName === item.label);
         if (values) {
-          item.value = values.startValue
+          item.value = values.startValue;
         }
       });
-      stateObjectService.countFunction(vm.movedStates.states, state)
-    })
+      stateObjectService.countFunction(vm.movedStates.states, state);
+    });
   };
 
   socketService.receive().then(null, null, (message) => {
@@ -174,9 +174,9 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
     let out = JSON.parse(message);
     _.forEach(vm.movedStates.states, state => {
       if (state.name in out) {
-        state.outputContainer = [{ 'label': 'x', 'value': out[state.name] }]
+        state.outputContainer = [{ 'label': 'x', 'value': out[state.name] }];
       }
     });
-    console.log(message)
-  })
+    console.log(message);
+  });
 }

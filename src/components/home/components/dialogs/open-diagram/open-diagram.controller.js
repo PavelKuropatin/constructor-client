@@ -12,28 +12,28 @@ export default function openDiagramController ($mdDialog, stateObjectHttpService
       .then((response) => {
         vm.diagrams = response.data;
         if (_.head(vm.diagrams)) {
-          vm.chosenUuid = _.head(vm.diagrams).uuid
+          vm.chosenUuid = _.head(vm.diagrams).uuid;
         }
-      })
+      });
   };
 
   vm.deleteDiagram = (uuid) => {
     stateObjectHttpService.deleteDiagram(uuid)
       .then((response) => {
-        vm.$onInit()
-      })
+        vm.$onInit();
+      });
   };
 
   vm.setDiagramToLoad = (uuid) => {
-    vm.chosenUuid = uuid
+    vm.chosenUuid = uuid;
   };
 
   vm.chooseDiagram = () => {
-    $mdDialog.hide(vm.chosenUuid)
+    $mdDialog.hide(vm.chosenUuid);
   };
 
   vm.hideDialog = () => {
-    $mdDialog.cancel()
-  }
+    $mdDialog.cancel();
+  };
 
 }

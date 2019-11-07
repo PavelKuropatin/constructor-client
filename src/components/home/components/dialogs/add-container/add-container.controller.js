@@ -1,15 +1,12 @@
 export default function addContainerController ($mdDialog) {
-  'ngInject'
-  let vm = this
+  'ngInject';
+  const vm = this;
 
-  vm.hideDialog = hideDialog
-  vm.addVar = addVar
+  vm.addVar = () => {
+    $mdDialog.hide(vm.inputModel);
+  };
 
-  function addVar () {
-    $mdDialog.hide(vm.inputModel)
-  }
-
-  function hideDialog () {
-    $mdDialog.cancel()
-  }
+  vm.hideDialog = () => {
+    $mdDialog.cancel();
+  };
 }
