@@ -2,7 +2,7 @@
     <md-icon>call_received</md-icon>
     <md-input-container ng-repeat="input in state.inputContainer">
         <label>{{input.label}}</label>
-        <input ng-model="input.value"/>
+        <input disabled ng-model="input.value"/>
     </md-input-container>
 </md-card>
 
@@ -10,7 +10,7 @@
     <md-icon>call_made</md-icon>
     <md-input-container ng-repeat="output in state.outputContainer">
         <label>{{output.label}}</label>
-        <input ng-model="output.value"/>
+        <input disabled ng-model="output.value"/>
     </md-input-container>
 </md-card>
 
@@ -23,11 +23,11 @@
         <md-content>
             <md-input-container>
                 <label>{{ 'function.enter' | translate }}</label>
-                <input ng-change="countFunction([], state)" ng-model="output.stringFunction"/>
+                <input disabled ng-change="countFunction([], state)" ng-model="output.stringFunction"/>
             </md-input-container>
             <md-input-container>
                 <label>{{ 'function.result' | translate }}</label>
-                <input ng-model="output.value"/>
+                <input disabled ng-model="output.value"/>
             </md-input-container>
         </md-content>
     </md-card>
@@ -55,3 +55,4 @@
         </md-input-container>
     </md-card-content>
 </md-card>
+

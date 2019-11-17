@@ -27,6 +27,8 @@ import fileReaderFactory from './components/directives/file/file-reader.factory'
 
 import socketService from './components/service/socket.service';
 import socketHttpService from './components/service/http/socket-http.service';
+import imageHttpService from './components/service/http/image-http.service';
+import customSettingDirective from './components/directives/custom-setting/custom-setting.directive';
 
 export default angular.module('app.custom-home', [uirouter])
   .config(routing)
@@ -39,7 +41,9 @@ export default angular.module('app.custom-home', [uirouter])
   .directive('customJsPlumbConnection', customJsPlumbConnectionDirective)
   .directive('customJsPlumbEndpoint', customJsPlumbEndpointDirective)
   .directive('customJsPlumbObject', customJsPlumbObjectDirective)
+  .directive('customSetting', customSettingDirective)
   .service('customJsPlumbStyleService', customJsPlumbStyleService)
+  .service('imageHttpService', imageHttpService)
   .service('socketService', socketService)
   .service('socketHttpService', socketHttpService)
   .constant('ROUTES', routes)

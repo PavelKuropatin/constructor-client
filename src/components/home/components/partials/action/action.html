@@ -20,18 +20,16 @@
 
     <js-plumb-endpoint anchor={{state.endpointStyle.sourceAnchor}}
                        class={{state.endpointStyle.sourceEndpoint}}
-                       ng-repeat="endpoint in state.sources"
                        settings="(state.endpointStyle.sourceAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || state.endpointStyle.sourceAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.sourceEndpointStyle1 : vm.sourceEndpointStyle2"
-                       uuid="{{endpoint.uuid}}">
+                       uuid="{{state.source.uuid}}">
         <js-plumb-connection ng-if="connection.is_visible"
                              ng-model="connection"
-                             ng-repeat="connection in endpoint.connections"
+                             ng-repeat="connection in state.source.connections"
                              state-objects="vm.diagram.states">
         </js-plumb-connection>
     </js-plumb-endpoint>
     <js-plumb-endpoint anchor={{state.endpointStyle.targetAnchor}}
                        class={{state.endpointStyle.targetEndpoint}}
-                       ng-repeat="endpoint in state.targets"
                        settings="((state.endpointStyle.targetAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || state.endpointStyle.targetAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.targetEndpointStyle1 : vm.targetEndpointStyle2)"
-                       uuid="{{endpoint.uuid}}"></js-plumb-endpoint>
+                       uuid="{{state.target.uuid}}"></js-plumb-endpoint>
 </js-plumb-object>

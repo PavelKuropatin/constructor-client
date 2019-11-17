@@ -51,16 +51,6 @@ export default function sidenavDirective ($timeout, $mdDialog, stateObjectServic
         return state.template === CONSTANTS.PARTIALS.CIRCLE;
       };
 
-      scope.swapEndpointState = (state) => {
-        state.endpointStyle.targetEndpoint = swapEndpointStyles(state.endpointStyle.targetEndpoint);
-        state.endpointStyle.sourceEndpoint = swapEndpointStyles(state.endpointStyle.sourceEndpoint);
-
-        state.endpointStyle.targetAnchor = swapAnchorStyles(state.endpointStyle.targetAnchor);
-        state.endpointStyle.sourceAnchor = swapAnchorStyles(state.endpointStyle.sourceAnchor);
-
-        refreshStates();
-      };
-
       function refreshStates () {
         let bufStateObjects = scope.diagram.states.slice();
         scope.diagram.states = [];
@@ -108,21 +98,6 @@ export default function sidenavDirective ($timeout, $mdDialog, stateObjectServic
         stateObjectService.setConfigState(state);
       };
 
-      function swapEndpointStyles (endpoint) {
-        if (endpoint === CONSTANTS.ENDPOINT_STYLE.ACTION.RIGHT) {
-          return CONSTANTS.ENDPOINT_STYLE.ACTION.LEFT;
-        } else {
-          return CONSTANTS.ENDPOINT_STYLE.ACTION.RIGHT;
-        }
-      }
-
-      function swapAnchorStyles (anchor) {
-        if (anchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) {
-          return CONSTANTS.ANCHOR.LEFT_MIDDLE;
-        } else {
-          return CONSTANTS.ANCHOR.RIGHT_MIDDLE;
-        }
-      }
     }
   };
 }

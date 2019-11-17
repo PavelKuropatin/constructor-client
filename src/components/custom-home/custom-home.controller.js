@@ -2,7 +2,7 @@ import openDiagramTemplate from '../home/components/dialogs/open-diagram/open-di
 import startCountTemplate from './components/dialogs/start-count/start-count.html';
 
 export default function customHomeController ($scope, $state, $mdDialog, $translate, $timeout, stateObjectHttpService, customJsPlumbStyleService,
-  stateObjectService, CONSTANTS, ROUTES, fileReader, socketService, socketHttpService) {
+  stateObjectService, CONSTANTS, ROUTES, fileReader, socketService, socketHttpService, imageHttpService) {
   'ngInject';
   const vm = this;
   $scope.CONSTANTS = CONSTANTS;
@@ -24,6 +24,7 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
   };
   vm.movedStates = { states: [] };
   $scope.backgroundImg = { 'name': '' };
+  vm.imageToUpload = null;
 
   $scope.$on(CONSTANTS.EVENT_CONSTANTS.SUCCESS_DIAGRAM_DELETE, () => {
     vm.diagram = undefined;
@@ -67,7 +68,9 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
 //    });
 
   vm.loadCanvasBackground = () => $('input[type="file"]').click();
+
   $scope.getFile = (file) => {
+    vm.imageToUpload = file;
     fileReader.readAsDataUrl(file, $scope)
       .then(function (result) {
         var img = new Image();
@@ -89,7 +92,6 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
       template: openDiagramTemplate,
       clickOutsideToClose: true
     }).then((uuid) => {
-      console.log(uuid);
       jsPlumb.ready(() => {
         stateObjectHttpService.getDiagram(uuid).then((response) => {
           vm.movedStates = { states: [] };
@@ -101,7 +103,6 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
   };
 
   vm.setLanguage = (lang) => {
-    console.log(lang);
     $translate.use(lang);
   };
 
@@ -119,7 +120,6 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
   };
 
   vm.openModelSettings = () => {
-    console.log(vm.modelSettings);
     $mdDialog.show({
       locals: { modelSettings: vm.modelSettings },
       controller: 'startCountController as vm',
@@ -127,7 +127,6 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
       clickOutsideToClose: true
     }).then((modelSettings) => {
       vm.modelSettings = modelSettings;
-      console.log(vm.modelSettings);
       switch (vm.modelSettings.type) {
         case CONSTANTS.MODEL.GENERATOR:
           startCounter();
@@ -135,7 +134,6 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
         case CONSTANTS.MODEL.SOCKET:
           socketService.initSocket(console.log);
           socketHttpService.startGetState(vm.modelSettings).then((response) => {
-            console.log(response.data);
             vm.cmdUUID = response.data.uuid;
           });
           break;
@@ -170,7 +168,6 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
   };
 
   socketService.receive().then(null, null, (message) => {
-    console.log(vm.cmdUUID);
     let out = JSON.parse(message);
     _.forEach(vm.movedStates.states, state => {
       if (state.name in out) {
@@ -179,4 +176,14 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
     });
     console.log(message);
   });
+
+  vm.uploadImage = () => {
+    console.log(vm.imageToUpload);
+//    imageHttpService.uploadImage(vm.imageToUpload).then((response) => {
+//        console.log(response.data);
+//    });
+    imageHttpService.getImages().then((response) => {
+        console.log(response.data);
+    });
+  };
 }

@@ -31,13 +31,12 @@ export default function homeController ($scope, $state, $mdDialog, $translate, s
 
   vm.onConnection = (instance, connection, targetUuid, sourceUuid) => {
     _.forEach(vm.diagram.states, state => {
-      _.forEach(state.sources, source => {
-        if (source.uuid == sourceUuid) {
-          source.connections.push({ 'uuid': targetUuid });
-          $scope.$apply();
+        if (state.source.uuid == sourceUuid) {
+              state.source.connections.push({ 'uuid': targetUuid });
+                $scope.$apply();
         }
-      });
     });
+
     stateObjectService.updateContainer(vm.diagram.states, sourceUuid, targetUuid);
     vm.updateDiagram();
   };
@@ -69,7 +68,7 @@ export default function homeController ($scope, $state, $mdDialog, $translate, s
       jsPlumb.ready(() => {
         stateObjectHttpService.getDiagram(uuid).then((response) => {
           vm.diagram = response.data;
-        });
+  });
       });
     });
   };

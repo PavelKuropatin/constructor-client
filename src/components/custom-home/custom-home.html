@@ -6,7 +6,8 @@
             <custom-sidenav active-state="vm.activeState" change-visibility="vm.inverseConnectionVisibility"
                             diagram="vm.movedStates"
                             editable="true" is-active-state="vm.isActiveState"
-                            refresh="vm.refresh" set-active-state="vm.setActiveState">
+                            is-active-setting="vm.isActiveSetting" refresh="vm.refresh"
+                            set-active-state="vm.setActiveState">
             </custom-sidenav>
         </div>
 
@@ -78,7 +79,7 @@
             </div>
         </div>
 
-        <setting flex="75" ng-if="vm.isActiveSetting"></setting>
+        <custom-setting flex="75" ng-if="vm.isActiveSetting"></custom-setting>
     </div>
 
 
@@ -100,6 +101,10 @@
 
                         <md-button aria-label="refresh connections">
                             <md-icon ng-click="vm.refreshStates()">refresh</md-icon>
+                        </md-button>
+
+                        <md-button aria-label="refresh connections">
+                            <md-icon ng-click="vm.uploadImage()">cloud_upload</md-icon>
                         </md-button>
 
                     </md-fab-actions>

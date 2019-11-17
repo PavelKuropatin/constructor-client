@@ -2,7 +2,7 @@ import template from './custom-sidenav.html';
 import editEndpointsLayoutTemplate
   from '../../../../home/components/dialogs/edit-endpoints-layout/edit-endpoints-layout.html';
 
-export default function customSidenavDirective ($timeout, $mdDialog) {
+export default function customSidenavDirective ($timeout, $mdDialog, stateObjectService) {
   'ngInject';
   return {
     restrict: 'EA',
@@ -12,6 +12,7 @@ export default function customSidenavDirective ($timeout, $mdDialog) {
       setActiveState: '=',
       changeVisibility: '=',
       isActiveState: '=',
+      isActiveSetting: '=',
       refresh: '=',
       editable: '='
     },
@@ -29,16 +30,14 @@ export default function customSidenavDirective ($timeout, $mdDialog) {
         });
       }
 
-      scope.editEndpoints = (state) => {
-        $mdDialog.show({
-          locals: { endpointStyle: state.endpointStyle },
-          controller: 'editEndpointsLayoutController as vm',
-          template: editEndpointsLayoutTemplate,
-          clickOutsideToClose: true
-        }).then(function (endpointStyle) {
-          state.endpointStyle = endpointStyle;
-          refreshStates();
-        });
+      scope.showStateSettings = (state) => {
+            scope.isActiveSetting =  !scope.isActiveSetting;
+        stateObjectService.setConfigState(state);
+      };
+
+      scope.configState = (state) => {
+              scope.isActiveSetting = !scope.isActiveSetting;
+              stateObjectService.setConfigState(state);
       };
     }
   };
