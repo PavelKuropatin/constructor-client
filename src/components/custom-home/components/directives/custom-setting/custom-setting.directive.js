@@ -20,7 +20,7 @@ export default function customSettingDirective (stateObjectService, CONSTANTS) {
                       return 'border_right';
                   }
                 }
-
+            scope.actions = ['set_image', 'stop_exec'];
             scope.icons = Object.keys(CONSTANTS.ENDPOINT_LAYOUTS);
             scope.state = stateObjectService.getConfigState();
             scope.countFunction = stateObjectService.countFunction;

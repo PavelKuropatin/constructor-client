@@ -44,13 +44,15 @@ export default function homeController ($scope, $state, $mdDialog, $translate, s
   vm.updateDiagram = () => {
     stateObjectHttpService.updateDiagram(vm.diagram).then(response => {
       vm.diagram = response.data;
+      console.log(vm.diagram);
     });
   };
 
   vm.createNewDiagram = () => {
     stateObjectHttpService.createNewDiagram().then(response => {
       vm.diagram = response.data;
-    });
+        console.log(vm.diagram);
+  });
   };
 
 //    jsPlumb.ready(() => {
@@ -68,7 +70,8 @@ export default function homeController ($scope, $state, $mdDialog, $translate, s
       jsPlumb.ready(() => {
         stateObjectHttpService.getDiagram(uuid).then((response) => {
           vm.diagram = response.data;
-  });
+          console.log(vm.diagram);
+});
       });
     });
   };

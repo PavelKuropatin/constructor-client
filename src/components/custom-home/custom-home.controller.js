@@ -60,12 +60,13 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
     });
   };
 
-//    jsPlumb.ready(() => {
-//            stateObjectHttpService.getDiagram("468b7557-77d8-40c0-baf5-d6201562f348").then((response) => {
-//                vm.diagram = response.data;
-//                resetStates(vm.diagram);
-//          });
-//    });
+    jsPlumb.ready(() => {
+            stateObjectHttpService.getDiagram("43439f66-7f13-4f2b-aa52-05a7ea21471d").then((response) => {
+                vm.diagram = response.data;
+                console.log(vm.diagram);
+                resetStates(vm.diagram);
+          });
+    });
 
   vm.loadCanvasBackground = () => $('input[type="file"]').click();
 
@@ -96,6 +97,7 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
         stateObjectHttpService.getDiagram(uuid).then((response) => {
           vm.movedStates = { states: [] };
           vm.diagram = response.data;
+          console.log(vm.diagram);
           resetStates(vm.diagram);
         });
       });

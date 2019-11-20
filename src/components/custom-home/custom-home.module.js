@@ -1,6 +1,7 @@
 import './custom-home.scss';
 import './components/custom-partials/action/action.scss';
 import './components/custom-partials/circle/circle.scss';
+import './components/directives/custom-setting/custom-setting.scss';
 
 import angular from 'angular';
 import uirouter from 'angular-ui-router';

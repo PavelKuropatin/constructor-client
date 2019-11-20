@@ -33,26 +33,26 @@
     </md-card>
 </md-card>
 
-<md-card>
-
-    <md-card-content layout="row">
-        <md-input-container>
-            <label>{{ 'state.source' | translate }}</label>
-            <md-select ng-change="apply()" ng-model="sourceLayout">
-                <md-option ng-repeat="icon in icons" ng-value="icon">
-                    <md-icon>{{icon}}</md-icon>
-                </md-option>
-            </md-select>
-        </md-input-container>
-        <md-input-container>
-
-            <label>{{ 'state.target' | translate }}</label>
-            <md-select ng-change="apply()" ng-model="targetLayout">
-                <md-option ng-repeat="icon in icons" ng-value="icon">
-                    <md-icon>{{icon}}</md-icon>
-                </md-option>
-            </md-select>
-        </md-input-container>
-    </md-card-content>
+<md-card class="connectedItems" layout="column" ng-model="state.settings.actions" ui-sortable="sortableOptions">
+    <md-card ng-repeat="action in state.settings.actions">
+        <md-content>
+            <div layout="row" layout-align="space-between center">
+                <div class="number"> {{action.number}}</div>
+                <md-input-container>
+                    <label>condition</label>
+                    <input ng-model="action.condition"/>
+                </md-input-container>
+                <md-select ng-model="action.type">
+                    <md-option ng-repeat="a in actions" ng-value="a">
+                        {{a}}
+                    </md-option>
+                </md-select>
+                <md-input-container>
+                    <label>value</label>
+                    <input ng-model="action.value"/>
+                </md-input-container>
+            </div>
+        </md-content>
+    </md-card>
 </md-card>
 
