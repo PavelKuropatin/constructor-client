@@ -2,7 +2,7 @@ import template from './custom-setting.html';
 
 const math = require('mathjs');
 
-export default function customSettingDirective (stateObjectService, CONSTANTS) {
+export default function customSettingDirective (stateObjectService,stateObjectHttpService, CONSTANTS) {
   'ngInject';
   return {
     restrict: 'E',
@@ -35,7 +35,32 @@ export default function customSettingDirective (stateObjectService, CONSTANTS) {
                     targetAnchor: CONSTANTS.ENDPOINT_LAYOUTS[scope.targetLayout].a,
                     targetEndpoint: CONSTANTS.ENDPOINT_LAYOUTS[scope.targetLayout].e
                   });
+                  console.log(scope.state.settings);
+                  stateObjectHttpService.saveSettings(scope.state.uuid, scope.state.settings).then(response => {
+                    console.log(response.data);
+                  });
              };
+
+             scope.refreshNumbers = () => {
+                _.forEach(scope.state.settings.actions, (action, i) =>  action.number = i + 1);
+             };
+
+             scope.deleteSettingsAction = (action_uuid) => {
+                    stateObjectHttpService.deleteSettingsAction(scope.state.uuid, action_uuid).then(response1 => {
+                            stateObjectHttpService.getStateSettings(scope.state.uuid).then(response2 => {
+                                console.log(response2.data);
+                                scope.state.settings = response2.data;
+                    });
+                    });
+             };
+
+              scope.addSettingsAction = (state_uuid) => {
+                                stateObjectHttpService.addSettingsAction(state_uuid).then(response => {
+                                            console.log(response.data);
+                                            scope.state.settings = response.data;
+                                });
+                         };
+
     }
   };
 }

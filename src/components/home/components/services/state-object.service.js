@@ -120,6 +120,7 @@ export default function stateObjectService ($rootScope, stateObjectHttpService, 
     });
   }
 
+
   return {
     createState: createState,
     deleteState: deleteState,
