@@ -47,12 +47,11 @@ export default function stateObjectHttpService ($http, env) {
   };
 
   const deleteContainer = (stateUuid, type, param) => {
-    return $http.delete(env.api + DEFAULT_STATE_URL + '/' + stateUuid + '/container/delete', {
+    return $http.post(env.api + DEFAULT_STATE_URL + '/' + stateUuid + '/container/delete', {
       type: type,
       label: param,
       value: 0
-    }
-    );
+    });
   };
 
   const deleteDiagram = (uuidDiagram) => {
