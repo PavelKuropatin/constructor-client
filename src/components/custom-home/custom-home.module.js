@@ -31,10 +31,10 @@ import socketHttpService from './components/service/http/socket-http.service';
 import imageHttpService from './components/service/http/image-http.service';
 import customSettingDirective from './components/directives/custom-setting/custom-setting.directive';
 
-export default angular.module('app.custom-home', [uirouter])
+export default angular.module('app.custom-home', ['ngMaterial', uirouter])
   .config(routing)
-  .controller('customHomeController', customHomeController)
   .controller('startCountController', startCountController)
+  .controller('customHomeController', customHomeController)
   .directive('ngFileSelect', ngFileSelectDirective)
   .factory('fileReader', fileReaderFactory)
   .directive('customSidenav', customSidenavDirective)

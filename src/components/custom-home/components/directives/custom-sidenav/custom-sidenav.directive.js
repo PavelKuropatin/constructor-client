@@ -1,6 +1,4 @@
 import template from './custom-sidenav.html';
-import editEndpointsLayoutTemplate
-  from '../../../../home/components/dialogs/edit-endpoints-layout/edit-endpoints-layout.html';
 
 export default function customSidenavDirective ($timeout, $mdDialog, stateObjectService) {
   'ngInject';
@@ -31,13 +29,13 @@ export default function customSidenavDirective ($timeout, $mdDialog, stateObject
       }
 
       scope.showStateSettings = (state) => {
-            scope.isActiveSetting =  !scope.isActiveSetting;
+        scope.isActiveSetting = !scope.isActiveSetting;
         stateObjectService.setConfigState(state);
       };
 
       scope.configState = (state) => {
-              scope.isActiveSetting = !scope.isActiveSetting;
-              stateObjectService.setConfigState(state);
+        scope.isActiveSetting = !scope.isActiveSetting;
+        stateObjectService.setConfigState(state);
       };
     }
   };

@@ -1,20 +1,20 @@
 <custom-js-plumb-object class="custom-action-state"
                         ng-click="vm.setActiveState(state)"
                         ng-style="{ 'left':state.x, 'top':state.y,  'box-shadow': '0 15px 35px ' + state.color}"
-                        state-object="state">
-    <h3 class="cursor-default">{{state.name}}</h3>
-    <custom-js-plumb-endpoint anchor={{state.endpointStyle.sourceAnchor}}
-                              class={{state.endpointStyle.sourceEndpoint}}
-                              settings="(state.endpointStyle.sourceAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || state.endpointStyle.sourceAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.sourceEndpointStyle1 : vm.sourceEndpointStyle2"
+                        state-object="state"
+                        uuid="{{state.uuid}}">
+    <custom-js-plumb-endpoint anchor={{state.style.sourceAnchor}}
+                              class={{state.style.sourceEndpoint}}
+                              settings="(state.style.sourceAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || state.style.sourceAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.sourceEndpointStyle1 : vm.sourceEndpointStyle2"
                               uuid="{{state.source.uuid}}">
-        <custom-js-plumb-connection ng-if="connection.is_visible"
+        <custom-js-plumb-connection ng-if="connection.isVisible"
                                     ng-model="connection"
                                     ng-repeat="connection in state.source.connections"
                                     state-objects="vm.diagram.states">
         </custom-js-plumb-connection>
     </custom-js-plumb-endpoint>
-    <custom-js-plumb-endpoint anchor={{state.endpointStyle.targetAnchor}}
-                              class={{state.endpointStyle.targetEndpoint}}
-                              settings="((state.endpointStyle.targetAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || state.endpointStyle.targetAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.targetEndpointStyle1 : vm.targetEndpointStyle2)"
+    <custom-js-plumb-endpoint anchor={{state.style.targetAnchor}}
+                              class={{state.style.targetEndpoint}}
+                              settings="((state.style.targetAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || state.style.targetAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.targetEndpointStyle1 : vm.targetEndpointStyle2)"
                               uuid="{{state.target.uuid}}"></custom-js-plumb-endpoint>
 </custom-js-plumb-object>

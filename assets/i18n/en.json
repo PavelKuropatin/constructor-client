@@ -18,6 +18,7 @@
     "action": "action"
   },
   "apply": "Apply",
+  "add_action": "Add action",
   "close": "Close",
   "param": {
     "name": "Param name",
@@ -45,6 +46,16 @@
       "port": "Port"
     }
   },
+  "image" : {
+    "choose" : "Choose image",
+    "explorer" : "Choose image",
+    "upload" : "Upload"
+  },
+  "action" : {
+    "condition" : "condition",
+    "value" : "value",
+    "add": "Add action",
+  },
   "state": {
     "name": "Name of State",
     "source": "Source",
@@ -59,5 +70,8 @@
     "color": "Color"
   },
   "Generator": "Generator",
-  "Socket": "Socket"
+  "Socket": "Socket",
+  "stop_exec" : "Stop",
+  "set_image" : "UI",
+  "none" : "Default"
 }

@@ -32,7 +32,7 @@ export default function jsPlumbCanvasDirective () {
       scope.jsPlumbInstance = instance;
 
       instance.bind('connection', (info, origEvent) => {
-        if (origEvent && origEvent.type == 'mouseup') {
+        if (origEvent && origEvent.type === 'mouseup') {
 
           var targetUuid = $(info.target).attr('uuid');
           var sourceUuid = $(info.source).attr('uuid');
@@ -46,9 +46,8 @@ export default function jsPlumbCanvasDirective () {
         minHeight: '1000px',
         display: 'block'
       }).draggable({
-//                axis: "y",
         stop: function (event, ui) {
-          var position = $(this).position();
+          const position = $(this).position();
           scope.x = position.left;
           scope.y = position.top;
           scope.$parent.$apply();
@@ -57,7 +56,7 @@ export default function jsPlumbCanvasDirective () {
 
       instance.setContainer($(element));
 
-      var zoom = (typeof scope.zoom === 'undefined') ? 1 : scope.zoom / 100;
+      const zoom = (typeof scope.zoom === 'undefined') ? 1 : scope.zoom / 100;
       jsPlumbZoomCanvas(instance, zoom, $(element)[0]);
 
       scope.$watch('zoom', (newVal, oldVal) => {

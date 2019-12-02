@@ -71,13 +71,11 @@ export default function stateObjectService ($rootScope, stateObjectHttpService, 
     });
   };
 
-  function getParentStates (states, targets) {
+  function getParentStates (states, targetUuid) {
     return _.filter(states, (state) => {
-      return _.find(state.sources, (source) => {
-        return _.find(source.connections, (connection) => {
-          return targets.includes(connection.uuid);
+        return _.find(state.source.connections, (connection) => {
+          return connection.target.uuid === targetUuid;
         });
-      });
     });
 
   }
@@ -92,12 +90,14 @@ export default function stateObjectService ($rootScope, stateObjectHttpService, 
   }
 
   const countFunction = (states, state) => {
-    let parentStates = getParentStates(states, _.map(state.targets, (target) => target.uuid));
+    let parentStates = getParentStates(states, state.target.uuid);
+    console.log(state.name);
+    console.log(parentStates);
     _.forEach(parentStates, (parentState) => {
       applyParentContainer(parentState.outputContainer, state.inputContainer);
     });
     _.forEach(state.outputContainer, container => {
-      let bufFunction = _.clone(container.stringFunction);
+      let bufFunction = _.clone(container.expression);
       _.forEach(state.inputContainer, item => {
         bufFunction = _.replace(bufFunction, new RegExp(item.label, 'g'), item.value);
       });
@@ -110,16 +110,15 @@ export default function stateObjectService ($rootScope, stateObjectHttpService, 
 
   function findSourceState (states, sourceUuid) {
     return _.find(states, state => {
-      return state.sources[0].uuid == sourceUuid;
+      return state.source.uuid == sourceUuid;
     });
   }
 
   function findTargetState (states, targetUuid) {
     return _.find(states, state => {
-      return state.targets[0].uuid == targetUuid;
+      return state.target.uuid == targetUuid;
     });
   }
-
 
   return {
     createState: createState,

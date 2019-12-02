@@ -11,7 +11,7 @@
         <input ng-model="state.v6"/>
     </md-input-container>
     <js-plumb-endpoint anchor="RightMiddle"
-                       class="{{state.endpointStyle.sourceEndpoint}}"
+                       class="{{state.style.sourceEndpoint}}"
                        ng-repeat="endpoint in state.sources"
                        settings="vm.sourceEndpointStyle"
                        uuid="{{endpoint.uuid}}">
@@ -21,7 +21,7 @@
         </js-plumb-connection>
     </js-plumb-endpoint>
     <js-plumb-endpoint anchor="LeftMiddle"
-                       class="{{state.endpointStyle.targetEndpoint}}"
+                       class="{{state.style.targetEndpoint}}"
                        ng-repeat="endpoint in state.targets"
                        settings="vm.targetEndpointStyle"
                        uuid="{{endpoint.uuid}}"></js-plumb-endpoint>

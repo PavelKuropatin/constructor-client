@@ -5,8 +5,8 @@
                             refresh="vm.refresh"></custom-sidenav>
             <custom-sidenav active-state="vm.activeState" change-visibility="vm.inverseConnectionVisibility"
                             diagram="vm.movedStates"
-                            editable="true" is-active-state="vm.isActiveState"
-                            is-active-setting="vm.isActiveSetting" refresh="vm.refresh"
+                            editable="true" is-active-setting="vm.isActiveSetting"
+                            is-active-state="vm.isActiveState" refresh="vm.refresh"
                             set-active-state="vm.setActiveState">
             </custom-sidenav>
         </div>
@@ -74,7 +74,8 @@
                 <custom-js-plumb-canvas id="container" image="vm.backgroundImg" on-connection="vm.onConnection"
                                         x="vm.pos_x" y="vm.pos_y"
                                         zoom="vm.zoomlevel">
-                    <ng-include ng-repeat="state in vm.movedStates.states" src="state.template"></ng-include>
+                    <ng-include ng-repeat="state in vm.movedStates.states"
+                                src="state.template"></ng-include>
                 </custom-js-plumb-canvas>
             </div>
         </div>
@@ -85,31 +86,22 @@
 
     <footer>
         <md-toolbar class="md-scroll-shrink">
-            <md-fab-toolbar md-direction="left">
-                <md-fab-trigger>
-                    <md-button aria-label="Add...">
-                        <md-icon>menu</md-icon>
-                    </md-button>
-                </md-fab-trigger>
 
-                <md-toolbar>
-                    <md-fab-actions layout="row">
-                        <md-button aria-label="load canvas background image">
-                            <input ng-file-select="onFileSelect($files)" style="display: none" type="file"/>
-                            <md-icon ng-click="vm.loadCanvasBackground()">image</md-icon>
-                        </md-button>
+            <div layout="row">
+                <md-button aria-label="load canvas background image">
+                    <input ng-file-select="onFileSelect($files)" style="display: none" type="file"/>
+                    <md-icon ng-click="vm.loadCanvasBackground()">image</md-icon>
+                </md-button>
 
-                        <md-button aria-label="refresh connections">
-                            <md-icon ng-click="vm.refreshStates()">refresh</md-icon>
-                        </md-button>
+                <md-button aria-label="refresh connections">
+                    <md-icon ng-click="vm.refreshStates()">refresh</md-icon>
+                </md-button>
 
-                        <md-button aria-label="refresh connections">
-                            <md-icon ng-click="vm.uploadImage()">cloud_upload</md-icon>
-                        </md-button>
+                <md-button aria-label="refresh connections">
+                    <md-icon ng-click="vm.uploadImage()">cloud_upload</md-icon>
+                </md-button>
 
-                    </md-fab-actions>
-                </md-toolbar>
-            </md-fab-toolbar>
+            </div>
         </md-toolbar>
     </footer>
 </div>

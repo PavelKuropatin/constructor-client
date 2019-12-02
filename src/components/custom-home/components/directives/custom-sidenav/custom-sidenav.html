@@ -6,9 +6,11 @@
                 <md-card-header-text>
                     <div layout="row" layout-align="space-between center">
                         <span class="title-text">{{state.name}}</span>
-                        <span class="medium-text">
-                            {{ 'state.position' | translate }}: [{{state.x| number}}, {{state.y| number}}]
-                        </span>
+                        <md-button aria-label="hide/show state info" class="md-icon-button"
+                                   ng-click="setActiveState(state)" ng-if="editable">
+                            <md-icon ng-if="activeState !== state">visibility</md-icon>
+                            <md-icon ng-if="activeState === state">visibility_off</md-icon>
+                        </md-button>
                         <md-button class="md-icon-button" ng-click="showStateSettings(state)" ng-if="editable">
                             <md-icon>settings_applications</md-icon>
                         </md-button>
@@ -22,11 +24,12 @@
                                      ng-if="state.source.connections.length"
                                      ng-repeat="connection in state.source.connections">
 
-                        <div class="big-text">{{ 'state.connection.self' | translate }} {{connection.uuid}}
-                            <md-icon ng-click="changeVisibility(connection)" ng-if="connection.is_visible">
+                        <div class="big-text">
+                            {{ 'state.connection.self' | translate }} {{connection.uuid}}
+                            <md-icon ng-click="changeVisibility(connection)" ng-if="connection.isVisible">
                                 visibility
                             </md-icon>
-                            <md-icon ng-click="changeVisibility(connection)" ng-if="connection.is_visible === false">
+                            <md-icon ng-click="changeVisibility(connection)" ng-if="connection.isVisible === false">
                                 visibility_off
                             </md-icon>
                         </div>

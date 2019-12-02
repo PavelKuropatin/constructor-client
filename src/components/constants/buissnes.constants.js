@@ -51,22 +51,22 @@ export default {
     SOCKET: 'Socket'
   },
 
-  ENDPOINT_LAYOUTS : {
-                  border_left: {
-                    a: 'LeftMiddle',
-                    e: 'endpoint-style-left'
-                  },
-                  border_top: {
-                    a: 'TopCenter',
-                    e: 'endpoint-style-top'
-                  },
-                  border_right: {
-                    a: 'RightMiddle',
-                    e: 'endpoint-style-right'
-                  },
-                  border_bottom: {
-                    a: 'BottomCenter',
-                    e: 'endpoint-style-bottom'
-                  }
-                }
+  ENDPOINT_LAYOUTS: {
+    border_left: {
+      a: 'LeftMiddle',
+      e: 'endpoint-style-left'
+    },
+    border_top: {
+      a: 'TopCenter',
+      e: 'endpoint-style-top'
+    },
+    border_right: {
+      a: 'RightMiddle',
+      e: 'endpoint-style-right'
+    },
+    border_bottom: {
+      a: 'BottomCenter',
+      e: 'endpoint-style-bottom'
+    }
+  }
 };

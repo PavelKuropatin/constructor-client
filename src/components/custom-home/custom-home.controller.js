@@ -16,7 +16,7 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
   vm.sourceEndpointStyle2 = customJsPlumbStyleService.getSourceEndpointStyle2();
 
   vm.countFunction = stateObjectService.countFunction;
-
+  vm.originStates = null;
   vm.modelSettings = {};
   vm.isActiveSetting = false;
   vm.sortableOptions = {
@@ -39,9 +39,9 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
 
   vm.setActiveState = (state) => vm.activeState = state;
 
-  vm.inverseConnectionVisibility = (connection) => connection.is_visible = !connection.is_visible;
+  vm.inverseConnectionVisibility = (connection) => connection.isVisible = !connection.isVisible;
 
-  vm.isActiveState = (state) => vm.activeState == state;
+  vm.isActiveState = (state) => vm.activeState === state;
 
   function resetStates (diagram) {
     _.forEach(diagram.states, state => {
@@ -59,14 +59,6 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
       vm.movedStates.states = bufStateObjects;
     });
   };
-
-    jsPlumb.ready(() => {
-            stateObjectHttpService.getDiagram("43439f66-7f13-4f2b-aa52-05a7ea21471d").then((response) => {
-                vm.diagram = response.data;
-                console.log(vm.diagram);
-                resetStates(vm.diagram);
-          });
-    });
 
   vm.loadCanvasBackground = () => $('input[type="file"]').click();
 
@@ -97,8 +89,8 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
         stateObjectHttpService.getDiagram(uuid).then((response) => {
           vm.movedStates = { states: [] };
           vm.diagram = response.data;
-          console.log(vm.diagram);
           resetStates(vm.diagram);
+          vm.originStates = JSON.parse(JSON.stringify(vm.diagram));
         });
       });
     });
@@ -118,10 +110,12 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
         socketHttpService.stopMonitor(vm.cmdUUID);
         break;
     }
-
   };
 
   vm.openModelSettings = () => {
+    if (!vm.diagram) {
+      return;
+    }
     $mdDialog.show({
       locals: { modelSettings: vm.modelSettings },
       controller: 'startCountController as vm',
@@ -129,6 +123,9 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
       clickOutsideToClose: true
     }).then((modelSettings) => {
       vm.modelSettings = modelSettings;
+
+      resetModelingStates();
+
       switch (vm.modelSettings.type) {
         case CONSTANTS.MODEL.GENERATOR:
           startCounter();
@@ -143,6 +140,18 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
     });
   };
 
+  const resetModelingStates = () => {
+    _.forEach(vm.movedStates.states, state => {
+      const oState = _.find(vm.originStates.states, o => o.uuid === state.uuid);
+      state.inputContainer = oState.inputContainer;
+      state.outputContainer = oState.outputContainer;
+      state.backgroundImg = null;
+    });
+    _.forEach(vm.modelSettings.vars, _var => {
+      _var.tmpValue = _var.startValue;
+    });
+  };
+
   const startCounter = () => {
     if (!vm.timer) {
       updateCounter();
@@ -151,21 +160,69 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
 
   const updateCounter = () => {
     _.forEach(vm.modelSettings.vars, _var => {
-      _var.startValue = +_var.startValue + +_var.stepValue;
+      _var.tmpValue = +_var.tmpValue + +_var.stepValue;
     });
-    changeParam();
-    vm.timer = $timeout(updateCounter, vm.modelSettings.interval);
+    const run = changeParam();
+    if (run) {
+      vm.timer = $timeout(updateCounter, vm.modelSettings.interval);
+    }
   };
 
   const changeParam = () => {
-    _.forEach(vm.movedStates.states, state => {
-      _.forEach(state.inputContainer, item => {
+    const states = vm.movedStates.states;
+    for (let i = 0; i < states.length; i++) {
+      _.forEach(states[i].inputContainer, item => {
         let values = vm.modelSettings.vars.find(_var => _var.valueName === item.label);
         if (values) {
-          item.value = values.startValue;
+          item.value = values.tmpValue;
         }
       });
-      stateObjectService.countFunction(vm.movedStates.states, state);
+      stateObjectService.countFunction(vm.movedStates.states, states[i]);
+      let action = defineAction(states[i]);
+      if (action) {
+        switch (action.type) {
+          case 'stop_exec':
+            console.log('stop exec');
+            vm.stopCount();
+            return false;
+          case  'set_image' :
+            const img = new Image();
+            img.src = action.value;
+            img.onload = function () {
+              $('[uuid=\'' + states[i].uuid + '\']')
+                .css({
+                  maxWidth: img.width + 'px',
+                  maxHeight: img.height + 'px',
+                  minWidth: img.width + 'px',
+                  minHeight: img.height + 'px',
+                  'background-image': 'url(' + action.value + ')'
+                });
+            };
+            break;
+          case 'none':
+            console.log('none');
+            break;
+        }
+      }
+    }
+    return true;
+  };
+
+  const defineAction = (state) => {
+    const container = state.inputContainer.concat(state.outputContainer);
+
+    return _.find(state.settings.actions, action => {
+      let expr = action.condition;
+      _.forEach(container, item => {
+        expr = _.replace(expr, new RegExp(item.label, 'g'), item.value);
+      });
+      let value;
+      try {
+        value = eval(expr);
+      } catch (ex) {
+        value = false;
+      }
+      return value;
     });
   };
 
@@ -176,16 +233,12 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
         state.outputContainer = [{ 'label': 'x', 'value': out[state.name] }];
       }
     });
-    console.log(message);
   });
 
   vm.uploadImage = () => {
     console.log(vm.imageToUpload);
-//    imageHttpService.uploadImage(vm.imageToUpload).then((response) => {
-//        console.log(response.data);
-//    });
     imageHttpService.getImages().then((response) => {
-        console.log(response.data);
+      console.log(response.data);
     });
   };
 }
