@@ -1,13 +1,15 @@
 import template from './custom-setting.html';
+import chooseImageTemplate from '../../dialogs/choose-image/choose-image.html';
 
 const math = require('mathjs');
 
-export default function customSettingDirective (stateObjectService, stateObjectHttpService, CONSTANTS) {
+export default function customSettingDirective ($mdDialog, stateObjectService, stateObjectHttpService, CONSTANTS) {
   'ngInject';
   return {
     restrict: 'E',
     template: template,
-    link: function (scope, element, attr) {
+    controllerAs: 'ctrl',
+    link: function (scope, element, attr, ctrl) {
       function getByAnchor (endpointAnchor) {
         switch (endpointAnchor) {
           case CONSTANTS.ANCHOR.TOP_CENTER:
@@ -61,6 +63,44 @@ export default function customSettingDirective (stateObjectService, stateObjectH
         });
       };
 
+      scope.chooseImage = (action) => {
+        console.log(scope);
+        $mdDialog.show({
+          controller: function ($scope, $mdDialog, stateObjectService, imageHttpService) {
+
+            const loadImages = () => {
+              imageHttpService.getImages(15).then(response => {
+                $scope.images = response.data;
+              });
+            };
+
+            loadImages();
+
+            $scope.uploadImage = () => {
+              $('#action_file').click();
+            };
+
+            $scope.apply = (url) => {
+              $mdDialog.hide(url);
+            };
+
+            $scope.getFile = (file) => {
+              if (!file) {
+                return;
+              }
+              $scope.uploadedImage = null;
+              imageHttpService.uploadImage(file).then((response) => {
+                $mdDialog.hide(response.data.url);
+              });
+            };
+          },
+          template: chooseImageTemplate,
+          clickOutsideToClose: true
+        }).then(function (url) {
+          action.value = url;
+          console.log(action);
+        });
+      };
     }
   };
 }

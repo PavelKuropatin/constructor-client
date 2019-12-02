@@ -74,7 +74,8 @@
                 <custom-js-plumb-canvas id="container" image="vm.backgroundImg" on-connection="vm.onConnection"
                                         x="vm.pos_x" y="vm.pos_y"
                                         zoom="vm.zoomlevel">
-                    <ng-include ng-repeat="state in vm.movedStates.states" src="state.template"></ng-include>
+                    <ng-include ng-repeat="state in vm.movedStates.states"
+                                src="state.template"></ng-include>
                 </custom-js-plumb-canvas>
             </div>
         </div>
@@ -85,32 +86,7 @@
 
     <footer>
         <md-toolbar class="md-scroll-shrink">
-            <!--            <md-fab-toolbar md-direction="left">-->
-            <!--                <md-fab-trigger>-->
-            <!--                    <md-button aria-label="Add...">-->
-            <!--                        <md-icon>menu</md-icon>-->
-            <!--                    </md-button>-->
-            <!--                </md-fab-trigger>-->
 
-            <!--                <md-toolbar>-->
-            <!--                    <md-fab-actions layout="row">-->
-            <!--                        <md-button aria-label="load canvas background image">-->
-            <!--                            <input ng-file-select="onFileSelect($files)" style="display: none" type="file"/>-->
-            <!--                            <md-icon ng-click="vm.loadCanvasBackground()">image</md-icon>-->
-            <!--                        </md-button>-->
-
-            <!--                        <md-button aria-label="refresh connections">-->
-            <!--                            <md-icon ng-click="vm.refreshStates()">refresh</md-icon>-->
-            <!--                        </md-button>-->
-
-            <!--                        <md-button aria-label="refresh connections">-->
-            <!--                            <md-icon ng-click="vm.uploadImage()">cloud_upload</md-icon>-->
-            <!--                        </md-button>-->
-
-            <!--                    </md-fab-actions>-->
-            <!--                </md-toolbar>-->
-            <!--            </md-fab-toolbar>-->
-            <!--        </md-toolbar>-->
             <div layout="row">
                 <md-button aria-label="load canvas background image">
                     <input ng-file-select="onFileSelect($files)" style="display: none" type="file"/>

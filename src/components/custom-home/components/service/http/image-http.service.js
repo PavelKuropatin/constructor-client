@@ -19,8 +19,13 @@ export default function imageHttpService ($http, env) {
     );
   };
 
-  const getImages = () => {
-    return $http.get(env.api + DEFAULT_IMAGE_URL);
+  const getImages = (size, next_cursor) => {
+    return $http.get(env.api + DEFAULT_IMAGE_URL, {
+      params: {
+        size: size || 15,
+        next_cursor: next_cursor || null
+      }
+    });
   };
 
   return {

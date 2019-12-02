@@ -1,75 +1,88 @@
-<md-card class="action-input-container" layout="row">
-    <md-icon>call_received</md-icon>
-    <md-input-container ng-repeat="input in state.inputContainer">
-        <label>{{input.label}}</label>
-        <input disabled ng-model="input.value"/>
-    </md-input-container>
-</md-card>
+<div class="custom-settings">
 
-<md-card class="action-input-container" layout="row">
-    <md-icon>call_made</md-icon>
-    <md-input-container ng-repeat="output in state.outputContainer">
-        <label>{{output.label}}</label>
-        <input disabled ng-model="output.value"/>
-    </md-input-container>
-</md-card>
-
-<md-card layout="column">
-    <md-card ng-repeat="output in state.outputContainer">
-        <md-card-header>
-            <md-icon>call_made</md-icon>
-            {{output.label}}
-        </md-card-header>
-        <md-content>
-            <md-input-container>
-                <label>{{ 'function.enter' | translate }}</label>
-                <input disabled ng-change="countFunction([], state)" ng-model="output.expression"/>
-            </md-input-container>
-            <md-input-container>
-                <label>{{ 'function.result' | translate }}</label>
-                <input disabled ng-model="output.value"/>
-            </md-input-container>
-        </md-content>
+    <md-card class="action-input-container" layout="row">
+        <md-icon>call_received</md-icon>
+        <md-input-container ng-repeat="input in state.inputContainer">
+            <label>{{input.label}}</label>
+            <input disabled ng-model="input.value"/>
+        </md-input-container>
     </md-card>
-</md-card>
 
-<md-card class="connectedItems" layout="column" ng-model="state.settings.actions" ui-sortable="sortableOptions"
-         ui-sortable-stop="refreshNumbers()">
-    <md-card ng-repeat="action in state.settings.actions">
-        <md-content>
-            <div layout="row" layout-align="space-between center" style="padding:5px">
-                <div class="number">#{{action.number}}</div>
+    <md-card class="action-input-container" layout="row">
+        <md-icon>call_made</md-icon>
+        <md-input-container ng-repeat="output in state.outputContainer">
+            <label>{{output.label}}</label>
+            <input disabled ng-model="output.value"/>
+        </md-input-container>
+    </md-card>
+
+    <md-card layout="column">
+        <md-card ng-repeat="output in state.outputContainer">
+            <md-card-header>
+                <md-icon>call_made</md-icon>
+                {{output.label}}
+            </md-card-header>
+            <md-content>
                 <md-input-container>
-                    <label>condition</label>
-                    <input ng-model="action.condition"/>
+                    <label>{{ 'function.enter' | translate }}</label>
+                    <input disabled ng-change="countFunction([], state)" ng-model="output.expression"/>
                 </md-input-container>
-                <md-select ng-model="action.type">
-                    <md-option ng-repeat="a in actions" ng-value="a">
-                        {{a}}
-                    </md-option>
-                </md-select>
                 <md-input-container>
-                    <label>value</label>
-                    <input ng-model="action.value"/>
+                    <label>{{ 'function.result' | translate }}</label>
+                    <input disabled ng-model="output.value"/>
                 </md-input-container>
-                <md-button class="md-table-action"
-                           ng-click="deleteSettingsAction(action.uuid)">
-                    <span class="material-icons md-18">delete_forever</span>
+            </md-content>
+        </md-card>
+    </md-card>
+
+    <md-card class="connectedItems" layout="column" ng-model="state.settings.actions" ui-sortable="sortableOptions"
+             ui-sortable-stop="refreshNumbers()">
+        <md-card ng-repeat="action in state.settings.actions">
+            <md-content>
+                <div layout="row" layout-align="space-between center" style="padding:5px">
+                    <div class="number">#{{action.number}}</div>
+                    <md-input-container>
+                        <label>condition</label>
+                        <input ng-model="action.condition"/>
+                    </md-input-container>
+                    <md-select ng-model="action.type">
+                        <md-option ng-repeat="a in actions" ng-value="a">
+                            {{a}}
+                        </md-option>
+                    </md-select>
+                    <md-input-container ng-if="action.type === 'set_image'">
+                        <md-button class="md-raised md-primary" ng-click="chooseImage(action)"
+                                   ng-if="!action.value || !action.value.trim()">Choose image
+                        </md-button>
+                        <img ng-click="chooseImage(action)" ng-if="action.value" src="{{action.value}}"/>
+                    </md-input-container>
+                    <md-input-container ng-if="action.type === 'stop_exec'">
+                        <label>value</label>
+                        <input disabled ng-model="action.value"/>
+                    </md-input-container>
+                    <md-input-container ng-if="action.type === 'none'">
+                        <label>value</label>
+                        <input disabled ng-model="action.value"/>
+                    </md-input-container>
+                    <md-button class="md-table-action"
+                               ng-click="deleteSettingsAction(action.uuid)">
+                        <span class="material-icons md-18">delete_forever</span>
+                    </md-button>
+                </div>
+            </md-content>
+        </md-card>
+        <div layout="row" layout-align="space-between center">
+            <md-input-container class="no-margin">
+                <md-button ng-click="apply()">
+                    Apply
                 </md-button>
-            </div>
-        </md-content>
+            </md-input-container>
+            <md-input-container class="no-margin">
+                <md-button ng-click="addSettingsAction(state.uuid)">
+                    Add
+                </md-button>
+            </md-input-container>
+        </div>
     </md-card>
-    <div layout="row" layout-align="space-between center">
-        <md-input-container class="no-margin">
-            <md-button ng-click="apply()">
-                Apply
-            </md-button>
-        </md-input-container>
-        <md-input-container class="no-margin">
-            <md-button ng-click="addSettingsAction(state.uuid)">
-                Add
-            </md-button>
-        </md-input-container>
-    </div>
-</md-card>
 
+</div>

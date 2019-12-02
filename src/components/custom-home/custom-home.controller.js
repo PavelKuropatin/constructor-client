@@ -186,7 +186,18 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
             vm.stopCount();
             return false;
           case  'set_image' :
-            console.log(action.value);
+            const img = new Image();
+            img.src = action.value;
+            img.onload = function () {
+              $('[uuid=\'' + states[i].uuid + '\']')
+                .css({
+                  maxWidth: img.width + 'px',
+                  maxHeight: img.height + 'px',
+                  minWidth: img.width + 'px',
+                  minHeight: img.height + 'px',
+                  'background-image': 'url(' + action.value + ')'
+                });
+            };
             break;
           case 'none':
             console.log('none');
@@ -226,9 +237,6 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
 
   vm.uploadImage = () => {
     console.log(vm.imageToUpload);
-//    imageHttpService.uploadImage(vm.imageToUpload).then((response) => {
-//        console.log(response.data);
-//    });
     imageHttpService.getImages().then((response) => {
       console.log(response.data);
     });
