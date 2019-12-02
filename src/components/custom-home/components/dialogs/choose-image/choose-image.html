@@ -1,7 +1,7 @@
 <md-card layout="column" layout-align="space-between start" style="width: 600px; height: 600px">
     <md-card-header>
         <md-card-header-text>
-            <div class="title-text">{{ 'model.settings' | translate }}</div>
+            <div class="title-text">{{ 'image.explorer' | translate }}</div>
         </md-card-header-text>
     </md-card-header>
     <md-card-content>
@@ -13,7 +13,7 @@
     <md-card-options>
         <input id="action_file" ng-file-select="onFileSelect($files)" style="display: none" type="file"/>
         <md-button ng-click="uploadImage()">
-            {{'apply' | translate }}
+            {{'image.upload' | translate }}
         </md-button>
         <md-button ng-click="hideDialog()">
             {{'close' | translate }}

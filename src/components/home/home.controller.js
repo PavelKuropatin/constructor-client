@@ -33,18 +33,19 @@ export default function homeController ($scope, $state, $mdDialog, $translate, s
   vm.onConnection = (instance, connection, targetUuid, sourceUuid) => {
     _.forEach(vm.diagram.states, state => {
       if (state.source.uuid === sourceUuid) {
-        state.source.connections.push({ uuid: targetUuid });
+        state.source.connections.push({ target : {uuid: targetUuid}, isVisible : true });
+        stateObjectService.updateContainer(vm.diagram.states, sourceUuid, targetUuid);
+        vm.updateDiagram();
         $scope.$apply();
       }
     });
-
-    stateObjectService.updateContainer(vm.diagram.states, sourceUuid, targetUuid);
-    vm.updateDiagram();
+//    stateObjectService.updateContainer(vm.diagram.states, sourceUuid, targetUuid);
+//    vm.updateDiagram();
   };
 
   vm.updateDiagram = () => {
     stateObjectHttpService.updateDiagram(vm.diagram).then(response => {
-      vm.diagram = response.data;
+        vm.diagram = response.data;
     });
   };
 

@@ -48,7 +48,10 @@ export default function customSettingDirective ($mdDialog, stateObjectService, s
       };
 
       scope.deleteSettingsAction = (action_uuid) => {
-        stateObjectHttpService.deleteSettingsAction(scope.state.uuid, action_uuid).then(response1 => {
+         stateObjectHttpService.saveSettings(scope.state.uuid, scope.state.settings).then(response => {
+                         scope.state.settings = response.data;
+                });
+         stateObjectHttpService.deleteSettingsAction(scope.state.uuid, action_uuid).then(response1 => {
           stateObjectHttpService.getStateSettings(scope.state.uuid).then(response2 => {
             console.log(response2.data);
             scope.state.settings = response2.data;
@@ -57,6 +60,9 @@ export default function customSettingDirective ($mdDialog, stateObjectService, s
       };
 
       scope.addSettingsAction = (state_uuid) => {
+        stateObjectHttpService.saveSettings(scope.state.uuid, scope.state.settings).then(response => {
+                 scope.state.settings = response.data;
+        });
         stateObjectHttpService.addSettingsAction(state_uuid).then(response => {
           console.log(response.data);
           scope.state.settings = response.data;
@@ -83,13 +89,16 @@ export default function customSettingDirective ($mdDialog, stateObjectService, s
             $scope.apply = (url) => {
               $mdDialog.hide(url);
             };
-
+            $scope.hideDialog = () => {
+                $mdDialog.cancel();
+            };
             $scope.getFile = (file) => {
               if (!file) {
                 return;
               }
               $scope.uploadedImage = null;
               imageHttpService.uploadImage(file).then((response) => {
+              $scope.uploadedImage = response.data.url;
                 $mdDialog.hide(response.data.url);
               });
             };
@@ -97,9 +106,12 @@ export default function customSettingDirective ($mdDialog, stateObjectService, s
           template: chooseImageTemplate,
           clickOutsideToClose: true
         }).then(function (url) {
-          action.value = url;
-          console.log(action);
-        });
+            if (url){
+            action.value = url;
+                               console.log(action);
+
+            }
+          });
       };
     }
   };

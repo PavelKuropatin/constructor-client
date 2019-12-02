@@ -42,26 +42,27 @@
                 <div layout="row" layout-align="space-between center" style="padding:5px">
                     <div class="number">#{{action.number}}</div>
                     <md-input-container>
-                        <label>condition</label>
+                        <label>{{ 'action.condition' | translate}}</label>
                         <input ng-model="action.condition"/>
                     </md-input-container>
                     <md-select ng-model="action.type">
                         <md-option ng-repeat="a in actions" ng-value="a">
-                            {{a}}
+                            {{a | translate }}
                         </md-option>
                     </md-select>
                     <md-input-container ng-if="action.type === 'set_image'">
                         <md-button class="md-raised md-primary" ng-click="chooseImage(action)"
-                                   ng-if="!action.value || !action.value.trim()">Choose image
+                                   ng-if="!action.value || !action.value.trim()">
+                            {{ 'image.choose' | translate }}
                         </md-button>
                         <img ng-click="chooseImage(action)" ng-if="action.value" src="{{action.value}}"/>
                     </md-input-container>
                     <md-input-container ng-if="action.type === 'stop_exec'">
-                        <label>value</label>
+                        <label>{{ 'action.value' | translate}}</label>
                         <input disabled ng-model="action.value"/>
                     </md-input-container>
                     <md-input-container ng-if="action.type === 'none'">
-                        <label>value</label>
+                        <label>{{ 'action.value' | translate}}</label>
                         <input disabled ng-model="action.value"/>
                     </md-input-container>
                     <md-button class="md-table-action"
@@ -74,12 +75,12 @@
         <div layout="row" layout-align="space-between center">
             <md-input-container class="no-margin">
                 <md-button ng-click="apply()">
-                    Apply
+                    {{'apply' | translate }}
                 </md-button>
             </md-input-container>
             <md-input-container class="no-margin">
                 <md-button ng-click="addSettingsAction(state.uuid)">
-                    Add
+                    {{'action.add' | translate }}
                 </md-button>
             </md-input-container>
         </div>

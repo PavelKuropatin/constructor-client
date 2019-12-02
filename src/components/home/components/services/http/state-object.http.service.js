@@ -27,7 +27,7 @@ export default function stateObjectHttpService ($http, env) {
   };
 
   const updateDiagram = (diagram) => {
-    return $http.post(env.api + DEFAULT_DIAGRAM_URL, diagram);
+    return $http.put(env.api + DEFAULT_DIAGRAM_URL + '/' + diagram.uuid, diagram);
   };
 
   const getDiagram = (uuid) => {
@@ -41,7 +41,7 @@ export default function stateObjectHttpService ($http, env) {
   const putNewContainer = (stateUuid, type, param, value) => {
     return $http.post(env.api + DEFAULT_STATE_URL + '/' + stateUuid + '/container/create', {
       type: type,
-      param: param,
+      label: param,
       value: value
     });
   };
