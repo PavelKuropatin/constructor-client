@@ -7,10 +7,8 @@ export default function startCountController ($scope, $mdDialog, modelSettings, 
   $scope.CONSTANTS = CONSTANTS;
   if (modelSettings) {
     vm.modelSettings = modelSettings;
-    vm.selectedSourceType = modelSettings.type;
+    vm.selectedSourceType = modelSettings.type || CONSTANTS.MODEL.GENERATOR;
   }
-
-  console.log(vm.modelSettings);
 
   vm.apply = () => {
     vm.modelSettings.type = vm.selectedSourceType;

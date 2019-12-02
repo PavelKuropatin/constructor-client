@@ -58,24 +58,24 @@ export default function stateObjectHttpService ($http, env) {
     return $http.delete(env.api + DEFAULT_DIAGRAM_URL + '/' + uuidDiagram);
   };
 
-        const saveSettings = (stateUuid, stateSettings) => {
-            return $http.post(env.api + DEFAULT_SETTINGS_URL + '/' + stateUuid, stateSettings);
-        };
+  const saveSettings = (stateUuid, stateSettings) => {
+    return $http.post(env.api + DEFAULT_SETTINGS_URL + '/' + stateUuid, stateSettings);
+  };
 
-        const deleteSettingsAction = (stateUuid, actionUuid) => {
-            return $http.delete(env.api + DEFAULT_SETTINGS_URL + '/' + stateUuid  + '/action/' + actionUuid);
-        };
+  const deleteSettingsAction = (stateUuid, actionUuid) => {
+    return $http.delete(env.api + DEFAULT_SETTINGS_URL + '/' + stateUuid + '/action/' + actionUuid);
+  };
 
-        const getStateSettings = (stateUuid) => {
-                    return $http.get(env.api + DEFAULT_SETTINGS_URL + '/' + stateUuid);
-        };
+  const getStateSettings = (stateUuid) => {
+    return $http.get(env.api + DEFAULT_SETTINGS_URL + '/' + stateUuid);
+  };
 
-        const addSettingsAction = (stateUuid) => {
-            return $http.post(env.api + DEFAULT_SETTINGS_URL + '/' + stateUuid + '/action', {
-                condition: 'false',
-                type: 'load_image'
-            });
-        };
+  const addSettingsAction = (stateUuid) => {
+    return $http.post(env.api + DEFAULT_SETTINGS_URL + '/' + stateUuid + '/action', {
+      condition: 'true',
+      type: 'none'
+    });
+  };
 
   return {
     createNewDiagram: createNewDiagram,

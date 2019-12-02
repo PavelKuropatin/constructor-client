@@ -23,10 +23,10 @@
                                      ng-repeat="connection in state.source.connections">
 
                         <div class="big-text">{{ 'state.connection.self' | translate }} {{connection.uuid}}
-                            <md-icon ng-click="changeVisibility(connection)" ng-if="connection.is_visible">
+                            <md-icon ng-click="changeVisibility(connection)" ng-if="connection.isVisible">
                                 visibility
                             </md-icon>
-                            <md-icon ng-click="changeVisibility(connection)" ng-if="connection.is_visible === false">
+                            <md-icon ng-click="changeVisibility(connection)" ng-if="connection.isVisible === false">
                                 visibility_off
                             </md-icon>
                         </div>

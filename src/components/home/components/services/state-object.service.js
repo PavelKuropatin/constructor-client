@@ -75,7 +75,7 @@ export default function stateObjectService ($rootScope, stateObjectHttpService, 
     return _.filter(states, (state) => {
       return _.find(state.sources, (source) => {
         return _.find(source.connections, (connection) => {
-          return targets.includes(connection.uuid);
+          return targets.includes(connection.target.uuid);
         });
       });
     });
@@ -97,7 +97,7 @@ export default function stateObjectService ($rootScope, stateObjectHttpService, 
       applyParentContainer(parentState.outputContainer, state.inputContainer);
     });
     _.forEach(state.outputContainer, container => {
-      let bufFunction = _.clone(container.stringFunction);
+      let bufFunction = _.clone(container.expression);
       _.forEach(state.inputContainer, item => {
         bufFunction = _.replace(bufFunction, new RegExp(item.label, 'g'), item.value);
       });
@@ -119,7 +119,6 @@ export default function stateObjectService ($rootScope, stateObjectHttpService, 
       return state.targets[0].uuid == targetUuid;
     });
   }
-
 
   return {
     createState: createState,

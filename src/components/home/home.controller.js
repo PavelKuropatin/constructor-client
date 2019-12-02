@@ -16,6 +16,7 @@ export default function homeController ($scope, $state, $mdDialog, $translate, s
 
   vm.countFunction = stateObjectService.countFunction;
   vm.isActiveSetting = false;
+  vm.settingsState = null;
 
   $scope.$on(CONSTANTS.EVENT_CONSTANTS.SUCCESS_DIAGRAM_DELETE, () => {
     vm.diagram = undefined;
@@ -31,10 +32,10 @@ export default function homeController ($scope, $state, $mdDialog, $translate, s
 
   vm.onConnection = (instance, connection, targetUuid, sourceUuid) => {
     _.forEach(vm.diagram.states, state => {
-        if (state.source.uuid == sourceUuid) {
-              state.source.connections.push({ 'uuid': targetUuid });
-                $scope.$apply();
-        }
+      if (state.source.uuid === sourceUuid) {
+        state.source.connections.push({ uuid: targetUuid });
+        $scope.$apply();
+      }
     });
 
     stateObjectService.updateContainer(vm.diagram.states, sourceUuid, targetUuid);
@@ -44,22 +45,14 @@ export default function homeController ($scope, $state, $mdDialog, $translate, s
   vm.updateDiagram = () => {
     stateObjectHttpService.updateDiagram(vm.diagram).then(response => {
       vm.diagram = response.data;
-      console.log(vm.diagram);
     });
   };
 
   vm.createNewDiagram = () => {
     stateObjectHttpService.createNewDiagram().then(response => {
       vm.diagram = response.data;
-        console.log(vm.diagram);
-  });
+    });
   };
-
-//    jsPlumb.ready(() => {
-//            stateObjectHttpService.getDiagram("468b7557-77d8-40c0-baf5-d6201562f348").then((response) => {
-//                vm.diagram = response.data;
-//          });
-//    });
 
   vm.openDiagram = () => {
     $mdDialog.show({
@@ -71,7 +64,7 @@ export default function homeController ($scope, $state, $mdDialog, $translate, s
         stateObjectHttpService.getDiagram(uuid).then((response) => {
           vm.diagram = response.data;
           console.log(vm.diagram);
-});
+        });
       });
     });
   };

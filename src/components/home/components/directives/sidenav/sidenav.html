@@ -7,10 +7,6 @@
         <md-button class="md-icon-button" ng-click="newState(diagram.uuid, diagram.states, state)">
             <md-icon>playlist_add</md-icon>
         </md-button>
-        <!--        <md-button class="md-icon-button"  aria_label="show json" ng-click="showjson=!showjson">-->
-        <!--            <md-icon ng-if="!showjson">create</md-icon>-->
-        <!--            <md-icon ng-if="showjson">remove</md-icon>-->
-        <!--        </md-button>-->
     </md-card-header>
 
     <md-divider></md-divider>
@@ -26,7 +22,7 @@
                         </span>
                     </div>
                 </md-card-header-text>
-                <md-button class="md-icon-button" ng-click="configState(state)" ng-if="!isActiveModel">
+                <md-button class="md-icon-button" ng-click="showStateSettings(state)" ng-if="!isActiveModel">
                     <md-icon>settings_applications</md-icon>
                 </md-button>
                 <md-button aria-label="hide/show state info" class="md-icon-button" ng-click="setActiveState(state)">
@@ -104,10 +100,11 @@
                     <md-card>
                         <md-card-header>
                             <md-card-header-text>
-                                <div class="big-text">{{ 'state.connection.self' | translate }} {{connection.uuid}}
+                                <div class="big-text">{{ 'state.connection.self' | translate }}
+                                    {{connection.target.uuid}}
                                 </div>
                             </md-card-header-text>
-                            <md-button class="md-icon-button" ng-click="removeIndex($index, source.connections)">
+                            <md-button class="md-icon-button" ng-click="removeIndex($index, state.source.connections)">
                                 <md-icon>delete_sweep</md-icon>
                             </md-button>
                         </md-card-header>

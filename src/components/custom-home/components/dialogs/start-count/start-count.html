@@ -17,18 +17,18 @@
                     </md-input-container>
                     <md-button ng-click="vm.addVariable()">+</md-button>
                 </md-list-item>
-                <md-list-item ng-repeat="(index, var) in vm.modelSettings.vars">
+                <md-list-item ng-repeat="(index, variable) in vm.modelSettings.vars">
                     <md-input-container>
                         <label>{{'model.generator.var_name' | translate }}</label>
-                        <input ng-model="var.valueName"/>
+                        <input ng-model="variable.valueName"/>
                     </md-input-container>
                     <md-input-container>
                         <label>{{'model.generator.var_start' | translate }}</label>
-                        <input ng-model="var.startValue"/>
+                        <input ng-model="variable.startValue"/>
                     </md-input-container>
                     <md-input-container>
                         <label>{{'model.generator.var_step' | translate }}</label>
-                        <input ng-model="var.stepValue"/>
+                        <input ng-model="variable.stepValue"/>
                     </md-input-container>
                     <md-button ng-click="vm.deleteVariable(index)">-</md-button>
                 </md-list-item>

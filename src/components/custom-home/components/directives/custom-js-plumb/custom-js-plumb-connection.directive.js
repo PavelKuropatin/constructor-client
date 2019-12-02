@@ -12,7 +12,7 @@ export default function customJsPlumbConnectionDirective ($timeout) {
       $timeout(() => {
         const instance = customJsPlumbEndpoint.scope.jsPlumbInstance;
         let sourceUuid = customJsPlumbEndpoint.scope.uuid;
-        let targetUuid = scope.ngModel.uuid;
+        let targetUuid = scope.ngModel.target.uuid;
         if (typeof customJsPlumbEndpoint.connectionObjects[targetUuid] === 'undefined') {
           customJsPlumbEndpoint.connectionObjects[targetUuid] = instance.connect({
             uuids: [

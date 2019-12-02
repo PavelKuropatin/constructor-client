@@ -61,12 +61,12 @@ export default function sidenavDirective ($timeout, $mdDialog, stateObjectServic
 
       scope.editEndpoints = (state) => {
         $mdDialog.show({
-          locals: { endpointStyle: state.endpointStyle },
+          locals: { endpointStyle: state.style },
           controller: 'editEndpointsLayoutController as vm',
           template: editEndpointsLayoutTemplate,
           clickOutsideToClose: true
         }).then(function (endpointStyle) {
-          state.endpointStyle = endpointStyle;
+          state.style = endpointStyle;
           refreshStates();
         });
       };
@@ -93,11 +93,10 @@ export default function sidenavDirective ($timeout, $mdDialog, stateObjectServic
         });
       };
 
-      scope.configState = (state) => {
+      scope.showStateSettings = (state) => {
         scope.isActiveSetting = !scope.isActiveSetting;
         stateObjectService.setConfigState(state);
       };
-
     }
   };
 }
