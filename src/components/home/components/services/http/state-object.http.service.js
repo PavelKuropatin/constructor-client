@@ -47,10 +47,11 @@ export default function stateObjectHttpService ($http, env) {
   };
 
   const deleteContainer = (stateUuid, type, param) => {
-    return $http.post(env.api + DEFAULT_STATE_URL + '/' + stateUuid + '/container/delete', {
+    return $http.request('delete', env.api + DEFAULT_STATE_URL + '/' + stateUuid + '/container/delete', { body :{
       type: type,
-      param: param,
+      label: param,
       value: 0
+    }
     });
   };
 
