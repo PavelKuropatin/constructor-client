@@ -180,6 +180,7 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
       stateObjectService.countFunction(vm.movedStates.states, states[i]);
       let action = defineAction(states[i]);
       if (action) {
+        console.log(action.number);
         switch (action.type) {
           case 'stop_exec':
             console.log('stop exec');

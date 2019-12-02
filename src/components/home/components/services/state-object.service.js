@@ -91,8 +91,6 @@ export default function stateObjectService ($rootScope, stateObjectHttpService, 
 
   const countFunction = (states, state) => {
     let parentStates = getParentStates(states, state.target.uuid);
-    console.log(state.name);
-    console.log(parentStates);
     _.forEach(parentStates, (parentState) => {
       applyParentContainer(parentState.outputContainer, state.inputContainer);
     });
