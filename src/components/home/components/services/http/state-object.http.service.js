@@ -77,6 +77,13 @@ export default function stateObjectHttpService ($http, env) {
     });
   };
 
+  const saveHistory = (diagram) => {
+    return $http.post(env.api + '/api/history', {
+      diagramUuid: diagram.uuid,
+      json: JSON.stringify(diagram)
+    });
+  };
+
   return {
     createNewDiagram: createNewDiagram,
     getDiagram: getDiagram,
@@ -91,7 +98,8 @@ export default function stateObjectHttpService ($http, env) {
     saveSettings: saveSettings,
     deleteSettingsAction: deleteSettingsAction,
     getStateSettings: getStateSettings,
-    addSettingsAction: addSettingsAction
+    addSettingsAction: addSettingsAction,
+    saveHistory: saveHistory
   };
 }
 

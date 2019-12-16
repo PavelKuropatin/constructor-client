@@ -50,6 +50,15 @@
                 </md-list-item>
             </md-list>
         </div>
+        <div>
+            <md-checkbox flex ng-model="vm.storeHistory">
+                {{ 'model.store_history' | translate }}
+            </md-checkbox>
+            <md-input-container ng-if="vm.storeHistory">
+                <label>{{ 'model.interval' | translate }}</label>
+                <input ng-model="vm.modelSettings.history_interval"/>
+            </md-input-container>
+        </div>
     </md-card-content>
     <md-input-container>
         <md-button ng-click="vm.apply()">

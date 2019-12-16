@@ -44,7 +44,8 @@
     "socket": {
       "host": "Host",
       "port": "Port"
-    }
+    },
+    "store_history": "Store history"
   },
   "image" : {
     "choose" : "Choose image",
@@ -54,7 +55,7 @@
   "action" : {
     "condition" : "condition",
     "value" : "value",
-    "add": "Add action",
+    "add": "Add action"
   },
   "state": {
     "name": "Name of State",

@@ -2,6 +2,7 @@ export default function startCountController ($scope, $mdDialog, modelSettings, 
   'ngInject';
   let vm = this;
 
+  vm.storeHistory = false;
   vm.sourceTypes = ['Generated', 'Socket'];
   vm.selectedSourceType = null;
   $scope.CONSTANTS = CONSTANTS;

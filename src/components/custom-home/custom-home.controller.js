@@ -1,7 +1,7 @@
 import openDiagramTemplate from '../home/components/dialogs/open-diagram/open-diagram.html';
 import startCountTemplate from './components/dialogs/start-count/start-count.html';
 
-export default function customHomeController ($scope, $state, $mdDialog, $translate, $timeout, stateObjectHttpService, customJsPlumbStyleService,
+export default function customHomeController ($scope, $interval, $state, $mdDialog, $translate, $timeout, stateObjectHttpService, customJsPlumbStyleService,
   stateObjectService, CONSTANTS, ROUTES, fileReader, socketService, socketHttpService, imageHttpService) {
   'ngInject';
   const vm = this;
@@ -105,6 +105,10 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
       case CONSTANTS.MODEL.GENERATOR:
         $timeout.cancel(vm.timer);
         vm.timer = null;
+        if (vm.history) {
+          $interval.cancel(vm.history);
+          vm.history = null;
+        }
         break;
       case CONSTANTS.MODEL.SOCKET:
         socketHttpService.stopMonitor(vm.cmdUUID);
@@ -153,9 +157,23 @@ export default function customHomeController ($scope, $state, $mdDialog, $transl
   };
 
   const startCounter = () => {
+    console.log(vm.modelSettings);
+    if (typeof vm.modelSettings.history_interval !== 'undefined') {
+      const history_interval = +vm.modelSettings.history_interval;
+      vm.history = $interval(saveHistory, history_interval);
+    }
     if (!vm.timer) {
       updateCounter();
     }
+  };
+
+  const saveHistory = () => {
+    let diagram = {};
+    angular.copy(vm.diagram, diagram);
+    diagram.states.push(vm.movedStates.states);
+    stateObjectHttpService.saveHistory(diagram).then(response => {
+      console.log(response.data);
+    });
   };
 
   const updateCounter = () => {
