@@ -1,70 +1,74 @@
-import openDiagramTemplate from './components/dialogs/open-diagram/open-diagram.html';
+import openSchemaTemplate from './components/dialogs/open-schema/open-schema.html';
 
-export default function homeController ($scope, $state, $mdDialog, $translate, stateObjectHttpService, jsPlumbStyleService,
-  stateObjectService, CONSTANTS, ROUTES) {
+export default function homeController ($scope, $state, $mdDialog, $translate, blockObjectHttpService, jsPlumbStyleService,
+  blockObjectService, CONSTANTS, ROUTES) {
   'ngInject';
   $scope.CONSTANTS = CONSTANTS;
   const vm = this;
   vm.zoomlevel = 64;
-  vm.activeState = null;
+  vm.activeBlock = null;
 
-  vm.targetEndpointStyle1 = jsPlumbStyleService.getTargetEndpointStyle1();
-  vm.targetEndpointStyle2 = jsPlumbStyleService.getTargetEndpointStyle2();
+  vm.outputEndpointStyle1 = jsPlumbStyleService.getOutputEndpointStyle1();
+  vm.outputEndpointStyle2 = jsPlumbStyleService.getOutputEndpointStyle2();
 
-  vm.sourceEndpointStyle1 = jsPlumbStyleService.getSourceEndpointStyle1();
-  vm.sourceEndpointStyle2 = jsPlumbStyleService.getSourceEndpointStyle2();
+  vm.inputEndpointStyle1 = jsPlumbStyleService.getInputEndpointStyle1();
+  vm.inputEndpointStyle2 = jsPlumbStyleService.getInputEndpointStyle2();
 
-  vm.countFunction = stateObjectService.countFunction;
+  vm.countFunction = blockObjectService.countFunction;
   vm.isActiveSetting = false;
-  vm.settingsState = null;
+  vm.settingsBlock = null;
 
-  $scope.$on(CONSTANTS.EVENT_CONSTANTS.SUCCESS_DIAGRAM_DELETE, () => {
-    vm.diagram = undefined;
+  $scope.$on(CONSTANTS.EVENT_CONSTANTS.SUCCESS_SCHEMA_DELETE, () => {
+    vm.schema = undefined;
   });
 
   vm.goToModel = () => {
     $state.go(ROUTES.MODEL);
   };
 
-  vm.setActiveState = (state) => {
-    vm.activeState = state;
+  vm.setActiveBlock = (block) => {
+    vm.activeBlock = block;
   };
 
-  vm.onConnection = (instance, connection, targetUuid, sourceUuid) => {
-    _.forEach(vm.diagram.states, state => {
-      if (state.source.uuid === sourceUuid) {
-        state.source.connections.push({ target : {uuid: targetUuid}, isVisible : true });
-        stateObjectService.updateContainer(vm.diagram.states, sourceUuid, targetUuid);
-        vm.updateDiagram();
-        $scope.$apply();
-      }
-    });
-//    stateObjectService.updateContainer(vm.diagram.states, sourceUuid, targetUuid);
-//    vm.updateDiagram();
+  vm.onConnection = (instance, connection, outputUuid, inputUuid) => {
+    let outputBlock = blockObjectService.findOutputBlock(vm.schema.blocks, outputUuid);
+    let output = _.filter(outputBlock.outputs, (o) => o.uuid = outputUuid)[0];
+
+    // _.forEach(vm.schema.blocks, block => {
+    let inputBlock = blockObjectService.findInputBlock(vm.schema.blocks, inputUuid);
+    let input = _.filter(inputBlock.inputs, (i) => i.uuid = inputUuid)[0];
+    // console.log(inputBlock);
+    // if (inputBlock) {
+      input.connections.push({ uuid: outputUuid, isVisible: true });
+      blockObjectService.updateContainer(vm.schema.blocks, inputBlock, outputBlock);
+      vm.updateSchema();
+      $scope.$apply();
+    // }
+    // });
   };
 
-  vm.updateDiagram = () => {
-    stateObjectHttpService.updateDiagram(vm.diagram).then(response => {
-        vm.diagram = response.data;
-    });
-  };
-
-  vm.createNewDiagram = () => {
-    stateObjectHttpService.createNewDiagram().then(response => {
-      vm.diagram = response.data;
+  vm.updateSchema = () => {
+    blockObjectHttpService.updateSchema(vm.schema).then(response => {
+      vm.schema = response.data;
     });
   };
 
-  vm.openDiagram = () => {
+  vm.createNewSchema = () => {
+    blockObjectHttpService.createNewSchema().then(response => {
+      vm.schema = response.data;
+    });
+  };
+
+  vm.openSchema = () => {
     $mdDialog.show({
-      controller: 'openDiagramController as vm',
-      template: openDiagramTemplate,
+      controller: 'openSchemaController as vm',
+      template: openSchemaTemplate,
       clickOutsideToClose: true
     }).then((uuid) => {
       jsPlumb.ready(() => {
-        stateObjectHttpService.getDiagram(uuid).then((response) => {
-          vm.diagram = response.data;
-          console.log(vm.diagram);
+        blockObjectHttpService.getSchema(uuid).then((response) => {
+          vm.schema = response.data;
+          console.log(vm.schema);
         });
       });
     });

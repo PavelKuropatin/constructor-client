@@ -17,7 +17,7 @@ module.exports = merge(common, {
 		fs: 'empty',
 		tls: 'empty',
 		net: 'empty'
-	}
+	},
 	plugins: [
 		new Webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production')

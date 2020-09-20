@@ -1,0 +1,89 @@
+<div class="custom-settings">
+
+    <md-card class="action-input-container" layout="row">
+        <md-icon>call_received</md-icon>
+        <md-input-container ng-repeat="input in block.inputVars">
+            <label>{{input.label}}</label>
+            <input disabled ng-model="input.value"/>
+        </md-input-container>
+    </md-card>
+
+    <md-card class="action-input-container" layout="row">
+        <md-icon>call_made</md-icon>
+        <md-input-container ng-repeat="output in block.outputVars">
+            <label>{{output.label}}</label>
+            <input disabled ng-model="output.value"/>
+        </md-input-container>
+    </md-card>
+
+    <md-card layout="column">
+        <md-card ng-repeat="output in block.outputVars">
+            <md-card-header>
+                <md-icon>call_made</md-icon>
+                {{output.label}}
+            </md-card-header>
+            <md-content>
+                <md-input-container>
+                    <label>{{ 'function.enter' | translate }}</label>
+                    <input disabled ng-change="countFunction([], block)" ng-model="output.expression"/>
+                </md-input-container>
+                <md-input-container>
+                    <label>{{ 'function.result' | translate }}</label>
+                    <input disabled ng-model="output.value"/>
+                </md-input-container>
+            </md-content>
+        </md-card>
+    </md-card>
+
+    <md-card class="connectedItems" layout="column" ng-model="block.settings.actions" ui-sortable="sortableOptions"
+             ui-sortable-stop="refreshNumbers()">
+        <md-card ng-repeat="action in block.settings.actions">
+            <md-content>
+                <div layout="row" layout-align="space-between center" style="padding:5px">
+                    <div class="number">#{{action.number}}</div>
+                    <md-input-container>
+                        <label>{{ 'action.condition' | translate}}</label>
+                        <input ng-model="action.condition"/>
+                    </md-input-container>
+                    <md-select ng-model="action.type">
+                        <md-option ng-repeat="a in actions" ng-value="a">
+                            {{a | translate }}
+                        </md-option>
+                    </md-select>
+                    <md-input-container ng-if="action.type === 'set_image'">
+                        <md-button class="md-raised md-primary" ng-click="chooseImage(action)"
+                                   ng-if="!action.value || !action.value.trim()">
+                            {{ 'image.choose' | translate }}
+                        </md-button>
+                        <img ng-click="chooseImage(action)" ng-if="action.value" src="{{action.value}}"/>
+                    </md-input-container>
+                    <md-input-container ng-if="action.type === 'stop_exec'">
+                        <label>{{ 'action.value' | translate}}</label>
+                        <input disabled ng-model="action.value"/>
+                    </md-input-container>
+                    <md-input-container ng-if="action.type === 'none'">
+                        <label>{{ 'action.value' | translate}}</label>
+                        <input disabled ng-model="action.value"/>
+                    </md-input-container>
+                    <md-button class="md-table-action"
+                               ng-click="deleteSettingsAction(action.uuid)">
+                        <span class="material-icons md-18">delete_forever</span>
+                    </md-button>
+                </div>
+            </md-content>
+        </md-card>
+        <div layout="row" layout-align="space-between center">
+            <md-input-container class="no-margin">
+                <md-button ng-click="apply()">
+                    {{'apply' | translate }}
+                </md-button>
+            </md-input-container>
+            <md-input-container class="no-margin">
+                <md-button ng-click="addSettingsAction(block.uuid)">
+                    {{'action.add' | translate }}
+                </md-button>
+            </md-input-container>
+        </div>
+    </md-card>
+
+</div>

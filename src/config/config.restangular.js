@@ -1,4 +1,4 @@
-export default function resourceLocationConfig (RestangularProvider, env) {
+export default function reinputLocationConfig (RestangularProvider, env) {
   'ngInject';
 //  RestangularProvider.setBaseUrl(env.api);
 }

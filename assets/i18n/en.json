@@ -6,13 +6,13 @@
   "schema": {
     "self" : "Schema"
   },
-  "diagram": {
-    "self": "Diagram",
-    "open": "Open diagram",
-    "create": "Create new diagram",
-    "update": "Update current diagram",
-    "choose": "Choose diagram...",
-    "info": "Diagram info",
+  "schema": {
+    "self": "Schema",
+    "open": "Open schema",
+    "create": "Create new schema",
+    "update": "Update current schema",
+    "choose": "Choose schema...",
+    "info": "Schema info",
     "name": "Name",
     "description": "Description",
     "action": "action"
@@ -57,10 +57,10 @@
     "value" : "value",
     "add": "Add action"
   },
-  "state": {
-    "name": "Name of State",
-    "source": "Source",
-    "target": "Target",
+  "block": {
+    "name": "Name of Block",
+    "input": "Input",
+    "output": "Output",
     "connection": {
       "self": "Connection",
       "condition": "Condition"

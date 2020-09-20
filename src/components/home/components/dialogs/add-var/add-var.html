@@ -1,0 +1,25 @@
+<md-card>
+    <md-card-header>
+        <md-card-header-text>
+            <div class="title-text">{{ 'param.add' | translate }}</div>
+        </md-card-header-text>
+    </md-card-header>
+    <md-card-content>
+        <md-input-container>
+            <label>{{ 'param.name' | translate }}</label>
+            <input ng-model="vm.inputVar.param"/>
+        </md-input-container>
+        <md-input-container>
+            <label>{{ 'param.value' | translate }}</label>
+            <input ng-model="vm.inputVar.value"/>
+        </md-input-container>
+    </md-card-content>
+    <md-input-container>
+        <md-button ng-click="vm.addVar()">
+            {{ 'apply' | translate }}
+        </md-button>
+        <md-button ng-click="vm.closeDialog()">
+            {{ 'close' | translate}}
+        </md-button>
+    </md-input-container>
+</md-card>

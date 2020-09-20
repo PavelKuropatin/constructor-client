@@ -1,0 +1,20 @@
+<custom-js-plumb-object class="custom-action-block"
+                        ng-click="vm.setActiveBlock(block)"
+                        ng-style="{ 'left':block.x, 'top':block.y,  'box-shadow': '0 15px 35px ' + block.color}"
+                        state-object="block"
+                        uuid="{{block.uuid}}">
+    <custom-js-plumb-endpoint anchor={{block.endpointStyle.inputAnchor}}
+                              class={{block.endpointStyle.inputEndpoint}}
+                              settings="(block.endpointStyle.inputAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || block.endpointStyle.inputAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.inputEndpointStyle1 : vm.inputEndpointStyle2"
+                              uuid="{{block.inputs[0].uuid}}">
+        <custom-js-plumb-connection ng-if="connection.isVisible"
+                                    ng-repeat="connection in block.inputs[0].connections"
+                                    ng-model="connection"
+                                    block-objects="vm.schema.blocks">
+        </custom-js-plumb-connection>
+    </custom-js-plumb-endpoint>
+    <custom-js-plumb-endpoint anchor={{block.endpointStyle.outputAnchor}}
+                              class={{block.endpointStyle.outputEndpoint}}
+                              settings="((block.endpointStyle.outputAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || block.endpointStyle.outputAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.outputEndpointStyle1 : vm.outputEndpointStyle2)"
+                              uuid="{{block.outputs[0].uuid}}"></custom-js-plumb-endpoint>
+</custom-js-plumb-object>

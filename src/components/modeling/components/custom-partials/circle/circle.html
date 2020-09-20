@@ -1,0 +1,28 @@
+<custom-js-plumb-object class="circle-block"
+                        ng-click="vm.setActiveBlock(block)"
+                        ng-style="{ 'left':block.x, 'top':block.y }"
+                        state-object="block">
+    <md-input-container class="circle-block-top-container">
+        <label>v5</label>
+        <input ng-model="block.v5"/>
+    </md-input-container>
+    <md-input-container class="circle-block-bottom-container">
+        <label>v6</label>
+        <input ng-model="block.v6"/>
+    </md-input-container>
+    <custom-js-plumb-endpoint anchor="RightMiddle"
+                              class="{{block.endpointStyle.inputEndpoint}}"
+                              ng-repeat="endpoint in block.inputs"
+                              settings="vm.inputEndpointStyle"
+                              uuid="{{endpoint.uuid}}">
+        <custom-js-plumb-connection ng-click="setActiveConnection($index)"
+                                    ng-model="connection"
+                                    ng-repeat="connection in endpoint.connections">
+        </custom-js-plumb-connection>
+    </custom-js-plumb-endpoint>
+    <custom-js-plumb-endpoint anchor="LeftMiddle"
+                              class="{{block.endpointStyle.outputEndpoint}}"
+                              ng-repeat="endpoint in block.outputs"
+                              settings="vm.outputEndpointStyle"
+                              uuid="{{endpoint.uuid}}"></custom-js-plumb-endpoint>
+</custom-js-plumb-object>

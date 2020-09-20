@@ -1,0 +1,50 @@
+<md-card>
+
+    <md-card-header>
+        <md-card-header-text>
+            <div class="title-text"> {{ 'schema.choose' | translate }}</div>
+        </md-card-header-text>
+    </md-card-header>
+
+    <table class="md-table">
+        <thead>
+        <tr>
+            <th class="md-table-header">
+                {{ 'schema.name' | translate }}
+            </th>
+            <th class="md-table-header">{{'schema.action' | translate }}</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-class="{'selected-background' : schema.uuid == vm.chosenUuid }"
+            ng-click="vm.setSchemaToLoad(schema.uuid)"
+            ng-model="schema"
+            ng-repeat="schema in vm.schemas">
+
+            <td>
+                <div class="md-table-content">
+                    {{ schema.name }}
+                </div>
+            </td>
+
+            <td>
+                <md-button class="md-table-action"
+                           ng-click="vm.deleteSchema(schema.uuid)">
+                    <span class="material-icons md-18">delete_forever</span>
+                </md-button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <md-input-container>
+        <md-button ng-click="vm.chooseSchema()">
+            {{ 'apply' | translate }}
+        </md-button>
+        <md-button ng-click="vm.closeDialog()">
+            {{ 'close' | translate }}
+        </md-button>
+    </md-input-container>
+
+</md-card>

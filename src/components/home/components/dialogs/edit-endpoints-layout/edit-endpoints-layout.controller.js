@@ -4,8 +4,8 @@ export default function editEndpointsLayoutController ($mdDialog, endpointStyle,
 
   vm.endpointStyle = endpointStyle;
 
-  vm.sourceLayout = getByAnchor(vm.endpointStyle.sourceAnchor);
-  vm.targetLayout = getByAnchor(vm.endpointStyle.targetAnchor);
+  vm.inputLayout = getByAnchor(vm.endpointStyle.inputAnchor);
+  vm.outputLayout = getByAnchor(vm.endpointStyle.outputAnchor);
 
   vm.endpointLayouts = {
     border_left: {
@@ -42,15 +42,15 @@ export default function editEndpointsLayoutController ($mdDialog, endpointStyle,
   vm.apply = () => {
     $mdDialog.hide(
       _.merge(vm.endpointStyle, {
-        sourceAnchor: vm.endpointLayouts[vm.sourceLayout].a,
-        sourceEndpoint: vm.endpointLayouts[vm.sourceLayout].e,
-        targetAnchor: vm.endpointLayouts[vm.targetLayout].a,
-        targetEndpoint: vm.endpointLayouts[vm.targetLayout].e
+        inputAnchor: vm.endpointLayouts[vm.inputLayout].a,
+        inputEndpoint: vm.endpointLayouts[vm.inputLayout].e,
+        outputAnchor: vm.endpointLayouts[vm.outputLayout].a,
+        outputEndpoint: vm.endpointLayouts[vm.outputLayout].e
       })
     );
   };
 
-  vm.hideDialog = () => {
+  vm.closeDialog = () => {
     $mdDialog.cancel();
   };
 }

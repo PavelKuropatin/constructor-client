@@ -34,9 +34,9 @@ export default function jsPlumbCanvasDirective () {
       instance.bind('connection', (info, origEvent) => {
         if (origEvent && origEvent.type === 'mouseup') {
 
-          var targetUuid = $(info.target).attr('uuid');
-          var sourceUuid = $(info.source).attr('uuid');
-          scope.onConnection(instance, info.connection, targetUuid, sourceUuid);
+          var outputUuid = $(info.target).attr('uuid');
+          var inputUuid = $(info.source).attr('uuid');
+          scope.onConnection(instance, info.connection, outputUuid, inputUuid);
           instance.deleteConnection(info.connection);
         }
       });

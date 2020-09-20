@@ -1,21 +1,21 @@
 <md-card>
     <md-card-header>
         <md-card-header-text>
-            <div class="title-text">{{ 'state.endpoints' | translate }}</div>
+            <div class="title-text">{{ 'block.endpoints' | translate }}</div>
         </md-card-header-text>
     </md-card-header>
     <md-card-content layout="column">
         <md-input-container>
-            <label>{{ 'state.source' | translate }}</label>
-            <md-select ng-model="vm.sourceLayout">
+            <label>{{ 'block.input' | translate }}</label>
+            <md-select ng-model="vm.inputLayout">
                 <md-option ng-repeat="(icon,_) in vm.endpointLayouts" ng-value="icon">
                     <md-icon>{{icon}}</md-icon>
                 </md-option>
             </md-select>
         </md-input-container>
         <md-input-container>
-            <label>{{ 'state.target' | translate }}</label>
-            <md-select ng-model="vm.targetLayout">
+            <label>{{ 'block.output' | translate }}</label>
+            <md-select ng-model="vm.outputLayout">
                 <md-option ng-repeat="(icon,_) in vm.endpointLayouts" ng-value="icon">
                     <md-icon>{{icon}}</md-icon>
                 </md-option>
@@ -26,7 +26,7 @@
         <md-button ng-click="vm.apply()">
             {{ 'apply' | translate}}
         </md-button>
-        <md-button ng-click="vm.hideDialog()">
+        <md-button ng-click="vm.closeDialog()">
             {{ 'close' | translate}}
         </md-button>
     </md-input-container>

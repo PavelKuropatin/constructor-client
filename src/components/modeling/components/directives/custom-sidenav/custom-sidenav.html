@@ -1,0 +1,42 @@
+<md-card class="model-sidenav">
+    <md-card-content class="connectedItems" ng-model="schema.blocks" ui-sortable="sortableOptions"
+                     ui-sortable-update="refresh()">
+        <md-card ng-click="setActiveBlock(block)" ng-repeat="block in schema.blocks">
+            <md-card-header>
+                <md-card-header-text>
+                    <div layout="row" layout-align="space-between center">
+                        <span class="title-text">{{block.name}}</span>
+                        <md-button aria-label="hide/show block info" class="md-icon-button"
+                                   ng-click="setActiveBlock(block)" ng-if="editable">
+                            <md-icon ng-if="activeBlock !== block">visibility</md-icon>
+                            <md-icon ng-if="activeBlock === block">visibility_off</md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button" ng-click="showBlockSettings(block)" ng-if="editable">
+                            <md-icon>settings_applications</md-icon>
+                        </md-button>
+                    </div>
+                </md-card-header-text>
+            </md-card-header>
+
+            <div ng-if="block.inputs.length != 0">
+                <md-card ng-if="isActiveBlock(block)">
+                    <md-card-content ng-class="{'active-block': connection.mouseover}"
+                                     ng-if="block.inputs[0].connections.length"
+                                     ng-repeat="connection in block.inputs[0].connections">
+
+                        <div class="big-text">
+                            {{ 'block.connection.self' | translate }} {{connection.uuid}}
+                            <md-icon ng-click="changeVisibility(connection)" ng-if="connection.isVisible">
+                                visibility
+                            </md-icon>
+                            <md-icon ng-click="changeVisibility(connection)" ng-if="connection.isVisible === false">
+                                visibility_off
+                            </md-icon>
+                        </div>
+
+                    </md-card-content>
+                </md-card>
+            </div>
+        </md-card>
+    </md-card-content>
+</md-card>

@@ -23,7 +23,7 @@ import './global.scss';
 
 import config from './app.config';
 import homeModule from './components/home/home.module';
-import customHomeModule from './components/custom-home/custom-home.module';
+import customHomeModule from './components/modeling/modeling.module';
 import configModule from './config/config.module';
 
 require('lodash');

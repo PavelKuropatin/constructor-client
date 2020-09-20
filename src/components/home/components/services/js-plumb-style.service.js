@@ -1,7 +1,7 @@
 export default function jsPlumbStyleService (CONSTANTS) {
   'ngInject';
 
-  const targetEndpointStyle1 = {
+  const outputEndpointStyle1 = {
     endpoint: 'Rectangle',
     paintStyle: {
       fill: '#BCAAA4',
@@ -12,7 +12,7 @@ export default function jsPlumbStyleService (CONSTANTS) {
     isTarget: true
   };
 
-  const targetEndpointStyle2 = {
+  const outputEndpointStyle2 = {
     endpoint: 'Rectangle',
     paintStyle: {
       fill: '#BCAAA4',
@@ -22,7 +22,7 @@ export default function jsPlumbStyleService (CONSTANTS) {
     maxConnections: -1,
     isTarget: true
   };
-  const sourceEndpointStyle1 = {
+  const inputEndpointStyle1 = {
     endpoint: 'Rectangle',
     paintStyle: {
       stroke: '#BCAAA4',
@@ -42,7 +42,7 @@ export default function jsPlumbStyleService (CONSTANTS) {
       stroke: '#216477'
     }
   };
-  const sourceEndpointStyle2 = {
+  const inputEndpointStyle2 = {
     endpoint: 'Rectangle',
     paintStyle: {
       stroke: '#BCAAA4',
@@ -63,17 +63,17 @@ export default function jsPlumbStyleService (CONSTANTS) {
     }
   };
 
-  const getTargetEndpointStyle1 = () => targetEndpointStyle1;
-  const getTargetEndpointStyle2 = () => targetEndpointStyle2;
+  const getOutputEndpointStyle1 = () => outputEndpointStyle1;
+  const getOutputEndpointStyle2 = () => outputEndpointStyle2;
 
-  const getSourceEndpointStyle1 = () => sourceEndpointStyle1;
-  const getSourceEndpointStyle2 = () => sourceEndpointStyle2;
+  const getInputEndpointStyle1 = () => inputEndpointStyle1;
+  const getInputEndpointStyle2 = () => inputEndpointStyle2;
 
   return {
-    getTargetEndpointStyle1: getTargetEndpointStyle1,
-    getTargetEndpointStyle2: getTargetEndpointStyle2,
-    getSourceEndpointStyle1: getSourceEndpointStyle1,
-    getSourceEndpointStyle2: getSourceEndpointStyle2
+    getOutputEndpointStyle1: getOutputEndpointStyle1,
+    getOutputEndpointStyle2: getOutputEndpointStyle2,
+    getInputEndpointStyle1: getInputEndpointStyle1,
+    getInputEndpointStyle2: getInputEndpointStyle2
   };
 }
 

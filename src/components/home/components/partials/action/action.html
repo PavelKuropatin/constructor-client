@@ -1,35 +1,38 @@
-<js-plumb-object class="action-state"
-                 ng-click="vm.setActiveState(state)"
-                 ng-style="{ 'left':state.x, 'top':state.y, 'box-shadow': '0 15px 35px' + state.color}"
-                 state-object="state">
+<js-plumb-object class="action-block"
+                 ng-click="vm.setActiveBlock(block)"
+                 ng-style="{ 'left':block.x, 'top':block.y, 'box-shadow': '0 15px 35px' + block.color}"
+                 state-object="block">
     <div class="action-input-container" layout="row">
         <md-icon>call_received</md-icon>
-        <md-input-container ng-repeat="input in state.inputContainer">
+        <md-input-container ng-repeat="input in block.inputVars">
             <label>{{input.label}}</label>
-            <input ng-change="vm.countFunction(states,state)" ng-model="input.value"/>
+            <input ng-change="vm.countFunction(blocks,block)" ng-model="input.value"/>
         </md-input-container>
     </div>
-    <h3 class="cursor-default">{{state.name}}</h3>
+    <h3 class="cursor-default">{{block.name}}</h3>
     <div class="action-input-container" layout="row">
         <md-icon>call_made</md-icon>
-        <md-input-container ng-repeat="output in state.outputContainer">
+        <md-input-container ng-repeat="output in block.outputVars">
             <label>{{output.label}}</label>
             <input ng-model="output.value"/>
         </md-input-container>
     </div>
 
-    <js-plumb-endpoint anchor={{state.style.sourceAnchor}}
-                       class={{state.style.sourceEndpoint}}
-                       settings="(state.style.sourceAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || state.style.sourceAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.sourceEndpointStyle1 : vm.sourceEndpointStyle2"
-                       uuid="{{state.source.uuid}}">
+    <js-plumb-endpoint anchor={{block.endpointStyle.inputAnchor}}
+                       class={{block.endpointStyle.inputEndpoint}}
+                       settings="(block.endpointStyle.inputAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || block.endpointStyle.inputAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.inputEndpointStyle1 : vm.inputEndpointStyle2"
+                       ng-repeat="input in block.inputs"
+                       uuid="{{input.uuid}}">
         <js-plumb-connection ng-if="connection.isVisible"
+                             ng-repeat="connection in input.connections"
                              ng-model="connection"
-                             ng-repeat="connection in state.source.connections"
-                             state-objects="vm.diagram.states">
+                             state-objects="vm.schema.blocks">
         </js-plumb-connection>
     </js-plumb-endpoint>
-    <js-plumb-endpoint anchor={{state.style.targetAnchor}}
-                       class={{state.style.targetEndpoint}}
-                       settings="((state.style.targetAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || state.style.targetAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.targetEndpointStyle1 : vm.targetEndpointStyle2)"
-                       uuid="{{state.target.uuid}}"></js-plumb-endpoint>
+    <js-plumb-endpoint anchor={{block.endpointStyle.outputAnchor}}
+                       class={{block.endpointStyle.outputEndpoint}}
+                       settings="((block.endpointStyle.outputAnchor === CONSTANTS.ANCHOR.LEFT_MIDDLE || block.endpointStyle.outputAnchor === CONSTANTS.ANCHOR.RIGHT_MIDDLE) ? vm.outputEndpointStyle1 : vm.outputEndpointStyle2)"
+                       ng-repeat="output in block.outputs"
+                       uuid="{{output.uuid}}"
+    ></js-plumb-endpoint>
 </js-plumb-object>

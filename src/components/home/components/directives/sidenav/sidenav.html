@@ -1,116 +1,116 @@
 <md-card class="sidenav">
     <md-card-header ng-if="!isActiveModel">
         <md-card-header-text>
-            <div class="title-text">{{diagram.name}}</div>
-            <div>{{diagram.description}}</div>
+            <div class="title-text">{{schema.name}}</div>
+            <div>{{schema.description}}</div>
         </md-card-header-text>
-        <md-button class="md-icon-button" ng-click="newState(diagram.uuid, diagram.states, state)">
+        <md-button class="md-icon-button" ng-click="newBlock(schema.uuid, schema.blocks, block)">
             <md-icon>playlist_add</md-icon>
         </md-button>
     </md-card-header>
 
     <md-divider></md-divider>
 
-    <md-card-content class="scrollable" flex ng-if="diagram.states.length >= 1 || showjson" style="max-height: 88vh">
-        <md-card ng-if="!showjson" ng-repeat="state in diagram.states">
+    <md-card-content class="scrollable" flex ng-if="schema.blocks.length >= 1 || showjson" style="max-height: 88vh">
+        <md-card ng-if="!showjson" ng-repeat="block in schema.blocks">
             <md-card-header>
                 <md-card-header-text>
                     <div layout="column">
-                        <span class="title-text">{{state.name}}</span>
+                        <span class="title-text">{{block.name}}</span>
                         <span class="medium-text" ng-if="!isActiveModel">
-                            {{ 'state.position' | translate }}: [{{state.x| number}}, {{state.y| number}}]
+                            {{ 'block.position' | translate }}: [{{block.x| number}}, {{block.y| number}}]
                         </span>
                     </div>
                 </md-card-header-text>
-                <md-button class="md-icon-button" ng-click="showStateSettings(state)" ng-if="!isActiveModel">
+                <md-button class="md-icon-button" ng-click="showBlockSettings(block)" ng-if="!isActiveModel">
                     <md-icon>settings_applications</md-icon>
                 </md-button>
-                <md-button aria-label="hide/show state info" class="md-icon-button" ng-click="setActiveState(state)">
-                    <md-icon ng-if="activeState !== state">visibility</md-icon>
-                    <md-icon ng-if="activeState === state">visibility_off</md-icon>
+                <md-button aria-label="hide/show block info" class="md-icon-button" ng-click="setActiveBlock(block)">
+                    <md-icon ng-if="activeBlock !== block">visibility</md-icon>
+                    <md-icon ng-if="activeBlock === block">visibility_off</md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="deleteState(diagram.uuid, diagram.states, state)">
+                <md-button class="md-icon-button" ng-click="deleteBlock(schema.uuid, schema.blocks, block)">
                     <md-icon>delete_sweep</md-icon>
                 </md-button>
             </md-card-header>
 
-            <md-card-content ng-hide="activeState != state">
+            <md-card-content ng-hide="activeBlock != block">
                 <div layout="row" layout-align="space-between">
                     <md-input-container>
-                        <label> {{ 'state.name' | translate}}</label>
-                        <input name="stateName" ng-model="state.name">
+                        <label> {{ 'block.name' | translate}}</label>
+                        <input name="blockName" ng-model="block.name">
                     </md-input-container>
                 </div>
 
                 <div layout="row" layout-align="space-between" ng-if="!isActiveModel">
                     <md-input-container>
-                        <label>{{ 'state.template' | translate }}</label>
-                        <md-select name="templateName" ng-model="state.template">
+                        <label>{{ 'block.template' | translate }}</label>
+                        <md-select name="templateName" ng-model="block.template">
                             <md-option ng-repeat="partial in partials" ng-value="partial">{{partial}}</md-option>
                         </md-select>
                     </md-input-container>
-                    <md-input-container ng-if="isActionState(state)">
-                        <label>{{ 'state.color' | translate }}</label>
-                        <md-select name="colorName" ng-model="state.color">
+                    <md-input-container ng-if="isActionBlock(block)">
+                        <label>{{ 'block.color' | translate }}</label>
+                        <md-select name="colorName" ng-model="block.color">
                             <md-option ng-repeat="color in colors" ng-value="color.color">{{color.abbr}}</md-option>
                         </md-select>
                     </md-input-container>
                 </div>
 
-                <div ng-if="isActionState(state)">
+                <div ng-if="isActionBlock(block)">
                     <md-card class="action-input-container" layout="row">
                         <md-icon>call_received</md-icon>
-                        <md-input-container ng-repeat="input in state.inputContainer">
+                        <md-input-container ng-repeat="input in block.inputVars">
                             <label>{{input.label}}</label>
-                            <input ng-change="countFunction(diagram.states, activeState)" ng-model="input.value"/>
+                            <input ng-change="countFunction(schema.blocks, activeBlock)" ng-model="input.value"/>
                         </md-input-container>
                         <div layout="column">
                             <md-button class="md-icon-button"
-                                       ng-click="openContainerDiagram(state, CONSTANTS.CONTAINER_TYPE.INPUT)">
+                                       ng-click="openContainerSchema(block, CONSTANTS.CONTAINER_TYPE.INPUT)">
                                 <md-icon>add</md-icon>
                             </md-button>
                             <md-button class="md-icon-button"
-                                       ng-click="deleteInput(state, CONSTANTS.CONTAINER_TYPE.INPUT)">
+                                       ng-click="deleteInput(block, CONSTANTS.CONTAINER_TYPE.INPUT)">
                                 <md-icon>remove</md-icon>
                             </md-button>
                         </div>
                     </md-card>
 
-                    <md-card class="action-input-container" layout="row" ng-if="isActionState(state)">
+                    <md-card class="action-input-container" layout="row" ng-if="isActionBlock(block)">
                         <md-icon>call_made</md-icon>
-                        <md-input-container ng-repeat="output in state.outputContainer">
+                        <md-input-container ng-repeat="output in block.outputVars">
                             <label>{{output.label}}</label>
                             <input ng-model="output.value"/>
                         </md-input-container>
                         <div layout="column">
                             <md-button class="md-icon-button"
-                                       ng-click="openContainerDiagram(state, CONSTANTS.CONTAINER_TYPE.OUTPUT)">
+                                       ng-click="openContainerSchema(block, CONSTANTS.CONTAINER_TYPE.OUTPUT)">
                                 <md-icon>add</md-icon>
                             </md-button>
                             <md-button class="md-icon-button"
-                                       ng-click="deleteOutput(state, CONSTANTS.CONTAINER_TYPE.OUTPUT)">
+                                       ng-click="deleteOutput(block, CONSTANTS.CONTAINER_TYPE.OUTPUT)">
                                 <md-icon>remove</md-icon>
                             </md-button>
                         </div>
                     </md-card>
                 </div>
 
-                <div ng-class="{'active-state': connection.mouseover}" ng-if="!isActiveModel"
-                     ng-if="state.source.connections.length" ng-repeat="connection in state.source.connections">
+                <div ng-class="{'active-block': connection.mouseover}" ng-if="!isActiveModel"
+                     ng-if="block.inputs[0].connections.length" ng-repeat="connection in block.inputs[0].connections">
                     <md-card>
                         <md-card-header>
                             <md-card-header-text>
-                                <div class="big-text">{{ 'state.connection.self' | translate }}
-                                    {{connection.target.uuid}}
+                                <div class="big-text">{{ 'block.connection.self' | translate }}
+                                    {{connection.uuid}}
                                 </div>
                             </md-card-header-text>
-                            <md-button class="md-icon-button" ng-click="removeIndex($index, state.source.connections)">
+                            <md-button class="md-icon-button" ng-click="removeIndex($index, block.inputs[0].connections)">
                                 <md-icon>delete_sweep</md-icon>
                             </md-button>
                         </md-card-header>
                         <md-card-content>
                             <md-input-container>
-                                <label>{{ 'state.connection.condition' | translate }}</label>
+                                <label>{{ 'block.connection.condition' | translate }}</label>
                                 <input name="conditionName" ng-model="connection.condition">
                             </md-input-container>
                         </md-card-content>
@@ -125,20 +125,20 @@
             <md-card>
                 <md-card-header>
                     <md-card-header-text>
-                        <div class="title-text">{{ 'diagram.info' | translate}}</div>
+                        <div class="title-text">{{ 'schema.info' | translate}}</div>
                     </md-card-header-text>
-                    <md-button class="md-icon-button" ng-click="deleteDiagram(diagram)">
+                    <md-button class="md-icon-button" ng-click="deleteSchema(schema)">
                         <md-icon>delete_sweep</md-icon>
                     </md-button>
                 </md-card-header>
                 <md-card-content>
                     <md-input-container>
-                        <label>{{ 'diagram.name' | translate}}</label>
-                        <input ng-model="diagram.name"/>
+                        <label>{{ 'schema.name' | translate}}</label>
+                        <input ng-model="schema.name"/>
                     </md-input-container>
                     <md-input-container>
-                        <label>{{ 'diagram.description' | translate}}</label>
-                        <input ng-model="diagram.description"/>
+                        <label>{{ 'schema.description' | translate}}</label>
+                        <input ng-model="schema.description"/>
                     </md-input-container>
                 </md-card-content>
             </md-card>
@@ -146,7 +146,7 @@
         </md-card>
 
         <md-card ng-if="showjson">
-            <textarea class="json-container">{{diagram.states | json }}</textarea>
+            <textarea class="json-container">{{schema.blocks | json }}</textarea>
         </md-card>
     </md-card-content>
 </md-card>

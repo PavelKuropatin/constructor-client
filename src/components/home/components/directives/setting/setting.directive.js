@@ -2,7 +2,7 @@ import template from './setting.html';
 
 const math = require('mathjs');
 
-export default function settingDirective (stateObjectService, CONSTANTS) {
+export default function settingDirective (blockObjectService, CONSTANTS) {
   'ngInject';
   return {
     restrict: 'E',
@@ -23,17 +23,17 @@ export default function settingDirective (stateObjectService, CONSTANTS) {
       }
 
       scope.icons = Object.keys(CONSTANTS.ENDPOINT_LAYOUTS);
-      scope.state = stateObjectService.getConfigState();
-      scope.countFunction = stateObjectService.countFunction;
-      scope.sourceLayout = getByAnchor(scope.state.style.sourceAnchor);
-      scope.targetLayout = getByAnchor(scope.state.style.targetAnchor);
+      scope.block = blockObjectService.getConfigBlock();
+      scope.countFunction = blockObjectService.countFunction;
+      scope.inputLayout = getByAnchor(scope.block.endpointStyle.inputAnchor);
+      scope.outputLayout = getByAnchor(scope.block.endpointStyle.outputAnchor);
 
       scope.apply = () => {
-        _.merge(scope.state.style, {
-          sourceAnchor: CONSTANTS.ENDPOINT_LAYOUTS[scope.sourceLayout].a,
-          sourceEndpoint: CONSTANTS.ENDPOINT_LAYOUTS[scope.sourceLayout].e,
-          targetAnchor: CONSTANTS.ENDPOINT_LAYOUTS[scope.targetLayout].a,
-          targetEndpoint: CONSTANTS.ENDPOINT_LAYOUTS[scope.targetLayout].e
+        _.merge(scope.block.endpointStyle, {
+          inputAnchor: CONSTANTS.ENDPOINT_LAYOUTS[scope.inputLayout].a,
+          inputEndpoint: CONSTANTS.ENDPOINT_LAYOUTS[scope.inputLayout].e,
+          outputAnchor: CONSTANTS.ENDPOINT_LAYOUTS[scope.outputLayout].a,
+          outputEndpoint: CONSTANTS.ENDPOINT_LAYOUTS[scope.outputLayout].e
         });
       };
 

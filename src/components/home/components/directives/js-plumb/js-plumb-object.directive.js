@@ -9,6 +9,7 @@ export default function jsPlumbObjectDirective () {
     transclude: true,
     template: '<div ng-transclude></div>',
     link: function (scope, element, attrs, jsPlumbCanvas) {
+
       const instance = jsPlumbCanvas.scope.jsPlumbInstance;
 
       instance.draggable(element, {

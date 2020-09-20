@@ -2,7 +2,7 @@
     {
         "name": "Agent Accepts Invite",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 1,
                 "connections": [
@@ -14,7 +14,7 @@
                 ]
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 2
             }
@@ -25,7 +25,7 @@
     {
         "name": "Lender Invites Agent",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 3,
                 "connections": [
@@ -42,7 +42,7 @@
                 ]
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 4
             }
@@ -53,7 +53,7 @@
     {
         "name": "Day 0",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 5,
                 "connections": [
@@ -70,7 +70,7 @@
                 ]
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 6
             }
@@ -81,7 +81,7 @@
     {
         "name": "Day2",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 7,
                 "connections": [
@@ -98,7 +98,7 @@
                 ]
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 8
             }
@@ -109,7 +109,7 @@
     {
         "name": "Day 4",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 9,
                 "connections": [
@@ -126,7 +126,7 @@
                 ]
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 10
             }
@@ -137,7 +137,7 @@
     {
         "name": "Day 6",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 11,
                 "connections": [
@@ -154,7 +154,7 @@
                 ]
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 12
             }
@@ -165,7 +165,7 @@
     {
         "name": "Day 7",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 13,
                 "connections": [
@@ -182,7 +182,7 @@
                 ]
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 14
             }
@@ -193,13 +193,13 @@
     {
         "name": "Non Responsive",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 15,
                 "connections": []
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 16
             }
@@ -208,15 +208,15 @@
         "y": 431.2472799549932
     },
     {
-        "name": "New State",
+        "name": "New Block",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 102,
                 "connections": []
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 103
             }
@@ -225,14 +225,14 @@
         "y": 834.0937614440918
     },
     {
-        "name": "New State",
+        "name": "New Block",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 104
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 105
             }
@@ -241,9 +241,9 @@
         "y": 547.9913330078125
     },
     {
-        "name": "New State",
+        "name": "New Block",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 106,
                 "connections": [
@@ -254,7 +254,7 @@
                 ]
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 107
             }
@@ -263,14 +263,14 @@
         "y": 822.5000381469727
     },
     {
-        "name": "New State",
+        "name": "New Block",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 108
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 109
             }
@@ -279,9 +279,9 @@
         "y": 541.2500381469727
     },
     {
-        "name": "New State",
+        "name": "New Block",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 2001
             },
@@ -289,7 +289,7 @@
                 "uuid": 2002
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 2003
             },
@@ -301,9 +301,9 @@
         "y": 822.5000023841858
     },
     {
-        "name": "New State",
+        "name": "New Block",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 2005
             },
@@ -311,7 +311,7 @@
                 "uuid": 2006
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 2007
             },
@@ -323,9 +323,9 @@
         "y": 822.5000023841858
     },
     {
-        "name": "New State",
+        "name": "New Block",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 2009
             },
@@ -333,7 +333,7 @@
                 "uuid": 2010
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 2011
             },
@@ -345,9 +345,9 @@
         "y": 947.4999904632568
     },
     {
-        "name": "New State",
+        "name": "New Block",
         "template": "default",
-        "sources": [
+        "inputs": [
             {
                 "uuid": 2013
             },
@@ -355,7 +355,7 @@
                 "uuid": 2014
             }
         ],
-        "targets": [
+        "outputs": [
             {
                 "uuid": 2015
             },

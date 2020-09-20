@@ -21,7 +21,6 @@ export default function jsPlumbEndpointDirective ($timeout) {
           anchor: attrs.anchor,
           uuid: attrs.uuid
         };
-
         let ep = instance.addEndpoint(element, scope.settings, options);
         scope.$on('$destroy', () => {
           instance.deleteEndpoint(ep);

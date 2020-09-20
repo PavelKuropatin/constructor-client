@@ -9,16 +9,17 @@ export default function jsPlumbConnectionDirective ($timeout) {
       stateObjects: '='
     },
     link: function (scope, element, attrs, jsPlumbEndpoint) {
+      console.log("connection");
+      console.log(scope);
       $timeout(() => {
         const instance = jsPlumbEndpoint.scope.jsPlumbInstance;
-        let sourceUuid = jsPlumbEndpoint.scope.uuid;
-        let targetUuid = scope.ngModel.target.uuid;
-
-        if (typeof jsPlumbEndpoint.connectionObjects[targetUuid] === 'undefined') {
-          jsPlumbEndpoint.connectionObjects[targetUuid] = instance.connect({
+        let inputUuid = jsPlumbEndpoint.scope.uuid;
+        let outputUuid = scope.ngModel.uuid;
+        if (typeof jsPlumbEndpoint.connectionObjects[outputUuid] === 'undefined') {
+          jsPlumbEndpoint.connectionObjects[outputUuid] = instance.connect({
             uuids: [
-              sourceUuid,
-              targetUuid
+              inputUuid,
+              outputUuid
             ],
             paintStyle: {
               strokeWidth: 6,
@@ -28,10 +29,10 @@ export default function jsPlumbConnectionDirective ($timeout) {
           });
         }
 
-        let connection = jsPlumbEndpoint.connectionObjects[targetUuid];
+        let connection = jsPlumbEndpoint.connectionObjects[outputUuid];
 
         connection.bind('mouseover', (conn, originalEvent) => {
-          let title = 'Uuid Target: ' + targetUuid;
+          let title = 'Uuid Output: ' + outputUuid;
           conn.addOverlay(['Label', {
             label: '<md-card style=\'padding: 4px\'>' + title + '</md-card>',
             location: 0.5,
@@ -49,12 +50,12 @@ export default function jsPlumbConnectionDirective ($timeout) {
 
         scope.$on('$destroy', () => {
           try {
-            instance.deleteConnection(jsPlumbEndpoint.connectionObjects[targetUuid]);
+            instance.deleteConnection(jsPlumbEndpoint.connectionObjects[outputUuid]);
           } catch (err) {
-            console.log('error', err, jsPlumbEndpoint.connectionObjects[targetUuid]);
+            console.log('error', err, jsPlumbEndpoint.connectionObjects[outputUuid]);
 
           }
-          jsPlumbEndpoint.connectionObjects[targetUuid] = undefined;
+          jsPlumbEndpoint.connectionObjects[outputUuid] = undefined;
         });
       }, 50);
     }

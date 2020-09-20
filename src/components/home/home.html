@@ -1,6 +1,6 @@
 <div layout="row">
-    <div class="sidenav-container" flex="25" ng-if="vm.diagram">
-        <sidenav active-state="vm.activeState" diagram="vm.diagram"
+    <div class="sidenav-container" flex="25" ng-if="vm.schema">
+        <sidenav active-block="vm.activeBlock" schema="vm.schema"
                  is-active-setting="vm.isActiveSetting">
         </sidenav>
     </div>
@@ -16,18 +16,18 @@
                             </md-button>
                             <md-menu-content ng-mouseleave="$mdMenu.close()" width="4">
                                 <md-menu-item>
-                                    <md-button ng-click="vm.createNewDiagram()">
-                                        {{ 'diagram.create' | translate }}
+                                    <md-button ng-click="vm.createNewSchema()">
+                                        {{ 'schema.create' | translate }}
                                     </md-button>
                                 </md-menu-item>
-                                <md-menu-item ng-if="vm.diagram">
-                                    <md-button ng-click="vm.updateDiagram()">
-                                        {{ 'diagram.update' | translate }}
+                                <md-menu-item ng-if="vm.schema">
+                                    <md-button ng-click="vm.updateSchema()">
+                                        {{ 'schema.update' | translate }}
                                     </md-button>
                                 </md-menu-item>
                                 <md-menu-item>
-                                    <md-button ng-click="vm.openDiagram()">
-                                        {{ 'diagram.open' | translate }}
+                                    <md-button ng-click="vm.openSchema()">
+                                        {{ 'schema.open' | translate }}
                                     </md-button>
                                 </md-menu-item>
                             </md-menu-content>
@@ -66,7 +66,7 @@
 
         <js-plumb-canvas id="container" on-connection="vm.onConnection" x="vm.pos_x" y="vm.pos_y"
                          zoom="vm.zoomlevel">
-            <ng-include ng-repeat="state in vm.diagram.states" src="state.template"></ng-include>
+            <ng-include ng-repeat="block in vm.schema.blocks" src="block.template"></ng-include>
         </js-plumb-canvas>
     </div>
 

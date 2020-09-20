@@ -1,101 +1,101 @@
 import template from './sidenav.html';
-import containerTemplate from '../../dialogs/add-container/add-container.html';
-import delContainerTemplate from '../../dialogs/del-container/del-container.html';
+import containerTemplate from '../../dialogs/add-var/add-var.html';
+import delContainerTemplate from '../../dialogs/delete-var/delete-var.html';
 import editEndpointsLayoutTemplate from '../../dialogs/edit-endpoints-layout/edit-endpoints-layout.html';
 
-export default function sidenavDirective ($timeout, $mdDialog, stateObjectService, CONSTANTS) {
+export default function sidenavDirective ($timeout, $mdDialog, blockObjectService, CONSTANTS) {
   'ngInject';
   return {
     restrict: 'EA',
     scope: {
-      diagram: '=',
-      activeState: '=',
+      schema: '=',
+      activeBlock: '=',
       isActiveSetting: '=',
       isActiveModel: '=?'
     },
     template: template,
     link: function (scope, element, attr) {
       scope.CONSTANTS = CONSTANTS;
-      scope.newState = stateObjectService.createState;
-      scope.deleteState = stateObjectService.deleteState;
-      scope.removeIndex = stateObjectService.removeIndex;
-      scope.deleteDiagram = stateObjectService.deleteDiagram;
+      scope.newBlock = blockObjectService.createBlock;
+      scope.deleteBlock = blockObjectService.deleteBlock;
+      scope.removeIndex = blockObjectService.removeIndex;
+      scope.deleteSchema = blockObjectService.deleteSchema;
       scope.partials = _.values(CONSTANTS.PARTIALS);
       scope.colors = _.values(CONSTANTS.TYPE_ACTION);
-      scope.countFunction = stateObjectService.countFunction;
+      scope.countFunction = blockObjectService.countFunction;
 
-      scope.openContainerDiagram = (state, type) => {
+      scope.openContainerSchema = (block, type) => {
         $mdDialog.show({
           controller: 'addContainerController as vm',
           template: containerTemplate,
           clickOutsideToClose: true
         }).then(function (model) {
-          stateObjectService.addContainer(state, type, model.param, model.value);
+          blockObjectService.addContainer(block, type, model.param, model.value);
         });
       };
 
-      scope.setActiveState = (state) => {
-        if (scope.activeState === state) {
-          scope.activeState = null;
+      scope.setActiveBlock = (block) => {
+        if (scope.activeBlock === block) {
+          scope.activeBlock = null;
         } else {
-          scope.activeState = state;
-          scope.countFunction(scope.diagram.states, scope.activeState);
+          scope.activeBlock = block;
+          scope.countFunction(scope.schema.blocks, scope.activeBlock);
         }
       };
 
-      scope.isActionState = (state) => {
-        return state.template === CONSTANTS.PARTIALS.ACTION;
+      scope.isActionBlock = (block) => {
+        return block.template === CONSTANTS.PARTIALS.ACTION;
       };
 
-      scope.isCircleState = (state) => {
-        return state.template === CONSTANTS.PARTIALS.CIRCLE;
+      scope.isCircleBlock = (block) => {
+        return block.template === CONSTANTS.PARTIALS.CIRCLE;
       };
 
-      function refreshStates () {
-        let bufStateObjects = scope.diagram.states.slice();
-        scope.diagram.states = [];
+      function refreshBlocks () {
+        let bufBlockObjects = scope.schema.blocks.slice();
+        scope.schema.blocks = [];
         $timeout(() => {
-          scope.diagram.states = bufStateObjects;
+          scope.schema.blocks = bufBlockObjects;
         });
       }
 
-      scope.editEndpoints = (state) => {
+      scope.editEndpoints = (block) => {
         $mdDialog.show({
-          locals: { endpointStyle: state.style },
+          locals: { endpointStyle: block.endpointStyle },
           controller: 'editEndpointsLayoutController as vm',
           template: editEndpointsLayoutTemplate,
           clickOutsideToClose: true
         }).then(function (endpointStyle) {
-          state.style = endpointStyle;
-          refreshStates();
+          block.endpointStyle = endpointStyle;
+          refreshBlocks();
         });
       };
 
-      scope.deleteInput = (state, type) => {
+      scope.deleteInput = (block, type) => {
         $mdDialog.show({
-          locals: { container: state.inputContainer },
+          locals: { container: block.inputVars },
           controller: 'delContainerController as vm',
           template: delContainerTemplate,
           clickOutsideToClose: true
         }).then(function (param) {
-          stateObjectService.deleteContainer(state, type, param);
+          blockObjectService.deleteContainer(block, type, param);
         });
       };
 
-      scope.deleteOutput = (state, type) => {
+      scope.deleteOutput = (block, type) => {
         $mdDialog.show({
-          locals: { container: state.outputContainer },
+          locals: { container: block.outputVars },
           controller: 'delContainerController as vm',
           template: delContainerTemplate,
           clickOutsideToClose: true
         }).then(function (param) {
-          stateObjectService.deleteContainer(state, type, param);
+          blockObjectService.deleteContainer(block, type, param);
         });
       };
 
-      scope.showStateSettings = (state) => {
+      scope.showBlockSettings = (block) => {
         scope.isActiveSetting = !scope.isActiveSetting;
-        stateObjectService.setConfigState(state);
+        blockObjectService.setConfigBlock(block);
       };
     }
   };

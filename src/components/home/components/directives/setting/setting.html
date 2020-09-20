@@ -1,6 +1,6 @@
 <md-card class="action-input-container" layout="row">
     <md-icon>call_received</md-icon>
-    <md-input-container ng-repeat="input in state.inputContainer">
+    <md-input-container ng-repeat="input in block.inputVars">
         <label>{{input.label}}</label>
         <input ng-model="input.value"/>
     </md-input-container>
@@ -8,14 +8,14 @@
 
 <md-card class="action-input-container" layout="row">
     <md-icon>call_made</md-icon>
-    <md-input-container ng-repeat="output in state.outputContainer">
+    <md-input-container ng-repeat="output in block.outputVars">
         <label>{{output.label}}</label>
         <input ng-model="output.value"/>
     </md-input-container>
 </md-card>
 
 <md-card layout="column">
-    <md-card ng-repeat="output in state.outputContainer">
+    <md-card ng-repeat="output in block.outputVars">
         <md-card-header>
             <md-icon>call_made</md-icon>
             {{output.label}}
@@ -23,7 +23,7 @@
         <md-content>
             <md-input-container>
                 <label>{{ 'function.enter' | translate }}</label>
-                <input ng-change="countFunction([], state)" ng-model="output.expression"/>
+                <input ng-change="countFunction([], block)" ng-model="output.expression"/>
             </md-input-container>
             <md-input-container>
                 <label>{{ 'function.result' | translate }}</label>
@@ -37,8 +37,8 @@
 
     <md-card-content layout="row">
         <md-input-container>
-            <label>{{ 'state.source' | translate }}</label>
-            <md-select ng-change="apply()" ng-model="sourceLayout">
+            <label>{{ 'block.input' | translate }}</label>
+            <md-select ng-change="apply()" ng-model="inputLayout">
                 <md-option ng-repeat="icon in icons" ng-value="icon">
                     <md-icon>{{icon}}</md-icon>
                 </md-option>
@@ -46,8 +46,8 @@
         </md-input-container>
         <md-input-container>
 
-            <label>{{ 'state.target' | translate }}</label>
-            <md-select ng-change="apply()" ng-model="targetLayout">
+            <label>{{ 'block.output' | translate }}</label>
+            <md-select ng-change="apply()" ng-model="outputLayout">
                 <md-option ng-repeat="icon in icons" ng-value="icon">
                     <md-icon>{{icon}}</md-icon>
                 </md-option>
