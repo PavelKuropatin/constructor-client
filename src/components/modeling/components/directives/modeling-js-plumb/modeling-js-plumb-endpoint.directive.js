@@ -1,4 +1,4 @@
-export default function customJsPlumbEndpointDirective ($timeout) {
+export default function modelingJsPlumbEndpointDirective ($timeout) {
   'ngInject';
   return {
     restrict: 'E',

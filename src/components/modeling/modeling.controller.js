@@ -69,7 +69,7 @@ export default function modelingController ($scope, $interval, $state, $mdDialog
         var img = new Image();
         img.src = result;
         img.onload = function () {
-          $('custom-js-plumb-canvas')
+          $('modeling-js-plumb-canvas')
             .css({
               minWidth: img.width + 'px',
               minHeight: img.height + 'px',

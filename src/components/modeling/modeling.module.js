@@ -1,7 +1,7 @@
 import './modeling.scss';
-import './components/custom-partials/action/action.scss';
-import './components/custom-partials/circle/circle.scss';
-import './components/directives/custom-setting/custom-setting.scss';
+import './components/modeling-partials/action/action.scss';
+import './components/modeling-partials/circle/circle.scss';
+import './components/directives/modeling-setting/modeling-setting.scss';
 
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
@@ -10,13 +10,13 @@ import routes from '../constants/routes.constants';
 import routing from './modeling.route';
 import modelingController from './modeling.controller';
 
-import customSidenavDirective from './components/directives/custom-sidenav/custom-sidenav.directive';
-import customJsPlumbCanvasDirective from './components/directives/custom-js-plumb/custom-js-plumb-canvas.directive';
-import customJsPlumbConnectionDirective
-  from './components/directives/custom-js-plumb/custom-js-plumb-connection.directive';
-import customJsPlumbEndpointDirective from './components/directives/custom-js-plumb/custom-js-plumb-endpoint.directive';
-import customJsPlumbObjectDirective from './components/directives/custom-js-plumb/custom-js-plumb-object.directive';
-import customPartialsConfig from './components/custom-partials/custom-partials.config';
+import modelingSidenavDirective from './components/directives/modeling-sidenav/modeling-sidenav.directive';
+import modelingJsPlumbCanvasDirective from './components/directives/modeling-js-plumb/modeling-js-plumb-canvas.directive';
+import modelingJsPlumbConnectionDirective
+  from './components/directives/modeling-js-plumb/modeling-js-plumb-connection.directive';
+import modelingJsPlumbEndpointDirective from './components/directives/modeling-js-plumb/modeling-js-plumb-endpoint.directive';
+import modelingJsPlumbObjectDirective from './components/directives/modeling-js-plumb/modeling-js-plumb-object.directive';
+import modelingPartialsConfig from './components/modeling-partials/modeling-partials.config';
 import customJsPlumbStyleService from './components/service/custom-js-plumb-style.service';
 
 import startCountController from './components/dialogs/start-count/start-count.controller';
@@ -29,7 +29,7 @@ import fileReaderFactory from './components/directives/file/file-reader.factory'
 import socketService from './components/service/socket.service';
 import socketHttpService from './components/service/http/socket-http.service';
 import imageHttpService from './components/service/http/image-http.service';
-import customSettingDirective from './components/directives/custom-setting/custom-setting.directive';
+import modelingSettingDirective from './components/directives/modeling-setting/modeling-setting.directive';
 
 export default angular.module('app.modeling', ['ngMaterial', uirouter])
   .config(routing)
@@ -37,17 +37,17 @@ export default angular.module('app.modeling', ['ngMaterial', uirouter])
   .controller('customHomeController', modelingController)
   .directive('ngFileSelect', ngFileSelectDirective)
   .factory('fileReader', fileReaderFactory)
-  .directive('customSidenav', customSidenavDirective)
-  .directive('customJsPlumbCanvas', customJsPlumbCanvasDirective)
-  .directive('customJsPlumbConnection', customJsPlumbConnectionDirective)
-  .directive('customJsPlumbEndpoint', customJsPlumbEndpointDirective)
-  .directive('customJsPlumbObject', customJsPlumbObjectDirective)
-  .directive('customSetting', customSettingDirective)
+  .directive('customSidenav', modelingSidenavDirective)
+  .directive('customJsPlumbCanvas', modelingJsPlumbCanvasDirective)
+  .directive('customJsPlumbConnection', modelingJsPlumbConnectionDirective)
+  .directive('customJsPlumbEndpoint', modelingJsPlumbEndpointDirective)
+  .directive('customJsPlumbObject', modelingJsPlumbObjectDirective)
+  .directive('customSetting', modelingSettingDirective)
   .service('customJsPlumbStyleService', customJsPlumbStyleService)
   .service('imageHttpService', imageHttpService)
   .service('socketService', socketService)
   .service('socketHttpService', socketHttpService)
   .constant('ROUTES', routes)
   .constant('CONSTANTS', constants)
-  .run(customPartialsConfig)
+  .run(modelingPartialsConfig)
   .name;

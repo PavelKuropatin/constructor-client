@@ -1,4 +1,4 @@
-export default function customJsPlumbCanvasDirective () {
+export default function modelingJsPlumbCanvasDirective () {
   'ngInject';
   const jsPlumbZoomCanvas = (instance, zoom, el, transformOrigin) => {
     transformOrigin = transformOrigin || [0, 0];

@@ -1,4 +1,4 @@
-export default function customJsPlumbObjectDirective () {
+export default function modelingJsPlumbObjectDirective () {
   'ngInject';
   return {
     restrict: 'E',

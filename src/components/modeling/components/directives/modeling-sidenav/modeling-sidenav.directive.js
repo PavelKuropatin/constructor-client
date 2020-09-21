@@ -1,6 +1,6 @@
-import template from './custom-sidenav.html';
+import template from './modeling-sidenav.html';
 
-export default function customSidenavDirective ($timeout, $mdDialog, blockObjectService) {
+export default function modelingSidenavDirective ($timeout, $mdDialog, blockObjectService) {
   'ngInject';
   return {
     restrict: 'EA',

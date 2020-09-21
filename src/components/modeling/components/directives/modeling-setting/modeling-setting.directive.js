@@ -1,9 +1,9 @@
-import template from './custom-setting.html';
+import template from './modeling-setting.html';
 import chooseImageTemplate from '../../dialogs/choose-image/choose-image.html';
 
 const math = require('mathjs');
 
-export default function customSettingDirective ($mdDialog, blockObjectService, blockObjectHttpService, CONSTANTS) {
+export default function modelingSettingDirective ($mdDialog, blockObjectService, blockObjectHttpService, CONSTANTS) {
   'ngInject';
   return {
     restrict: 'E',

@@ -4,7 +4,7 @@ export default function ngFileSelectDirective () {
     link: function (scope, element) {
 
       element.bind('change', function (e) {
-        scope.getFile((e.srcElement || e.output).files[0]);
+        scope.getFile((e.srcElement || e.target).files[0]);
       });
 
     }
