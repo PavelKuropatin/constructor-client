@@ -54,27 +54,24 @@ export default function blockObjectHttpService ($http, env) {
     });
   };
 
+  const getBLock = (blockUuid) => {
+    return $http.get(env.api + DEFAULT_BLOCK_URL + '/' + blockUuid);
+  };
+
   const deleteSchema = (uuidSchema) => {
     return $http.delete(env.api + DEFAULT_SCHEMA_URL + '/' + uuidSchema);
   };
 
-  const saveSettings = (blockUuid, blockSettings) => {
-    return $http.post(env.api + DEFAULT_SETTINGS_URL + '/' + blockUuid, blockSettings);
+  const saveSettings = (settingsUuid, blockSettings) => {
+    return $http.post(env.api + DEFAULT_SETTINGS_URL + '/' + settingsUuid, blockSettings);
   };
 
-  const deleteSettingsAction = (blockUuid, actionUuid) => {
-    return $http.delete(env.api + DEFAULT_SETTINGS_URL + '/' + blockUuid + '/action/' + actionUuid);
+  const deleteSettingsAction = (settingsUuid, actionUuid) => {
+    return $http.delete(env.api + DEFAULT_SETTINGS_URL + '/' + settingsUuid + '/action/' + actionUuid);
   };
 
-  const getBlockSettings = (blockUuid) => {
-    return $http.get(env.api + DEFAULT_SETTINGS_URL + '/' + blockUuid);
-  };
-
-  const addSettingsAction = (blockUuid) => {
-    return $http.post(env.api + DEFAULT_SETTINGS_URL + '/' + blockUuid + '/action', {
-      condition: 'true',
-      type: 'none'
-    });
+  const addSettingsAction = (settingsUuid, action) => {
+    return $http.post(env.api + DEFAULT_SETTINGS_URL + '/' + settingsUuid + '/action', action);
   };
 
   const saveHistory = (schema) => {
@@ -97,7 +94,7 @@ export default function blockObjectHttpService ($http, env) {
     deleteSchema: deleteSchema,
     saveSettings: saveSettings,
     deleteSettingsAction: deleteSettingsAction,
-    getBlockSettings: getBlockSettings,
+    getBlock: getBLock,
     addSettingsAction: addSettingsAction,
     saveHistory: saveHistory
   };

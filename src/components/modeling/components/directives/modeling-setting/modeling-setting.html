@@ -55,7 +55,7 @@
                                    ng-if="!action.value || !action.value.trim()">
                             {{ 'image.choose' | translate }}
                         </md-button>
-                        <img ng-click="chooseImage(action)" ng-if="action.value" src="{{action.value}}"/>
+                        <img ng-click="chooseImage(action)" ng-if="action.value" ng-src="{{action.value}}"/>
                     </md-input-container>
                     <md-input-container ng-if="action.type === 'stop_exec'">
                         <label>{{ 'action.value' | translate}}</label>
@@ -66,7 +66,7 @@
                         <input disabled ng-model="action.value"/>
                     </md-input-container>
                     <md-button class="md-table-action"
-                               ng-click="deleteSettingsAction(action.uuid)">
+                               ng-click="deleteSettingsAction(block.settings.uuid, action.uuid)">
                         <span class="material-icons md-18">delete_forever</span>
                     </md-button>
                 </div>
@@ -74,12 +74,12 @@
         </md-card>
         <div layout="row" layout-align="space-between center">
             <md-input-container class="no-margin">
-                <md-button ng-click="apply()">
+                <md-button ng-click="saveSettings()">
                     {{'apply' | translate }}
                 </md-button>
             </md-input-container>
             <md-input-container class="no-margin">
-                <md-button ng-click="addSettingsAction(block.uuid)">
+                <md-button ng-click="addSettingsAction(block.settings.uuid)">
                     {{'action.add' | translate }}
                 </md-button>
             </md-input-container>

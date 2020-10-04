@@ -46,8 +46,8 @@ export default function modelingController ($scope, $interval, $state, $mdDialog
   function resetBlocks (schema) {
     _.forEach(schema.blocks, block => {
       block.template = 'custom_' + block.template;
-      block.x = 10;
-      block.y = 10;
+      // block.x = 10;
+      // block.y = 10;
     });
   }
 

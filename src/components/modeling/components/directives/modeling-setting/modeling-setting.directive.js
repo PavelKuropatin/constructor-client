@@ -30,16 +30,18 @@ export default function modelingSettingDirective ($mdDialog, blockObjectService,
       scope.inputLayout = getByAnchor(scope.block.endpointStyle.inputAnchor);
       scope.outputLayout = getByAnchor(scope.block.endpointStyle.outputAnchor);
 
-      scope.apply = () => {
+      scope.saveSettings = () => {
         _.merge(scope.block.endpointStyle, {
           inputAnchor: CONSTANTS.ENDPOINT_LAYOUTS[scope.inputLayout].a,
           inputEndpoint: CONSTANTS.ENDPOINT_LAYOUTS[scope.inputLayout].e,
           outputAnchor: CONSTANTS.ENDPOINT_LAYOUTS[scope.outputLayout].a,
           outputEndpoint: CONSTANTS.ENDPOINT_LAYOUTS[scope.outputLayout].e
         });
-
-        blockObjectHttpService.saveSettings(scope.block.uuid, scope.block.settings).then(response => {
+        scope.refreshNumbers();
+        console.log(scope.block.settings.actions);
+        blockObjectHttpService.saveSettings(scope.block.settings.uuid, scope.block.settings).then(response => {
           console.log(response.data);
+          scope.block.settings = response.data;
         });
       };
 
@@ -47,25 +49,21 @@ export default function modelingSettingDirective ($mdDialog, blockObjectService,
         _.forEach(scope.block.settings.actions, (action, i) => action.number = i + 1);
       };
 
-      scope.deleteSettingsAction = (action_uuid) => {
-         blockObjectHttpService.saveSettings(scope.block.uuid, scope.block.settings).then(response => {
-                         scope.block.settings = response.data;
-                });
-         blockObjectHttpService.deleteSettingsAction(scope.block.uuid, action_uuid).then(response1 => {
-          blockObjectHttpService.getBlockSettings(scope.block.uuid).then(response2 => {
-            console.log(response2.data);
-            scope.block.settings = response2.data;
-          });
+      scope.deleteSettingsAction = (settings_uuid, action_uuid) => {
+        blockObjectHttpService.deleteSettingsAction(settings_uuid, action_uuid).then(response => {
+          scope.block.settings = response.data;
+          scope.saveSettings();
         });
       };
 
-      scope.addSettingsAction = (block_uuid) => {
-        blockObjectHttpService.saveSettings(scope.block.uuid, scope.block.settings).then(response => {
-                 scope.block.settings = response.data;
-        });
-        blockObjectHttpService.addSettingsAction(block_uuid).then(response => {
-          console.log(response.data);
+      scope.addSettingsAction = (settings_uuid) => {
+        blockObjectHttpService.addSettingsAction(settings_uuid, {
+          condition: 'true',
+          type: 'none',
+          number: scope.block.settings.actions.length + 1
+        }).then(response => {
           scope.block.settings = response.data;
+          scope.saveSettings();
         });
       };
 
@@ -90,7 +88,7 @@ export default function modelingSettingDirective ($mdDialog, blockObjectService,
               $mdDialog.hide(url);
             };
             $scope.hideDialog = () => {
-                $mdDialog.cancel();
+              $mdDialog.cancel();
             };
             $scope.getFile = (file) => {
               if (!file) {
@@ -98,7 +96,7 @@ export default function modelingSettingDirective ($mdDialog, blockObjectService,
               }
               $scope.uploadedImage = null;
               imageHttpService.uploadImage(file).then((response) => {
-              $scope.uploadedImage = response.data.url;
+                $scope.uploadedImage = response.data.url;
                 $mdDialog.hide(response.data.url);
               });
             };
@@ -106,12 +104,12 @@ export default function modelingSettingDirective ($mdDialog, blockObjectService,
           template: chooseImageTemplate,
           clickOutsideToClose: true
         }).then(function (url) {
-            if (url){
+          if (url) {
             action.value = url;
-                               console.log(action);
+            console.log(action);
 
-            }
-          });
+          }
+        });
       };
     }
   };
